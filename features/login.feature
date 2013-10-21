@@ -5,27 +5,27 @@ Feature: Login to Spillio
 
 Background: I am on the Spillio home page
 
-	Given I am on the Spillio home page
+	Given I am on the "Spillio home" page
 	And I am not logged in
 	Then I should see a "sign in" button
 
 Scenario: Redirectiong to CalNet Login page
 
 	When I press "sign in" button
-	Then I should be on "CalNet Login" page
+	Then I should be on the "CalNet Login" page
 
 Scenario: Sign in without password
 
 	When I press "sign in" button
 	And I enter "this is not an id" as username
-	Then I should see "Passphrase is a required field." text on the page
+	Then I should see "Passphrase is a required field." on the page
 
 Scenario: Sign in using not a valid Password
 
 	When I press "sign in" button
 	And I enter "this is not an id" as username
 	And I enter "some password" as password
-	Then I should see "The CalNet ID and/or Passphrase you provided are incorrect." text on the page
+	Then I should see "The CalNet ID and/or Passphrase you provided are incorrect." on the page
 
 
 Scenario: Sign in using a valid Password
@@ -34,4 +34,4 @@ Scenario: Sign in using a valid Password
 	And I enter "validUserName" as username
 	And I enter "validPassword" as password
 	Then I should be on the "Create User Profile" page
-	Or I should be on "User Profile" page
+	Then I should be on the "User Profile" page
