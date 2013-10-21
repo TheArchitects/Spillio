@@ -7,12 +7,21 @@
 
 .jumbotron {
 	background-color: #99CCFF;
-	height:400px;
 }
 
 
 
-
+body {
+	background: url(../hi.jpg) no-repeat center bottom #241c23;
+	background: url(../hi.jpg) no-repeat relative;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	top: 0;
+	z-index: -2;
+	text-align: left;
+	min-height: 720px;
+}
 
 
 
