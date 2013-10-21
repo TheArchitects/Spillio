@@ -12,8 +12,7 @@
 
 
 body {
-	background: url(../hi.jpg) no-repeat center bottom #241c23;
-	background: url(../hi.jpg) no-repeat relative;
+	background: url(../../app/assets/images/landing-background.jpg) no-repeat center bottom #241c23;
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
