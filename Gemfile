@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.14'
-gem 'bootstrap-sass'
+gem 'twitter-bootstrap-rails'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -31,6 +31,7 @@ group :assets do
   gem 'sass-rails', '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
+  gem 'less-rails'
 end
 
 gem 'jquery-rails'
