@@ -54,6 +54,7 @@ Then /^I should see a "(.+)" (.+)$/ do |name, tag|
 end
 
 
+
 Then /^I should be on the "(.+)" page$/ do |page_name|
 	current_path = URI.parse(current_url).path
   	if current_path.respond_to? :should
