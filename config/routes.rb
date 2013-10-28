@@ -1,4 +1,10 @@
 Spillio::Application.routes.draw do
+match 'students/create' => 'students#create'
+match 'students/new' => 'students#new'
+match 'students/:id' => 'students#show'
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
