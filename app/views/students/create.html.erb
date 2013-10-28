@@ -1,0 +1,12 @@
+<h1>My Profile</h1>
+
+<p>Your profile has been created.</p>
+
+<ul>
+<li> <strong>Name</strong> <%= @student.name %> </li>
+<li> <strong>Section</strong> <%= @student.section.number %> </li>
+<li> <strong>About</strong> <%= @student.about %> </li >
+<li> <strong>Skills</strong> <%= @student.skills.map { |e| e.name }.join(',') %> </li>
+<li> <strong>Courses</strong> <%= @student.courses.map { |e| e.name }.join(',') %> </li>
+<li> <strong>Interest</strong> <%= @student.interest %> </li>
+</ul>
