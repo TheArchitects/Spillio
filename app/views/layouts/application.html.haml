@@ -10,6 +10,7 @@
     = stylesheet_link_tag    "application", :media => "all"
     = yield :styles
     = javascript_include_tag "application"
+    %script{:src=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
     = yield :scripts
     = csrf_meta_tags
   %body
