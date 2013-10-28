@@ -1,9 +1,17 @@
 Spillio::Application.routes.draw do
-match 'students/create' => 'students#create'
-match 'students/new' => 'students#new'
-match 'students/:id' => 'students#show'
-match 'students/search' => 'students#search'
 
+  match 'students/create' => 'students#create'
+  match 'students/new' => 'students#new'
+  match 'students/search' => 'students#search'
+  match 'students/:id' => 'students#show'
+
+  # For Authentication
+  match '/auth/:provider/callback' => 'sessions#create'
+  match '/auth/failure' => 'sessions#failure', :as => :failure
+  match '/signout' => 'sessions#destroy', :as => :signout
+  match '/signin' => 'sessions#new', :as => :signin
+
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +62,6 @@ match 'students/search' => 'students#search'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'login#index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -42,3 +42,4 @@ gem 'haml'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+gem 'omniauth-facebook', '1.4.0'
