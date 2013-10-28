@@ -8,7 +8,7 @@
 }
 
 body {
-	background: image-url('landing-background.jpg') no-repeat center bottom #241c23;
+	background: url('landing-background.jpg') no-repeat center bottom #241c23;
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
@@ -21,7 +21,7 @@ body {
 }
 
 #main-title {
-  background: image-url('landing-paperscrap.png');
+  background: url('landing-paperscrap.png');
   width: 350px;
   margin: 80px auto;
   text-align: center;
