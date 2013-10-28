@@ -1,0 +1,23 @@
+<h1>Let's create your profile!</h1>
+
+<%= form_for @student, url: {action: "create"} do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label :section, 'Section' %>
+  <%= collection_select :student, :section_id, Section.all, :id, :number %><br />
+
+  <%= f.label :about, 'About' %>
+  <%= f.text_field :about %><br />
+  
+  <%= f.label :skills, 'Skills' %>
+  <%= collection_select :skills_students, :skill_id, Skill.all, :id, :name %><br />
+
+  <%= f.label :courses, 'Courses' %>
+  <%= collection_select :courses_students, :course_id, Course.all, :id, :name %><br />
+  
+  <%= f.label :interest, 'Interest' %>
+  <%= f.text_field :interest %><br />
+  
+  <%= f.submit 'Create profile' %>
+<% end %>
