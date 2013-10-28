@@ -1,9 +1,23 @@
 !!! 5
 %html
 	%head
-		%title Ruby on Rails Tutorial Sample App | #{yield(:title)}
-		= stylesheet_link_tag    "application", :media => "all"
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+		%title Spillio | #{yield(:title)}
+    %meta{content: "", name: "description"}/
+    %meta{content: "width=device-width", name: "viewport"}/
+		%link{:href=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+    = stylesheet_link_tag    "application", :media => "all"
+    = yield :styles
 		= javascript_include_tag "application"
+    = yield :scripts
 		= csrf_meta_tags
 	%body
 		= yield
+
+-# In every children haml file add their particular css and js files with:
+-# - content_for :styles do
+-#   = stylesheet_link_tag 'whatever' # dont include extension
+
+-# - content_for :scripts do
+-#   = javascript_include_tag 'whatever' #dont include extension
