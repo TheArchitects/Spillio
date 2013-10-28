@@ -4,9 +4,8 @@ class SessionsController < ApplicationController
 		user = FbUser.where(:provider => auth['provider'], 
 		                :uid => auth['uid']).first || FbUser.create_with_omniauth(auth)
 		session[:user_id] = user.id
-
 		#redirect to user profile after successful signin
-		redirect_to root_url, :notice => "Signed in!"
+		redirect_to students_new_path
 	end
 
 	def new
@@ -21,6 +20,6 @@ class SessionsController < ApplicationController
 
 	def failure
 		flash[:notice] = "Login Failed, please try again."
-		redirect_to login_path
+		redirect_to root_url
 	end
 end
