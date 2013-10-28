@@ -2,8 +2,10 @@
   = "Search"
 - content_for :styles do
   = stylesheet_link_tag 'student_search'
+  = stylesheet_link_tag 'select2-3.4.4/select2'
 - content_for :scripts do
   = javascript_include_tag 'student_search'
+  = javascript_include_tag 'select2-3.4.4/select2.min'
 
 / Fixed navbar
 .navbar.navbar-default.navbar-fixed-top
@@ -20,7 +22,10 @@
           %span.input-group-btn
             %button.btn.btn-default{type: "submit"}
               %span.glyphicon.glyphicon-search
-          %input.form-control{placeholder: "Student name", type: "text", name: "query"}/
+          - if flash.include? :query
+            %input.form-control{type: "text", name: "query", value: flash[:query]}
+          - else
+            %input.form-control{placeholder: "Student name", type: "text", name: "query"}
       %ul.nav.navbar-nav.nav-pills
         %li.active
           %a{href: "#"} Students
@@ -41,7 +46,18 @@
               %b.caret
         #advanced-settings.panel-collapse.collapse
           .panel-body
-            To be implemented.
+            %form
+              .checkbox
+                %label
+                  %input{type: "checkbox", name: "only_students_without_groups", checked: @only_students_without_groups}/
+                  Only students without groups
+              .checkbox
+                %label
+                  %input{type: "checkbox", name: "only_students_in_my_section", checked: @only_students_in_my_section}/
+                  Only students in my section
+              %select.select2#filter-by-skills{name: "filter_by_skills", multiple: "multiple"}
+                %option{value: "AL"} Alabama
+                %option{value: "WY"} Wyoming
   / / Advanced search
   / Results list
   .container
@@ -64,7 +80,7 @@
                 %p.list-group-item-text
                   %strong Skills:
                   - s.skills.each do |sk|
-                    = sk.name
+                    %span.label.label-primary= sk.name
     .row
       %ul.pagination
         %li
