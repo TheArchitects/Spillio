@@ -12,12 +12,12 @@
   
   <%= f.label :skills, 'Skills' %>
   <% Skill.all.each do |skill| %>
-    <%= check_box_tag 'skill_ids[]', skill.id, false, :id => "skill_id_#{skill.id}" %> <%= skill.name %>
+    <%= check_box_tag 'skill_ids[]', skill.id, false, :id => skill.name %> <%= skill.name %>
   <% end %><br />
 
   <%= f.label :courses, 'Courses' %>
   <% Course.all.each do |course| %>
-    <%= check_box_tag 'course_ids[]', course.id, false, :id => "course_id_#{course.id}" %> <%= course.name %>
+    <%= check_box_tag 'course_ids[]', course.id, false, :id => course.name %> <%= course.name %>
   <% end %><br />
   
   <%= f.label :interest, 'Interest' %>
