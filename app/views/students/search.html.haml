@@ -20,7 +20,7 @@
           %span.input-group-btn
             %button.btn.btn-default{type: "submit"}
               %span.glyphicon.glyphicon-search
-          %input.form-control{placeholder: "Student name", type: "text"}/
+          %input.form-control{placeholder: "Student name", type: "text", name: "query"}/
       %ul.nav.navbar-nav.nav-pills
         %li.active
           %a{href: "#"} Students
@@ -49,18 +49,18 @@
       .list-group
         / Results
         - @students.each do |s|
-          %a.list-group-item{href: "student/#{s.id}"}
+          %a.list-group-item{href: "/students/#{s.id}"}
             .row
               .col-lg-1.col-md-1.col-sm-2.col-xs-2
                 %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/
               .col-lg-11.col-md-11.col-sm-10.col-xs-10
-                %h4.list-group-item-heading s.name
+                %h4.list-group-item-heading= s.name
                 %p.list-group-item-text
                   %strong Section:
-                  s.section.number
+                  = s.section.number
                 %p.list-group-item-text
                   %strong Description:
-                  s.about
+                  = s.about
                 %p.list-group-item-text
                   %strong Skills:
                   - s.skills.each do |sk|
