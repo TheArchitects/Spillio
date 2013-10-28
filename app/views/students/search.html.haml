@@ -1,0 +1,85 @@
+- content_for :title do
+  = "Search"
+- content_for :styles do
+  = stylesheet_link_tag 'student_search'
+- content_for :scripts do
+  = javascript_include_tag 'student_search'
+
+/ Fixed navbar
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    %a.navbar-brand{href: "#"} spillio
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    .navbar-collapse.collapse
+      %form#search-form.navbar-form.navbar-left{role: "search"}
+        .input-group
+          %span.input-group-btn
+            %button.btn.btn-default{type: "submit"}
+              %span.glyphicon.glyphicon-search
+          %input.form-control{placeholder: "Student name", type: "text", name: "query"}/
+      %ul.nav.navbar-nav.nav-pills
+        %li.active
+          %a{href: "#"} Students
+        %li
+          %a{href: "#"} Projects
+    / /.nav-collapse
+/ / Fixed navbar
+/ Page body
+.container
+  / Advanced search
+  .container
+    .row
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a.accordion-toggle{"data-toggle" => "collapse", href: "#advanced-settings"}
+              Advanced search
+              %b.caret
+        #advanced-settings.panel-collapse.collapse
+          .panel-body
+            To be implemented.
+  / / Advanced search
+  / Results list
+  .container
+    .row
+      .list-group
+        / Results
+        - @students.each do |s|
+          %a.list-group-item{href: "/students/#{s.id}"}
+            .row
+              .col-lg-1.col-md-1.col-sm-2.col-xs-2
+                %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/
+              .col-lg-11.col-md-11.col-sm-10.col-xs-10
+                %h4.list-group-item-heading= s.name
+                %p.list-group-item-text
+                  %strong Section:
+                  = s.section.number
+                %p.list-group-item-text
+                  %strong Description:
+                  = s.about
+                %p.list-group-item-text
+                  %strong Skills:
+                  - s.skills.each do |sk|
+                    = sk.name
+    .row
+      %ul.pagination
+        %li
+          %a{href: "#"} «
+        %li
+          %a{href: "#"} 1
+        %li
+          %a{href: "#"} 2
+        %li
+          %a{href: "#"} 3
+        %li
+          %a{href: "#"} 4
+        %li
+          %a{href: "#"} 5
+        %li
+          %a{href: "#"} »
+  / / Results list
+/ / Page body

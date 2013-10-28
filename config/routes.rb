@@ -1,6 +1,8 @@
 Spillio::Application.routes.draw do
-  match 'students/create' => 'students#create'
+
+  post 'students/create' => 'students#create'
   match 'students/new' => 'students#new'
+  match 'students/search' => 'students#search'
   match 'students/:id' => 'students#show'
 
   # For Authentication

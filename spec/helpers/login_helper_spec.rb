@@ -10,6 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe LoginHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+
+# Nothing to test now

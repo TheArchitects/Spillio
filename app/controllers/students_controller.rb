@@ -17,4 +17,19 @@ class StudentsController < ApplicationController
   	@student.courses << Course.find(params[:course_ids])
   	@student.save
   end
+
+  def search
+    # TODO: if other settings, filter by them
+    # TODO: paging
+
+    # If we have been given a name, return users who contain it
+    # Else return all
+    if params.has_key?(:query)
+      @students = Student.search_by_name(params[:query])
+      @any_results = @students.any?
+    else
+      @students = Student.all
+      @any_results = @students.any?
+    end
+  end
 end
