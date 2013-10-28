@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20131027215357) do
 
   add_index "courses_students", ["course_id", "student_id"], :name => "index_courses_students_on_course_id_and_student_id", :unique => true
 
+  create_table "fb_users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sections", :force => true do |t|
     t.integer  "number"
     t.datetime "created_at", :null => false
