@@ -42,4 +42,3 @@ gem 'haml'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-gem 'ucb_rails'
