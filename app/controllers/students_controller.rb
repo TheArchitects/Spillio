@@ -19,17 +19,21 @@ class StudentsController < ApplicationController
   end
 
   def search
-    # TODO: if other settings, filter by them
-    # TODO: paging
+    name_query = params[:query] || ""
+    page = params[:page] || 1
 
-    # If we have been given a name, return users who contain it
-    # Else return all
-    if params.has_key?(:query)
-      @students = Student.search_by_name(params[:query])
-      @any_results = @students.any?
-    else
-      @students = Student.all
-      @any_results = @students.any?
-    end
+    # TODO: if other settings, filter by them
+
+    # Construct sql query
+    num_pages, sql_query = Student.search_by_name(name_query, page)
+
+    # Flash variables
+    flash[:query] = name_query
+
+    # View variables
+    @students = sql_query
+    @page = page
+    @any_results = @students.any?
+    @num_pages = num_pages
   end
 end
