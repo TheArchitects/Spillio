@@ -15,7 +15,6 @@ class StudentsController < ApplicationController
   # TODO: Form validation!!
   def create
   	s = params[:student]
-<<<<<<< HEAD
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
     if s.has_key? :skill_ids
