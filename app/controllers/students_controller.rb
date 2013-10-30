@@ -19,7 +19,6 @@ class StudentsController < ApplicationController
     # some weird and unknown reason
     if s.has_key? :skill_ids
       s[:skill_ids] = s[:skill_ids].select { |sk| not sk.empty?}
-      puts s[:skill_ids].size
     end
 
     if s.has_key? :course_ids
