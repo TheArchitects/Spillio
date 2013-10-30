@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
       s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
     end
 
-    if s[:name] != '' and s[:about] != '' and s[:interest] != ''
+    if s[:name] != '' and s[:about] != ''
   	  @student = Student.create(:name => s[:name], :about => s[:about],
   		  :interest => s[:interest])
   	  @student.section = Section.find(s[:section_id])
@@ -39,6 +39,7 @@ class StudentsController < ApplicationController
       @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + @missing
       redirect_to students_new_path
+      # TODO: Persist params in flash and retrieve them from the view
     end
   end
 
