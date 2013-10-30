@@ -2,8 +2,10 @@
   = "Search"
 - content_for :styles do
   = stylesheet_link_tag 'student_search'
+  = stylesheet_link_tag 'select2-3.4.4/select2'
 - content_for :scripts do
   = javascript_include_tag 'student_search'
+  = javascript_include_tag 'select2-3.4.4/select2.min'
 
 / Fixed navbar
 .navbar.navbar-default.navbar-fixed-top
@@ -20,7 +22,10 @@
           %span.input-group-btn
             %button.btn.btn-default{type: "submit"}
               %span.glyphicon.glyphicon-search
-          %input.form-control{placeholder: "Student name", type: "text", name: "query"}/
+          - if (not flash[:query].nil?) and (not flash[:query].empty?)
+            %input.form-control{type: "text", name: "query", value: flash[:query]}
+          - else
+            %input.form-control{placeholder: "Student name", type: "text", name: "query"}
       %ul.nav.navbar-nav.nav-pills
         %li.active
           %a{href: "#"} Students
@@ -41,45 +46,57 @@
               %b.caret
         #advanced-settings.panel-collapse.collapse
           .panel-body
-            To be implemented.
+            %form
+              .checkbox
+                %label
+                  %input{type: "checkbox", name: "only_students_without_groups", checked: @only_students_without_groups}/
+                  Only students without groups
+              .checkbox
+                %label
+                  %input{type: "checkbox", name: "only_students_in_my_section", checked: @only_students_in_my_section}/
+                  Only students in my section
+              - if not @all_skills.nil?
+                %select.select2#filter-by-skills{name: "filter_by_skills", multiple: "multiple"}
+                  - @all_skills.each do |sk|
+                    %option{value: sk.name}= sk.name
+              %button.btn.btn-primary.btn-sm{type: "submit"}
+                Re do search
   / / Advanced search
   / Results list
   .container
-    .row
-      .list-group
-        / Results
-        - @students.each do |s|
-          %a.list-group-item{href: "/students/#{s.id}"}
-            .row
-              .col-lg-1.col-md-1.col-sm-2.col-xs-2
-                %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/
-              .col-lg-11.col-md-11.col-sm-10.col-xs-10
-                %h4.list-group-item-heading= s.name
-                %p.list-group-item-text
-                  %strong Section:
-                  = s.section.number
-                %p.list-group-item-text
-                  %strong Description:
-                  = s.about
-                %p.list-group-item-text
-                  %strong Skills:
-                  - s.skills.each do |sk|
-                    = sk.name
-    .row
-      %ul.pagination
-        %li
-          %a{href: "#"} «
-        %li
-          %a{href: "#"} 1
-        %li
-          %a{href: "#"} 2
-        %li
-          %a{href: "#"} 3
-        %li
-          %a{href: "#"} 4
-        %li
-          %a{href: "#"} 5
-        %li
-          %a{href: "#"} »
+    - if @any_results
+      .row
+        .list-group
+          / Results
+          - @students.each do |s|
+            %a.list-group-item{href: "/students/#{s.id}"}
+              .row
+                .col-lg-1.col-md-1.col-sm-2.col-xs-2
+                  %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/
+                .col-lg-11.col-md-11.col-sm-10.col-xs-10
+                  %h4.list-group-item-heading= s.name
+                  %p.list-group-item-text
+                    %strong Section:
+                    - if not s.section.nil?
+                      = s.section.number
+                    - else
+                      Not yet specified.
+                  %p.list-group-item-text
+                    %strong Description:
+                    = s.about
+                  %p.list-group-item-text
+                    %strong Skills:
+                    - if (s.skills)
+                      - s.skills.each do |sk|
+                        %span.label.label-primary= sk.name
+      .row
+        %ul.pagination
+          - 1.upto(@num_pages) do |page|
+            %li
+              = link_to("#{page}", student_search_url(query: flash[:query], page: page))
+    - else
+      .row
+        .alert.alert-danger
+          No results found
   / / Results list
 / / Page body

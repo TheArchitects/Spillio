@@ -10,9 +10,9 @@ describe Student do
   describe "Student search" do
     it "should be able to search students by name" do
       bob = Student.create!({:name=>"Bob",:about=>"Nice Guy",:interest=>"Tennis"})
-      Student.search_by_name("Bob")[0].should eq(bob)
-      Student.search_by_name("Peter").should eq([])
+      Student.search_by_name("Bob", 1)[1].should eq([bob])
+      Student.search_by_name("Peter", 1)[1].should eq([])
     end
   end
-  # ToDo: foreign keys, search by other params once we implement it
+  # ToDo: foreign keys, search by other params once we implement it, pagination
 end
