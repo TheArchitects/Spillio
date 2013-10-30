@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # TODO: Form validation!!
   def create
   	s = params[:student]
+<<<<<<< HEAD
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
     if s.has_key? :skill_ids
@@ -26,14 +27,20 @@ class StudentsController < ApplicationController
       s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
     end
 
-  	@student = Student.create(:name => s[:name], :about => s[:about],
-  		:interest => s[:interest])
-  	@student.section = Section.find(s[:section_id])
- 	  @student.skills << Skill.find(s[:skill_ids])
-  	@student.courses << Course.find(s[:course_ids])
-  	@student.save
-    @view_only = true
-    redirect_to "/students/#{@student.id}"
+    if s[:name] != '' and s[:about] != '' and s[:interest] != ''
+  	  @student = Student.create(:name => s[:name], :about => s[:about],
+  		  :interest => s[:interest])
+  	  @student.section = Section.find(s[:section_id])
+ 	    @student.skills << Skill.find(s[:skill_ids])
+  	  @student.courses << Course.find(s[:course_ids])
+  	  @student.save
+      @view_only = true
+      redirect_to "/students/#{@student.id}"
+    else
+      @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
+      flash[:notice] = "Please fill in the following fields: " + @missing
+      redirect_to students_new_path
+    end
   end
 
   def search
