@@ -3,6 +3,7 @@
 - content_for :styles do
   = stylesheet_link_tag 'student_profile'
   = stylesheet_link_tag 'select2-3.4.4/select2'
+  = stylesheet_link_tag 'select2-3.4.4/select2-bootstrap'
 - content_for :scripts do
   = javascript_include_tag 'student_profile'
   = javascript_include_tag 'select2-3.4.4/select2.min'
@@ -16,10 +17,13 @@
 .container
   / Form
   .container
-    = form_for @user, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+    = form_for @student, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
       / Top section
       .row
-        %h3 Edit your profile:
+        - if @view_only
+          %h3 Student profile
+        - else
+          %h3 Edit your profile
         %hr/
         / Top left section
         #student-info-section.col-xs-12.col-sm-12.col-md-8.col-lg-8
@@ -29,15 +33,24 @@
               .form-group
                 = f.label :name, 'Name: ', :class => 'col-lg-2 control-label'
                 .col-lg-10
-                  = f.text_field :name, :placeholder => 'text', :class => 'form-control'
+                  - if @view_only
+                    %p= @student.name
+                  - else
+                    = f.text_field :name, :placeholder => 'Your name', :class => 'form-control', :disabled => @view_only
               .form-group
                 = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
                 .col-lg-2
-                  = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
+                  - if @view_only
+                    %p= @student.section.number
+                  - else
+                    = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
               .form-group
                 = f.label :about, 'Description: ', :class => 'col-lg-2 control-label'
                 .col-lg-10
-                  = f.text_field :about, :class => 'form-control', :rows => '4'
+                  - if @view_only
+                    %p= @student.about
+                  - else
+                    = f.text_area :about, :class => 'form-control', :rows => '4'
         / / Top left section
         / Image section
         #image-section.col-xs-12.col-sm-12.col-md-4.col-lg-4
@@ -56,16 +69,19 @@
       #other-section.row
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :skills
-          = collection_select :student, :skill_ids, Skill.all, :id, :name, :class => 'form-control', :multiple => true
+          = collection_select :student, :skill_ids, Skill.all, :id, :name, {}, :class => 'form-control', :multiple => true
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
-        = f.label :courses
-          = collection_select :student, :course_ids, Course.all, :id, :name, :class => 'form-control', :multiple => true
+          = f.label :courses
+          = collection_select :student, :course_ids, Course.all, :id, :name, {}, :class => 'form-control', :multiple => true
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :interest
-          = f.text_field :interest, :class => 'form-control', :rows => '4'
+          = f.text_area :interest, :class => 'form-control', :rows => '4'
       / / Bottom section
       .row
         .container
-          = f.submit 'Save', :class => 'btn btn-primary pull-right'
+          - if @view_only
+            - # PlaceHolder for edit
+          - else
+            = f.submit 'Save', :class => 'btn btn-primary pull-right'
   / / Form
 / / Page body

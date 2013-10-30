@@ -1,9 +1,9 @@
 Spillio::Application.routes.draw do
-
+  get 'students/search' => 'students#search', :as => :student_search
+  resources :students # TODO: Chop off some of the routes
   post 'students/create' => 'students#create'
   match 'students/new' => 'students#new'
-  get 'students/search' => 'students#search', :as => :student_search
-  match 'students/:id' => 'students#show'
+  match 'students/:id' => 'students#show', :as => :student_show
 
   # For Authentication
   match '/auth/:provider/callback' => 'sessions#create'

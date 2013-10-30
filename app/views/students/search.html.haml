@@ -77,14 +77,18 @@
                   %h4.list-group-item-heading= s.name
                   %p.list-group-item-text
                     %strong Section:
-                    = s.section.number
+                    - if not s.section.nil?
+                      = s.section.number
+                    - else
+                      Not yet specified.
                   %p.list-group-item-text
                     %strong Description:
                     = s.about
                   %p.list-group-item-text
                     %strong Skills:
-                    - s.skills.each do |sk|
-                      %span.label.label-primary= sk.name
+                    - if (s.skills)
+                      - s.skills.each do |sk|
+                        %span.label.label-primary= sk.name
       .row
         %ul.pagination
           - 1.upto(@num_pages) do |page|
