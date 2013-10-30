@@ -1,0 +1,71 @@
+- content_for :title do
+  = "Profile"
+- content_for :styles do
+  = stylesheet_link_tag 'student_profile'
+  = stylesheet_link_tag 'select2-3.4.4/select2'
+- content_for :scripts do
+  = javascript_include_tag 'student_profile'
+  = javascript_include_tag 'select2-3.4.4/select2.min'
+
+/ Fixed navbar
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    %a.navbar-brand{href: "#"} spillio
+/ / Fixed navbar
+/ Page body
+.container
+  / Form
+  .container
+    = form_for @user, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+      / Top section
+      .row
+        %h3 Edit your profile:
+        %hr/
+        / Top left section
+        #student-info-section.col-xs-12.col-sm-12.col-md-8.col-lg-8
+          .panel.panel-default
+            .panel-heading Personal info:
+            .panel-body
+              .form-group
+                = f.label :name, 'Name: ', :class => 'col-lg-2 control-label'
+                .col-lg-10
+                  = f.text_field :name, :placeholder => 'text', :class => 'form-control'
+              .form-group
+                = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
+                .col-lg-2
+                  = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
+              .form-group
+                = f.label :about, 'Description: ', :class => 'col-lg-2 control-label'
+                .col-lg-10
+                  = f.text_field :about, :class => 'form-control', :rows => '4'
+        / / Top left section
+        / Image section
+        #image-section.col-xs-12.col-sm-12.col-md-4.col-lg-4
+          .panel.panel-default
+            .panel-heading Avatar:
+            .panel-body
+              %img#avatar-image.img-square.img-responsive{alt: "User profile", src: "https://cdn1.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png"}/
+              / = f.text_field :img_url, :class => 'form-control'
+        / Image section
+      / / Top section
+      .row.hide
+        #groups-section.container
+          .well
+            Groups will go here
+      / Bottom section
+      #other-section.row
+        .col-xs-12.col-sm-12.col-md-4.col-lg-4
+          = f.label :skills
+          = collection_select :student, :skill_ids, Skill.all, :id, :name, :class => 'form-control', :multiple => true
+        .col-xs-12.col-sm-12.col-md-4.col-lg-4
+        = f.label :courses
+          = collection_select :student, :course_ids, Course.all, :id, :name, :class => 'form-control', :multiple => true
+        .col-xs-12.col-sm-12.col-md-4.col-lg-4
+          = f.label :interest
+          = f.text_field :interest, :class => 'form-control', :rows => '4'
+      / / Bottom section
+      .row
+        .container
+          = f.submit 'Save', :class => 'btn btn-primary pull-right'
+  / / Form
+/ / Page body
