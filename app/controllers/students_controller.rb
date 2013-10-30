@@ -10,12 +10,18 @@ class StudentsController < ApplicationController
 
   def create
   	s = params[:student]
-  	@student = Student.create(:name => s[:name], :about => s[:about],
-  		:interest => s[:interest])
-  	@student.section = Section.find(s[:section_id])
- 	  @student.skills << Skill.find(params[:skill_ids])
-  	@student.courses << Course.find(params[:course_ids])
-  	@student.save
+    if s[:name] != '' and s[:about] != '' and s[:interest] != ''
+  	  @student = Student.create(:name => s[:name], :about => s[:about],
+  		  :interest => s[:interest])
+  	  @student.section = Section.find(s[:section_id])
+ 	    @student.skills << Skill.find(params[:skill_ids])
+  	  @student.courses << Course.find(params[:course_ids])
+  	  @student.save
+    else
+      @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
+      flash[:notice] = "Please fill in the following fields: " + @missing
+      redirect_to students_new_path
+    end
   end
 
   def search

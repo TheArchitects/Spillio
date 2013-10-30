@@ -1,5 +1,7 @@
 <h1>Let's create your profile!</h1>
-
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 <%= form_for @student, url: {action: "create"} do |f| %>
   <%= f.label :name, 'Name' %>
   <%= f.text_field :name %><br />
