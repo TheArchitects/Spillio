@@ -6,7 +6,8 @@ class Student < ActiveRecord::Base
 
   def self.search_by_name(query, page)
     # TODO: Avoid SQL injection!!
-    sql_query = Student.where("name like ?", "%#{query}%")
+    query = query.downcase
+    sql_query = Student.where("lower(name) like ?", "%#{query}%")
     return Student.num_pages_from_query(sql_query), sql_query.paginate(:per_page => 20, :page => page)
   end
 

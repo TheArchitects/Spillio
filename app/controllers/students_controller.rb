@@ -2,10 +2,14 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    @edit = true
+    render :profile
   end
 
   def show
     @student = Student.find(params[:id])
+    @edit = false
+    render :profile
   end
 
   def create
@@ -16,6 +20,8 @@ class StudentsController < ApplicationController
  	  @student.skills << Skill.find(params[:skill_ids])
   	@student.courses << Course.find(params[:course_ids])
   	@student.save
+    @edit = false
+    redirect_to :show(:id => @student.id)
   end
 
   def search
