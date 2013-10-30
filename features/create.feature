@@ -8,13 +8,12 @@ Background: I am on the Create New Profile page
   Given I am on the Create New Profile page
 
 Scenario: Enter in user information
-  Given I am on the Create New Profile page
-  And I fill in "Name" with "Jalal"
+  Given I fill in "Name" with "Jalal"
   And I check "Java"
-  And I fill in "Courses" with "CS162"
-  And I select "101" from "Section"
+  And I check "CS162"
+  And I select "101" from "student_section_id"
   And I fill in "Interest" with "Running"
-  And I click "Save"
+  And I press "Create profile"
   Then I should be on the New User Profile page
   And I should see "Jalal"
   And I should see "Java"
