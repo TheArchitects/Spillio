@@ -43,7 +43,10 @@
                 = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
                 .col-lg-2
                   - if @view_only
-                    %p= @student.section.number
+                    - if not @student.section.nil?
+                      %p= @student.section.number
+                    - else
+                      %p Not yet specified
                   - else
                     = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
               .form-group
