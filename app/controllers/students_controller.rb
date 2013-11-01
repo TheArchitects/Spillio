@@ -12,6 +12,14 @@ class StudentsController < AuthenticatedController
     render :profile
   end
 
+  def update
+    # TO DO make this work, show edit ok msg, check user valid
+    @student = Student.find(params[:id])
+    # @student.update_attributes!(params[:student])
+    @view_only = true
+    render :profile
+  end
+
   def self.cid_exists? cid
     Student.find_by_cid(cid)!=nil
   end

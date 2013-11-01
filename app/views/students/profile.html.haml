@@ -2,11 +2,11 @@
   = "Profile"
 - content_for :styles do
   = stylesheet_link_tag 'student_profile'
-  = stylesheet_link_tag 'select2-3.4.4/select2'
-  = stylesheet_link_tag 'select2-3.4.4/select2-bootstrap'
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2.css", :rel=>"stylesheet"}
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2-bootstrap.css", :rel=>"stylesheet"}
 - content_for :scripts do
+  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
   = javascript_include_tag 'student_profile'
-  = javascript_include_tag 'select2-3.4.4/select2.min'
 
 / Fixed navbar
 .navbar.navbar-default.navbar-fixed-top
