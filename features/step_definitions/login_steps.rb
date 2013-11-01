@@ -1,7 +1,17 @@
+=begin
+Refer to 
+https://github.com/rubycas/rubycas-client#testing
+for testing CAS
+
+
+=end
 
 #Given I am on the page
-Given /^I am on the "(.+)" page$/ do |page_path|
-	page.visit("/#{page_path}")
+Given /^I am on the "(.+)" page$/ do |page_name|
+	case page_name
+  when 'home'
+    page.visit("/")
+  end
 end
 
 #Make sure you are logged in
@@ -12,8 +22,6 @@ Given /^a valid user$/ do
              :password_confirmation => "validPassword"
            })
 end
-
-
 
 Given /^I am not logged in$/ do 
 	flunk "unimplemented"
@@ -31,26 +39,23 @@ When /^I press "(.+)" button$/ do |button|
 	click_button(button)
 end
 
+When /^I follow "(.*)" link$/ do |link|
+  click_link(link)
+end
+
+
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
 Then /^I should see "(.+)" on the page$/ do |text|
-	if page.respond_to? :should
-    	page.should have_content(text)
-  	else
+
     	assert page.has_content?(text)
-  	end
+  	
 end
 
-Then /^I should see a "(.+)" (.+)$/ do |name, tag|
-	field = find_field(tag)
-    field_value = (field.tag_name == 'textarea') ? field.text : field.value
-    if field_value.respond_to? :should
-      	field_value.should =~ /#{name}/
-    else
-      	assert_match(/#{name}/, field_value)
-    end
+Then /^I should see a "(.+)" button$/ do |name|
+	assert page.has_content?(name)
 end
 
 
@@ -75,6 +80,3 @@ Then /^I should be on the "(.+)" page or on the "(.+)" page$/ do |page1, page2|
     	assert_equal test, true
   	end
 end
-
-
-

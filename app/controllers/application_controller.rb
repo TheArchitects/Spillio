@@ -1,3 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+	require 'casclient'
+	require 'casclient/frameworks/rails/filter'
+
+  	protect_from_forgery
 end

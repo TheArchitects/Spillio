@@ -1,15 +1,12 @@
 Spillio::Application.routes.draw do
   get 'students/search' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
-  post 'students/create' => 'students#create'
-  match 'students/new' => 'students#new'
-  match 'students/:id' => 'students#show', :as => :student_show
+  match 'student/cid/:id' => 'students#show_by_cid', :as => :student_show_by_cid, via: [:get]
 
-  # For Authentication
-  match '/auth/:provider/callback' => 'sessions#create'
-  match '/auth/failure' => 'sessions#failure', :as => :failure
-  match '/signout' => 'sessions#destroy', :as => :signout
-  match '/signin' => 'sessions#new', :as => :signin
+  # For CAS Login
+  match '/login' => 'login#login', :as => :login, via: [:get]
+  match '/logout' => 'login#logout', :as => :logout, via: [:get]
+  match '/account' => 'login#index', :as => :user_account, via: [:get]
 
   root :to => 'home#index'
 
