@@ -1,6 +1,5 @@
 class StudentsController < AuthenticatedController
 
-
   def new
     @student = Student.new
     @view_only = false
@@ -22,7 +21,7 @@ class StudentsController < AuthenticatedController
     @student = Student.find_by_cid(params[:id])
 
     if @student
-      @view_only = true
+      @view_only = false
       render :profile
     else
       redirect_to students_new_path
@@ -33,17 +32,31 @@ class StudentsController < AuthenticatedController
   def create
   	s = params[:student]
     student_cid = session[:cas_user]
-    if s[:name] != '' and s[:about] != '' and s[:interest] != '' and student_cid!=nil
-      @student = Student.create(:name => s[:name], :about => s[:about],
-        :interest => s[:interest], :cid => student_cid)
+
+    # Remove empty skill and course ids, cause they appear for
+    # some weird and unknown reason
+    if s.has_key? :skill_ids
+      s[:skill_ids] = s[:skill_ids].select { |sk| not sk.empty?}
+    end
+
+    if s.has_key? :course_ids
+      s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
+    end
+
+    if s[:name] != '' and s[:about] != '' and student_cid!=nil
+  	  @student = Student.create(:name => s[:name], :about => s[:about],
+  		  :interest => s[:interest], :cid => student_cid)
   	  @student.section = Section.find(s[:section_id])
- 	    @student.skills << Skill.find(params[:skill_ids])
-  	  @student.courses << Course.find(params[:course_ids])
+ 	    @student.skills << Skill.find(s[:skill_ids])
+  	  @student.courses << Course.find(s[:course_ids])
   	  @student.save
+      @view_only = true
+      redirect_to "/students/#{@student.id}"
     else
       @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + @missing
       redirect_to students_new_path
+      # TODO: Persist params in flash and retrieve them from the view
     end
   end
 
