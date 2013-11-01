@@ -32,27 +32,19 @@ class StudentsController < AuthenticatedController
   # TODO: Form validation!!
   def create
   	s = params[:student]
-    # Remove empty skill and course ids, cause they appear for
-    # some weird and unknown reason
-    if s.has_key? :skill_ids
-      s[:skill_ids] = s[:skill_ids].select { |sk| not sk.empty?}
-      puts s[:skill_ids].size
+    student_cid = session[:cas_user]
+    if s[:name] != '' and s[:about] != '' and s[:interest] != '' and student_cid!=nil
+      @student = Student.create(:name => s[:name], :about => s[:about],
+        :interest => s[:interest], :cid => student_cid)
+  	  @student.section = Section.find(s[:section_id])
+ 	    @student.skills << Skill.find(params[:skill_ids])
+  	  @student.courses << Course.find(params[:course_ids])
+  	  @student.save
+    else
+      @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
+      flash[:notice] = "Please fill in the following fields: " + @missing
+      redirect_to students_new_path
     end
-
-    if s.has_key? :course_ids
-      s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
-    end
-
-    student_cid = LoginController.get_cid
-
-  	@student = Student.create(:name => s[:name], :about => s[:about],
-  		:interest => s[:interest], :cid => student_cid)
-  	@student.section = Section.find(s[:section_id])
- 	  @student.skills << Skill.find(s[:skill_ids])
-  	@student.courses << Course.find(s[:course_ids])
-  	@student.save
-    @view_only = true
-    redirect_to "/students/#{@student.id}"
   end
 
   def search
