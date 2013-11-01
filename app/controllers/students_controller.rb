@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentsController < AuthenticatedController
 
   def new
     @student = Student.new
@@ -12,9 +12,35 @@ class StudentsController < ApplicationController
     render :profile
   end
 
+  def update
+    # TO DO make this work, show edit ok msg, check user valid
+    @student = Student.find(params[:id])
+    # @student.update_attributes!(params[:student])
+    @view_only = true
+    render :profile
+  end
+
+  def self.cid_exists? cid
+    Student.find_by_cid(cid)!=nil
+  end
+
+  # Finds the student with Calnet Id number
+  def show_by_cid
+    @student = Student.find_by_cid(params[:id])
+
+    if @student
+      @view_only = false
+      render :profile
+    else
+      redirect_to students_new_path
+    end
+  end
+
   # TODO: Form validation!!
   def create
   	s = params[:student]
+    student_cid = session[:cas_user]
+
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
     if s.has_key? :skill_ids
@@ -25,9 +51,9 @@ class StudentsController < ApplicationController
       s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
     end
 
-    if s[:name] != '' and s[:about] != ''
+    if s[:name] != '' and s[:about] != '' and student_cid!=nil
   	  @student = Student.create(:name => s[:name], :about => s[:about],
-  		  :interest => s[:interest])
+  		  :interest => s[:interest], :cid => student_cid)
   	  @student.section = Section.find(s[:section_id])
  	    @student.skills << Skill.find(s[:skill_ids])
   	  @student.courses << Course.find(s[:course_ids])

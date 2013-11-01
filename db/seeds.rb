@@ -6,12 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 courses = Course.create([{ name: 'CS161' }, { name: 'CS168' }])
 skills = Skill.create([{ name: 'Java' }, { name: 'Ruby' }])
 sections = Section.create([{ number: 100 }, { number: 101 }])
-jalal = Student.create(name: 'Jalal', about:'I am idiot.', interest: 'Idiot people')
-jalal.section = sections[1]
-jalal.skills << skills[0]
-jalal.skills << skills[1]
-jalal.courses << courses[1]
-jalal.save
+
+
+
+kayvan = Student.create(name: 'Kayvan', about:'Nothing to say', interest: 'Everything', cid:'1007417')
+kayvan.section = sections[1]
+kayvan.skills << skills[0]
+kayvan.skills << skills[1]
+kayvan.courses << courses[1]
+kayvan.save
