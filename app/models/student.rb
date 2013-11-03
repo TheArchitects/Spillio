@@ -1,7 +1,7 @@
 class Student < ActiveRecord::Base
   belongs_to :group :section
   has_and_belongs_to_many :courses :skills 
-  has_many :notifications :posts
+  has_many :notifications :posts :comments
 
   attr_accessible :about, :interest, :name, :cid
 
