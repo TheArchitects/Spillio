@@ -16,26 +16,30 @@ additions, updates, etc.. on top of WORKING code.
 
 Go to project folder (ie., the one that contains app/, config/...)
 
-0. Add heroku remote (if you haven't already done so):
+0.- Add heroku remote (if you haven't already done so):
   git remote add heroku git@heroku.com:spillio.git
 
-1. If you added or modified any asset (css, js, img) then:
-  1.1. Update asset version: Go to config/application.rb and change the config.assets.version to something higher.
-  1.2. Precompile assets: run
-     RAILS_ENV=production exec rake assets:precompile
+1.- If you added or modified any asset (css, js, img) then:
+* Update asset version: Go to config/application.rb and change the config.assets.version to something higher.
+* Precompile assets: run
 
-2. Make a new commit. Make sure that you are committing all your changes, plus changes created by steps 1.1 and 1.2
+  RAILS_ENV=production exec rake assets:precompile
 
-3. Push commit to github (push origin master) and to heroku (push heroku master)
+2.- Make a new commit. Make sure that you are committing all your changes, plus changes created by steps 1.1 and 1.2
 
-4. If you modified the db, run:
+3.- Push commit to github (push origin master) and to heroku (push heroku master)
+
+4.- If you modified the db, run:
   heroku run rake db:migrate
   heroku run rake db:seed # Do not run this if we don't want to prefill any data in the db
 
-5. If the db change is very drastic, db:migrate may fail. In such case, we'd like to reset the db (WARNING: this erases all content) with
+5.- If the db change is very drastic, db:migrate may fail. In such case, we'd like to reset the db (WARNING: this erases all content) with
   heroku run pg:reset
 
-6. Rejoice
+6.- Rejoice
+
+
+
 
 
 
