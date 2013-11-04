@@ -1,7 +1,8 @@
 class Student < ActiveRecord::Base
-  belongs_to :section
-  has_and_belongs_to_many :courses
-  has_and_belongs_to_many :skills
+  belongs_to :group :section
+  has_and_belongs_to_many :courses :skills 
+  has_many :notifications :posts :comments
+
   attr_accessible :about, :interest, :name, :cid
 
   def self.search_by_name(query, page)
