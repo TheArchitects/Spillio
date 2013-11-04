@@ -41,28 +41,15 @@ class StudentsController < AuthenticatedController
   	s = params[:student]
     student_cid = session[:cas_user]
 
-    # Remove empty skill and course ids, cause they appear for
-    # some weird and unknown reason
-    if s.has_key? :skill_ids
-      s[:skill_ids] = s[:skill_ids].select { |sk| not sk.empty?}
-    end
-
-    if s.has_key? :course_ids
-      s[:course_ids] = s[:course_ids].select { |c| not c.empty?}
-    end
+    StudentsController.cleanup_fields!(s)
 
     if s[:name] != '' and s[:about] != '' and student_cid!=nil
-  	  @student = Student.create(:name => s[:name], :about => s[:about],
-  		  :interest => s[:interest], :cid => student_cid)
-  	  @student.section = Section.find(s[:section_id])
- 	    @student.skills << Skill.find(s[:skill_ids])
-  	  @student.courses << Course.find(s[:course_ids])
-  	  @student.save
+  	  @student = Student.create_for_current_user!(s, student_cid)
       @view_only = true
       redirect_to "/students/#{@student.id}"
     else
-      @missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
-      flash[:notice] = "Please fill in the following fields: " + @missing
+      missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
+      flash[:notice] = "Please fill in the following fields: " + missing
       redirect_to students_new_path
       # TODO: Persist params in flash and retrieve them from the view
     end
@@ -85,5 +72,17 @@ class StudentsController < AuthenticatedController
     @page = page
     @any_results = @students.any?
     @num_pages = num_pages
+  end
+
+  def self.cleanup_fields!(student)
+    # Remove empty skill and course ids, cause they appear for
+    # some weird and unknown reason
+    if student.has_key? :skill_ids
+      student[:skill_ids] = student[:skill_ids].select { |sk| not sk.empty?}
+    end
+
+    if student.has_key? :course_ids
+      student[:course_ids] = student[:course_ids].select { |c| not c.empty?}
+    end
   end
 end
