@@ -4,7 +4,7 @@ Feature: create a group with my classmates
   So that I can form a project group
 
   Background: I am on the Home Page
-    Given: I am signed in as "Jalal"
+    Given I am signed in as "Jalal"
 
   Scenario: Send a request to someone who is not in a group
     Given I am on the Search for Students page
