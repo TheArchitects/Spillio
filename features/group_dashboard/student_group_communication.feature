@@ -28,25 +28,18 @@ Feature: View assignments due
     | 2  | url  | Heroku | 2            | nil     | nil                |
 
     And the following posts exist:
-    | id | author | published_at       | iteration_id |
-    | 1  | 1      | 2011-10-1 00:00:00 | 1            |
-    | 2  | 3      | 2011-10-2 00:00:00 | 2            |
+    | id | author | published_at       | iteration_id | content |
+    | 1  | 1      | 2011-10-1 00:00:00 | 1            |         |
+    | 2  | 3      | 2011-10-2 00:00:00 | 2            |  great  |
 
     Given I am logged into the student group dashboard
 
-  Scenario: I should see assignments in chronological order
-    Then I should see "It1-1" before "It1-2"
-    And I should see "Blah" within "#it-1"
+  Scenario: I should be able to input questions
+    Given I fill in the input box with "when are you free to meet"
+    Then I press submit
+    And I should be on the group dashboard page
+    And I should see "when are you free to meet" within "#it-2 .content"
 
-  Scenario: I should see the date in the header of future assignments
-    Given it is the "2013-9-2 00:00:00"
-    Then I should see "1/10/2013" within "#it-2 .header"
-    And I should not see "1/10/2011" within "#it-1 .header"
-
-  Scenario: I should see the score in the header of past assignments
-    Given it is the "2013-9-2 00:00:00"
-    Then I should see "10/20" within "#it-1 .header"
-    And I should not see "Score" within "#it-2 .header"
-
-
-
+  Scenario: I should see the instructor's response in group dashboard
+    Then I should see "Robocop" within "#it-2 .content"
+    Then I should see "great" within "#it-2 .content"
