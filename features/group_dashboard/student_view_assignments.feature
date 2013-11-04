@@ -31,3 +31,6 @@ Feature: View assignments due
     | id | author | published_at       | iteration_id |
     | 1  | 1      | 2011-10-1 00:00:00 | 1            |
     | 2  | 3      | 2011-10-2 00:00:00 | 2            |
+
+    Given I am logged into the student group dashboard
+
