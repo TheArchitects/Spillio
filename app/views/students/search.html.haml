@@ -8,32 +8,8 @@
   %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
   = javascript_include_tag 'student_search'
 
-/ Fixed navbar
-.navbar.navbar-default.navbar-fixed-top
-  .container
-    %a.navbar-brand{href: "#"} spillio
-    .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-    .navbar-collapse.collapse
-      %form#search-form.navbar-form.navbar-left{role: "search"}
-        .input-group
-          %span.input-group-btn
-            %button.btn.btn-default{type: "submit"}
-              %span.glyphicon.glyphicon-search
-          - if (not flash[:query].nil?) and (not flash[:query].empty?)
-            %input.form-control{type: "text", name: "query", value: flash[:query]}
-          - else
-            %input.form-control{placeholder: "Student name", type: "text", name: "query"}
-      %ul.nav.navbar-nav.nav-pills
-        %li.active
-          %a{href: "#"} Students
-        %li
-          %a{href: "#"} Projects
-    / /.nav-collapse
-/ / Fixed navbar
+.container
+  = render "navbar"
 / Page body
 .container
   / Advanced search
