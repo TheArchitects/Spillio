@@ -11,19 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105235205) do
-
-  create_table "announcements", :force => true do |t|
-    t.text     "message"
-    t.datetime "starts_at"
-    t.datetime "ends_at"
-    t.boolean  "active"
-    t.text     "roles"
-    t.text     "types"
-    t.text     "style"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131106001513) do
 
   create_table "assignments", :force => true do |t|
     t.text     "description"
@@ -43,12 +31,12 @@ ActiveRecord::Schema.define(:version => 20131105235205) do
 
   add_index "courses", ["name"], :name => "index_courses_on_name", :unique => true
 
-  create_table "courses_students", :id => false, :force => true do |t|
+  create_table "courses_users", :id => false, :force => true do |t|
     t.integer "course_id"
-    t.integer "student_id"
+    t.integer "user_id"
   end
 
-  add_index "courses_students", ["course_id", "student_id"], :name => "index_courses_students_on_course_id_and_student_id", :unique => true
+  add_index "courses_users", ["course_id", "user_id"], :name => "index_courses_users_on_course_id_and_user_id", :unique => true
 
   create_table "groups", :force => true do |t|
     t.string   "group_name"
@@ -60,16 +48,6 @@ ActiveRecord::Schema.define(:version => 20131105235205) do
 
   add_index "groups", ["instructor_id"], :name => "index_groups_on_instructor_id"
   add_index "groups", ["section_id"], :name => "index_groups_on_section_id"
-
-  create_table "hidden_announcements", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "announcement_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "hidden_announcements", ["announcement_id"], :name => "index_hidden_announcements_on_announcement_id"
-  add_index "hidden_announcements", ["user_id"], :name => "index_hidden_announcements_on_user_id"
 
   create_table "instructors", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -118,12 +96,12 @@ ActiveRecord::Schema.define(:version => 20131105235205) do
 
   add_index "skills", ["name"], :name => "index_skills_on_name", :unique => true
 
-  create_table "skills_students", :id => false, :force => true do |t|
+  create_table "skills_users", :id => false, :force => true do |t|
     t.integer "skill_id"
-    t.integer "student_id"
+    t.integer "user_id"
   end
 
-  add_index "skills_students", ["skill_id", "student_id"], :name => "index_skills_students_on_skill_id_and_student_id", :unique => true
+  add_index "skills_users", ["skill_id", "user_id"], :name => "index_skills_users_on_skill_id_and_user_id", :unique => true
 
   create_table "submissions", :force => true do |t|
     t.text     "content"
@@ -145,8 +123,9 @@ ActiveRecord::Schema.define(:version => 20131105235205) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "cid"
+    t.string   "type"
   end
 
-  add_index "users", ["section_id"], :name => "index_students_on_section_id"
+  add_index "users", ["section_id"], :name => "index_users_on_section_id"
 
 end
