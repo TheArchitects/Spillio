@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
     return Student.num_pages_from_query(sql_query), sql_query.paginate(:per_page => 20, :page => page)
   end
 
+  # Creates a User model for the authenticated user
   def self.create_for_current_user!(s, current_user_id)
     student = Student.create(:name => s[:name], :about => s[:about],
         :interest => s[:interest], :cid => current_user_id)
@@ -20,6 +21,16 @@ class User < ActiveRecord::Base
     student.save
 
     return student
+  end
+
+
+  # Instance methods
+  def is_student
+    return type == 'Student'
+  end
+
+  def is_instructor
+    return type == 'Instructor'
   end
 
   private
