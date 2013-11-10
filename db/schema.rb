@@ -108,7 +108,6 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
   add_index "skills_users", ["skill_id", "user_id"], :name => "index_skills_users_on_skill_id_and_user_id", :unique => true
 
   create_table "submissions", :force => true do |t|
-    t.string   "label"
     t.text     "content"
     t.datetime "submitted_date"
     t.integer  "group_id"
