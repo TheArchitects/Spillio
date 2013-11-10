@@ -13,6 +13,21 @@
           %input.form-control{placeholder: "Search", type: "text", name: "query"}/
         %button.btn.btn-default{type: "submit"} Submit
       %ul.nav.navbar-nav.navbar-right
+        / TODO: In the future, either show My Group or show requests
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            Group requests
+            %span.badge 5
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              =link_to "Request 1","#{student_path @authenticated_user}"
+              %a.btn.btn-primary
+                Accept
+            %li
+              =link_to "Request 2","#{edit_student_path @authenticated_user}"
+              %a.btn.btn-primary
+                Accept
         %li
           %a{href: "#"} My Group
         %li.dropdown
