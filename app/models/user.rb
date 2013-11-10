@@ -25,11 +25,11 @@ class User < ActiveRecord::Base
 
 
   # Instance methods
-  def is_student
+  def is_student?
     return type == 'Student'
   end
 
-  def is_instructor
+  def is_instructor?
     return type == 'Instructor'
   end
 

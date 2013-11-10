@@ -1,3 +1,6 @@
+- content_for :styles do
+  = stylesheet_link_tag 'shared_navbar'
+
 / Navbar. In the future we can include instructor navbars here too
 - unless @authenticated_user.nil?
   = render "shared/loggedin_student_navbar"
