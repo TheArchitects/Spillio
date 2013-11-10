@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106001513) do
+ActiveRecord::Schema.define(:version => 20131110093429) do
 
   create_table "assignments", :force => true do |t|
     t.text     "description"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20131106001513) do
   end
 
   add_index "courses_users", ["course_id", "user_id"], :name => "index_courses_users_on_course_id_and_user_id", :unique => true
+
+  create_table "group_join_requests", :force => true do |t|
+    t.integer  "requester"
+    t.integer  "requestee"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "group_name"
@@ -124,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20131106001513) do
     t.datetime "updated_at", :null => false
     t.integer  "cid"
     t.string   "type"
+    t.integer  "group_id"
   end
 
   add_index "users", ["section_id"], :name => "index_users_on_section_id"

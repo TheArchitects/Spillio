@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
 	has_many :scores
 	has_many :submissions
 	has_many :posts
+	has_many :group_join_requests
 	attr_accessible :group_name
 
 end
