@@ -9,6 +9,7 @@ gem 'twitter-bootstrap-rails'
 group :development, :test do
   gem 'sqlite3'
   gem 'ruby-debug19'
+  gem 'debugger'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
