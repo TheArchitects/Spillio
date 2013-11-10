@@ -12,7 +12,7 @@ Spillio::Application.routes.draw do
 
   # For DashBoard Controller
 
-  match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get] 
+  match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get]
 
 
 

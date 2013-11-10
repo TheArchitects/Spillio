@@ -1,3 +1,60 @@
-// Place all the styles related to the GroupDashBoard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  padding-top: 70px;
+}
+
+#search-form {
+  max-width: 400px;
+}
+
+#other-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#other-section .select2-container {
+  height: 94px !important;
+}
+
+#other-section .select2-choices {
+  height: 85px !important;
+
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(2%, #fff)) !important;
+  background-image: -webkit-linear-gradient(top, #eee 1%, #fff 2%) !important;
+  background-image: -moz-linear-gradient(top, #eee 1%, #fff 2%) !important;
+  background-image: linear-gradient(top, #eee 1%, #fff 2%) !important;
+}
+
+.panel-title {
+  text-align: center;
+}
+
+.card {
+    padding:1.5rem;
+    box-shadow:0 1px 2px #aaa;
+    background:white;
+    margin:0 1rem 1rem;
+    border-radius:3px;
+    user-select:none;
+    animation:fly-in-from-left .5s 1s ease both;
+    transform-origin:top left;
+}
+
+.assignment {
+  background-color: #d5d5d5;
+}
+
+.member {
+  font-size: 16px;
+}
+
+.student {
+  text-align: right;
+}
+
+.instructor {
+  text-align: left;
+}
+
+h3 {
+  text-align: center;
+}
