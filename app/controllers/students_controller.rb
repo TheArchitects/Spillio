@@ -12,6 +12,13 @@ class StudentsController < AuthenticatedController
     render :profile
   end
 
+  def edit
+    # TODO: Check user is a student
+    @student = @authenticated_user
+    @view_only = false
+    render :profile
+  end
+
   def update
     # TO DO make this work, show edit ok msg, check user valid
     @student = Student.find(params[:id])
@@ -73,6 +80,8 @@ class StudentsController < AuthenticatedController
     @any_results = @students.any?
     @num_pages = num_pages
   end
+
+  private
 
   def self.cleanup_fields!(student)
     # Remove empty skill and course ids, cause they appear for
