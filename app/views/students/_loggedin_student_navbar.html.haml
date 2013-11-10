@@ -17,17 +17,17 @@
           %a{href: "#"} My Group
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-            = @student.name
+            = @authenticated_user.name
             %b.caret
           %ul.dropdown-menu
             %li
-              =link_to "View Profile","#{student_path @student}"
+              =link_to "View Profile","#{student_path @authenticated_user}"
             %li
-              =link_to "Edit Profile","#{edit_student_path @student}"
+              =link_to "Edit Profile","#{edit_student_path @authenticated_user}"
             %li.divider
             %li
               =link_to "Logout","#{logout_path}"
-          
+
 
     / /.nav-collapse
 / / Fixed navbar

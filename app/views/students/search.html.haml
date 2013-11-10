@@ -8,8 +8,10 @@
   %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
   = javascript_include_tag 'student_search'
 
-.container
-  = render "navbar"
+/ Navbar
+- unless @authenticated_user.nil?
+  = render "loggedin_student_navbar"
+
 / Page body
 .container
   / Advanced search
