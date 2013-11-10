@@ -44,17 +44,8 @@
                 %h4 Description
                 .panel-body
                   = assignment.description
-                %h4 Submission Logistics
-                .panel-body
-                  %p You will submit a file containing the following information on one line:
-                  %p heroku-uri admin-name admin-password
-                  %p for example:
-                  %p myname.herokuapp.com admin abc123
-                  .col-lg-8
-                    .input-group
-                      %input.form-control{type: "text"}/
-                      %span.input-group-btn
-                        %button.btn.btn-default{type: "button"} Submit
+                - unless assignment.submissions.nil? || assignment.submissions.count == 0
+                  = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
               .card
                 %h4 Message
                 %hr/

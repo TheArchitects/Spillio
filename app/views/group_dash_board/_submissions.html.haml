@@ -1,0 +1,9 @@
+%h4 Submissions
+.panel-body
+  - submissions.each do |submission|
+    = form_for submission, :html => {:class => 'form-inline', :role => 'form'} do |f|
+      = f.label :content, submission.label, :class => 'control-label'
+      %br
+      .form-group
+        = f.text_field :content, :class => 'form-control', :required => true
+      = f.submit 'Save', :class => 'btn btn-primary'

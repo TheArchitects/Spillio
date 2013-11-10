@@ -13,7 +13,7 @@ Spillio::Application.routes.draw do
   # For DashBoard Controller
 
   match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get]
-
+  put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
 
 
   # The priority is based upon order of creation:

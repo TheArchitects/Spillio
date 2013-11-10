@@ -1,6 +1,7 @@
 class CreateSubmissions < ActiveRecord::Migration
   def change
     create_table :submissions do |t|
+      t.string :label
       t.text :content
       t.datetime :submitted_date
       t.references :group
