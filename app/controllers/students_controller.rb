@@ -13,7 +13,8 @@ class StudentsController < AuthenticatedController
   end
 
   def edit
-    @student = Student.find(params[:id])
+    # TODO: Check user is a student
+    @student = @authenticated_user
     @view_only = false
     render :profile
   end
@@ -62,7 +63,6 @@ class StudentsController < AuthenticatedController
   end
 
   def search
-    @student = Student.find_by_cid(session[:cas_user])
     name_query = params[:query] || ""
     page = params[:page] || 1
 
@@ -80,6 +80,8 @@ class StudentsController < AuthenticatedController
     @any_results = @students.any?
     @num_pages = num_pages
   end
+
+  private
 
   def self.cleanup_fields!(student)
     # Remove empty skill and course ids, cause they appear for
