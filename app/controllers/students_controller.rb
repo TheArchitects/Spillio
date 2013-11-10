@@ -12,12 +12,6 @@ class StudentsController < AuthenticatedController
     render :profile
   end
 
-  def edit
-    @student = Student.find(params[:id])
-    @view_only = false
-    render :profile
-  end
-
   def update
     # TO DO make this work, show edit ok msg, check user valid
     @student = Student.find(params[:id])
@@ -62,7 +56,6 @@ class StudentsController < AuthenticatedController
   end
 
   def search
-    @student = Student.find_by_cid(session[:cas_user])
     name_query = params[:query] || ""
     page = params[:page] || 1
 

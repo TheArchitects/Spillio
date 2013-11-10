@@ -8,8 +8,11 @@
   %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
   = javascript_include_tag 'student_profile'
 
-.container
-  = render "navbar"
+/ Fixed navbar
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    %a.navbar-brand{href: "#"} spillio
+/ / Fixed navbar
 / Page body
 .container
   / Form
