@@ -1,6 +1,6 @@
-class CreateStudents < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :students do |t|
+    create_table :users do |t|
       t.string :name
       t.text :about
       t.references :section
@@ -8,6 +8,6 @@ class CreateStudents < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :students, :section_id
+    add_index :users, :section_id
   end
 end
