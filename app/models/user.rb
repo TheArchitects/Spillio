@@ -13,12 +13,17 @@ class User < ActiveRecord::Base
 
   # Creates a User model for the authenticated user
   def self.create_for_current_user!(s, current_user_id)
+    # TODO: Check if instructor
     student = Student.create(:name => s[:name], :about => s[:about],
         :interest => s[:interest], :cid => current_user_id)
     student.section = Section.find(s[:section_id])
     student.skills << Skill.find(s[:skill_ids])
     student.courses << Course.find(s[:course_ids])
     student.save
+
+    student_group = Group.create(:group_name => 'Unnamed')
+    student_group.students << student
+    student_group.save
 
     return student
   end

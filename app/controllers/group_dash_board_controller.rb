@@ -5,15 +5,16 @@ class GroupDashBoardController < AuthenticatedController
 	#display all the info of the group that belongs to
 	#authenticated user
 	def show
-		group_id = @authenticated_user.group
-		if group_id == params[:id]
-			@group = Group.find[group_id]
+		group_id = @authenticated_user.group.id
+
+		if group_id.to_s == params[:id]
+			@group = Group.find(group_id)
 		else
 			flash[:notice] = 'You are not allowed to check this group :)'
 		end
 	end
-	
-	#Submits the submission content 
+
+	#Submits the submission content
 	def submit_assignment
 
 	end

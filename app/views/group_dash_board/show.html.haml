@@ -14,23 +14,20 @@
 / Page body
 .container
   .row
-    %h2 spillio's Dashboard
+    %h3= "#{@group.group_name} dashboard"
     %hr/
   .row
     / Left panel
     .col-lg-3.col-md-3.col-sm-12.col-xs-12
       .panel.panel-default
         .panel-heading
-          %h4.panel-title
-            Group 20
+          %h4.panel-title= @group.group_name
         .panel-body
-          %h3 Group members:
+          %h4 Group members:
           %ul.member
-            %li Adolf
-            %li Friedrich
-            %li Guti
-            %li CR
-            %li Hummels
+            - @group.students.each do |student|
+              %li
+                = link_to student.name, "#{student_path student}"
     / / Left panel
     / Assignment dahsboard panel
     .col-lg-9.col-md-9.col-sm-12.col-xs-12
