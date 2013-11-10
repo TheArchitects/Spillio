@@ -8,7 +8,6 @@ gem 'twitter-bootstrap-rails'
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
   gem 'sqlite3'
-  gem 'ruby-debug19'
   gem 'debugger'
   gem 'database_cleaner'
   gem 'capybara'
