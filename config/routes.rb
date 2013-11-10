@@ -10,6 +10,12 @@ Spillio::Application.routes.draw do
 
   root :to => 'home#index'
 
+  # For DashBoard Controller
+
+  match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get] 
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
