@@ -8,7 +8,14 @@ Spillio::Application.routes.draw do
   match '/logout' => 'login#logout', :as => :logout, via: [:get]
   match '/account' => 'login#index', :as => :user_account, via: [:get]
 
+  # For Home
   root :to => 'home#index'
+
+  # For DashBoard Controller
+  match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get]
+  put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
+  post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

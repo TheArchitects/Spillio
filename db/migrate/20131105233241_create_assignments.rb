@@ -1,12 +1,11 @@
 class CreateAssignments < ActiveRecord::Migration
   def change
     create_table :assignments do |t|
-      t.text :description
-      t.datetime :due_date
-      t.references :instructor
+      t.references :group
+      t.references :task
 
       t.timestamps
     end
-    add_index :assignments, :instructor_id
+    add_index :assignments, :group_id
   end
 end
