@@ -40,6 +40,12 @@ class User < ActiveRecord::Base
     return type == 'Instructor'
   end
 
+  def incoming_group_requests
+    GroupJoinRequest.where(:requestee_id => self)
+  end
+
+
+
   private
   def self.num_pages_from_query(query)
     total_res = query.count

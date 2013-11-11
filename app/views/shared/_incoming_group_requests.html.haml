@@ -1,0 +1,9 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => (group_requests.size > 0) ? "dropdown" : "", href: "#"}
+    Group requests
+    %span.badge #{group_requests.size > 0 ? group_requests.size : ""}
+    %b.caret{:class => (group_requests.size == 0) ? "hide" : "" }
+  %ul.dropdown-menu
+    - group_requests.each do |gr|
+      %li
+        =link_to "Accept #{gr.requester.name}","/group_join/accept/#{gr.id}"

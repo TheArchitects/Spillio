@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   belongs_to :section
   has_many :students
 	has_many :assignments
-
+  has_many :group_join_requests
 	attr_accessible :group_name
 
   # TODO: Remove once we have isntructor functionality
@@ -31,6 +31,15 @@ class Group < ActiveRecord::Base
     assignment_2.save
 
     return group
+  end
+
+  def self.delete_if_empty(group_id)
+    if Group.exists? group_id
+      group = Group.find group_id
+      if group.students.count == 0
+        group.destroy
+      end
+    end
   end
 
 end
