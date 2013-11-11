@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(:version => 20131110093429) do
   add_index "courses_users", ["course_id", "user_id"], :name => "index_courses_users_on_course_id_and_user_id", :unique => true
 
   create_table "group_join_requests", :force => true do |t|
-    t.integer  "requester"
-    t.integer  "requestee"
+    t.integer  "requester_id"
+    t.integer  "requestee_id"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "groups", :force => true do |t|

@@ -5,8 +5,8 @@ class GroupJoinController < AuthenticatedController
 		requester = @authenticated_user
 		if requestee && group_id && requester
 			req = GroupJoinRequest.create
-			req.requestee = params[:requestee]
-			req.requester = requester.id
+			req.requestee = requestee
+			req.requester = requester
 			req.group_id = group_id
 			req.save
 		end
@@ -15,9 +15,13 @@ class GroupJoinController < AuthenticatedController
 
 	def accept
 		req = GroupJoinRequest.find(params[:id])
-		if req && @authenticated_user.id == req.requestee
-			requester = Student.find(req.requester)
-			requester.group_id = req.group_id
+		if req && @authenticated_user.id == req.requestee.id
+			old_group_id = req.requester.group_id
+			req.requester.group_id = req.group_id
+			req.requester.save
+
+			Group.delete_if_empty old_group_id
+
 			req.destroy
 		end
 		redirect_to :back
