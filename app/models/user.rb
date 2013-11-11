@@ -21,7 +21,9 @@ class User < ActiveRecord::Base
     student.courses << Course.find(s[:course_ids])
     student.save
 
-    student_group = Group.create_group_with_mock_assignments('Unnamed')
+    group_name = "#{student.name}'s group"
+
+    student_group = Group.create_group_with_mock_assignments(group_name)
     student_group.students << student
     student_group.save
 
