@@ -8,5 +8,5 @@
         = f.label :content, submission.label, :class => 'control-label'
         %br
         .form-group
-          = f.text_field :content, :class => 'form-control', :required => true
-        = f.submit 'Save', :class => 'btn btn-primary'
+          = f.text_field :content, :class => 'form-control', :required => true, :disabled => (not submission.content.nil?)
+        = f.submit 'Save', :class => 'btn btn-primary', :disabled => (not submission.content.nil?)

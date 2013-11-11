@@ -23,7 +23,7 @@ class GroupDashBoardController < AuthenticatedController
 			submission.content = params[:submission][:content]
 			submission.submitted_date = DateTime.now
 			submission.save
-			group_id = submission.group_id
+			group_id = submission.assignment.group_id
 			redirect_to group_db_show_url(group_id)
 			return
 		end
