@@ -2,6 +2,8 @@ Spillio::Application.routes.draw do
   get 'search/students' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
   match 'student/cid/:id' => 'students#show_by_cid', :as => :student_show_by_cid, via: [:get]
+  match 'group_join/create' => 'group_join#create'
+  match 'group_join/accept/:id' => 'group_join#accept'
 
   # For CAS Login
   match '/login' => 'login#login', :as => :login, via: [:get]

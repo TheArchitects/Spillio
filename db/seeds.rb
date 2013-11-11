@@ -10,6 +10,7 @@
 courses = Course.create([{ name: 'CS161' }, { name: 'CS168' }])
 skills = Skill.create([{ name: 'Java' }, { name: 'Ruby' }])
 sections = Section.create([{ number: 100 }, { number: 101 }])
+groups = Group.create([{ group_name: 'Group1'}, { group_name: 'Group2'}])
 
 
 
@@ -18,4 +19,19 @@ kayvan.section = sections[1]
 kayvan.skills << skills[0]
 kayvan.skills << skills[1]
 kayvan.courses << courses[1]
+kayvan.group = groups[0]
 kayvan.save
+
+megumi = Student.create(name: 'Megumi', about:'Doggie person', interest: 'Guys', cid:'1122233')
+megumi.section = sections[0]
+megumi.skills << skills[0]
+megumi.skills << skills[1]
+megumi.courses << courses[0]
+megumi.save
+
+kevin = Student.create(name: 'Kevin', about:'I am cool.', interest: 'Girls', cid:'123987')
+kevin.section = sections[0]
+kevin.skills << skills[0]
+kevin.skills << skills[1]
+kevin.courses << courses[0]
+kevin.save

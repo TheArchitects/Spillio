@@ -68,6 +68,11 @@
                     - if (s.skills)
                       - s.skills.each do |sk|
                         %span.label.label-primary= sk.name
+                  - if not s.group.nil?
+                    %p.list-group-item-text
+                      %strong Group:
+                      = s.group.group_name
+
       .row
         %ul.pagination
           - 1.upto(@num_pages) do |page|

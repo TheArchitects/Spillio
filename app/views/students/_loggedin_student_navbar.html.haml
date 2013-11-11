@@ -10,24 +10,24 @@
     .navbar-collapse.collapse
       %form.navbar-form.navbar-left{role: "search", action: "/search/students"}
         .form-group
-          %input.form-control{placeholder: "Search", type: "text", name: "query"}/
+          %input.form-control{placeholder: "Search", type: "text", name: "query"}
         %button.btn.btn-default{type: "submit"} Submit
       %ul.nav.navbar-nav.navbar-right
         / TODO: In the future, either show My Group or show requests
+        - if @student && @student.group_id && @authenticated_user
+          %form.navbar-form.navbar-right{role: "GroupJoinRequest", action: "/group_join/create"}
+            %input{type: "hidden", name: "requestee", value: @student.id}
+            %button.btn.btn-default{type: "submit"} Request
+
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             Group requests
-            %span.badge 5
+            %span.badge #{@group_requests.size}
             %b.caret
           %ul.dropdown-menu
-            %li
-              =link_to "Request 1","#{student_path @authenticated_user}"
-              %a.btn.btn-primary
-                Accept
-            %li
-              =link_to "Request 2","#{edit_student_path @authenticated_user}"
-              %a.btn.btn-primary
-                Accept
+            - @group_requests.each do |gr|
+              %li
+                =link_to "Accept #{Student.find(gr.requester).name}","/group_join/accept/#{gr.id}"
         %li
           %a{href: "#"} My Group
         %li.dropdown
