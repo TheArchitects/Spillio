@@ -50,9 +50,6 @@ class GroupDashBoardController < AuthenticatedController
 			post.user = @authenticated_user
 			post.save
 
-			puts "BUTIFARRAAAAAAAAA"
-			puts post.user.name
-
 			group_id = assignment.group_id
 			redirect_to group_db_show_url(group_id)
 			return
