@@ -13,13 +13,11 @@ sections = Section.create([{ number: 100 }, { number: 101 }])
 groups = Group.create([{ group_name: 'Group1'}, { group_name: 'Group2'}])
 
 
-
 kayvan = Student.create(name: 'Kayvan', about:'Nothing to say', interest: 'Everything', cid:'1007417')
 kayvan.section = sections[1]
 kayvan.skills << skills[0]
 kayvan.skills << skills[1]
 kayvan.courses << courses[1]
-kayvan.group = groups[0]
 kayvan.save
 
 megumi = Student.create(name: 'Megumi', about:'Doggie person', interest: 'Guys', cid:'1122233')
@@ -35,3 +33,20 @@ kevin.skills << skills[0]
 kevin.skills << skills[1]
 kevin.courses << courses[0]
 kevin.save
+
+
+# TODO: Groups should only be created with a special function each time a user is
+# created. When a student is merged onto a new group, if its old group becomes
+# empty, it must be deleted
+the_beatles = Group.create_group_with_mock_assignments('The Beatles')
+the_beatles.students << kayvan
+the_beatles.students << megumi
+the_beatles.save
+
+
+rolling = Group.create_group_with_mock_assignments('The Rolling Stones')
+rolling.students << kevin
+rolling.save
+
+
+puts "Seed planted :)"

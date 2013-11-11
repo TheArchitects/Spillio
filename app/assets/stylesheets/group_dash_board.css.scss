@@ -1,0 +1,53 @@
+body {
+  padding-top: 70px;
+}
+
+.card {
+    padding:1.5rem;
+    box-shadow:0 1px 2px #aaa;
+    background:white;
+    margin:0 1rem 1rem;
+    border-radius:3px;
+    user-select:none;
+    animation:fly-in-from-left .5s 1s ease both;
+    transform-origin:top left;
+}
+
+.assignment {
+  background-color: #d5d5d5;
+}
+
+.assignment > .panel-collapse {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.assignment > .panel-collapse > .card:first-child {
+  margin-top: 10px;
+}
+
+.member {
+  font-size: 16px;
+}
+
+span.author {
+  font-weight: bold;
+}
+
+.student {
+  text-align: left;
+}
+
+.student > .content {
+  padding-left: 15px;
+}
+
+.instructor > .content {
+  padding-right: 15px;
+}
+
+.instructor {
+  text-align: right;
+}
+

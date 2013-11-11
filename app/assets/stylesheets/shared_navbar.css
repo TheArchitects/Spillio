@@ -1,0 +1,31 @@
+
+.navbar-default {
+  background-color: #485979;
+  border-color: #3f5e80;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+}
+
+.navbar-brand {
+  font-family: 'ABeeZee' sans-serif;
+}
+
+.navbar-brand:hover {
+  color: #FFF !important;
+  text-shadow: 1px 1px 2px rgba(146, 144, 148, 1);
+}
+
+.navbar-nav > li > a {
+  color: #FFF !important;
+}
+
+.navbar-nav .caret {
+  border-top-color: #FFF !important;
+  border-bottom-color: #FFF !important;
+}
+
+.navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background: #586989 !important;
+}

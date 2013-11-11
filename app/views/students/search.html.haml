@@ -9,8 +9,7 @@
   = javascript_include_tag 'student_search'
 
 / Navbar
-- unless @authenticated_user.nil?
-  = render "loggedin_student_navbar"
+= render "shared/navbar"
 
 / Page body
 .container

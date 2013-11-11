@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 ruby "1.9.3"
 gem 'rails', '3.2.14'
-gem 'twitter-bootstrap-rails'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
   gem 'sqlite3'
-  gem 'ruby-debug19'
+  gem 'debugger'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
@@ -30,9 +30,7 @@ end
 group :assets do
   gem 'therubyracer', '~> 0.12.0'
   gem 'sass-rails', '~> 3.2.6'
-  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
-  gem 'less-rails'
 end
 
 gem 'jquery-rails'
@@ -44,4 +42,3 @@ gem 'will_paginate', '~> 3.0.5'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-gem 'omniauth-facebook', '1.4.0'

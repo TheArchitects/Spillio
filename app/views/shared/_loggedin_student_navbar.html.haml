@@ -1,0 +1,40 @@
+/ Fixed navbar
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    %a.navbar-brand{href: "#"} Spillio
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    .navbar-collapse.collapse
+      %form.navbar-form.navbar-left{role: "search", action: "/search/students"}
+        .form-group
+          %input.form-control{placeholder: "Search", type: "text", name: "query"}/
+        %button.btn.btn-default{type: "submit"}
+          %span.glyphicon.glyphicon-search
+      %ul.nav.navbar-nav.navbar-right
+        / TODO: In the future, either show My Group or show requests
+        / TODO: Change this for label if already requested
+        - if @student && @student.group_id && @authenticated_user
+          %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
+            %input{type: "hidden", name: "requestee", value: @student.id}
+            %button.btn.btn-default{type: "submit"} Request to join
+        = render 'shared/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
+        - unless @authenticated_user.group_id.nil?
+          %li
+            =link_to "My group","#{group_db_show_url @authenticated_user.group_id}"
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            = @authenticated_user.name
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              =link_to "View Profile","#{student_path @authenticated_user}"
+            %li
+              =link_to "Edit Profile","#{edit_student_path @authenticated_user}"
+            %li.divider
+            %li
+              =link_to "Logout","#{logout_path}"
+    / /.nav-collapse
+/ / Fixed navbar
