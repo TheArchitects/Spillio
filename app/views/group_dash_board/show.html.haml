@@ -38,7 +38,7 @@
               %h4.panel-title
                 %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-#{assignment.id}"}
                   = assignment.title
-                %span.pull-right.badge Score:10/20
+                - assignment_badge(assignment)
             .panel-collapse.collapse{:id => "assignment-#{assignment.id}"}
               .card
                 %h4 Description

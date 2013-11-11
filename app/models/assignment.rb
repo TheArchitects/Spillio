@@ -20,4 +20,18 @@ class Assignment < ActiveRecord::Base
     posts = Post.where(:assignment_id => self.id)
                 .order(:date => :asc)
   end
+
+  def total_score
+    total_max_score, total_score = 0, 0
+    scores.each do |s|
+      total_max_score += s.max_score
+      total_score += s.score
+    end
+
+    if [total_score, total_max_score] == [0, 0]
+      return nil
+    else
+      return total_score, total_max_score
+    end
+  end
 end
