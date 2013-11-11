@@ -27,11 +27,23 @@
   font-size: 16px;
 }
 
+span.author {
+  font-weight: bold;
+}
+
 .student {
-  text-align: right;
+  text-align: left;
+}
+
+.student > .content {
+  padding-left: 15px;
+}
+
+.instructor > .content {
+  padding-right: 15px;
 }
 
 .instructor {
-  text-align: left;
+  text-align: right;
 }
 
