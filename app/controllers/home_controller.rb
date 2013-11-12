@@ -7,7 +7,9 @@ class HomeController < ApplicationController
 		
 
 		if session[:cas_user]!=nil
-			redirect_to user_account_path
+			#redirect_to user_account_path
+			authenticated_user = User.find_by_cid(session[:cas_user])
+			redirect_to group_db_show_url authenticated_user.group_id
 		end
 
 		@login_link = login_path
