@@ -16,7 +16,7 @@
       %ul.nav.navbar-nav.navbar-right
         / TODO: In the future, either show My Group or show requests
         / TODO: Change this for label if already requested
-        - if @student && @student.group_id && @authenticated_user
+        - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id 
           %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
             %input{type: "hidden", name: "requestee", value: @student.id}
             %button.btn.btn-default{type: "submit"} Request to join
