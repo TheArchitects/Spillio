@@ -16,10 +16,14 @@
       %ul.nav.navbar-nav.navbar-right
         / TODO: In the future, either show My Group or show requests
         / TODO: Change this for label if already requested
-        - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id 
+        - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id
+          - label = 'Request to join'
+          - if GroupJoinRequest.exists?(:requestee_id => @student.id , :requester_id => @authenticated_user.id)
+            - label = 'Request sent'
           %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
             %input{type: "hidden", name: "requestee", value: @student.id}
-            %button.btn.btn-default{type: "submit"} Request to join
+            %button.btn.btn-default{type: "submit"} 
+              = label
         = render 'shared/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
         - unless @authenticated_user.group_id.nil?
           %li
