@@ -6,10 +6,17 @@ class GroupJoinRequest < ActiveRecord::Base
 
 	def self.valid_request?(requester, requestee)
 	valid = ((not self.request_to_yourself?(requester, requestee)) and 
-		(not request_exists?(requester, requestee)) and
-		(not request_to_teammates?(requester, requestee)) and 
-		(not request_to_full_teams?(requester, requestee)))
+		(not self.request_exists?(requester, requestee)) and
+		(not self.request_to_teammates?(requester, requestee)) and 
+		(not self.request_to_full_teams?(requester, requestee)))
 	return valid
+	end
+
+	def self.request_label(requester, requestee)
+		label = 'Join this student'
+
+
+		return label
 	end
 
 	private
@@ -25,7 +32,7 @@ class GroupJoinRequest < ActiveRecord::Base
 	return requester.group.id == requestee.group.id
 	end
 
-	#TODO: is if team would be over the allowed cap
+	#TODO: check if team would be over the allowed cap
 	def self.request_to_full_teams?(requester, requestee)
 	return false
 	end
