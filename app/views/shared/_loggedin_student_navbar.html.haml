@@ -19,7 +19,7 @@
         - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id
           - label = 'Request to join'
           - active = true
-          - if GroupJoinRequest.exists?(:requestee_id => @student.id , :requester_id => @authenticated_user.id)
+          - if GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
             - label = 'Request sent'
             - active = false
           %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
