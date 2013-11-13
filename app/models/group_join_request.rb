@@ -21,9 +21,7 @@ class GroupJoinRequest < ActiveRecord::Base
 			label = 'Group Full'
 		else
 			label = 'This should not happen'
-
-
-
+		end
 		return label
 	end
 
