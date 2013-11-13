@@ -27,11 +27,5 @@ class GroupJoinController < AuthenticatedController
 		redirect_to :back
 	end
 
-	#checks whether requestee was already requested by current requester
-	def already_requested?
-		requestee = Student.find(params[:requestee])
-		requester = @authenticated_user
-		return GroupJoinRequest.exist?(:requestee => requestee, :requester => requester)
-	end
 
 end

@@ -18,12 +18,13 @@
         / TODO: Change this for label if already requested
         - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id
           - label = 'Request to join'
+          - active = true
           - if GroupJoinRequest.exists?(:requestee_id => @student.id , :requester_id => @authenticated_user.id)
             - label = 'Request sent'
+            - active = false
           %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
             %input{type: "hidden", name: "requestee", value: @student.id}
-            %button.btn.btn-default{type: "submit"} 
-              = label
+            %button.btn.btn-default{type: "submit", disable: active} #{label}
         = render 'shared/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
         - unless @authenticated_user.group_id.nil?
           %li
