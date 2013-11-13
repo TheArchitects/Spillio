@@ -13,7 +13,15 @@ class GroupJoinRequest < ActiveRecord::Base
 	end
 
 	def self.request_label(requester, requestee)
-		label = 'Join this student'
+		if self.request_exists?(requester, requestee)
+			label = 'Request Sent'
+		elsif self.request_to_teammates?(requester, requestee)
+			label = 'Already a Groupmate'
+		elsif self.request_to_full_teams?(requester, requestee)
+			label = 'Group Full'
+		else
+			label = 'This should not happen'
+
 
 
 		return label
@@ -25,15 +33,15 @@ class GroupJoinRequest < ActiveRecord::Base
 	end
 
 	def self.request_exists?(requester, requestee)
-	return self.exists?(:requester_id => requester, :requestee_id => requestee)
+		return self.exists?(:requester_id => requester, :requestee_id => requestee)
 	end
 
 	def self.request_to_teammates?(requester, requestee)
-	return requester.group.id == requestee.group.id
+		return requester.group.id == requestee.group.id
 	end
 
 	#TODO: check if team would be over the allowed cap
 	def self.request_to_full_teams?(requester, requestee)
-	return false
+		return false
 	end
 end
