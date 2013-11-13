@@ -35,6 +35,8 @@ class GroupJoinRequest < ActiveRecord::Base
 	end
 
 	def self.request_to_teammates?(requester, requestee)
+		requester = Student.find(requester)
+		requestee = Student.find(requestee)
 		return requester.group.id == requestee.group.id
 	end
 
