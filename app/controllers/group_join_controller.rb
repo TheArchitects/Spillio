@@ -26,4 +26,6 @@ class GroupJoinController < AuthenticatedController
 		end
 		redirect_to :back
 	end
+
+
 end
