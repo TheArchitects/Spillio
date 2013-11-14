@@ -1,19 +1,22 @@
-Given(/^the following instructor exists:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+Given(/the following instructor exists:$/) do |table|
+  table.hashes.each do |int|
+    Instructor.create!(int)
+  end
 end
 
-Given(/^the following group exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+And /the following group exist:$/ do |table|
+  table.hashes.each do |gro|
+    Group.create!(gro)
+  end
 end
 
-Given(/^the following students exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+And /the following students exist:$/ do |table|
+  table.hashes.each do |stu|
+    Student.create!(stu)
+  end
 end
 
-Given(/^the following iterations exist:$/) do |table|
+And (/^the following iterations exist:$/) do |table|
   # table is a Cucumber::Ast::Table
   pending # express the regexp above with the code you wish you had
 end

@@ -14,15 +14,14 @@
 ActiveRecord::Schema.define(:version => 20131110184834) do
 
   create_table "assignments", :force => true do |t|
-    t.text     "description"
-    t.datetime "due_date"
-    t.integer  "instructor_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "group_id"
+    t.integer  "task_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "title"
   end
 
-  add_index "assignments", ["instructor_id"], :name => "index_assignments_on_instructor_id"
+  add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
 
   create_table "assignments_groups", :id => false, :force => true do |t|
     t.integer "assignment_id"
@@ -47,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
 
   add_index "courses_users", ["course_id", "user_id"], :name => "index_courses_users_on_course_id_and_user_id", :unique => true
 
+  create_table "group_join_requests", :force => true do |t|
+    t.integer  "requester_id"
+    t.integer  "requestee_id"
+    t.integer  "group_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "groups", :force => true do |t|
     t.string   "group_name"
     t.integer  "instructor_id"
@@ -62,27 +69,23 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
     t.datetime "date"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "group_id"
     t.integer  "assignment_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "posts", ["assignment_id"], :name => "index_posts_on_assignment_id"
-  add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "scores", :force => true do |t|
     t.decimal  "score"
     t.decimal  "max_score"
-    t.integer  "group_id"
     t.integer  "assignment_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "scores", ["assignment_id"], :name => "index_scores_on_assignment_id"
-  add_index "scores", ["group_id"], :name => "index_scores_on_group_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "number"
@@ -108,16 +111,26 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
   add_index "skills_users", ["skill_id", "user_id"], :name => "index_skills_users_on_skill_id_and_user_id", :unique => true
 
   create_table "submissions", :force => true do |t|
+    t.string   "label"
     t.text     "content"
     t.datetime "submitted_date"
-    t.integer  "group_id"
     t.integer  "assignment_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
   add_index "submissions", ["assignment_id"], :name => "index_submissions_on_assignment_id"
-  add_index "submissions", ["group_id"], :name => "index_submissions_on_group_id"
+
+  create_table "tasks", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "due_date"
+    t.integer  "author_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tasks", ["author_id"], :name => "index_tasks_on_author_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

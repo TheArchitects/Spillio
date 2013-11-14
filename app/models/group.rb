@@ -8,7 +8,7 @@ class Group < ActiveRecord::Base
 	has_many :submissions
 	has_many :posts
 	attr_accessible :group_name
-
+  attr_accessible :id, :instructor_id
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
