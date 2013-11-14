@@ -2,15 +2,13 @@ class LoginController < AuthenticatedController
 	
 	
 	def index
-		
-		if StudentsController.cid_exists? session[:cas_user]
+		if @authenticated_user!=nil
 			#existed user
-			redirect_to student_show_by_cid_path(session[:cas_user])
+			redirect_to student_path @authenticated_user
 		else 
 			#new user
 			redirect_to new_student_path
 		end
-
 	end
 
 	def login
