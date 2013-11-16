@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     student = Student.create(:name => s[:name], :about => s[:about],
         :interest => s[:interest], :cid => current_user_id)
     student.section = Section.find(s[:section_id])
-    student.create_and_add_skills_by_names(s[:skills])
+    student.create_and_add_skills_by_name(s[:skill_names])
     student.courses << Course.find(s[:course_ids])
     student.save
 
@@ -28,11 +28,7 @@ class User < ActiveRecord::Base
     return student
   end
 
-  def create_and_add_skills_by_name(skill_list)
-    skill_list.each do |sk|
-      self << Skill.create(:name => sk)
-    end
-  end
+
 
   # Instance methods
   def is_student?
@@ -42,6 +38,25 @@ class User < ActiveRecord::Base
   def is_instructor?
     return type == 'Instructor'
   end
+
+  def skill_names
+    skill_names= ""
+    if skills.count > 0
+      skills.each do |sk|
+        skill_names += "#{sk.name}, "
+      end
+      skill_names.chop!.chop!
+    end
+    skill_names
+  end
+
+  def create_and_add_skills_by_name(skill_list)
+    skill_list.split(",").each do |sk|
+      self.skills << Skill.create(:name => sk)
+    end
+  end
+
+
 
   private
   def self.num_pages_from_query(query)

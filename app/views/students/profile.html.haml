@@ -71,8 +71,8 @@
       / Bottom section
       #other-section.row
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
-          = f.label :skills
-          = f.hidden :skills
+          = f.label :skill_names
+          = f.hidden_field :skill_names
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :courses
           = collection_select :student, :course_ids, Course.all, :id, :name, {}, :class => 'form-control', :multiple => true
