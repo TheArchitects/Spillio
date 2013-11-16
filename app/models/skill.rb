@@ -1,4 +1,4 @@
 class Skill < ActiveRecord::Base
-  belongs_to :students
-  attr_accessible :name
+	has_and_belongs_to_many :students
+  	attr_accessible :name
 end
