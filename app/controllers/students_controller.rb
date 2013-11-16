@@ -111,9 +111,9 @@ class StudentsController < AuthenticatedController
   def self.cleanup_fields!(student)
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
-    if student.has_key? :skill_ids
-      student[:skill_ids] = student[:skill_ids].select { |sk| not sk.empty?}
-    end
+    # if student.has_key? :skill_ids
+    #   student[:skill_ids] = student[:skill_ids].select { |sk| not sk.empty?}
+    # end
 
     if student.has_key? :course_ids
       student[:course_ids] = student[:course_ids].select { |c| not c.empty?}
