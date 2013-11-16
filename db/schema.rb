@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
     t.integer  "cid"
     t.string   "type"
     t.integer  "group_id"
+    t.string   "email"
   end
 
   add_index "users", ["group_id"], :name => "index_users_on_group_id"
