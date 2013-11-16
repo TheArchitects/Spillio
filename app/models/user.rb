@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :section
   has_and_belongs_to_many :courses
-  has_and_belongs_to_many :skills
+  has_many :skills
   attr_accessible :about, :interest, :name, :cid, :type
 
   def self.search_by_name(query, page)
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     student = Student.create(:name => s[:name], :about => s[:about],
         :interest => s[:interest], :cid => current_user_id)
     student.section = Section.find(s[:section_id])
-    student.skills << Skill.find(s[:skill_ids])
+    student.create_and_add_skills_by_names(s[:skills])
     student.courses << Course.find(s[:course_ids])
     student.save
 
@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
     return student
   end
 
+  def create_and_add_skills_by_name(skill_list)
+    skill_list.each do |sk|
+      self << Skill.create(:name => sk)
+    end
+  end
 
   # Instance methods
   def is_student?
