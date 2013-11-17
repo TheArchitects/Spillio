@@ -23,7 +23,7 @@ Feature: See feedback and grade
 		| Pepe | 1        |
 		| John | 1        |
 
-
+		#modified assignment model , added the following fields :id, :score, :group_id
 		And the following iterations exist:
 		| id | title | due_date           | score | description | group_id |
 		| 1  | It1-1 | 2011-10-1 00:00:00 | 10/20 | Blah        | 1        |

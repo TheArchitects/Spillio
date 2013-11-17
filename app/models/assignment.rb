@@ -4,7 +4,7 @@ class Assignment < ActiveRecord::Base
 	has_many :scores
 	has_many :submissions
 	has_many :posts
-	attr_accessible :title, :description, :due_date
+	attr_accessible :title, :description, :due_date, :id, :score, :group_id
 
 
   # TODO: Remove once we have instructor functionality

@@ -10,15 +10,18 @@ And /the following group exist:$/ do |table|
   end
 end
 
+
 And /the following students exist:$/ do |table|
   table.hashes.each do |stu|
     Student.create!(stu)
   end
 end
 
+#modify
 And (/^the following iterations exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each do |stu|
+    Assignment.create!(stu)
+  end
 end
 
 Given(/^the following submission_fields exist:$/) do |table|
