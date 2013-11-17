@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
     return student
   end
 
+  def self.exists_with_cid? cid
+    find_by_cid(cid)!=nil
+  end
 
   # Instance methods
   def is_student?
