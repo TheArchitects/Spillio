@@ -23,8 +23,5 @@ kayvan.save
 # TODO: Groups should only be created with a special function each time a user is
 # created. When a student is merged onto a new group, if its old group becomes
 # empty, it must be deleted
-the_beatles = Group.create_group_with_mock_assignments('The Beatles')
-the_beatles.students << kayvan
-the_beatles.save
 
 puts "Seed planted :)"
