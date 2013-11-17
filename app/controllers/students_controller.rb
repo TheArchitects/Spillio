@@ -1,6 +1,13 @@
 class StudentsController < AuthenticatedController
 
+  skip_before_filter :get_authenticated_user, :only => [:new, :create]
+
   def new
+    # We can only create an user per cid
+    if (not session[:cas_user].nil?) and User.exists_with_cid? session[:cas_user]
+      render :status => :forbidden and return
+    end
+
     @student = Student.new
     @view_only = false
     render :profile
@@ -25,10 +32,6 @@ class StudentsController < AuthenticatedController
     # @student.update_attributes!(params[:student])
     @view_only = true
     render :profile
-  end
-
-  def self.cid_exists? cid
-    Student.find_by_cid(cid)!=nil
   end
 
   # Finds the student with Calnet Id number
