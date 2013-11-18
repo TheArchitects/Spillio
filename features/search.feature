@@ -5,7 +5,7 @@ Feature: search for potential group members
 
 Background: Students have already created Spillio User Profiles
 
-  Given "Jalal" is logged in
+  Given I am logged in as a student
   And the following User Profiles exist on Spillio:
   |Name  |Skills  |Current Courses  |Past Courses  |Section Number  |Interests  |Notes to Classmates  |
   |Kayvan|Java    |CS162            |CS170         |1               |Sports     |                     |
