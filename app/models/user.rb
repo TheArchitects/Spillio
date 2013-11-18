@@ -21,13 +21,18 @@ class User < ActiveRecord::Base
     student.courses << Course.find(s[:course_ids])
     student.save
 
-    student_group = Group.create_group_with_mock_assignments('Unnamed')
+    group_name = "#{student.name}'s group"
+
+    student_group = Group.create_group_with_mock_assignments(group_name)
     student_group.students << student
     student_group.save
 
     return student
   end
 
+  def self.exists_with_cid? cid
+    find_by_cid(cid)!=nil
+  end
 
   # Instance methods
   def is_student?
@@ -37,6 +42,12 @@ class User < ActiveRecord::Base
   def is_instructor?
     return type == 'Instructor'
   end
+
+  def incoming_group_requests
+    GroupJoinRequest.where(:requestee_id => self)
+  end
+
+
 
   private
   def self.num_pages_from_query(query)

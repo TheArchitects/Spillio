@@ -13,100 +13,39 @@
 
 / Page body
 .container
-  .row
-    %h3= "#{@group.group_name} dashboard"
-    %hr/
-  .row
-    / Left panel
-    .col-lg-3.col-md-3.col-sm-12.col-xs-12
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title= @group.group_name
-        .panel-body
-          %h4 Group members:
-          %ul.member
-            - @group.students.each do |student|
-              %li
-                = link_to student.name, "#{student_path student}"
-    / / Left panel
-    / Assignment dahsboard panel
-    .col-lg-9.col-md-9.col-sm-12.col-xs-12
-      #accordion.panel-group
-        - @group.assignments.each do |assignment|
-          .panel.panel-default.assignment
-            .panel-heading
-              %h4.panel-title
-                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-#{assignment.id}"}
-                  = assignment.title
-                %span.pull-right.badge Score:10/20
-            .panel-collapse.collapse{ :id => "assignment-#{assignment.id}" }
-              .card
-                %h4 Description
-                .panel-body
-                  = assignment.description
-                - unless assignment.submissions.nil? || assignment.submissions.count == 0
+  .container
+    .row
+      %h3= "#{@group.group_name} dashboard"
+      %hr/
+    .row
+      / Left panel
+      .col-lg-3.col-md-3.col-sm-12.col-xs-12
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title= @group.group_name
+          .panel-body
+            %h4 Group members:
+            %ul.member
+              - @group.students.each do |student|
+                %li
+                  = link_to student.name, "#{student_path student}"
+      / / Left panel
+      / Assignment dahsboard panel
+      .col-lg-9.col-md-9.col-sm-12.col-xs-12
+        #accordion.panel-group
+          - @group.assignments.each do |assignment|
+            .panel.panel-default.assignment
+              .panel-heading
+                %h4.panel-title
+                  %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-#{assignment.id}"}
+                    = assignment.title
+                  - assignment_badge(assignment)
+              .panel-collapse.collapse{:id => "assignment-#{assignment.id}"}
+                .card
+                  %h4 Description
+                  .panel-body
+                    = assignment.description
                   = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
-              .card
-                %h4 Message
-                %hr/
-                .message.instructor
-                  %span.author Author: Omer
-                  %p.content I don't like you!
-                %hr/
-                .message.student
-                  %span.author Author: spillio
-                  %p.content Please help!
-                %hr/
-                .message.instructor
-                  %span.author Author: Omer
-                  %p.content Buy me dinner!
-              .card
-                %h4 Feedback
-                .panel-body
-                  This is the best team ever, awesome spillio!
-        .panel.panel-default.assignment
-          .panel-heading
-            %h4.panel-title
-              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-6745"}
-                Iteration 1-1
-              %span.pull-right.badge Due: 10/12
-          #assignment-6745.panel-collapse.collapse
-            .card
-              %h4 Description
-              .panel-body
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              %h4 Submission Logistics
-              .panel-body
-                %p You will submit a file containing the following information on one line:
-                %p heroku-uri admin-name admin-password
-                %p for example:
-                %p myname.herokuapp.com admin abc123
-                .col-lg-8
-                  .input-group
-                    %input.form-control{type: "text"}/
-                    %span.input-group-btn
-                      %button.btn.btn-default{type: "button"} Submit
-        .panel.panel-default.assignment
-          .panel-heading
-            %h4.panel-title
-              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-4536"}
-                Iteration 2
-              %span.pull-right.badge Due: --/--
-          #assignment-4536.panel-collapse.collapse
-            .card
-              %h4 Description
-              .panel-body
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              %h4 Submission Logistics
-              .panel-body
-                %p You will submit a file containing the following information on one line:
-                %p heroku-uri admin-name admin-password
-                %p for example:
-                %p myname.herokuapp.com admin abc123
-                .col-lg-8
-                  .input-group
-                    %input.form-control{type: "text"}/
-                    %span.input-group-btn
-                      %button.btn.btn-default{type: "button"} Submit
-    / / Assignment dahsboard panel
-/ / Page body
+                .card
+                  = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
+      / / Assignment dahsboard panel
