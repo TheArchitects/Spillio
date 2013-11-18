@@ -9,6 +9,7 @@ class GroupJoinController < AuthenticatedController
 			req.requester = requester
 			req.group_id = group_id
 			req.save
+      flash[:notice] = "Request Sent to #{requestee.name}"
 		end
 		redirect_to :back
 	end
