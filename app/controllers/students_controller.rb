@@ -42,7 +42,7 @@ class StudentsController < AuthenticatedController
       @view_only = false
       render :profile
     else
-      redirect_to students_new_path
+      redirect_to new_student_path
     end
   end
 
@@ -60,7 +60,7 @@ class StudentsController < AuthenticatedController
     else
       missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + missing
-      redirect_to students_new_path
+      redirect_to new_student_path
       # TODO: Persist params in flash and retrieve them from the view
     end
   end

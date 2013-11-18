@@ -20,6 +20,7 @@ end
 group :test do
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  gem 'rack_session_access'
 end
 group :production do
   gem 'pg'
