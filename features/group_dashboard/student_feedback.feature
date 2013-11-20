@@ -8,7 +8,7 @@ Background: I am a logged in student in my group dashboard
 	| id | name    |
 	| 3  | Robocop |
 
-	and the following group exist:
+	And the following group exist:
 	| id | instructor_id |
 	| 1  | 3             |
 
