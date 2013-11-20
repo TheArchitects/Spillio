@@ -17,30 +17,31 @@ And /the following students exist:$/ do |table|
   end
 end
 
-#modify
-And (/^the following iterations exist:$/) do |table|
+
+Given(/^the following tasks exist:$/) do |table|
   table.hashes.each do |stu|
-    Assignment.create!(stu)
+    Task.create!(stu)
   end
 end
 
 Given(/^the following submission_fields exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each do |stu|
+    Submission.create!(stu)
+  end
 end
 
 Given(/^the following posts exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each do |stu|
+    Post.create!(stu)
+  end
 end
 
-Given(/^'It(\d+)\-(\d+)' past its due date$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given(/^the following score was received:$/) do |table|
+  table.hashes.each do |stu|
+    Score.create!(stu)
+  end
 end
 
-Given(/^the instructor did submit the grade$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
 When(/^I follow the 'It(\d+)\-(\d+)' accordion$/) do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
