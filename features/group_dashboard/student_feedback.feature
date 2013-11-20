@@ -2,7 +2,7 @@ Feature: See feedback and grade
 	As a student member of a group
 	I want to be able to see the grade we received from instructor	
 	So that I can make improvement on the project
-
+	
 	Background: I am a logged in student in my group dashboard
 		Given the following instructor exists:
 		| id | name    |
