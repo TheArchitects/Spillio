@@ -15,6 +15,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'haml-rails'
   gem 'simplecov'
+  gem 'railroady'
 end
 
 group :test do
