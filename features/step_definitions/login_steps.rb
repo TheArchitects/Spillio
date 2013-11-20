@@ -6,33 +6,15 @@ for testing CAS
 
 =end
 
-#Given I am on the page
+Given /^I am logged in$/ do
+  CASClient::Frameworks::Rails::Filter.fake("User")
+end
+
 Given /^I am on the "(.+)" page$/ do |page_name|
 	case page_name
   when 'home'
     page.visit("/")
   end
-end
-
-#Make sure you are logged in
-Given /^a valid user$/ do
-  @user = User.create!({
-             :username => "validusername",
-             :password => "validPassword",
-             :password_confirmation => "validPassword"
-           })
-end
-
-Given /^I am not logged in$/ do 
-	flunk "unimplemented"
-end
-
-Given /^I am logged in as (.+)$/ do |user|
-	Given "a valid user"
-  	visit signin_url
-  	fill_in "username", :with => "validusername"
-  	fill_in "Password", :with => "validPassword"
-  	click_button "Sign in"
 end
 
 When /^I press "(.+)" button$/ do |button|
@@ -42,7 +24,6 @@ end
 When /^I follow "(.*)" link$/ do |link|
   click_link(link)
 end
-
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
