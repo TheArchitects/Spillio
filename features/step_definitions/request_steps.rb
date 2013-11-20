@@ -20,7 +20,8 @@ Given /the following users exist/ do |users_table|
 end
 
 Given /^I am on the Search for Students Page$/ do
-  page.visit('/search/students')
+  page.visit('/')
+  #page.visit('/search/students')
 end
 
 When /^I click on "(.+)" in the list of students$/ do |student_name|

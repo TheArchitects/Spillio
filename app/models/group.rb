@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
 	has_many :assignments
   has_many :group_join_requests
 	attr_accessible :group_name
-  attr_accessible :id, :instructor_id
+  attr_accessible :id, :instructor_id, :max_students
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
