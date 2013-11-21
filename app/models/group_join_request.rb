@@ -5,20 +5,24 @@ class GroupJoinRequest < ActiveRecord::Base
 	belongs_to :requester, :class_name => "Student"
 
 	def self.valid_request?(requester, requestee)
-	valid = ((not self.request_to_yourself?(requester, requestee)) and 
-		(not self.request_exists?(requester, requestee)) and
-		(not self.request_to_teammates?(requester, requestee)) and 
-		(not self.request_to_full_teams?(requester, requestee)))
-	return valid
+		return (
+				(not self.request_exists?(requester, requestee)) and
+				(not self.request_to_teammates?(requester, requestee)) and
+				(not self.request_to_full_teams?(requester, requestee))
+			)
 	end
 
 	def self.request_label(requester, requestee)
+		if self.valid_request?(requester, requestee)
+			return 'Request to join'
+		end
+
 		if self.request_exists?(requester, requestee)
-			label = 'Request Sent'
+			label = 'Request pending'
 		elsif self.request_to_teammates?(requester, requestee)
-			label = 'Already a Groupmate'
+			label = 'Already a groupmate'
 		elsif self.request_to_full_teams?(requester, requestee)
-			label = 'Group Full'
+			label = 'Group full'
 		else
 			label = 'This should not happen'
 		end

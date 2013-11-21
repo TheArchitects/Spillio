@@ -1,0 +1,6 @@
+- if (not @student.nil?) && @student.joinable_by?(@authenticated_user)
+  %form{role: "form", action: "/group_join/create"}
+    - active = GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
+    - label = GroupJoinRequest.request_label(@authenticated_user.id, @student.id)
+    %input{type: "hidden", name: "requestee", value: @student.id}
+    %button.btn.btn-default{type: "submit", disable: active} #{label}
