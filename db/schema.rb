@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110184834) do
+ActiveRecord::Schema.define(:version => 20131121123203) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
     t.integer  "group_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "request_type"
   end
 
   create_table "groups", :force => true do |t|
@@ -52,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
     t.integer  "section_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "status"
+    t.integer  "max_size"
   end
 
   add_index "groups", ["instructor_id"], :name => "index_groups_on_instructor_id"
@@ -86,6 +89,10 @@ ActiveRecord::Schema.define(:version => 20131110184834) do
   end
 
   add_index "sections", ["number"], :name => "index_sections_on_number", :unique => true
+
+  create_table "settings", :force => true do |t|
+    t.integer "max_group_size"
+  end
 
   create_table "skills", :force => true do |t|
     t.string   "name"

@@ -4,6 +4,7 @@ Feature: Assign groups to instructors
   So TAs can work with groups and give them feedback
 
   Background: I am a logged in admin in the dashboard
+    Given settings set
 	  Given the following instructor exists:
 	  |id |name    |
 	  |3  |Robocop |

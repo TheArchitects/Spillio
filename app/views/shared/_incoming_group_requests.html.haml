@@ -6,4 +6,4 @@
   %ul.dropdown-menu
     - group_requests.each do |gr|
       %li
-        =link_to "Accept #{gr.requester.name}","/group_join/accept/#{gr.id}"
+        =link_to "Accept #{gr.requester.name} #{gr.request_type} request","/group_join/accept/#{gr.id}"

@@ -4,6 +4,7 @@ Feature: View assignments due
   So that I can quickly know what we have to do
 
   Background: I am a logged in student in my group dashboard
+    Given settings set
     Given the following instructor exists:
     | id | name    |
     | 3  | Robocop |

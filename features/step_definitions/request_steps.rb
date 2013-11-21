@@ -1,12 +1,5 @@
-Given /the following users exist/ do |users_table|
-  users_table.hashes.each do |user|
-    Student.create!(user)
-  end
-end
-
 Given /^I am on the Search for Students Page$/ do
   visit('/search/students')
-  save_and_open_page
 end
 
 When /^I click on "(.+)" in the list of students$/ do |student_name|

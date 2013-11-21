@@ -4,6 +4,7 @@ Feature: Submit Assignments
 	So that I can submit the project
 
 Background: I am a logged in student in my group dashboard
+	Given settings set
 	Given the following instructor exists:
 	| id | name    |
 	| 3  | Robocop |

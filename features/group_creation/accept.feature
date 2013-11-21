@@ -4,6 +4,7 @@ Feature: Respond to someone's request to join a group
   So that I can select the people I am going to work with
 
   Background: I am on the Home Page
+    Given settings set
     Given there is a request to join "Megumi"
 
   Scenario: Accept a request to join someone

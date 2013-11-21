@@ -4,6 +4,7 @@ Feature: Communicate with group
   So I can answer their questions, provide feedback...
 
   Background: I am a logged in student in my group dashboard
+    Given settings set
     Given the following instructor exists:
     | name    |
     | Robocop |

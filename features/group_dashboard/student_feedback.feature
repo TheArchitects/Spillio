@@ -4,6 +4,7 @@ Feature: See feedback and grade
 	So that I can make improvement on the project
 	
 	Background: I am a logged in student in my group dashboard
+		Given settings set
 		Given the following instructor exists:
 		| name    |
 		| Robocop |

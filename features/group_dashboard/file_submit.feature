@@ -4,6 +4,7 @@ Feature: Submit assignments online
   So that my teachers can grade them
 
   Background: I am a logged in student in my group dashboard
+    Given settings set
     Given the following task exists:
     |title  |description  |due_date  |
     |iteration1-1|features|5/1/2014  |

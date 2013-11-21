@@ -5,12 +5,12 @@ Feature: search for potential group members
 
 Background: Students have already created Spillio User Profiles
 
-  Given I am logged in as a student
-  And the following User Profiles exist on Spillio:
-  |Name  |Skills  |Current Courses  |Past Courses  |Section Number  |Interests  |Notes to Classmates  |
-  |Kayvan|Java    |CS162            |CS170         |1               |Sports     |                     |
-  |Kevin |C       |CS150            |CS160         |1               |Games      |                     |
-  |Alfonso|Ruby   |CS154            |CS174         |2               |Reading    |                     |
+  Given I am logged in
+  And the following users exist
+  |Name  |Skills  |Courses          |Section Number  |Interests  |Notes to Classmates  |
+  |Kayvan|Java    |CS162            |1               |Sports     |                     |
+  |Kevin |C       |CS150            |1               |Games      |                     |
+  |Alfonso|Ruby   |CS154            |2               |Reading    |                     |
 
   And I am on the Spillio search page
 
