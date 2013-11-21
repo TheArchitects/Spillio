@@ -5,8 +5,8 @@ for testing CAS
 
 
 =end
+=begin
 
-#Given I am on the page
 Given /^I am on the "(.+)" page$/ do |page_name|
 	case page_name
   when 'home'
@@ -21,7 +21,6 @@ end
 When /^I follow "(.*)" link$/ do |link|
   click_link(link)
 end
-
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
@@ -59,3 +58,4 @@ Then /^I should be on the "(.+)" page or on the "(.+)" page$/ do |page1, page2|
     	assert_equal test, true
   	end
 end
+=end
