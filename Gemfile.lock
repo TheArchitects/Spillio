@@ -181,11 +181,8 @@ DEPENDENCIES
   jquery-rails
   launchy
   pg
-<<<<<<< HEAD
   rack_session_access
-=======
   railroady
->>>>>>> k1/iter3
   rails (= 3.2.14)
   rspec-rails
   sass-rails (~> 3.2.6)
