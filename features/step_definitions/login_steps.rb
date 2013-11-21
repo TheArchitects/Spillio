@@ -6,7 +6,10 @@ for testing CAS
 
 =end
 
-#Given I am on the page
+Given /^I am logged in$/ do
+  CASClient::Frameworks::Rails::Filter.fake("User")
+end
+
 Given /^I am on the "(.+)" page$/ do |page_name|
 	case page_name
   when 'home'
@@ -21,7 +24,6 @@ end
 When /^I follow "(.*)" link$/ do |link|
   click_link(link)
 end
-
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
