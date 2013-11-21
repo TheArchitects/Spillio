@@ -16,7 +16,7 @@ Given /^I am logged in as a Student$/i do
     skills: Skill.find_or_initialize_by_name('Ruby'),
     courses: Course.find_or_initialize_by_name('CS161')
   }
-  student.create_for_current_user!(s,"12345")
+  Student.create_for_current_user!(s,"12345")
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|

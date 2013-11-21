@@ -6,10 +6,10 @@ Feature: Request to join an existing group
   Background: I am on the Search for Students page
     Given I am logged in
     And the following users exist:
-    |name  |
-    |Megumi|
-    |Kevin |
-    |Alfonso|
+    |name  | about| group_id|
+    |Megumi|  about|        |
+    |Kevin |  about|        |
+    |Alfonso| about|        |
 
     Given I am on the Create New Student Profile page
     Given I fill in "Name" with "Jalal"
@@ -22,12 +22,11 @@ Feature: Request to join an existing group
     Given I am on the Search for Students Page
     Given I click on "Megumi" in the list of students
     Then I should be on the View Profile Page for "Megumi"
-    Then I click on "Join Megumi"
-    Then I should be on "Request Sent Page"
+    Then I press "join"
     And I should see "Request Sent to Megumi"
 
   Scenario: Send a request to someone who is in an existing group
-    Given I am on the Search for Students page
+    Given I am on the Search for Students Page
     And I click on "Jalal" in the list of students
     Then I should be on the View Profile Page for Jalal
     Then I click on "Join My Group"
