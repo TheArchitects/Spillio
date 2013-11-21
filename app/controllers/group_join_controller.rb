@@ -4,8 +4,6 @@ class GroupJoinController < AuthenticatedController
 		group_id = requestee.group_id
 		requester = @authenticated_user
 		if requestee && group_id && requester
-			puts "Creating req"
-
 			req = GroupJoinRequest.create
 			req.requestee = requestee
 			req.requester = requester
@@ -13,8 +11,6 @@ class GroupJoinController < AuthenticatedController
 			req.save
       flash[:notice] = "Request Sent to #{requestee.name}"
 		end
-
-		puts "Finitoo"
 
 		redirect_to :back
 	end
