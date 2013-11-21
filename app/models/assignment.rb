@@ -8,6 +8,7 @@ class Assignment < ActiveRecord::Base
 
 	delegate :title, :description, :due_date, :to => :task
 
+  attr_accessible :id, :title, :due_date, :score, :description, :group_id
   def self.create_from_group_and_task(group, task)
     assignment = Assignment.create()
     assignment.group = group
