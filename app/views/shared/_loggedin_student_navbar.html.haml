@@ -14,17 +14,6 @@
         %button.btn.btn-default{id:"search", type: "submit"}
           %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
-        / TODO: In the future, either show My Group or show requests
-        / TODO: Change this for label if already requested
-        - if @student && @student.group_id && @authenticated_user && @student.id != @authenticated_user.id
-          - label = "Join #{@student.name}"
-          - active = true
-          - unless GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
-            - label = GroupJoinRequest.request_label(@authenticated_user.id, @student.id)
-            - active = false
-          %form.navbar-form.navbar-right{role: "form", action: "/group_join/create"}
-            %input{type: "hidden", name: "requestee", value: @student.id}
-            %button.btn.btn-default{type: "submit", disable: active} #{label}
         = render 'shared/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
         - unless @authenticated_user.group_id.nil?
           %li

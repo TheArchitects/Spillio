@@ -15,16 +15,18 @@
 .container
   / Form
   .container
+    / Top section
+    .row
+      - if @view_only
+        %h3 #{@student.name}'s profile
+      - else
+        %h3 Edit your profile
+      = render 'join_student_group'
+      %hr/
+      - if flash[:notice]
+        .alert.alert-warning= flash[:notice]
     = form_for @student, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
-      / Top section
       .row
-        - if @view_only
-          %h3 Student profile
-        - else
-          %h3 Edit your profile
-        %hr/
-        - if flash[:notice]
-          .alert.alert-warning= flash[:notice]
         / Top left section
         #student-info-section.col-xs-12.col-sm-12.col-md-8.col-lg-8
           .panel.panel-default
