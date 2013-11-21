@@ -5,10 +5,7 @@ for testing CAS
 
 
 =end
-
-Given /^I am logged in$/ do
-  CASClient::Frameworks::Rails::Filter.fake("User")
-end
+=begin
 
 Given /^I am on the "(.+)" page$/ do |page_name|
 	case page_name
@@ -61,3 +58,4 @@ Then /^I should be on the "(.+)" page or on the "(.+)" page$/ do |page1, page2|
     	assert_equal test, true
   	end
 end
+=end
