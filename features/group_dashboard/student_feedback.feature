@@ -42,7 +42,6 @@ Feature: See feedback and grade
 
 	Scenario: Grade was submitted by instructor
 		Given I am on the "Group Dashboard" page
-		And show me the page
 		Then I should see '10/20' as a score
 
 
