@@ -6,14 +6,20 @@ Feature: Request to join an existing group
   Background: I am on the Search for Students page
     Given I am logged in
     And the following users exist:
-    |name  |skills  |courses  |section  |interest  |
-    |Megumi|Java    |CS162    |100      |Sports    |
-    |Kevin |C       |CS150    |100      |Games     |
-    |Alfonso|Ruby   |CS154    |101      |Reading   |
+    |name  |
+    |Megumi|
+    |Kevin |
+    |Alfonso|
+
+    Given I am on the Create New Student Profile page
+    Given I fill in "Name" with "Jalal"
+    And I select "101" from "student_section_id"
+    And I fill in "Interest" with "Running"
+    And I fill in "Description:" with "I am a test student"
+    And I press "Save"
 
   Scenario: Send a request to someone who is not in a group
     Given I am on the Search for Students Page
-    Then show me the page
     Given I click on "Megumi" in the list of students
     Then I should be on the View Profile Page for "Megumi"
     Then I click on "Join Megumi"
