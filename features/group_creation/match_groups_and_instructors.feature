@@ -7,16 +7,16 @@ Feature: Assign groups to instructors
     Given settings set
 	  Given the following instructor exists:
 	  |id |name    |
-	  |3  |Robocop |
+	  |88 |Robocop |
 
-	  And the following group exist:
-	  |name |id |instructor_id |
-  	|group_a|1|3             |
+	  And the following group exists:
+	  |group_name | id |instructor_id |
+  	|group_a    | 27 |88            |
 
 	  And the following students exist:
 	  |id |name |group_id |
-	  |1  |Pepe |1        |
-	  |2  |John |1        |
+	  |45 |Pepe |27       |
+	  |64 |John |27       |
 
   Scenario: Assign Robocop to group_a
     Given I am on the dashboard

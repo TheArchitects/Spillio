@@ -1,42 +1,28 @@
-Given(/the following instructor exists:$/) do |table|
-  table.hashes.each do |int|
-    Instructor.create!(int)
-  end
-end
-
-And /the following group exist:$/ do |table|
-  table.hashes.each do |gro|
-    Group.create!(gro)
-  end
-end
-
-
-And /the following students exist:$/ do |table|
-  table.hashes.each do |stu|
-    Student.create!(stu)
-  end
-end
-
-
-Given(/^the following tasks exist:$/) do |table|
+Given(/^the following task[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Task.create!(stu)
   end
 end
 
-Given(/^the following submission_fields exist:$/) do |table|
+Given(/^the following assignment[s]? exist[s]?:$/) do |table|
+  table.hashes.each do |stu|
+    Assignment.create!(stu)
+  end
+end
+
+Given(/^the following submission[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Submission.create!(stu)
   end
 end
 
-Given(/^the following posts exist:$/) do |table|
+Given(/^the following post[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Post.create!(stu)
   end
 end
 
-Given(/^the following score was received:$/) do |table|
+Given(/^the following score[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Score.create!(stu)
   end

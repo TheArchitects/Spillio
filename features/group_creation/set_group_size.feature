@@ -6,8 +6,8 @@ Feature: Set number of students per group
   Background: I am a logged in admin on the dashboard
     Given settings set
 	  Given the following instructor exists:
-	  | id | name    |
-	  | 3  |Robocop |
+	  | name    |
+	  | Robocop |
 
     And I am logged in as "Robocop"
 

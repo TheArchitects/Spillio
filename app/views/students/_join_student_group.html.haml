@@ -3,7 +3,6 @@
     - active = GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
     - label = GroupJoinRequest.request_label(@authenticated_user.id, @student.id)
     %input{type: "hidden", name: "requestee", value: @student.id}
-    
     - if active
       %input{type: "hidden", name: "request_type", value: label}
       - if label=='invite'
@@ -13,5 +12,4 @@
       %button.btn.btn-default{type: "submit", id:label} #{label}
     - else
       %button.btn.btn-default{type: "submit", id:label, disabled:""} #{label}
-      
-    
+

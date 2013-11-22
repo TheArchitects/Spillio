@@ -9,7 +9,7 @@ setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
-puts "settings : #{Setting.first}"
+puts "settings : #{Setting.first.max_group_size}"
 
 
 courses = Course.create!([{ name: 'CS161' }, { name: 'CS168' }])
@@ -49,20 +49,19 @@ alfonso.save
 # TODO: Groups should only be created with a special function each time a user is
 # created. When a student is merged onto a new group, if its old group becomes
 # empty, it must be deleted
-the_beatles = Group.create_group_with_mock_assignments!('The Beatles')
+the_beatles = Group.create_group_with_mock_assignments('The Beatles')
 the_beatles.students << kayvan
 the_beatles.students << megumi
 the_beatles.save
 
 
-rolling = Group.create_group_with_mock_assignments!('The Rolling Stones')
+rolling = Group.create_group_with_mock_assignments('The Rolling Stones')
 rolling.students << kevin
 rolling.save
 
 req = GroupJoinRequest.create!
 req.requester = kevin
 req.requestee = kayvan
-req.group_id = kevin.group_id
 req.request_type = 'merge'
 req.save
 
