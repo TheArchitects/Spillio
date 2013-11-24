@@ -16,7 +16,7 @@ courses = Course.create!([{ name: 'CS161' }, { name: 'CS168' }])
 skills = Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 sections = Section.create!([{ number: 100 }, { number: 101 }])
 
-kayvan = Student.create!(name: 'Kayvan', about:'Nothing to say', interest: 'Everything', cid:'10074171')
+kayvan = Student.create!(name: 'Fake Kayvan', about:'Nothing to say', interest: 'Everything', cid:'1007')
 kayvan.section = sections[1]
 kayvan.skills << skills[0]
 kayvan.skills << skills[1]
