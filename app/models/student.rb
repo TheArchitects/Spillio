@@ -13,8 +13,12 @@ class Student < User
     student.cid = cas_id
 
     student.section = Section.find(student_edit_form_data[:section_id])
-    student.skills << Skill.find(student_edit_form_data[:skill_ids])
-    student.courses << Course.find(student_edit_form_data[:course_ids])
+    unless student_edit_form_data[:course_ids].nil?
+      student.add_courses(student_edit_form_data[:course_ids])
+    end
+    unless student_edit_form_data[:skill_names].nil?
+      student.add_skills(student_edit_form_data[:skill_names].split(','))
+    end
     student.save
 
     if not student.group_id
@@ -25,6 +29,25 @@ class Student < User
     end
 
     return student
+  end
+
+  def add_courses(course_ids)
+    course_ids.each do |course_id|
+      course = Course.find(course_id)
+      unless self.courses.include? course
+        self.courses << course
+        self.save
+      end
+    end
+  end
+
+  def add_skills(skill_names)
+    skill_names.each do |skill_name|
+      unless self.skills.any? { |skill| skill.name == skill_name}
+        self.skills << Skill.create(:name => skill_name)
+        self.save
+      end
+    end
   end
 
   # Checks if this student can potentially be joined in a group by another

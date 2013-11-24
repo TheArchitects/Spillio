@@ -13,7 +13,7 @@ Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
       about: 'Nothing to say',
       interest: 'Everything',
       section: Section.find_or_initialize_by_number(100),
-      skills: [Skill.find_or_initialize_by_name('Ruby')],
+      skills: [Skill.create!(:name => 'Ruby')],
       courses: [Course.find_or_initialize_by_name('CS161')]
     }
     Student.create_or_update(s, cas_user)

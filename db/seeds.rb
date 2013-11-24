@@ -12,34 +12,29 @@ setting.save
 puts "settings : Group size => #{Setting.first.max_group_size}"
 
 courses = Course.create!([{ name: 'CS161' }, { name: 'CS168' }])
-skills = Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 sections = Section.create!([{ number: 100 }, { number: 101 }])
 
 kayvan = Student.create!(name: 'Fake Kayvan', about:'Nothing to say', interest: 'Everything', cid:'1007')
 kayvan.section = sections[1]
-kayvan.skills << skills[0]
-kayvan.skills << skills[1]
+kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 kayvan.courses << courses[1]
 kayvan.save
 
 megumi = Student.create!(name: 'Megumi', about:'Doggie person', interest: 'Guys', cid:'1122233')
 megumi.section = sections[0]
-megumi.skills << skills[0]
-megumi.skills << skills[1]
+megumi.skills << Skill.create!([{ name: 'Japanese' }, { name: 'Judo' }])
 megumi.courses << courses[0]
 megumi.save
 
 kevin = Student.create!(name: 'Kevin', about:'I am cool.', interest: 'Girls', cid:'123987')
 kevin.section = sections[0]
-kevin.skills << skills[0]
-kevin.skills << skills[1]
+kevin.skills << Skill.create!([{ name: 'Android' }, { name: 'Origami' }])
 kevin.courses << courses[0]
 kevin.save
 
 alfonso = Student.create!(name: 'Alfonso', about:'Nothing to say', interest: 'Everything', cid:'010101')
 alfonso.section = sections[1]
-alfonso.skills << skills[0]
-alfonso.skills << skills[1]
+alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 alfonso.courses << courses[1]
 alfonso.save
 
