@@ -14,9 +14,25 @@ class User < ActiveRecord::Base
   # Creates a User model for the authenticated user
   def self.create_for_current_user!(s, current_user_id)
     # TODO: Check if instructor
+    student = Student.create(:name => s[:name], :about => s[:about],
+        :interest => s[:interest], :cid => current_user_id)
+    student.section = Section.find(s[:section_id])
+    student.skills << Skill.find(s[:skill_ids])
+    student.courses << Course.find(s[:course_ids])
+    student.save
 
+    group_name = "#{student.name}'s group"
+
+    student_group = Group.create_group_with_mock_assignments(group_name)
+    student_group.students << student
+    student_group.save
+
+    return student
   end
 
+  def self.exists_with_cid? cid
+    find_by_cid(cid)!=nil
+  end
 
 
   # Instance methods
@@ -43,6 +59,10 @@ class User < ActiveRecord::Base
     skill_list.split(",").each do |sk|
       self.skills << Skill.create(:name => sk)
     end
+  end
+
+  def incoming_group_requests
+    GroupJoinRequest.where(:requestee_id => self)
   end
 
 

@@ -1,6 +1,13 @@
 class StudentsController < AuthenticatedController
 
+  skip_before_filter :get_authenticated_user, :only => [:new, :create]
+
   def new
+    # We can only create an user per cid
+    if (not session[:cas_user].nil?) and User.exists_with_cid? session[:cas_user]
+      render :status => :forbidden and return
+    end
+
     @student = Student.new
     @view_only = false
     render_profile
@@ -47,10 +54,6 @@ class StudentsController < AuthenticatedController
 
   end
 
-  def self.cid_exists? cid
-    Student.find_by_cid(cid)!=nil
-  end
-
   # Finds the student with Calnet Id number
   def show_by_cid
     @student = Student.find_by_cid(params[:id])
@@ -59,7 +62,7 @@ class StudentsController < AuthenticatedController
       @view_only = false
       render_profile
     else
-      redirect_to students_new_path
+      redirect_to new_student_path
     end
   end
 
@@ -82,7 +85,7 @@ class StudentsController < AuthenticatedController
 
       missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + missing
-      redirect_to students_new_path
+      redirect_to new_student_path
       # TODO: Persist params in flash and retrieve them from the view
     end
   end

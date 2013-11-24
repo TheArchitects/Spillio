@@ -23,19 +23,41 @@ class GroupDashBoardController < AuthenticatedController
 			submission.content = params[:submission][:content]
 			submission.submitted_date = DateTime.now
 			submission.save
-			group_id = submission.group_id
+			group_id = submission.assignment.group_id
 			redirect_to group_db_show_url(group_id)
 			return
 		end
 
-		puts "Sad panda"
+		render text: "Sad panda. You tried to do something weird"
 
-		# TODO Sad path
+		# TODO Do proper Sad path
 	end
 
 	#Creates a new post for the specified assignment
 	def create_post
+		assignment_id = params[:assignment_id]
 
+		if Assignment.exists?(assignment_id)
+			assignment = Assignment.find(assignment_id)
+			post = Post.create({
+				content: params[:content],
+				date: DateTime.now
+				})
+
+			assignment.posts << post
+			assignment.save
+
+			post.user = @authenticated_user
+			post.save
+
+			group_id = assignment.group_id
+			redirect_to group_db_show_url(group_id)
+			return
+		end
+
+		render text: "Sad panda. You tried to do something weird"
+
+		# TODO Do proper Sad path
 	end
 
 

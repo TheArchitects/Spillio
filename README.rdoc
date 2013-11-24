@@ -11,6 +11,22 @@ environment (in this case Heroku). We want to make sure to start working on new 
 additions, updates, etc.. on top of WORKING code.
 
 
+== Troubleshooting
+
+* The new branch I pulled from ain't workin...
+
+  bundle install  
+  
+  rake db:migrate:reset  
+  
+  rake db:seed  
+
+* CalNet says this is not an authorized page
+
+  open localhost:3000 in your browser and try again
+
+
+
 == Instructions for deployment to Heroku
 
 

@@ -79,7 +79,7 @@
           = f.hidden_field :skill_names
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :courses
-          = collection_select :student, :course_ids, Course.all, :id, :name, {}, :class => 'form-control', :multiple => true
+          = collection_select :student, :course_ids, Course.all, :id, :name, {}, :class => 'form-control', :multiple => true, :data_readonly => @view_only
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :interest
           = f.text_area :interest, :class => 'form-control', :rows => '4'

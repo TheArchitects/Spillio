@@ -1,38 +1,17 @@
 =begin
-Refer to 
+Refer to
 https://github.com/rubycas/rubycas-client#testing
 for testing CAS
 
 
 =end
+=begin
 
-#Given I am on the page
 Given /^I am on the "(.+)" page$/ do |page_name|
 	case page_name
   when 'home'
     page.visit("/")
   end
-end
-
-#Make sure you are logged in
-Given /^a valid user$/ do
-  @user = User.create!({
-             :username => "validusername",
-             :password => "validPassword",
-             :password_confirmation => "validPassword"
-           })
-end
-
-Given /^I am not logged in$/ do 
-	flunk "unimplemented"
-end
-
-Given /^I am logged in as (.+)$/ do |user|
-	Given "a valid user"
-  	visit signin_url
-  	fill_in "username", :with => "validusername"
-  	fill_in "Password", :with => "validPassword"
-  	click_button "Sign in"
 end
 
 When /^I press "(.+)" button$/ do |button|
@@ -43,7 +22,6 @@ When /^I follow "(.*)" link$/ do |link|
   click_link(link)
 end
 
-
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
@@ -51,7 +29,7 @@ end
 Then /^I should see "(.+)" on the page$/ do |text|
 
     	assert page.has_content?(text)
-  	
+
 end
 
 Then /^I should see a "(.+)" button$/ do |name|
@@ -80,3 +58,4 @@ Then /^I should be on the "(.+)" page or on the "(.+)" page$/ do |page1, page2|
     	assert_equal test, true
   	end
 end
+=end

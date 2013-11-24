@@ -1,13 +1,46 @@
 class Group < ActiveRecord::Base
-
-	has_and_belongs_to_many :assignments
-	belongs_to :instructor
-	belongs_to :section
-	has_many :students
-	has_many :scores
-	has_many :submissions
-	has_many :posts
+  belongs_to :instructor
+  belongs_to :section
+  has_many :students
+	has_many :assignments
+  has_many :group_join_requests
 	attr_accessible :group_name
   attr_accessible :id, :instructor_id
+
+  # TODO: Remove once we have isntructor functionality
+  def self.create_group_with_mock_assignments(group_name)
+    group = Group.create({group_name: group_name})
+
+    task_1 = Task.mock_task_1
+    assignment_1 = Assignment.create_from_group_and_task(group, task_1)
+    submission_1 = Submission.create({
+      label: "Your credit card details plz",
+      content: "Sure: 1234-1234-1324-1234",
+      submitted_date: Date.parse('5-6-2006')
+      })
+    assignment_1.submissions << submission_1
+    score_1 = Score.create({:max_score => 20, :score => 10})
+    assignment_1.scores << score_1
+    assignment_1.save
+
+    task_2 = Task.mock_task_2
+    assignment_2 = Assignment.create_from_group_and_task(group, task_2)
+    submission_2 = Submission.create({
+      label: "Plz gimme the codez",
+      })
+    assignment_2.submissions << submission_2
+    assignment_2.save
+
+    return group
+  end
+
+  def self.delete_if_empty(group_id)
+    if Group.exists? group_id
+      group = Group.find group_id
+      if group.students.count == 0
+        group.destroy
+      end
+    end
+  end
 
 end

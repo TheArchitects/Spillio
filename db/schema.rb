@@ -24,14 +24,6 @@ ActiveRecord::Schema.define(:version => 20131115092005) do
 
   add_index "assignments", ["instructor_id"], :name => "index_assignments_on_instructor_id"
 
-  create_table "assignments_groups", :id => false, :force => true do |t|
-    t.integer "assignment_id"
-    t.integer "group_id"
-  end
-
-  add_index "assignments_groups", ["assignment_id", "group_id"], :name => "index_assignments_groups_on_assignment_id_and_group_id"
-  add_index "assignments_groups", ["group_id"], :name => "index_assignments_groups_on_group_id"
-
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
