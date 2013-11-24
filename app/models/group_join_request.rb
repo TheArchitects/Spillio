@@ -1,6 +1,5 @@
 class GroupJoinRequest < ActiveRecord::Base
 	attr_accessible :requestee, :requester, :request_type
-	belongs_to :group
 	belongs_to :requestee, :class_name => "Student"
 	belongs_to :requester, :class_name => "Student"
 

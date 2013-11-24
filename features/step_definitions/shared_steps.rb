@@ -49,3 +49,15 @@ Given(/the following student[s]? exist[s]?:$/) do |table|
     Student.create!(stu)
   end
 end
+
+#
+# => Visit Steps
+#
+
+Given /^I am on the Search for Students Page$/ do
+  visit(student_search_path)
+end
+
+Given /^I am on the profile page for "(.*)"$/ do |user|
+  visit(student_path(User.find_by_name(user)))
+end
