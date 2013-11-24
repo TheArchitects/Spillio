@@ -17,4 +17,4 @@ class GroupDashBoardController < AuthenticatedController
     new_score = Score.create(:max_score=>max_score,:score=>score)
     assignment.scores << new_score
   end
-
+end

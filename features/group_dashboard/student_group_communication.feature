@@ -4,33 +4,44 @@ Feature: View assignments due
   So that I can quickly know what we have to do
 
   Background: I am a logged in student in my group dashboard
+    Given settings set
     Given the following instructor exists:
     | id | name    |
-    | 3  | Robocop |
+    | 43 | Robocop |
 
-    And the following group exist:
+    And the following group exists:
     | id | instructor_id |
-    | 1  | 3             |
+    | 78 | 43            |
 
     And the following students exist:
     | id | name | group_id |
-    | 1  | Pepe | 1        |
-    | 2  | John | 1        |
+    | 99 | Pepe | 78       |
+    | 88 | John | 78       |
 
-    And the following iterations exist:
-    | id | title | due_date           | score | description | group_id |
-    | 1  | It1-1 | 2011-10-1 00:00:00 | 10/20 | Blah        | 1        |
-    | 2  | It1-2 | 2013-10-1 00:00:00 | nil   | Derp derp   | 1        |
+    And the following tasks exist:
+    | id | title | due_date           | description |
+    | 91 | It1-1 | 2011-10-1 00:00:00 | Blah        |
+    | 92 | It1-2 | 2013-10-1 00:00:00 | Derp derp   |
 
-    And the following submission_fields exist:
-    | id | type | label  | iteration_id | content | submitted_at       |
-    | 1  | text | Essay  | 1            | Bleh    | 2011-10-1 00:00:00 |
-    | 2  | url  | Heroku | 2            | nil     | nil                |
+    And the following assignments exist:
+    | id | group_id | task_id |
+    | 89 | 78       | 91      |
+    | 53 | 78       | 92      |
+
+    And the following score exists:
+    | id | max_score | score | assignment_id |
+    | 21 | 20        | 10    | 89            |
+    | 22 | 30        | nil   | 53            |
+
+    And the following submissions exist:
+    | label  | assignment_id | content | submitted_date       |
+    | Essay  | 89            | Bleh    | 2011-10-1 00:00:00   |
+    | Heroku | 53            | nil     | nil                  |
 
     And the following posts exist:
-    | id | author | published_at       | iteration_id | content |
-    | 1  | 1      | 2011-10-1 00:00:00 | 1            |         |
-    | 2  | 3      | 2011-10-2 00:00:00 | 2            |  great  |
+    | author_id  | published_at       | assignment_id    | content |
+    | 99         | 2011-10-1 00:00:00 | 89              | such content    |
+    | 43         | 2011-10-2 00:00:00 | 53            |  wow  |
 
     Given I am logged into the student group dashboard
 
