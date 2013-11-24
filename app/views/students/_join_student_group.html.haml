@@ -1,0 +1,15 @@
+- if (not @student.nil?) && (not @authenticated_user.nil?) && @student.joinable_by?(@authenticated_user)
+  %form{role: "form", action: "/group_join/create"}
+    - active = GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
+    - label = GroupJoinRequest.request_label(@authenticated_user.id, @student.id)
+    %input{type: "hidden", name: "requestee", value: @student.id}
+    - if active
+      %input{type: "hidden", name: "request_type", value: label}
+      - if label=='invite'
+        - label = "Invite to group"
+      - else
+        - label = "Request to #{label}"
+      %button.btn.btn-default{type: "submit", id:label} #{label}
+    - else
+      %button.btn.btn-default{type: "submit", id:label, disabled:""} #{label}
+

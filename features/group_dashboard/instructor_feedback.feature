@@ -4,6 +4,7 @@ Feature: View and Grade assignments
   So students can see how well they did on them
 
   Background: I am a logged in instructor with a group assigned which has some prefilled data
+    Given settings set
     Given the following instructor exists:
     | name    |
     | Robocop |

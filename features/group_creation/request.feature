@@ -4,26 +4,63 @@ Feature: Request to join an existing group
   So that I can form a project group
 
   Background: I am on the Search for Students page
-    Given I am logged in
+    Given settings set
     And the following users exist:
-    |name  |skills  |courses  |section  |interest  |
-    |Megumi|Java    |CS162    |100      |Sports    |
-    |Kevin |C       |CS150    |100      |Games     |
-    |Alfonso|Ruby   |CS154    |101      |Reading   |
+    |name  | about | group_id |cid  | about| interest|
+    |Megumi|  about|         |11111| about| interest|
+    |Kevin |  about| 77      |22222| about| interest|
+    |Alfonso| about| 33      |33333| about| interest|
+    |Kayvan|  about| 77      |44444| about| interest|
 
-  Scenario: Send a request to someone who is not in a group
+    And the following groups exist:
+    | id |group_name     |
+    | 33 | Alfonso's group|
+    | 77 | Kevin's group  |
+
+  Scenario: Send an invitation to someone who is not in a group
+    Given I am logged in with cid "33333"
     Given I am on the Search for Students Page
-    Then show me the page
     Given I click on "Megumi" in the list of students
     Then I should be on the View Profile Page for "Megumi"
-    Then I click on "Join Megumi"
-    Then I should be on "Request Sent Page"
-    And I should see "Request Sent to Megumi"
+    Then I press "Invite to group"
+    And I should see "Invitation Sent to Megumi"
 
-  Scenario: Send a request to someone who is in an existing group
-    Given I am on the Search for Students page
-    And I click on "Jalal" in the list of students
-    Then I should be on the View Profile Page for Jalal
-    Then I click on "Join My Group"
-    Then I should be on "Request Sent Page"
-    And I should see "Request Sent"
+  Scenario: Send a join request to someone who is in an existing group
+    Given I am logged in with cid "11111"
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    Then I press "Request to join"
+    And I should see "Request Sent to Kevin"
+
+  Scenario: Send a merge request to someone who is in an existing group
+    Given I am logged in with cid "33333"
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    Then I press "Request to merge"
+    And I should see "Merge request Sent to Kevin"
+
+  Scenario: Try to send a request to groupmate
+    Given I am logged in with cid "44444"
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    And I should see "Already a groupmate"
+
+  Scenario: Pending request
+    Given I am logged in with cid "11111"
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    And I should see "Request pending"
+
+  Scenario: Group is full
+
+    Given the following users exist:
+    |name  | about| group_id|cid  | about| interest|
+    |Arturo|  about| 77      |99999| about| interest|
+
+    Given I am logged in with cid "11111"
+    Given I am on the Search for Students Page
+    And I click on "Kevin" in the list of students
+    And I should see "Group is full"
+

@@ -1,6 +1,7 @@
+require 'simplecov'
+SimpleCov.start 'rails'
 require 'bundler'
 Bundler.setup(:default, :development)
-require 'simplecov' unless ENV['TRAVIS'] || defined?(JRUBY_VERSION)
 Bundler.require
 
 require 'rubycas-client'

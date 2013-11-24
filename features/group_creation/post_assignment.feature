@@ -4,6 +4,7 @@ Feature: Post new task
   So that students have know what they are expected to do
 
   Background: I am a logged in admin on the dashboard
+    Given settings set
 	  Given the following instructor exists:
 	  | id | name    |
 	  | 3  | Robocop |

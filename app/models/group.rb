@@ -6,6 +6,9 @@ class Group < ActiveRecord::Base
   has_many :group_join_requests
 	attr_accessible :group_name
   attr_accessible :id, :instructor_id
+
+  before_create :default_values
+
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
@@ -41,5 +44,40 @@ class Group < ActiveRecord::Base
       end
     end
   end
+
+  def size
+    self.students.count
+  end
+
+  def self.merge_groups(group1_id, group2_id)
+    group1 = Group.find(group1_id)
+    group2 = Group.find(group2_id)
+
+    if group1.size + group2.size < Setting.first.max_group_size
+      merged_group = Group.create(group_name: group2.group_name)
+
+      group1.students.each do |s|
+        s.group_id = merged_group.id
+        s.save
+      end
+
+      group2.students.each do |s|
+        s.group_id = merged_group.id
+        s.save
+      end
+
+    else
+      # group size exeded
+      return false
+    end
+    # successful merge
+    return merged_group.id
+  end
+
+  private
+    def default_values
+      self.max_size ||= Setting.first.max_group_size
+    end
+
 
 end

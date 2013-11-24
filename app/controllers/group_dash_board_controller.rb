@@ -11,6 +11,8 @@ class GroupDashBoardController < AuthenticatedController
 			@group = Group.find(group_id)
 		else
 			flash[:notice] = 'You are not allowed to check this group :)'
+			redirect_to student_path @authenticated_user
+			return
 		end
 	end
 
@@ -41,13 +43,13 @@ class GroupDashBoardController < AuthenticatedController
 			assignment = Assignment.find(assignment_id)
 			post = Post.create({
 				content: params[:content],
-				date: DateTime.now
+				published_at: DateTime.now
 				})
 
 			assignment.posts << post
 			assignment.save
 
-			post.user = @authenticated_user
+			post.author = @authenticated_user
 			post.save
 
 			group_id = assignment.group_id
