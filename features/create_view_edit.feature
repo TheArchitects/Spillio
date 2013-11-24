@@ -5,10 +5,9 @@ Feature: create a profile with my information
 
 Background: I am on the Create New Profile page
   Given settings set
-  Given I am logged in as a 000000
-  
 
 Scenario: Create new user and View user information
+  Given I am logged in with cid "12345"
   Given I am on the Create New Student Profile page
   And I fill in "Name" with "Jalal"
   And I select "101" from "student_section_id"
@@ -22,8 +21,8 @@ Scenario: Create new user and View user information
   And I should see "I am a test student"
 
 Scenario: Edit user information
-  Given I am logged in as a 111111
-  
+  Given I am logged in with cid "111111"
+
   Given I am on the Create New Student Profile page
   And I fill in "Name" with "Kayvan"
   And I select "101" from "student_section_id"
@@ -32,7 +31,6 @@ Scenario: Edit user information
   And I press "Save"
 
   Given I am on the Edit Student Profile page of "Kayvan"
-  Then show me the page
   And I fill in "Interest" with "Some Thing"
   And I press "Save"
   Then I should be on the User Profile page of "Kayvan"

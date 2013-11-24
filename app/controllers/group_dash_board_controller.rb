@@ -41,13 +41,13 @@ class GroupDashBoardController < AuthenticatedController
 			assignment = Assignment.find(assignment_id)
 			post = Post.create({
 				content: params[:content],
-				date: DateTime.now
+				published_at: DateTime.now
 				})
 
 			assignment.posts << post
 			assignment.save
 
-			post.user = @authenticated_user
+			post.author = @authenticated_user
 			post.save
 
 			group_id = assignment.group_id

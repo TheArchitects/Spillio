@@ -1,5 +1,5 @@
 class GroupJoinRequest < ActiveRecord::Base
-	attr_accessible :group_id, :requestee, :requester, :request_type
+	attr_accessible :requestee, :requester, :request_type
 	belongs_to :group
 	belongs_to :requestee, :class_name => "Student"
 	belongs_to :requester, :class_name => "Student"
@@ -8,7 +8,7 @@ class GroupJoinRequest < ActiveRecord::Base
 		return (
 				(not self.request_exists?(requester, requestee)) and
 				(not self.request_to_teammates?(requester, requestee)) and
-				(not self.request_to_full_teams?(requester, requestee))	
+				(not self.request_to_full_teams?(requester, requestee))
 			)
 	end
 
@@ -55,7 +55,7 @@ class GroupJoinRequest < ActiveRecord::Base
 	def self.request_to_full_teams?(requester, requestee)
 		requester_group_id = Student.find(requester).group_id
 		requestee_group_id = Student.find(requestee).group_id
-		
+
 		if requestee_group_id.nil?
 			requester_group = Group.find(requester_group_id)
 			return requester_group.size == requester_group.max_size
