@@ -4,10 +4,11 @@ Feature: Submit assignments online
   So that my teachers can grade them
 
   Background: I am a logged in student in my group dashboard
+    Given settings set
     Given the following task exists:
-    |title  |description  |due_date  |
-    |iteration1-1|features|5/1/2014  |
-    |iteration1-2|features|5/8/2014  |
+    |title        |description  | due_date  |
+    |iteration1-1 |features     | 5/1/2014  |
+    |iteration1-2 |features     | 5/8/2014  |
     And I am logged into the student group dashboard
 
   Scenario: Upload a file

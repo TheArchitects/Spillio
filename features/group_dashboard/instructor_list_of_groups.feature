@@ -4,6 +4,7 @@ Feature: View instructors assigned groups
   So I can quickly navigate through them and monitor how are they going
 
   Background: I am a logged in instructor with some groups assigned
+    Given settings set
     Given the following instructors exist:
     | name    |
     | Robocop |

@@ -14,6 +14,10 @@ Then /^I press "(.*)"$/ do |button|
   page.click_button(button)
 end
 
+Then /^I click "(.*)" link$/ do |link|
+  click_link(link)
+end
+
 Then /^I should see "(.*)"$/ do |text|
   have_content(text)
 end
