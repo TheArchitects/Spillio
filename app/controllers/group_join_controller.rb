@@ -45,10 +45,10 @@ class GroupJoinController < AuthenticatedController
       else
         flash[:notice] = "Sorry, I did not understand your request!"
       end
-
-
     end
 
+    # In case of merge, we are redirecting the user already in
+    # the accept_merge function
     unless type=='merge'
       redirect_to :back
     end

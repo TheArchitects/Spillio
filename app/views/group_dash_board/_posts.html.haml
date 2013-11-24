@@ -5,8 +5,8 @@
 - else
   - posts.each do |post|
     .panel-body
-      %div{:class => post.user.is_student? ? "message student" : "message instructor"}
-        %span.author= "#{post.user.name} said:"
+      %div{:class => post.author.is_student? ? "message student" : "message instructor"}
+        %span.author= "#{post.author.name} said:"
         %p.content= post.content
 = form_tag({:action => 'create_post', :controller => 'group_dash_board', :assignment_id => assignment_id}, {:role => 'form'}) do
   = label_tag :content, "Ask something:", :class => 'control-label'
