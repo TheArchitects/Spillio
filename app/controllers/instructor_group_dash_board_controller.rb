@@ -1,4 +1,4 @@
-class GroupDashBoardController < AuthenticatedController
+class InstructorGroupDashBoardController < AuthenticatedController
 
   def set_group_size(size)
     Group.max_students = size

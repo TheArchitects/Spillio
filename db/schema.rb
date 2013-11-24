@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122024729) do
+ActiveRecord::Schema.define(:version => 20131124195128) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
@@ -135,11 +135,12 @@ ActiveRecord::Schema.define(:version => 20131122024729) do
     t.text     "about"
     t.integer  "section_id"
     t.string   "interest"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "cid"
     t.string   "type"
     t.integer  "group_id"
+    t.boolean  "is_administrator", :default => false
   end
 
   add_index "users", ["group_id"], :name => "index_users_on_group_id"
