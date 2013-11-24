@@ -50,6 +50,17 @@ class Student < User
     end
   end
 
+  def skill_names
+    skill_names= ""
+    if skills.count > 0
+      skills.each do |sk|
+        skill_names += "#{sk.name}, "
+      end
+      skill_names.chop!.chop!
+    end
+    skill_names
+  end
+
   # Checks if this student can potentially be joined in a group by another
 	def joinable_by?(other_student)
 	  # False if self doesn't have a group or self equals the other student

@@ -25,23 +25,6 @@ class User < ActiveRecord::Base
     return type == 'Instructor'
   end
 
-  def skill_names
-    skill_names= ""
-    if skills.count > 0
-      skills.each do |sk|
-        skill_names += "#{sk.name}, "
-      end
-      skill_names.chop!.chop!
-    end
-    skill_names
-  end
-
-  def create_and_add_skills_by_name(skill_list)
-    skill_list.split(",").each do |sk|
-      self.skills << Skill.create(:name => sk)
-    end
-  end
-
   def incoming_group_requests
     GroupJoinRequest.where(:requestee_id => self)
   end
