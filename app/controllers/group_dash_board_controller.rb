@@ -11,6 +11,8 @@ class GroupDashBoardController < AuthenticatedController
 			@group = Group.find(group_id)
 		else
 			flash[:notice] = 'You are not allowed to check this group :)'
+			redirect_to student_path @authenticated_user
+			return
 		end
 	end
 

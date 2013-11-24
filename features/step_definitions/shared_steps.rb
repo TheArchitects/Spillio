@@ -61,3 +61,7 @@ end
 Given /^I am on the profile page for "(.*)"$/ do |user|
   visit(student_path(User.find_by_name(user)))
 end
+
+Then /^I should be on the group Page for "(.*)"$/ do |user|
+  visit(group_db_show_path(User.find_by_name(user).group_id))
+end

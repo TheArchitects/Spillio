@@ -49,9 +49,9 @@ class GroupJoinController < AuthenticatedController
 
     end
 
-    # unless type=='merge'
+    unless type=='merge'
       redirect_to :back
-    # end
+    end
   end
 
 
@@ -100,8 +100,6 @@ private
       redirect_to :back
     end
 
-    Group.delete_if_empty group1_id
-    Group.delete_if_empty group2_id
     req.destroy
 
   end
