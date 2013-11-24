@@ -14,7 +14,7 @@ class StudentsController < AuthenticatedController
   end
 
   def show
-    @student = @authenticated_user
+    @student = Student.find(params[:id])
     @view_only = true
     render_profile
   end
@@ -39,12 +39,9 @@ class StudentsController < AuthenticatedController
     StudentsController.cleanup_fields!(s)
 
     if s[:name] != '' and s[:about] != '' and student_cid!=nil
-
       @student = Student.create_or_update(s, student_cid)
-      
       @view_only = true
       render_profile
-
     else
       missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + missing
@@ -66,7 +63,6 @@ class StudentsController < AuthenticatedController
     end
   end
 
-
   # TODO: Form validation!!
   def create
   	s = params[:student]
@@ -75,14 +71,10 @@ class StudentsController < AuthenticatedController
     StudentsController.cleanup_fields!(s)
 
     if s[:name] != '' and s[:about] != '' and student_cid!=nil
-
   	  @student = Student.create_or_update(s, student_cid)
-      
       @view_only = true
       redirect_to student_path @student
-
     else
-
       missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
       flash[:notice] = "Please fill in the following fields: " + missing
       redirect_to new_student_path
@@ -114,10 +106,6 @@ class StudentsController < AuthenticatedController
   def self.cleanup_fields!(student)
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
-    # if student.has_key? :skill_ids
-    #   student[:skill_ids] = student[:skill_ids].select { |sk| not sk.empty?}
-    # end
-
     if student.has_key? :course_ids
       student[:course_ids] = student[:course_ids].select { |c| not c.empty?}
     end
