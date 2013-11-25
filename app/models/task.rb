@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :author, :class_name => "Instructor"
   has_many :assignments
-  attr_accessible :id, :title, :description, :due_date, :content
+  attr_accessible :id, :title, :description, :due_date, :content # TODO: wtf is content
 
   # TODO: Remove once we have instructor functionality
   def self.mock_task_1

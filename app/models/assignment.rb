@@ -26,7 +26,7 @@ class Assignment < ActiveRecord::Base
     total_max_score, total_score = 0, 0
     scores.each do |s|
       total_max_score += s.max_score
-      total_score += s.score
+      total_score += s.score unless s.score.nil?
     end
 
     if [total_score, total_max_score] == [0, 0]

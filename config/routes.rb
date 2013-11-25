@@ -21,6 +21,7 @@ Spillio::Application.routes.draw do
   # For Group Management Controller
   match 'group_management' => 'instructors#show', :as => :group_management_show, via: [:get]
   match 'new_assignment' => 'instructors#new_assignment'
+  match 'post_assignment' => 'instructors#post_new_assignment'
   match 'assign_grades' => 'instructors#assign_grades'
   match 'group_management/update' => 'instructors#update'
 

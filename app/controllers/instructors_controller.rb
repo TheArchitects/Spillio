@@ -34,4 +34,27 @@ class InstructorsController < AuthenticatedController
     new_score = Score.create(:max_score=>max_score,:score=>score)
     assignment.scores << new_score
   end
+
+  def new_assignment
+  end
+
+  def post_new_assignment
+    # To Do Validate
+    title = params[:task_name]
+    description = params[:description]
+    due_date = Date.parse(params[:due_date])
+    max_score = params[:max_score]
+    label = params[:submission_label]
+
+    task = Task.create!(:title => title, :description => description, :due_date => due_date)
+
+    Group.all.each do |group|
+      assignment = Assignment.create_from_group_and_task(group, task)
+      assignment.scores << Score.create!(:max_score => max_score)
+      assignment.submissions << Submission.create!(:label => label)
+      assignment.save
+    end
+
+    render :text => "Assignment posted :D"
+  end
 end
