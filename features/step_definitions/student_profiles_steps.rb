@@ -15,14 +15,6 @@ Given /I am on the Edit Student Profile page of "(.*)"/ do |student_name|
   visit edit_student_path Student.find_by_name(student_name)
 end
 
-Then /^I should be on the New User Profile page/ do
-  current_path = URI.parse(current_url).path
-  current_path.should match(/students\/(\d)+$/)
+Then(/^I search for "(.*)"$/) do |query_terms|
+  visit student_search_path query: query_terms
 end
-
-Then /^I should be on the User Profile page of "(.*)"/ do |student_name|
-  current_path = URI.parse(current_url).path
-  current_path.should match(student_path(Student.find_by_name(student_name)))
-end
-
-

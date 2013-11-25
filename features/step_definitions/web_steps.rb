@@ -2,7 +2,7 @@ When /I check "(.*)"/ do |field|
   page.check(field)
 end
 
-Then /^I select "(.*)" from "(.*)"$/ do |selection, box|
+When /^I select "(.*)" from "(.*)"$/ do |selection, box|
   page.select selection, :from => box
 end
 
@@ -10,14 +10,82 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-Then /^I press "(.*)"$/ do |button|
+
+
+
+
+
+#
+# => User input actions on a page
+#
+
+When /^I press "(.*)"$/ do |button|
   page.click_button(button)
 end
 
-Then /^I click "(.*)" link$/ do |link|
+When /^I click "(.*)" link$/ do |link|
   click_link(link)
 end
 
-Then /^I should see "(.*)"$/ do |text|
-  have_content(text)
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+  fill_in(field, :with => value)
+end
+
+
+
+#
+# => Existence of elements in a page
+#
+
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+end
+World(WithinHelpers)
+
+# Single-line step scoper
+When /^(.*) within (.*[^:])$/ do |st, parent|
+  with_scope(parent) { step st }
+end
+
+# Multi-line step scoper
+When /^(.*) within (.*[^:]):$/ do |st, parent, table_or_string|
+  with_scope(parent) { step "#{st}:", table_or_string }
+end
+
+Then (/^(?:|I )should see "([^"]*)"$/) do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end
+
+Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
+  regexp = Regexp.new(regexp)
+
+  if page.respond_to? :should
+    page.should have_xpath('//*', :text => regexp)
+  else
+    assert page.has_xpath?('//*', :text => regexp)
+  end
+end
+
+Then (/^(?:|I )should not see "([^"]*)"$/) do |text|
+  if page.respond_to? :should
+    page.should have_no_content(text)
+  else
+    assert page.has_no_content?(text)
+  end
+end
+
+Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
+  regexp = Regexp.new(regexp)
+
+  if page.respond_to? :should
+    page.should have_no_xpath('//*', :text => regexp)
+  else
+    assert page.has_no_xpath?('//*', :text => regexp)
+  end
 end

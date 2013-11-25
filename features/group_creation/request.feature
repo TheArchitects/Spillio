@@ -6,11 +6,11 @@ Feature: Request to join an existing group
   Background: I am on the Search for Students page
     Given settings set
     And the following users exist:
-    |name  | about | group_id |cid  | about| interest|
-    |Megumi|  about|         |11111| about| interest|
-    |Kevin |  about| 77      |22222| about| interest|
-    |Alfonso| about| 33      |33333| about| interest|
-    |Kayvan|  about| 77      |44444| about| interest|
+    |name   | about  | group_id |cid  | about| interest|
+    |Megumi |  about |          |11111| about| interest|
+    |Kevin  |  about | 77       |22222| about| interest|
+    |Alfonso| about  | 33       |33333| about| interest|
+    |Kayvan |  about | 77       |44444| about| interest|
 
     And the following groups exist:
     | id |group_name     |
@@ -19,48 +19,40 @@ Feature: Request to join an existing group
 
   Scenario: Send an invitation to someone who is not in a group
     Given I am logged in with cid "33333"
-    Given I am on the Search for Students Page
-    Given I click on "Megumi" in the list of students
+    And I am on the Search for Students Page
+    When I click "11111" link within "#results"
     Then I should be on the View Profile Page for "Megumi"
-    Then I press "Invite to group"
-    And I should see "Invitation Sent to Megumi"
+    When I press "Invite to group"
+    Then I should see "Request pending"
 
   Scenario: Send a join request to someone who is in an existing group
     Given I am logged in with cid "11111"
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    Then I press "Request to join"
-    And I should see "Request Sent to Kevin"
+    And I am on the Search for Students Page
+    Then show me the page
+    When I click "22222" link within "#results"
+    And I press "Request to join"
+    Then I should see "Request pending"
 
   Scenario: Send a merge request to someone who is in an existing group
     Given I am logged in with cid "33333"
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    Then I press "Request to merge"
-    And I should see "Merge request Sent to Kevin"
+    And I am on the Search for Students Page
+    When I click "22222" link within "#results"
+    And I press "Request to merge"
+    Then I should see "Request pending"
 
   Scenario: Try to send a request to groupmate
     Given I am logged in with cid "44444"
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    And I should see "Already a groupmate"
-
-  Scenario: Pending request
-    Given I am logged in with cid "11111"
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    And I should see "Request pending"
+    And I am on the Search for Students Page
+    When I click "22222" link within "#results"
+    Then I should see "Already a groupmate"
 
   Scenario: Group is full
-
     Given the following users exist:
     |name  | about| group_id|cid  | about| interest|
     |Arturo|  about| 77      |99999| about| interest|
 
     Given I am logged in with cid "11111"
-    Given I am on the Search for Students Page
-    And I click on "Kevin" in the list of students
-    And I should see "Group is full"
+    And I am on the Search for Students Page
+    When I click "22222" link within "#results"
+    Then I should see "Group is full"
 

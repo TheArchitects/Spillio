@@ -6,17 +6,19 @@ Feature: Respond to someone's request to join a group
   Background: I am on the Home Page
     Given settings set
     Given the following users exist:
-    |name   | about | group_id |cid  | about| interest|
-    |Kevin  | about |          |33333| about| interest|
-    |Kayvan | about | 77       |44444| about| interest|
-    |Alfonso| about | 33       |55555| about| interest|
-    |Jalal  | about | 33       |66666| about| interest|
+    | name   | about | group_id | cid   | interest|
+    | Kevin  | about |          | 33333 | interest|
+    | Kayvan | about | 77       | 44444 | interest|
+    | Alfonso| about | 33       | 55555 | interest|
+    | Jalal  | about | 33       | 66666 | interest|
+    | Arturo | about | 44       | 77777 | interest|
 
     And the following groups exist:
     | id | group_name     |
     | 33 | Alfonso's group|
     | 77 | Kayvan's group |
-    
+    | 44 | Arturo's group |
+
 
   Scenario: Accept a request to join someone's group
     Given I am logged in with cid "44444"
@@ -35,18 +37,9 @@ Feature: Respond to someone's request to join a group
     And I should see "Kevin"
 
   Scenario: Accept a merge request to another group
-    Given I am logged in with cid "55555"
-    Given there is a request to merge from "Kayvan" to "Alfonso"
+    Given I am logged in with cid "77777"
+    Given there is a request to merge from "Kayvan" to "Arturo"
     And I am on the profile page for "Alfonso"
     And I click "Accept Kayvan merge request" link
     Then I should be on the group Page for "Kayvan"
-    Then show me the page
-    And I should see "Alfonso"
-
-
-  Scenario: maximum group size reached
-    Given I am logged in with cid "55555"
-    Given there is a request to merge from "Alfonso" to "Kayvan"
-    Then show me the page
-    And I click "Accept Alfonso merge request" link
-    And I should see ""
+    And I should see "Kayvan"

@@ -14,7 +14,7 @@ Scenario: Create new user and View user information
   And I fill in "Interest" with "Running"
   And I fill in "Description:" with "I am a test student"
   And I press "Save"
-  Then I should be on the New User Profile page
+  Then I should be on the New User Profile page for "Jalal"
   And I should see "Jalal"
   And I should see "Java"
   And I should see "Running"
