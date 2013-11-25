@@ -19,21 +19,7 @@ module NavigationHelpers
     when /^the group dashboard page for cid "(.*)"$/
       group_db_show_path(User.find_by_cid($1).group_id)
 
-    when /^my group dashboard page$/
-      group_db_show_path(User.find_by_name($1).group_id)
-
-    # it wouldnt surprise me if the following 4 paths are the same
-    # TODO: check it and remove some of them if so
-    when /^the View Profile Page for "(.+)"$/
-      "/students/#{Student.find_by_name($1).id}"
-
-    when /^the New User Profile page for "(.+)"$/
-      "/students/#{Student.find_by_name($1).id}"
-
-    when /^the User Profile page of "(.*)"$/
-      student_path(Student.find_by_name($1))
-
-    when /^the profile page of "(.*)"$/
+    when /^the (?:View |New User |User )?Profile Page (?:for|of) "(.+)"$/i
       student_path(Student.find_by_name($1))
 
     when /^the Search for Students Page$/
