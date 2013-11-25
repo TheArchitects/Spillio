@@ -13,4 +13,8 @@ class Student < User
 	    )
 	end
 
+  def is_administrator
+    return false
+  end
+
 end

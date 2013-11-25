@@ -18,6 +18,11 @@ Spillio::Application.routes.draw do
   put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
   post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
 
+  # For Group Management Controller
+  match 'group_management' => 'instructors#show', :as => :group_management_show, via: [:get]
+  match 'new_assignment' => 'instructors#new_assignment'
+  match 'assign_grades' => 'instructors#assign_grades'
+  match 'group_management/update' => 'instructors#update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

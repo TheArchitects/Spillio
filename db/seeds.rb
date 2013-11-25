@@ -44,7 +44,12 @@ alfonso.skills << skills[1]
 alfonso.courses << courses[1]
 alfonso.save
 
-
+stephanie = Instructor.create!(name: 'Stephanie')
+alan = Instructor.create!(name: 'Alan')
+william = Instructor.create!(name: 'William')
+stephanie.save
+alan.save
+william.save
 
 # TODO: Groups should only be created with a special function each time a user is
 # created. When a student is merged onto a new group, if its old group becomes
@@ -52,11 +57,13 @@ alfonso.save
 the_beatles = Group.create_group_with_mock_assignments('The Beatles')
 the_beatles.students << kayvan
 the_beatles.students << megumi
+the_beatles.instructor = stephanie
 the_beatles.save
 
 
 rolling = Group.create_group_with_mock_assignments('The Rolling Stones')
 rolling.students << kevin
+rolling.instructor = alan
 rolling.save
 
 req = GroupJoinRequest.create!

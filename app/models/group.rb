@@ -5,9 +5,23 @@ class Group < ActiveRecord::Base
 	has_many :assignments
   has_many :group_join_requests
 	attr_accessible :group_name
-  attr_accessible :id, :instructor_id, :max_students
+  attr_accessible :id, :instructor_id
 
   before_create :default_values
+
+  @@max_students = 6
+
+  def num_students
+    self.students.count
+  end
+
+  def self.max_students
+    @@max_students
+  end
+
+  def self.max_students=(max)
+    @@max_students = max
+  end
 
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)

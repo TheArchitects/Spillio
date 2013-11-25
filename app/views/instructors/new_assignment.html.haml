@@ -1,0 +1,150 @@
+- content_for :title do
+  = "Dashboard"
+
+- content_for :styles do
+  = stylesheet_link_tag 'group_dash_board'
+
+- content_for :scripts do
+  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
+  = javascript_include_tag 'student_profile'
+
+/ Navbar
+= render "shared/navbar"
+
+/ Page body
+.container
+  .container
+    .row
+      %h3= "New Assignment"
+      %hr/
+    .row
+    / Left panel
+    .col-lg-3.col-md-3.col-sm-12.col-xs-12
+      .panel.panel-default
+        .panel-body
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                  New Assignment
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                  Group Management
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-manage"}
+                  Groups
+            #group-manage.panel-collapse.collapse
+              .card
+                .btn-group
+                  .btn-group
+                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                      All Groups
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: "#"} Group 1
+                      %li
+                        %a{href: "#"} Group 2
+                      %li
+                        %a{href: "#"} Group 3
+                      %li
+                        %a{href: "#"} Group 4
+                      %li
+                        %a{href: "#"} Group 5
+                      %li
+                        %a{href: "#"} Group 6
+                  %hr/
+                  .btn-group
+                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                      My Groups
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: "#"} Group 1
+                      %li
+                        %a{href: "#"} Group 2
+    / / Left panel
+    / Assignment dahsboard panel
+    .col-lg-9.col-md-9.col-sm-12.col-xs-12
+      #accordion.panel-group
+        .panel.panel-default.assignment
+          .panel-heading
+          #assignment-5.panel-collapse
+            .card
+              %h4 Assignment Name
+              .input-group{style: "width:50%"}
+                %input.form-control{type: "text"}/
+              %hr/
+              %h4 Due Date
+              .input-group{style: "width:50%"}
+                %input.form-control{type: "text"}/
+                %span.input-group-addon /2013
+                .input-group-btn
+                  / Button and dropdown menu
+                  %button.btn.btn-default{type: "button"} Calendar
+              %hr/
+              %h4 Possible points
+              .input-group{style: "width:50%"}
+                %input.form-control{type: "text"}/
+                .input-group-btn
+                  / Button and dropdown menu
+                  %button.btn.btn-default{type: "button"} Save
+              %hr/
+              %h4 Description
+              .input-group{style: "width:100%"}
+                %textarea.form-control{rows: "8"}
+              %hr/
+              %h4 Required Submissions
+              %table.table.table-striped
+                %tr
+                  %th Type
+                  %th Name
+                  %th Des
+                %tr
+                  %td
+                    .btn-group
+                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                        File
+                        %span.caret
+                      %ul.dropdown-menu{role: "menu"}
+                        %li
+                          %a{href: "#"} Link
+                  %td
+                    %span Group_submission.zip
+                  %td
+                    %span Rotten Potatoes
+                %tr
+                  %td
+                    .btn-group
+                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                        File
+                        %span.caret
+                      %ul.dropdown-menu{role: "menu"}
+                        %li
+                          %a{href: "#"} Link
+                  %td
+                    %span Group_submission.zip
+                  %td
+                    %span Heroku Link
+                %tr
+                  %td
+                    .btn-group
+                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                        Link
+                        %span.caret
+                      %ul.dropdown-menu{role: "menu"}
+                        %li
+                          %a{href: "#"} File
+                  %td
+                    %span Group_submission.zip
+                  %td
+                    %span Rotten Potatoes
+                %button.btn.btn-success{style: "float:right", type: "button"} Add
+        %button.btn.btn-success{style: "float:left", type: "button"} To all groups
+        %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} To all Students
+      %br/
+    / / Assignment dahsboard panel

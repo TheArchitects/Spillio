@@ -1,0 +1,109 @@
+- content_for :title do
+  = "Dashboard"
+
+- content_for :styles do
+  = stylesheet_link_tag 'group_dash_board'
+
+/ Navbar
+= render "shared/navbar"
+
+/ Page body
+.container
+  .container
+    .row
+      %h3= "Group Management"
+      %hr/
+    .row
+    / Left panel
+    .col-lg-3.col-md-3.col-sm-12.col-xs-12
+      .panel.panel-default
+        .panel-body
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                  New Assignment
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                  Group Management
+          .panel.panel-default.assignment
+            .panel-heading
+              %h4.panel-title
+                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-manage"}
+                  Groups
+            #group-manage.panel-collapse.collapse
+              .card
+                .btn-group
+                  .btn-group
+                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                      All Groups
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: "#"} Group 1
+                      %li
+                        %a{href: "#"} Group 2
+                      %li
+                        %a{href: "#"} Group 3
+                      %li
+                        %a{href: "#"} Group 4
+                      %li
+                        %a{href: "#"} Group 5
+                      %li
+                        %a{href: "#"} Group 6
+                  %hr/
+                  .btn-group
+                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                      My Groups
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: "#"} Group 1
+                      %li
+                        %a{href: "#"} Group 2
+    / / Left panel
+    / Assignment dahsboard panel
+    %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "/group_management/update"}
+      #accordion.panel-group
+        .panel.panel-default.assignment
+          .panel-heading
+            %h4#iteration.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-5"}
+                General Group Settings
+          #assignment-5.panel-collapse
+            .card
+              %h4 Maximum Group Size
+              .input-group{style: "width:30%"}
+                %input.form-control{placeholder: "#{Group.max_students}", type: "text", name: "group_size"}/
+              %hr/
+              %h4 Submissions
+              %hr/
+              %h4 Assign Instructors to Groups
+              %table.table.table-striped
+                %tr
+                  %th Group
+                  %th Number of Students
+                  %th Group's GSI
+                - Group.all.each do |gr|
+                  %tr
+                    %td #{gr.group_name}
+                    %td
+                      %span.badge #{gr.num_students}
+                    %td
+                      %select
+                        - Instructor.all.each do |inst|
+                          - if gr.instructor.nil? == false
+                            %option{selected: gr.instructor.name}
+                              #{inst.name}
+                          - else
+                            %option
+                              #{inst.name}
+                              
+        %br/
+        %button.btn.btn-success{style: "float:right", type: "submit"} Make Changes
+      %br/
+      %br/
+      %br/
+/ / Assignment dahsboard panel
