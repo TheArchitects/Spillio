@@ -23,10 +23,6 @@ Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
   end
 end
 
-When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  fill_in(field, :with => value)
-end
-
 
 
 #
