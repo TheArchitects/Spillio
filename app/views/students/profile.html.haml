@@ -40,6 +40,13 @@
                   - else
                     = f.text_field :name, :placeholder => 'Your name', :class => 'form-control', :disabled => @view_only, :required => true
               .form-group
+                = f.label :email, 'Email: ', :class => 'col-lg-2 control-label'
+                .col-lg-10
+                  - if @view_only
+                    %p= @student.email
+                  - else
+                    = f.text_field :email, :placeholder => 'Email Address', :class => 'form-control', :disabled => @view_only, :required => true
+              .form-group
                 = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
                 .col-lg-2
                   - if @view_only
@@ -59,11 +66,8 @@
         / / Top left section
         / Image section
         #image-section.col-xs-12.col-sm-12.col-md-4.col-lg-4
-          .panel.panel-default
-            .panel-heading Avatar:
-            .panel-body
-              %img#avatar-image.img-square.img-responsive{alt: "User profile", src: "https://cdn1.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png"}/
-              / = f.text_field :img_url, :class => 'form-control'
+          .thumbnail
+            %img#avatar-image.img-square.img-responsive{alt: "User profile", src: "#{@gravatar_url}"}
         / Image section
       / / Top section
       .row.hide
@@ -73,14 +77,14 @@
       / Bottom section
       #other-section.row
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
-          = f.label :skills
-          = collection_select :student, :skill_ids, Skill.all, :id, :name, {}, :class => 'form-control', :multiple => true, :data_readonly => @view_only
+          = f.label :skill_names
+          = f.hidden_field :skill_names, :data_readonly => @view_only
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
           = f.label :courses
           = collection_select :student, :course_ids, Course.all, :id, :name, {}, :class => 'form-control', :multiple => true, :data_readonly => @view_only
         .col-xs-12.col-sm-12.col-md-4.col-lg-4
-          = f.label :interest
-          = f.text_area :interest, :class => 'form-control', :rows => '4'
+          = f.label :interest, "Interests"
+          = f.text_area :interest, :class => 'form-control', :rows => '4', :disabled => @view_only
       / / Bottom section
       .row
         .container

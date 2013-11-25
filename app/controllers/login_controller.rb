@@ -2,7 +2,6 @@ class LoginController < AuthenticatedController
 	skip_before_filter :get_authenticated_user, :only => [:login, :index]
 
 	def index
-
 		if User.exists_with_cid? session[:cas_user]
 			#existing user
 			authenticated_user = User.find_by_cid(session[:cas_user])
@@ -11,7 +10,6 @@ class LoginController < AuthenticatedController
 			#new user
 			redirect_to new_student_path
 		end
-
 	end
 
 	# Callback for after CalNet authentication
