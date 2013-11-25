@@ -13,29 +13,36 @@ class GroupJoinRequest < ActiveRecord::Base
 
 	def self.request_label(requester_id, requestee_id)
 		if self.valid_request?(requester_id, requestee_id)
-			requester = Student.find(requester_id)
-			requestee = Student.find(requestee_id)
-			if requester.group_id.nil? and (not requestee.group_id.nil?)
-				return 'join'
-			elsif (not requester.group_id.nil?) and requestee.group_id.nil?
-				return 'invite'
-			elsif  (not requester.group_id.nil?) and (not requestee.group_id.nil?)
-				return 'merge'
-			end
-
-		end
-
-	    if self.request_exists?(requester_id, requestee_id)
-	      label = 'Request pending'
-	    elsif self.request_to_teammates?(requester_id, requestee_id)
-	      label = 'Already a groupmate'
-	    elsif self.request_to_full_teams?(requester_id, requestee_id)
-	      label = 'Group is full'
-	    end
-	    return label||""
+			return self.generate_valid_request_type(requester_id, requestee_id)
+		else
+	    return self.generate_reason_for_invalid_request(requester_id, requestee_id)
+	  end
 	end
 
 	private
+
+	def self.generate_valid_request_type(requester_id, requestee_id)
+		requester = Student.find(requester_id)
+		requestee = Student.find(requestee_id)
+		if requester.group_id.nil? and (not requestee.group_id.nil?)
+			return 'join'
+		elsif (not requester.group_id.nil?) and requestee.group_id.nil?
+			return 'invite'
+		elsif  (not requester.group_id.nil?) and (not requestee.group_id.nil?)
+			return 'merge'
+		end
+	end
+
+	def self.generate_reason_for_invalid_request(requester_id, requestee_id)
+		if self.request_exists?(requester_id, requestee_id)
+      label = 'Request pending'
+    elsif self.request_to_teammates?(requester_id, requestee_id)
+      label = 'Already a groupmate'
+    elsif self.request_to_full_teams?(requester_id, requestee_id)
+      label = 'Group is full'
+    end
+    return label||""
+	end
 
 	def self.request_exists?(requester, requestee)
 		return self.exists?(:requester_id => requester, :requestee_id => requestee)
