@@ -47,7 +47,6 @@ Feature: Submit Assignments
 
 
   Scenario: First time submit
-    Then show me the page
     When I fill in "Heroku" with "bananas"
     And I press "Save" button
     Then I should see "bananas"
