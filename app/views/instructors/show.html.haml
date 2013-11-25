@@ -92,15 +92,8 @@
                     %td
                       %span.badge #{gr.num_students}
                     %td
-                      %select
-                        - Instructor.all.each do |inst|
-                          - if gr.instructor.nil? == false and gr.instructor.name == inst.name
-                            %option{selected: gr.instructor.name}
-                              #{inst.name}
-                          - else
-                            %option
-                              #{inst.name}
-                              
+                      - @group = gr
+                      = collection_select :group, :instructor_id, Instructor.all, :id, :name, prompt: true, :class => 'form-control'
         %br/
         %button.btn.btn-success{style: "float:right", type: "submit"} Make Changes
       %br/
