@@ -1,11 +1,11 @@
 Feature: See feedback and grade
-	As a student member of a group
-	I want to be able to see the grade we received from instructor
-	So that I can make improvement on the project
+  As a student member of a group
+  I want to be able to see the grade we received from instructor
+  So that I can make improvement on the project
 
-	Background: I am a logged in student in my group dashboard
-		Given settings set
-		Given the following instructor exists:
+  Background: I am a logged in student in my group dashboard
+    Given settings set
+    Given the following instructor exists:
     | id | name    |
     | 43 | Robocop |
 
@@ -14,9 +14,9 @@ Feature: See feedback and grade
     | 78 | 43            |
 
     And the following students exist:
-    | id | name | group_id |
-    | 99 | Pepe | 78       |
-    | 88 | John | 78       |
+    | id | name | group_id | cid |
+    | 99 | Pepe | 78       | 123 |
+    | 88 | John | 78       | 456 |
 
     And the following tasks exist:
     | id | title | due_date           | description |
@@ -31,7 +31,7 @@ Feature: See feedback and grade
     And the following score exists:
     | id | max_score | score | assignment_id |
     | 21 | 20        | 10    | 89            |
-    | 22 | 30        | nil   | 53            |
+    | 22 | 30        | -1    | 53            |
 
     And the following submissions exist:
     | label  | assignment_id | content | submitted_date       |
@@ -43,14 +43,11 @@ Feature: See feedback and grade
     | 99         | 2011-10-1 00:00:00 | 89              | such content    |
     | 43         | 2011-10-2 00:00:00 | 53            |  wow  |
 
+    Given it is currently 2014-9-2 00:00:00
+    And I am logged into the student group dashboard as "123"
 
+  Scenario: Grade was submitted by instructor
+    Then I should see "10.0/20.0" within "#assignment-89"
 
-	Scenario: Grade was submitted by instructor
-		Given I am on the "Group Dashboard" page
-		Then I should see '10/20' as a score
-
-
-	Scenario:
-		Given the instructor did not submit the grade
-		When I follow the 'It1-2' accordion
-		Then I should see 'N/A' as a score
+  Scenario: Instructor did not submit a grade
+    Then I should see "Not yet graded" within "#assignment-53"

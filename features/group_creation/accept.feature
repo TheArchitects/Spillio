@@ -25,7 +25,7 @@ Feature: Respond to someone's request to join a group
     Given there is a request to join from "Kevin" to "Kayvan"
     And I am on the profile page for "Kayvan"
     And I click "Accept Kevin join request" link
-    Then I should be on the group Page for "Kayvan"
+    Then I should be on the group dashboard page for "Kayvan"
     And I should see "Kevin"
 
   Scenario: Accept an invitation someone's group
@@ -33,7 +33,7 @@ Feature: Respond to someone's request to join a group
     Given there is an invitation to join from "Kayvan" to "Kevin"
     And I am on the profile page for "Kevin"
     And I click "Accept Kayvan invite request" link
-    Then I should be on the group Page for "Kayvan"
+    Then I should be on the group dashboard page for "Kayvan"
     And I should see "Kevin"
 
   Scenario: Accept a merge request to another group
@@ -41,5 +41,5 @@ Feature: Respond to someone's request to join a group
     Given there is a request to merge from "Kayvan" to "Arturo"
     And I am on the profile page for "Alfonso"
     And I click "Accept Kayvan merge request" link
-    Then I should be on the group Page for "Kayvan"
+    Then I should be on the group dashboard page for "Kayvan"
     And I should see "Kayvan"

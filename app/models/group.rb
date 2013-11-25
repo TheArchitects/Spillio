@@ -68,8 +68,6 @@ class Group < ActiveRecord::Base
       return merged_group.id
     else
       # group size exeded
-      puts "SIZE EXCEEDED"
-      puts "#{group1.size} + #{group2.size} < #{Setting.first.max_group_size}"
       return false
     end
   end
@@ -77,5 +75,9 @@ class Group < ActiveRecord::Base
   # Instance methods
   def max_size
     Setting.first.max_group_size
+  end
+
+  def assignments_in_order
+    self.assignments.sort! {|a,b| a.due_date <=> b.due_date}
   end
 end

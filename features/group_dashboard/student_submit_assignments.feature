@@ -14,9 +14,9 @@ Feature: Submit Assignments
     | 78 | 43            |
 
     And the following students exist:
-    | id | name | group_id |
-    | 99 | Pepe | 78       |
-    | 88 | John | 78       |
+    | id | name | group_id | cid |
+    | 99 | Pepe | 78       | 123 |
+    | 88 | John | 78       | 456 |
 
     And the following tasks exist:
     | id | title | due_date           | description |
@@ -36,26 +36,22 @@ Feature: Submit Assignments
     And the following submissions exist:
     | label  | assignment_id | content | submitted_date       |
     | Essay  | 89            | Bleh    | 2011-10-1 00:00:00   |
-    | Heroku | 53            | nil     | nil                  |
+    | Heroku | 53            |      |                   |
 
     And the following posts exist:
     | author_id  | published_at       | assignment_id    | content |
     | 99         | 2011-10-1 00:00:00 | 89              | such content    |
     | 43         | 2011-10-2 00:00:00 | 53            |  wow  |
 
+    Given I am logged into the student group dashboard as "123"
 
 
-	Scenario: First time submit
-		Given I did not submit the assignment
-		And the iteration accordion is not collapsed
-		Then I should see the "description" form
-		And the 'submit' button
-		When I fill "description" with "submission content"
-		And I press 'submit'
-		Then I should see "submission content"
-		And I should not see the "description" form
+  Scenario: First time submit
+    Then show me the page
+    When I fill in "Heroku" with "bananas"
+    And I press "Save" button
+    Then I should see "bananas"
+    And I should not see "#submission_content" within "#assignment-53"
 
-	Scenario: Not first time submit
-		Given I did submit the assignement
-		And the iteration accordion is not collapsed
-		Then I should not see the "description" form
+  Scenario: Not first time submit
+    Then I should not see "#submission_content" within "#assignment-89"

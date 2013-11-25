@@ -13,12 +13,16 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the (RottenPotatoes )?home\s?page$/ then '/movies'
-
-    when /^the group Page for "(.*)"$/
+    when /^the group dashboard page for "(.*)"$/
       group_db_show_path(User.find_by_name($1).group_id)
 
-    # it wouldnt surprise me if the following 3 paths are the same
+    when /^the group dashboard page for cid "(.*)"$/
+      group_db_show_path(User.find_by_cid($1).group_id)
+
+    when /^my group dashboard page$/
+      group_db_show_path(User.find_by_name($1).group_id)
+
+    # it wouldnt surprise me if the following 4 paths are the same
     # TODO: check it and remove some of them if so
     when /^the View Profile Page for "(.+)"$/
       "/students/#{Student.find_by_name($1).id}"

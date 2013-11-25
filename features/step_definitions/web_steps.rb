@@ -19,7 +19,7 @@ end
 # => User input actions on a page
 #
 
-When /^I press "(.*)"$/ do |button|
+When /^I press "(.*)" button$/ do |button|
   page.click_button(button)
 end
 
@@ -62,6 +62,16 @@ Then (/^(?:|I )should see "([^"]*)"$/) do |text|
   end
 end
 
+Then (/^(?:|I )should see "([^"]*)" before "([^"]*)"$/) do |e1, e2|
+  if page.respond_to? :should
+    page.should have_content(text)
+    page.body.index(e1).should < page.body.index(e2)
+  else
+    assert page.has_content?(text)
+    assert page.body.index(e1) < page.body.index(e2)
+  end
+end
+
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
 
@@ -88,4 +98,8 @@ Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   else
     assert page.has_no_xpath?('//*', :text => regexp)
   end
+end
+
+Then /^the "([^\"]+)" field should be disabled$/ do |field|
+  find_field(field)[:disabled].should == 'disabled'
 end
