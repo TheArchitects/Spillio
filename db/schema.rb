@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(:version => 20131122024729) do
   add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
 
   create_table "scores", :force => true do |t|
-    t.decimal  "score"
+    t.decimal  "score",         :default => -1.0
     t.decimal  "max_score"
     t.integer  "assignment_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_index "scores", ["assignment_id"], :name => "index_scores_on_assignment_id"

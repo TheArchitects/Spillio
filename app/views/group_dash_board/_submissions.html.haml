@@ -4,9 +4,13 @@
   %h4 Submissions
   .panel-body
     - submissions.each do |submission|
-      = form_for submission, :html => {:class => 'form-inline', :role => 'form'} do |f|
-        = f.label :content, submission.label, :class => 'control-label'
-        %br
-        .form-group
-          = f.text_field :content, :class => 'form-control', :required => true, :disabled => (not submission.content.nil?)
-        = f.submit 'Save', :class => 'btn btn-primary', :disabled => (not submission.content.nil?)
+      - if ( submission.content.nil? || submission.content.empty?)
+        = form_for submission, :html => {:class => 'form-inline', :role => 'form'} do |f|
+          = f.label :content, submission.label, :class => 'control-label'
+          %br
+          .form-group
+            = f.text_field :content, :class => 'form-control', :required => true
+          = f.submit 'Save', :class => 'btn btn-primary'
+      - else
+        %h4= submission.label
+        %p= submission.content

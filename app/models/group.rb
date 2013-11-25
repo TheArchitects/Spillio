@@ -7,8 +7,6 @@ class Group < ActiveRecord::Base
 	attr_accessible :group_name
   attr_accessible :id, :instructor_id
 
-  before_create :default_values
-
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
@@ -66,18 +64,20 @@ class Group < ActiveRecord::Base
         s.save
       end
 
+      # successful merge
+      return merged_group.id
     else
       # group size exeded
       return false
     end
-    # successful merge
-    return merged_group.id
   end
 
-  private
-    def default_values
-      self.max_size ||= Setting.first.max_group_size
-    end
+  # Instance methods
+  def max_size
+    Setting.first.max_group_size
+  end
 
-
+  def assignments_in_order
+    self.assignments.sort! {|a,b| a.due_date <=> b.due_date}
+  end
 end

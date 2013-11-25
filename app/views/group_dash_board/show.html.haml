@@ -33,19 +33,19 @@
       / Assignment dahsboard panel
       .col-lg-9.col-md-9.col-sm-12.col-xs-12
         #accordion.panel-group
-          - @group.assignments.each do |assignment|
-            .panel.panel-default.assignment
+          - @group.assignments_in_order.each do |assignment|
+            .panel.panel-default.assignment{:id => "assignment-#{assignment.id}"}
               .panel-heading
                 %h4.panel-title
-                  %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-#{assignment.id}"}
+                  %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-#{assignment.id}-collapse"}
                     = assignment.title
                   - assignment_badge(assignment)
-              .panel-collapse.collapse{:id => "assignment-#{assignment.id}"}
-                .card
+              .panel-collapse.collapse{:id => "assignment-#{assignment.id}-collapse"}
+                .card.description
                   %h4 Description
                   .panel-body
                     = assignment.description
                   = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
-                .card
+                .card.messages
                   = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
       / / Assignment dahsboard panel

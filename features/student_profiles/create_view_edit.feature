@@ -13,10 +13,9 @@ Scenario: Create new user and View user information
   And I select "101" from "student_section_id"
   And I fill in "Interest" with "Running"
   And I fill in "Description:" with "I am a test student"
-  And I press "Save"
-  Then I should be on the New User Profile page
+  And I press "Save" button
+  Then I should be on the New User Profile page for "Jalal"
   And I should see "Jalal"
-  And I should see "Java"
   And I should see "Running"
   And I should see "I am a test student"
 
@@ -28,11 +27,11 @@ Scenario: Edit user information
   And I select "101" from "student_section_id"
   And I fill in "Interest" with "Nothing"
   And I fill in "Description:" with "I am a test student"
-  And I press "Save"
+  And I press "Save" button
 
   Given I am on the Edit Student Profile page of "Kayvan"
   And I fill in "Interest" with "Some Thing"
-  And I press "Save"
+  And I press "Save" button
   Then I should be on the User Profile page of "Kayvan"
   And I should see "Some Thing"
 
