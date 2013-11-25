@@ -10,13 +10,13 @@ Feature: View assignments due
     | 43 | Robocop |
 
     And the following group exists:
-    | id | instructor_id |
-    | 78 | 43            |
+    | id | instructor_id | group_name |
+    | 78 | 43            | Monkees    |
 
     And the following students exist:
-    | id | name | group_id |
-    | 99 | Pepe | 78       |
-    | 88 | John | 78       |
+    | id | name | group_id | cid |
+    | 99 | Pepe | 78       | 123 |
+    | 88 | John | 78       | 456 |
 
     And the following tasks exist:
     | id | title | due_date           | description |
@@ -43,21 +43,20 @@ Feature: View assignments due
     | 99         | 2011-10-1 00:00:00 | 89              | such content    |
     | 43         | 2011-10-2 00:00:00 | 53            |  wow  |
 
-    Given I am logged into the student group dashboard
+    Given it is currently 2013-9-2 00:00:00
+    Given I am logged into the student group dashboard as "123"
 
   Scenario: I should see assignments in chronological order
     Then I should see "It1-1" before "It1-2"
-    And I should see "Blah" within "#it-1"
+    And I should see "Blah" within "#assignment-89"
 
   Scenario: I should see the date in the header of future assignments
-    Given it is the "2013-9-2 00:00:00"
-    Then I should see "1/10/2013" within "#it-2 .header"
-    And I should not see "1/10/2011" within "#it-1 .header"
+    Then I should see "1/Oct/2013" within "#assignment-53"
+    And I should not see "1/Oct/2011" within "#assignment-89"
 
   Scenario: I should see the score in the header of past assignments
-    Given it is the "2013-9-2 00:00:00"
-    Then I should see "10/20" within "#it-1 .header"
-    And I should not see "Score" within "#it-2 .header"
+    Then I should see "10.0/20.0" within "#assignment-89"
+    And I should not see "Score" within "#assignment-53"
 
 
 

@@ -14,9 +14,9 @@ Feature: View assignments due
     | 78 | 43            |
 
     And the following students exist:
-    | id | name | group_id |
-    | 99 | Pepe | 78       |
-    | 88 | John | 78       |
+    | id | name | group_id | cid |
+    | 99 | Pepe | 78       | 123 |
+    | 88 | John | 78       | 456 |
 
     And the following tasks exist:
     | id | title | due_date           | description |
@@ -40,17 +40,17 @@ Feature: View assignments due
 
     And the following posts exist:
     | author_id  | published_at       | assignment_id    | content |
-    | 99         | 2011-10-1 00:00:00 | 89              | such content    |
-    | 43         | 2011-10-2 00:00:00 | 53            |  wow  |
+    | 99         | 2011-10-1 00:00:00 | 89              | wow    |
+    | 43         | 2011-10-2 00:00:00 | 53            |  such content  |
 
-    Given I am logged into the student group dashboard
+    And I am logged into the student group dashboard as "123"
 
   Scenario: I should be able to input questions
-    Given I fill in the input box with "when are you free to meet"
-    Then I press submit
-    And I should be on the group dashboard page
-    And I should see "when are you free to meet" within "#it-2 .content"
+    Given I fill in "content" with "when are you free to meet" within "#assignment-89"
+    And I press "Post" button within "#assignment-89"
+    Then I should be on the group dashboard page for cid "123"
+    And I should see "when are you free to meet" within "#assignment-89"
 
   Scenario: I should see the instructor's response in group dashboard
-    Then I should see "Robocop" within "#it-2 .content"
-    Then I should see "great" within "#it-2 .content"
+    Then I should see "Robocop" within "#assignment-53 .messages"
+    And I should see "such content" within "#assignment-53 .messages .content"

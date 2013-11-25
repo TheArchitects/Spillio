@@ -7,20 +7,17 @@ class Group < ActiveRecord::Base
 	attr_accessible :group_name
   attr_accessible :id, :instructor_id
 
-  before_create :default_values
-
-  @@max_students = 6
-
+  # TODO Clean up max_students mess: we have them like three times
   def num_students
     self.students.count
   end
 
   def self.max_students
-    @@max_students
+    Setting.first.max_group_size
   end
 
   def self.max_students=(max)
-    @@max_students = max
+    Setting.first.max_group_size = max
   end
 
   # TODO: Remove once we have isntructor functionality
@@ -80,16 +77,21 @@ class Group < ActiveRecord::Base
         s.save
       end
 
+      # successful merge
+      return merged_group.id
     else
       # group size exceeded
       return false
     end
-    # successful merge
-    return merged_group.id
   end
 
-  private
-  def default_values
-    self.max_size ||= Setting.first.max_group_size
+
+  # Instance methods
+  def max_size
+    Setting.first.max_group_size
+  end
+
+  def assignments_in_order
+    self.assignments.sort! {|a,b| a.due_date <=> b.due_date}
   end
 end
