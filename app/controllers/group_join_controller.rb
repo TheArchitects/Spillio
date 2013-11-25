@@ -35,13 +35,13 @@ class GroupJoinController < AuthenticatedController
       case type
       when 'invite'
         # from a student to a student
-        accept_invite(req)
+        accept_join(req, true)
       when 'merge'
         # from a group to a group
         accept_merge(req)
       when 'join'
         # from a student to a group
-        accept_join(req)
+        accept_join(req, false)
       else
         flash[:notice] = "Sorry, we did not understand your request!"
         redirect_to :back
@@ -69,24 +69,18 @@ private
     end
   end
 
-  def accept_join(req)
+  def accept_join(req, reverse)
     old_group_id = req.requester.group_id
     Group.delete_if_empty old_group_id
 
-    req.requester.group_id = req.requestee.group_id
-    req.requester.save
-    req.destroy
+    if (reverse)
+      req.requestee.group_id = req.requester.group_id
+      req.requestee.save
+    else
+      req.requester.group_id = req.requestee.group_id
+      req.requester.save
+    end
 
-    @authenticated_user.reload
-    redirect_to group_db_show_path(@authenticated_user.group_id)
-  end
-
-  def accept_invite(req)
-    old_group_id = req.requestee.group_id
-    Group.delete_if_empty old_group_id
-
-    req.requestee.group_id = req.requester.group_id
-    req.requestee.save
     req.destroy
 
     @authenticated_user.reload
