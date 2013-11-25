@@ -7,6 +7,19 @@ class Group < ActiveRecord::Base
 	attr_accessible :group_name
   attr_accessible :id, :instructor_id
 
+  # TODO Clean up max_students mess: we have them like three times
+  def num_students
+    self.students.count
+  end
+
+  def self.max_students
+    Setting.first.max_group_size
+  end
+
+  def self.max_students=(max)
+    Setting.first.max_group_size = max
+  end
+
   # TODO: Remove once we have isntructor functionality
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
@@ -67,10 +80,11 @@ class Group < ActiveRecord::Base
       # successful merge
       return merged_group.id
     else
-      # group size exeded
+      # group size exceeded
       return false
     end
   end
+
 
   # Instance methods
   def max_size

@@ -68,4 +68,8 @@ class Student < User
 	      (not other_student == self)
 	    )
 	end
+
+  def is_administrator
+    return false
+  end
 end

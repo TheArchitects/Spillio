@@ -30,7 +30,7 @@
                 %li
                   = link_to student.name, "#{student_path student}"
       / / Left panel
-      / Assignment dahsboard panel
+      / Assignment dashboard panel
       .col-lg-9.col-md-9.col-sm-12.col-xs-12
         #accordion.panel-group
           - @group.assignments_in_order.each do |assignment|
@@ -48,4 +48,4 @@
                   = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
                 .card.messages
                   = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
-      / / Assignment dahsboard panel
+      / / Assignment dashboard panel
