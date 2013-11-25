@@ -94,7 +94,7 @@
                     %td
                       %select
                         - Instructor.all.each do |inst|
-                          - if gr.instructor.nil? == false
+                          - if gr.instructor.nil? == false and gr.instructor.name == inst.name
                             %option{selected: gr.instructor.name}
                               #{inst.name}
                           - else
