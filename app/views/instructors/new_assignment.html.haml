@@ -72,79 +72,49 @@
     .col-lg-9.col-md-9.col-sm-12.col-xs-12
       #accordion.panel-group
         .panel.panel-default.assignment
-          .panel-heading
-          #assignment-5.panel-collapse
-            .card
-              %h4 Assignment Name
-              .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
-              %hr/
-              %h4 Due Date
-              .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
-                %span.input-group-addon /2013
-                .input-group-btn
-                  / Button and dropdown menu
-                  %button.btn.btn-default{type: "button"} Calendar
-              %hr/
-              %h4 Possible points
-              .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
-                .input-group-btn
-                  / Button and dropdown menu
-                  %button.btn.btn-default{type: "button"} Save
-              %hr/
-              %h4 Description
-              .input-group{style: "width:100%"}
-                %textarea.form-control{rows: "8"}
-              %hr/
-              %h4 Required Submissions
-              %table.table.table-striped
-                %tr
-                  %th Type
-                  %th Name
-                  %th Des
-                %tr
-                  %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        File
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} Link
-                  %td
-                    %span Group_submission.zip
-                  %td
-                    %span Rotten Potatoes
-                %tr
-                  %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        File
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} Link
-                  %td
-                    %span Group_submission.zip
-                  %td
-                    %span Heroku Link
-                %tr
-                  %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        Link
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} File
-                  %td
-                    %span Group_submission.zip
-                  %td
-                    %span Rotten Potatoes
-                %button.btn.btn-success{style: "float:right", type: "button"} Add
-        %button.btn.btn-success{style: "float:left", type: "button"} To all groups
-        %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} To all Students
-      %br/
-    / / Assignment dahsboard panel
+          = form_tag :controller => :instructors, :action => :post_new_assignment do
+            .panel-heading
+              %h4.panel-title
+                New class assignment
+                %button.btn.btn-primary.btn-xs.pull-right{type: "submit"} Send to all groups
+            #assignment-5.panel-collapse
+              .card
+                %h4 Assignment Name
+                .input-group{style: "width:50%"}
+                  = text_field_tag :task_name, nil, :class => "form-control", placeholder: "e.g., Iteration 1-1"
+                %hr/
+                %h4 Due Date
+                .input-group{style: "width:50%"}
+                  = text_field_tag :due_date, nil, :class => "form-control", placeholder: "yyyy-mm-dd"
+                %hr/
+                %h4 Maximum score
+                - # TODO: add possibility of adding more than one of these. Should
+                - # have to modify scores to have a label also, which should be
+                - # editable from here
+                .input-group{style: "width:50%"}
+                  = text_field_tag :max_score, nil, :class => "form-control", placeholder: "e.g., 100", type: "number"
+                %hr/
+                %h4 Description
+                .input-group{style: "width:100%"}
+                  = text_area_tag :description, nil, :rows => 8, :class => "form-control"
+                %hr/
+                %h4 Deliverables to submit
+                %table.table.table-striped
+                  %tr
+                    - # TODO: Add type
+                    - # %th Type
+                    %th Description
+                  - # TODO: add possibility of adding more than one submission
+                  %tr
+                    / %td
+                    /   .btn-group
+                    /     %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                    /       File
+                    /       %span.caret
+                    /     %ul.dropdown-menu{role: "menu"}
+                    /       %li
+                    /         %a{href: "#"} Link
+                    %td
+                      .input-group{style: "width:50%"}
+                        = text_field_tag :submission_label, nil, :class => "form-control", placeholder: "e.g., Heroku url"
+    / / Assignment dashboard panel

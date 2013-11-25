@@ -31,7 +31,7 @@ class Assignment < ActiveRecord::Base
         return nil
       end
       total_max_score += s.max_score
-      total_score += s.score
+      total_score += s.score unless s.score.nil?
     end
 
     if [total_score, total_max_score] == [0, 0]
