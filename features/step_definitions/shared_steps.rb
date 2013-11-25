@@ -6,7 +6,6 @@ end
 # through all the steps
 Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
   CASClient::Frameworks::Rails::Filter.fake(cas_user)
-
   unless User.exists?(:cid => cas_user)
     case user_type
     when 'Student'
@@ -22,6 +21,10 @@ Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
     end
     # TODO Implement more cases: instructor, admin
   end
+end
+
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+  fill_in(field, :with => value)
 end
 
 

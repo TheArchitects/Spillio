@@ -95,18 +95,10 @@ ActiveRecord::Schema.define(:version => 20131122024729) do
 
   create_table "skills", :force => true do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "skills", ["name"], :name => "index_skills_on_name", :unique => true
-
-  create_table "skills_users", :id => false, :force => true do |t|
-    t.integer "skill_id"
-    t.integer "user_id"
-  end
-
-  add_index "skills_users", ["skill_id", "user_id"], :name => "index_skills_users_on_skill_id_and_user_id", :unique => true
 
   create_table "submissions", :force => true do |t|
     t.string   "label"
@@ -140,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20131122024729) do
     t.integer  "cid"
     t.string   "type"
     t.integer  "group_id"
+    t.string   "email"
   end
 
   add_index "users", ["group_id"], :name => "index_users_on_group_id"

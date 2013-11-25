@@ -1,8 +1,7 @@
 Before do
-  Skill.delete_all
-  Course.delete_all
-  Section.delete_all
-  Skill.create([{ name: 'Java' }, { name: 'Ruby' }])
+  Skill.delete_all unless not Skill.table_exists?
+  Course.delete_all unless not Course.table_exists?
+  Section.delete_all unless not Section.table_exists?
   Course.create([{ name: 'CS161' }, {name: 'CS162' }])
   Section.create([{ number: 100 }, {number: 101 }])
 end
