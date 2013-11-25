@@ -13,15 +13,21 @@ class InstructorsController < AuthenticatedController
     if params[:group_size]
       set_group_size(params[:group_size])
     end
-    #if params[:
-    #redirect_to "/group_management"
+    if params[:group_instructor]
+      params[:group_instructor].each do |group_id, instructor_id|
+        set_group_instructor(group_id, instructor_id)
+      end
+    end
+    redirect_to "/group_management"
   end
 
   def set_group_size(size)
     Group.max_students = size
   end
 
-  def set_group_instructor(instructor, group)
+  def set_group_instructor(group_id, instructor_id)
+    group = Group.find(group_id)
+    instructor = Instructor.find(instructor_id)
     group.instructor = instructor
     instructor.groups << group
   end

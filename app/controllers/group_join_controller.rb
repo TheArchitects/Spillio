@@ -43,14 +43,15 @@ class GroupJoinController < AuthenticatedController
         # from a student to a group
         accept_join(req)
       else
-        flash[:notice] = "Sorry, I did not understand your request!"
+        flash[:notice] = "Sorry, we did not understand your request!"
+        redirect_to :back
       end
-    end
-
-    # In case of merge, we are redirecting the user already in
-    # the accept_merge function
-    unless type=='merge'
-      redirect_to :back
+    else
+      # In case of merge, we are redirecting the user already in
+      # the accept_merge function
+      unless type=='merge'
+        redirect_to :back
+      end
     end
   end
 
@@ -75,6 +76,9 @@ private
     req.requester.group_id = req.requestee.group_id
     req.requester.save
     req.destroy
+
+    @authenticated_user.reload
+    redirect_to group_db_show_path(@authenticated_user.group_id)
   end
 
   def accept_invite(req)
@@ -84,6 +88,9 @@ private
     req.requestee.group_id = req.requester.group_id
     req.requestee.save
     req.destroy
+
+    @authenticated_user.reload
+    redirect_to group_db_show_path(@authenticated_user.group_id)
   end
 
   def accept_merge(req)

@@ -92,8 +92,14 @@
                     %td
                       %span.badge #{gr.num_students}
                     %td
-                      - @group = gr
-                      = collection_select :group, :instructor_id, Instructor.all, :id, :name, prompt: true, :class => 'form-control'
+                      %select{ :name=> "group_instructor[#{gr.id}]", :id=> "group_instructor[#{gr.id}]" }
+                        - if gr.instructor.nil?
+                          %option{selected: "selected", value: "Please select:"} Please select:
+                        - Instructor.all.each do |inst|
+                          - if gr.instructor.nil? == false and gr.instructor == inst
+                            %option{selected: "selected", value: inst.id} #{inst.name}
+                          - else
+                            %option{value: inst.id} #{inst.name}
         %br/
         %button.btn.btn-success{style: "float:right", type: "submit"} Make Changes
       %br/

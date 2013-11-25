@@ -47,3 +47,8 @@ end
 When(/^I follow the 'It(\d+)\-(\d+)' accordion$/) do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
 end
+
+Given(/^I am logged into the student group dashboard as "(.*)"$/) do |cid|
+  step "I am logged in with cid \"#{cid}\" as a Student"
+  visit group_db_show_path(Student.find_by_cid(cid).group_id)
+end

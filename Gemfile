@@ -21,6 +21,8 @@ end
 group :test do
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  gem 'timecop', '~> 0.6.3'
+  gem 'chronic'
 end
 group :production do
   gem 'pg'
