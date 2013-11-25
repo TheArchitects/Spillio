@@ -31,6 +31,10 @@ class Student < User
     return student
   end
 
+  def self.enough_fields?(hash, student_cid)
+    hash[:name] != '' && hash[:about] != '' && student_cid!=nil
+  end
+
   def add_courses(course_ids)
     course_ids.each do |course_id|
       course = Course.find(course_id)
