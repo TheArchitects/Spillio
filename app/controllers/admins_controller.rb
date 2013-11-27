@@ -1,4 +1,9 @@
-class InstructorsController < AuthenticatedController
+class AdminsController < AuthenticatedController
+
+  def index
+
+    
+  end
 
   def show
     #instructor? = @authenticated_user.is_administrator
@@ -10,19 +15,18 @@ class InstructorsController < AuthenticatedController
   end
 
   def update
+    
     if params[:group_size]
-      set_group_size(params[:group_size])
+      Setting.set_max_group_size(params[:group_size])
+      render :text => "Updated Group Max Size :D"
     end
     if params[:group_instructor]
       params[:group_instructor].each do |group_id, instructor_id|
         set_group_instructor(group_id, instructor_id)
       end
+      render :text => ":D"
     end
-    redirect_to "/group_management"
-  end
-
-  def set_group_size(size)
-    Group.max_students = size
+    render :text => "#{params}"
   end
 
   def set_group_instructor(group_id, instructor_id)
@@ -42,6 +46,7 @@ class InstructorsController < AuthenticatedController
   end
 
   def new_assignment
+
   end
 
   def post_new_assignment

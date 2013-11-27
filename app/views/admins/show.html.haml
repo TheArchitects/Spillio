@@ -65,7 +65,7 @@
                         %a{href: "#"} Group 2
     / / Left panel
     / Assignment dahsboard panel
-    %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "/group_management/update"}
+    %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "#{update_settings_path}", method: :POST}
       #accordion.panel-group
         .panel.panel-default.assignment
           .panel-heading
@@ -76,7 +76,7 @@
             .card
               %h4 Maximum Group Size
               .input-group{style: "width:30%"}
-                %input.form-control{placeholder: "#{Group.max_students}", type: "text", name: "group_size"}/
+                %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "text", name: "group_size"}/
               %hr/
               %h4 Submissions
               %hr/
