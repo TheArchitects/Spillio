@@ -6,7 +6,7 @@
 
 - content_for :scripts do
   %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
-  = javascript_include_tag 'student_profile'
+  = javascript_include_tag 'new_assignment'
 
 / Navbar
 = render "shared/navbar"
@@ -77,11 +77,11 @@
             .card
               %h4 Assignment Name
               .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
+                %input.form-control{type: "text", name: "assignment_name"}/
               %hr/
               %h4 Due Date
               .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
+                %input.form-control{type: "text", name: "due_date"}/
                 %span.input-group-addon /2013
                 .input-group-btn
                   / Button and dropdown menu
@@ -89,62 +89,32 @@
               %hr/
               %h4 Possible points
               .input-group{style: "width:50%"}
-                %input.form-control{type: "text"}/
+                %input.form-control{type: "text", name: "possible_points"}/
                 .input-group-btn
                   / Button and dropdown menu
                   %button.btn.btn-default{type: "button"} Save
               %hr/
               %h4 Description
               .input-group{style: "width:100%"}
-                %textarea.form-control{rows: "8"}
+                %textarea.form-control{rows: "8", name: "description"}
               %hr/
               %h4 Required Submissions
-              %table.table.table-striped
+              %table.table.table-striped#submissions
                 %tr
                   %th Type
                   %th Name
-                  %th Des
+                  %th Description
                 %tr
                   %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        File
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} Link
+                    = select_tag "file type", options_for_select(['File', 'Link'])
                   %td
-                    %span Group_submission.zip
+                    .input-group{style: "width:50%"}
+                      %input.form-control{type: "text", name: "assignment_name_1", placeholder: "name"}/
                   %td
-                    %span Rotten Potatoes
-                %tr
-                  %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        File
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} Link
-                  %td
-                    %span Group_submission.zip
-                  %td
-                    %span Heroku Link
-                %tr
-                  %td
-                    .btn-group
-                      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                        Link
-                        %span.caret
-                      %ul.dropdown-menu{role: "menu"}
-                        %li
-                          %a{href: "#"} File
-                  %td
-                    %span Group_submission.zip
-                  %td
-                    %span Rotten Potatoes
-                %button.btn.btn-success{style: "float:right", type: "button"} Add
-        %button.btn.btn-success{style: "float:left", type: "button"} To all groups
-        %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} To all Students
+                    .input-group{style: "width:50%"}
+                      %input.form-control{type: "text", name: "description1", placeholder: "description"}/
+                %button.btn.btn-success{onclick: "addRow()", style: "float:right", type: "button"} Add Another File
+        %br/
+        %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} Save Changes
       %br/
     / / Assignment dahsboard panel

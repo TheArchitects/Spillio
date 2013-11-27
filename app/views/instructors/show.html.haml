@@ -21,12 +21,12 @@
           .panel.panel-default.assignment
             .panel-heading
               %h4.panel-title
-                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                %a{href: "/new_assignment"}
                   New Assignment
           .panel.panel-default.assignment
             .panel-heading
               %h4.panel-title
-                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#"}
+                %a{href: "group_management"}
                   Group Management
           .panel.panel-default.assignment
             .panel-heading
@@ -41,30 +41,20 @@
                       All Groups
                       %span.caret
                     %ul.dropdown-menu
-                      %li
-                        %a{href: "#"} Group 1
-                      %li
-                        %a{href: "#"} Group 2
-                      %li
-                        %a{href: "#"} Group 3
-                      %li
-                        %a{href: "#"} Group 4
-                      %li
-                        %a{href: "#"} Group 5
-                      %li
-                        %a{href: "#"} Group 6
+                      - Group.all.each do |gr|
+                        %li
+                          %a{href: "group/#{gr.id}"} #{gr.group_name}
                   %hr/
                   .btn-group
                     %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
                       My Groups
                       %span.caret
                     %ul.dropdown-menu
-                      %li
-                        %a{href: "#"} Group 1
-                      %li
-                        %a{href: "#"} Group 2
+                      - @authenticated_user.groups.each do |gr|
+                        %li
+                          %a{href: "group/#{gr.id}"} #{gr.group_name}
     / / Left panel
-    / Assignment dahsboard panel
+    / Assignment dashboard panel
     %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "/group_management/update"}
       #accordion.panel-group
         .panel.panel-default.assignment
@@ -105,4 +95,4 @@
       %br/
       %br/
       %br/
-/ / Assignment dahsboard panel
+/ / Assignment dashboard panel
