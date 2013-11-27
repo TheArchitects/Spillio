@@ -1,11 +1,11 @@
 class Group < ActiveRecord::Base
-  belongs_to :instructor
+  belongs_to :reader, :class_name => "Student"
   belongs_to :section
   has_many :students
 	has_many :assignments
   has_many :group_join_requests
 	attr_accessible :group_name
-  attr_accessible :id, :instructor_id
+  attr_accessible :id
 
   # TODO Clean up max_students mess: we have them like three times
   def num_students

@@ -2,7 +2,6 @@ class AdminsController < AuthenticatedController
 
   def index
 
-    
   end
 
   def show
@@ -15,25 +14,27 @@ class AdminsController < AuthenticatedController
   end
 
   def update
-    
-    if params[:group_size]
+    new_group_size = params[:group_size]
+    if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
+      flash[:notice] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
       Setting.set_max_group_size(params[:group_size])
-      render :text => "Updated Group Max Size :D"
     end
-    if params[:group_instructor]
-      params[:group_instructor].each do |group_id, instructor_id|
-        set_group_instructor(group_id, instructor_id)
+    if params[:group_reader]
+      params[:group_reader].each do |group_id, reader_id|
+        if reader_id != "Please select"
+          assign_reader_to_a_group(group_id, reader_id)
+        end
       end
-      render :text => ":D"
+      flash[:notice] = "Changes to group readers have been saved."
     end
-    render :text => "#{params}"
+    redirect_to admin_path
   end
 
-  def set_group_instructor(group_id, instructor_id)
-    group = Group.find(group_id)
-    instructor = Instructor.find(instructor_id)
-    group.instructor = instructor
-    instructor.groups << group
+  def assign_reader_to_a_group(group_id, reader_id)
+    group = Group.find_by_id(group_id)
+    reader = Student.find_by_id(reader_id)
+    group.reader = reader
+    group.save
   end
 
   def post_new_task(title, description, due_date)

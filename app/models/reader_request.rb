@@ -1,12 +1,17 @@
 class ReaderRequest < ActiveRecord::Base
-  attr_accessible :responded, :time_stamp, :user
+  has_one :requester, :class_name => "Student"
+  attr_accessible :responded, :time_stamp, :requester
 
-  def is_responded? request_id
+  def self.is_responded? request_id
   	self.find_by_id(request_id).responded
   end
 
-  def get_user request_id
-  	self.find_by_id(request_id).user
+  def get_requester
+  	self.requester
+  end
+
+  def self.get_all_unresponded_requests
+  	self.where(:responded => :false)
   end
 
 end
