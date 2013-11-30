@@ -1,0 +1,48 @@
+.col-lg-9.col-md-9.col-sm-12.col-xs-12
+  #accordion.panel-group
+    .panel.panel-default.assignment
+      .panel-heading
+        #assignment-5.panel-collapse
+          .card
+            %h4 Assignment Name
+            .input-group{style: "width:50%"}
+              %input.form-control{type: "text", name: "assignment_name"}/
+            %hr/
+            %h4 Due Date
+            .input-group{style: "width:50%"}
+              %input.form-control{type: "text", name: "due_date"}/
+              %span.input-group-addon /2013
+              .input-group-btn
+                / Button and dropdown menu
+                %button.btn.btn-default{type: "button"} Calendar
+            %hr/
+            %h4 Possible points
+            .input-group{style: "width:50%"}
+              %input.form-control{type: "text", name: "possible_points"}/
+              .input-group-btn
+                / Button and dropdown menu
+                %button.btn.btn-default{type: "button"} Save
+            %hr/
+            %h4 Description
+            .input-group{style: "width:100%"}
+              %textarea.form-control{rows: "8", name: "description"}
+            %hr/
+            %h4 Required Submissions
+            %table.table.table-striped#submissions
+              %tr
+                %th Type
+                %th Name
+                %th Description
+              %tr
+                %td
+                  = select_tag "file type", options_for_select(['File', 'Link'])
+                %td
+                  .input-group{style: "width:50%"}
+                    %input.form-control{type: "text", name: "assignment_name_1", placeholder: "name"}/
+                %td
+                  .input-group{style: "width:50%"}
+                    %input.form-control{type: "text", name: "description1", placeholder: "description"}/
+              %button.btn.btn-success{onclick: "addRow()", style: "float:right", type: "button"} Add Another File
+              %br/
+            %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} Save Changes
+            %br/

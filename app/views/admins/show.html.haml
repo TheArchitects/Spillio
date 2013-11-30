@@ -11,90 +11,19 @@
 .container
   .container
     .row
-      %h3= "Group Management"
+      %h3= "Admin Console"
       %hr/
     .row
       - if flash[:notice]
         .alert.alert-warning= flash[:notice]
     / Left panel
-    .col-lg-3.col-md-3.col-sm-12.col-xs-12
-      .panel.panel-default
-        .panel-body
-          .panel.panel-default.assignment
-            .panel-heading
-              %h4.panel-title
-                %a{href: "/new_assignment"}
-                  New Assignment
-          .panel.panel-default.assignment
-            .panel-heading
-              %h4.panel-title
-                %a{href: "group_management"}
-                  Group Management
-          .panel.panel-default.assignment
-            .panel-heading
-              %h4.panel-title
-                %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-manage"}
-                  Groups
-            #group-manage.panel-collapse.collapse
-              .card
-                .btn-group
-                  .btn-group
-                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                      All Groups
-                      %span.caret
-                    %ul.dropdown-menu
-                      - Group.all.each do |gr|
-                        %li
-                          %a{href: "group/#{gr.id}"} #{gr.group_name}
-                  %hr/
-                  .btn-group
-                    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                      My Groups
-                      %span.caret
-                    %ul.dropdown-menu
-                      - @authenticated_user.groups.each do |gr|
-                        %li
-                          %a{href: "group/#{gr.id}"} #{gr.group_name}
-    / / Left panel
-    / Assignment dahsboard panel
-    %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "#{update_settings_path}"}
-      #accordion.panel-group
-        .panel.panel-default.assignment
-          .panel-heading
-            %h4#iteration.panel-title
-              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-5"}
-                General Group Settings
-          #assignment-5.panel-collapse
-            .card
-              %h4 Maximum Group Size
-              .input-group{style: "width:30%"}
-                %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "text", name: "group_size"}/
-              %hr/
-              %h4 Submissions
-              %hr/
-              %h4 Assign Instructors to Groups
-              %table.table.table-striped
-                %tr
-                  %th Group
-                  %th Number of Students
-                  %th Group's GSI
-                - Group.all.each do |gr|
-                  %tr
-                    %td #{gr.group_name}
-                    %td
-                      %span.badge #{gr.num_students}
-                    %td
-                      %select{ :name=> "group_reader[#{gr.id}]", :id=> "group_reader[#{gr.id}]" }
-                        - if gr.reader.nil?
-                          %option{selected: "selected", value: "Please select"} Please select:
-                        - else
-                          %option{selected: "selected", value: gr.reader.id} #{gr.reader.name}
+    =render "left_panel"
+    / / main Panel
+    -case params["page"]
+    -when "gm"
+      =render "main_panel_group_management"
+    -when "na"
+      =render "main_panel_new_assignment"
+    -when "ag"
+      =render "main_panel_assign_grades"
 
-                        - User.get_readers.each do |reader|
-                          %option{value: reader.id} #{reader.name}
-        %br/
-        %button.btn.btn-success{style: "float:right", type: "submit"} Make Changes
-      %br/
-      %br/
-      %br/
-/ / Assignment dashboard panel
