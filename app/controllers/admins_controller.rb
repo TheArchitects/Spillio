@@ -13,6 +13,11 @@ class AdminsController < AuthenticatedController
     #end
   end
 
+  # returning all the groups associated to this reader
+  def mygroups
+    Group.get_groups_for(@authenticated_user.id)
+  end
+
   def update
     new_group_size = params[:group_size]
     if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
