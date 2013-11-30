@@ -41,13 +41,13 @@
                 Re do search
   / / Advanced search
   / Results list
-  .container
+  .container#results
     - if @any_results
       .row
         .list-group
           / Results
           - @students.each do |s|
-            %a.list-group-item{href: "/students/#{s.id}", id: "#{s.name}"}
+            %a.list-group-item{href: "/students/#{s.id}", id: "#{s.cid}"}
               .row
                 .col-lg-1.col-md-1.col-sm-2.col-xs-2
                   %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/

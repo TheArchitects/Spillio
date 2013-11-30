@@ -10,28 +10,35 @@ class StudentsController < AuthenticatedController
 
     @student = Student.new
     @view_only = false
-    render :profile
+    render_profile
   end
 
   def show
     @student = Student.find(params[:id])
     @view_only = true
+    render_profile
+  end
+
+  def render_profile
+    email = @student.email || "" #Possibly get the email with @student.email
+    gravatar_id = Digest::MD5::hexdigest(email.downcase)
+    @gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
     render :profile
   end
 
   def edit
-    # TODO: Check user is a student
     @student = @authenticated_user
     @view_only = false
-    render :profile
+    render_profile
+  end
+
+  # TODO: Form validation!!
+  def create
+    create_or_update_handler
   end
 
   def update
-    # TO DO make this work, show edit ok msg, check user valid
-    @student = Student.find(params[:id])
-    # @student.update_attributes!(params[:student])
-    @view_only = true
-    render :profile
+    create_or_update_handler
   end
 
   # Finds the student with Calnet Id number
@@ -40,28 +47,9 @@ class StudentsController < AuthenticatedController
 
     if @student
       @view_only = false
-      render :profile
+      render_profile
     else
       redirect_to new_student_path
-    end
-  end
-
-  # TODO: Form validation!!
-  def create
-  	s = params[:student]
-    student_cid = session[:cas_user]
-
-    StudentsController.cleanup_fields!(s)
-
-    if s[:name] != '' and s[:about] != '' and student_cid!=nil
-  	  @student = Student.create_for_current_user!(s, student_cid)
-      @view_only = true
-      redirect_to "/students/#{@student.id}"
-    else
-      missing = [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
-      flash[:notice] = "Please fill in the following fields: " + missing
-      redirect_to new_student_path
-      # TODO: Persist params in flash and retrieve them from the view
     end
   end
 
@@ -84,17 +72,38 @@ class StudentsController < AuthenticatedController
     @num_pages = num_pages
   end
 
+
+
   private
+
+  def create_or_update_handler
+    s = params[:student]
+    student_cid = session[:cas_user]
+    StudentsController.cleanup_fields!(s)
+
+    if Student.enough_fields?(s, student_cid)
+      create_and_render_student(s, student_cid)
+    else
+      missing = StudentsController.list_of_missing_params(s)
+      flash[:notice] = "Please fill in the following fields: " + missing
+      redirect :back
+    end
+  end
+
+  def create_and_render_student(s, student_cid)
+    @student = Student.create_or_update(s, student_cid)
+    redirect_to student_path(:id => @student.id)
+  end
 
   def self.cleanup_fields!(student)
     # Remove empty skill and course ids, cause they appear for
     # some weird and unknown reason
-    if student.has_key? :skill_ids
-      student[:skill_ids] = student[:skill_ids].select { |sk| not sk.empty?}
-    end
-
     if student.has_key? :course_ids
       student[:course_ids] = student[:course_ids].select { |c| not c.empty?}
     end
+  end
+
+  def self.list_of_missing_params(s)
+    [:name,:about,:interest].select{ |e| s[e] == '' }.map{ |e| e.to_s }.join ', '
   end
 end

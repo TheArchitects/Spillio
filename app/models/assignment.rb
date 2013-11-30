@@ -25,8 +25,13 @@ class Assignment < ActiveRecord::Base
   def total_score
     total_max_score, total_score = 0, 0
     scores.each do |s|
+      # At least one score hasn't been graded yet
+      # so we return nil
+      if s.score == -1
+        return nil
+      end
       total_max_score += s.max_score
-      total_score += s.score
+      total_score += s.score unless s.score.nil?
     end
 
     if [total_score, total_max_score] == [0, 0]

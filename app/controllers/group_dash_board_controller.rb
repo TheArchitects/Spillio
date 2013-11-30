@@ -6,7 +6,6 @@ class GroupDashBoardController < AuthenticatedController
 	#authenticated user
 	def show
 		group_id = @authenticated_user.group.id
-
 		if group_id.to_s == params[:id]
 			@group = Group.find(group_id)
 		else
