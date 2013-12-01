@@ -1,0 +1,29 @@
+- content_for :title do
+  = "Dashboard"
+
+- content_for :styles do
+  = stylesheet_link_tag 'group_dash_board'
+
+/ Navbar
+= render "navbar"
+
+/ Page body
+.container
+  .container
+    .row
+      %h3= "Admin Console"
+      %hr/
+    .row
+      - if flash[:notice]
+        .alert.alert-warning= flash[:notice]
+    / Left panel
+    =render "left_panel"
+    / / main Panel
+    -case params["page"]
+    -when "gm"
+      =render "main_panel_group_management"
+    -when "na"
+      =render "main_panel_new_assignment"
+    -when "ag"
+      =render "main_panel_assign_grades"
+

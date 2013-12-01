@@ -1,11 +1,11 @@
 class Group < ActiveRecord::Base
-  belongs_to :instructor
+  belongs_to :reader, :class_name => "Student"
   belongs_to :section
   has_many :students
 	has_many :assignments
   has_many :group_join_requests
 	attr_accessible :group_name
-  attr_accessible :id, :instructor_id
+  attr_accessible :id
 
   # TODO Clean up max_students mess: we have them like three times
   def num_students
@@ -18,6 +18,10 @@ class Group < ActiveRecord::Base
 
   def self.max_students=(max)
     Setting.first.max_group_size = max
+  end
+
+  def self.get_groups_for(reader_id)
+    self.where(reader_id: reader_id)
   end
 
   # TODO: Remove once we have isntructor functionality

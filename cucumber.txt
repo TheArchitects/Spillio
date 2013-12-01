@@ -1,0 +1,639 @@
+Using the default profile...
+Feature: Assign groups to instructors
+  As a class administrator
+  I want to be able to assign groups to TAs
+  So TAs can work with groups and give them feedback
+
+  Background: I am a logged in admin in the dashboard[90m # features/admin_dashboard/match_groups_and_instructors.feature:6[0m
+    [32mGiven settings set[90m                                # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m            # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m88[0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                   # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mgroup_name[0m[0m |[0m [32mid[0m[0m |[0m [32minstructor_id[0m[0m |[0m
+      | [32mgroup_a   [0m[0m |[0m [32m27[0m[0m |[0m [32m88           [0m[0m |[0m
+    [32mAnd the following students exist:[90m                 # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mid[0m[0m |[0m [32mname[0m[0m |[0m [32mgroup_id[0m[0m |[0m
+      | [32m45[0m[0m |[0m [32mPepe[0m[0m |[0m [32m27      [0m[0m |[0m
+      | [32m64[0m[0m |[0m [32mJohn[0m[0m |[0m [32m27      [0m[0m |[0m
+
+  Scenario: Assign Robocop to group_a[90m                        # features/admin_dashboard/match_groups_and_instructors.feature:21[0m
+    [33mGiven I am on the dashboard[90m                              # features/step_definitions/undefined_steps.rb:1[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:2:in `/^I am on the dashboard$/'[0m
+[33m      features/admin_dashboard/match_groups_and_instructors.feature:22:in `Given I am on the dashboard'[0m
+    [36mAnd I click on "[36m[1mGroup Management[0m[0m[36m" in the sidebar[90m         # features/step_definitions/undefined_steps.rb:5[0m[0m
+    [36mAnd I select "[36m[1mRobocop[0m[0m[36m" under "[36m[1mAssigned to[0m[0m[36m" for "[36m[1mgroup_a[0m[0m[36m"[90m # features/step_definitions/undefined_steps.rb:9[0m[0m
+    [33mAnd I press "Save"[90m                                       # features/admin_dashboard/match_groups_and_instructors.feature:25[0m[0m
+[33m      Undefined step: "I press "Save"" (Cucumber::Undefined)[0m
+[33m      features/admin_dashboard/match_groups_and_instructors.feature:25:in `And I press "Save"'[0m
+    [36mThen I should see "[36m[1mChanges Made Successfully[0m[0m[36m"[90m            # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should see "[36m[1mgroup_a assigned to [0m[0m[36m"Robocop"[90m          # features/step_definitions/undefined_steps.rb:13[0m[0m
+
+Feature: Post new task
+  As a class administrator
+  I want to be able to assign new tasks
+  So that students have know what they are expected to do
+
+  Background: I am a logged in admin on the dashboard[90m # features/admin_dashboard/post_assignment.feature:6[0m
+    [32mGiven settings set[90m                                # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m            # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m3 [0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [33mAnd I am logged in as "[33m[1mRobocop[0m[0m[33m"[90m                   # features/step_definitions/undefined_steps.rb:17[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:18:in `/^I am logged in as "(.*?)"$/'[0m
+[33m      features/admin_dashboard/post_assignment.feature:12:in `And I am logged in as "Robocop"'[0m
+
+  Scenario: Post "Iteration1-1" for all students[90m                                                                # features/admin_dashboard/post_assignment.feature:14[0m
+    [36mGiven I am on the dashboard[90m                                                                                 # features/step_definitions/undefined_steps.rb:1[0m[0m
+    [36mAnd I click on "[36m[1mNew Assignment[0m[0m[36m" in the sidebar[90m                                                              # features/step_definitions/undefined_steps.rb:5[0m[0m
+    [36mAnd I fill in "[36m[1mDescription[0m[0m[36m" with "[36m[1m3 User Stories with Pivotal Tracker and Cucumber Tests[0m[0m[36m"[90m                   # features/step_definitions/web_steps.rb:30[0m[0m
+    [36mAnd I fill in "[36m[1mDue Date[0m[0m[36m" with "[36m[1m5/1/2014[0m[0m[36m"[90m                                                                    # features/step_definitions/web_steps.rb:30[0m[0m
+    [36mAnd I fill in "[36m[1mFields to Submit[0m[0m[36m" with "[36m[1mPivotal Tracker Link,Field with User Stories and Cucumber Tests[0m[0m[36m"[90m     # features/step_definitions/web_steps.rb:30[0m[0m
+    [33mAnd I click "Save"[90m                                                                                          # features/admin_dashboard/post_assignment.feature:20[0m[0m
+[33m      Undefined step: "I click "Save"" (Cucumber::Undefined)[0m
+[33m      features/admin_dashboard/post_assignment.feature:20:in `And I click "Save"'[0m
+    [36mThen I should see "[36m[1mNew Task Successfully Posted[0m[0m[36m"[90m                                                            # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should see "[36m[1m3 User Stories with Pivotal Tracker and Cucumber Tests[0m[0m[36m" under "[36m[1mDescription[0m[0m[36m"[90m               # features/step_definitions/undefined_steps.rb:21[0m[0m
+    [36mAnd I should see "[36m[1m5/1/2014[0m[0m[36m" under "[36m[1mDue Date[0m[0m[36m"[90m                                                                # features/step_definitions/undefined_steps.rb:21[0m[0m
+    [36mAnd I should see "[36m[1mPivotal Tracker Link,Field with User Stories and Cucumber Tests[0m[0m[36m" under "[36m[1mFields to Submit[0m[0m[36m"[90m # features/step_definitions/undefined_steps.rb:21[0m[0m
+
+Feature: Set number of students per group
+  As a class admin
+  I want to be able to set the allowed number of students per group
+  So that there is a balance between the number of groups and projects
+
+  Background: I am a logged in admin on the dashboard[90m # features/admin_dashboard/set_group_size.feature:6[0m
+    [32mGiven settings set[90m                                # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m            # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mname   [0m[0m |[0m
+      | [32mRobocop[0m[0m |[0m
+    [33mAnd I am logged in as "[33m[1mRobocop[0m[0m[33m"[90m                   # features/step_definitions/undefined_steps.rb:17[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:18:in `/^I am logged in as "(.*?)"$/'[0m
+[33m      features/admin_dashboard/set_group_size.feature:12:in `And I am logged in as "Robocop"'[0m
+
+  Scenario: Set the number of students to 5[90m          # features/admin_dashboard/set_group_size.feature:14[0m
+    [36mGiven I am on the dashboard[90m                      # features/step_definitions/undefined_steps.rb:1[0m[0m
+    [36mAnd I click on "[36m[1mGroup Management[0m[0m[36m" in the Sidebar[90m # features/step_definitions/undefined_steps.rb:25[0m[0m
+    [36mAnd I fill in "[36m[1mGroup Size[0m[0m[36m" with "[36m[1m5[0m[0m[36m"[90m              # features/step_definitions/web_steps.rb:30[0m[0m
+    [33mAnd I press "Save"[90m                               # features/admin_dashboard/set_group_size.feature:18[0m[0m
+[33m      Undefined step: "I press "Save"" (Cucumber::Undefined)[0m
+[33m      features/admin_dashboard/set_group_size.feature:18:in `And I press "Save"'[0m
+    [36mThen I should see "[36m[1mChanges Made Successfully[0m[0m[36m"[90m    # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should see "[36m[1mGroup Size: 5 Students[0m[0m[36m"[90m        # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: Respond to someone's request to join a group
+  As a student and member of a group
+  I want to accept or reject join requests
+  So that I can select the people I am going to work with
+
+  Background: I am on the Home Page[90m  # features/group_creation/accept.feature:6[0m
+    [32mGiven settings set[90m               # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following users exist:[90m # features/step_definitions/setup_steps.rb:15[0m[0m
+      | [32mname   [0m[0m |[0m [32mabout[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid  [0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKevin  [0m[0m |[0m [32mabout[0m[0m |[0m [32m        [0m[0m |[0m [32m33333[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKayvan [0m[0m |[0m [32mabout[0m[0m |[0m [32m77      [0m[0m |[0m [32m44444[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mAlfonso[0m[0m |[0m [32mabout[0m[0m |[0m [32m33      [0m[0m |[0m [32m55555[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mJalal  [0m[0m |[0m [32mabout[0m[0m |[0m [32m33      [0m[0m |[0m [32m66666[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mArturo [0m[0m |[0m [32mabout[0m[0m |[0m [32m44      [0m[0m |[0m [32m77777[0m[0m |[0m [32minterest[0m[0m |[0m
+    [32mAnd the following groups exist:[90m  # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_name     [0m[0m |[0m
+      | [32m33[0m[0m |[0m [32mAlfonso's group[0m[0m |[0m
+      | [32m77[0m[0m |[0m [32mKayvan's group [0m[0m |[0m
+      | [32m44[0m[0m |[0m [32mArturo's group [0m[0m |[0m
+
+  Scenario: Accept a request to join someone's group[90m          # features/group_creation/accept.feature:23[0m
+    [32mGiven I am logged in with cid "[32m[1m44444[0m[0m[32m"[90m                     # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mGiven there is a request to join from "[32m[1mKevin[0m[0m[32m" to "[32m[1mKayvan[0m[0m[32m"[90m # features/step_definitions/group_creation_steps.rb:1[0m[0m
+    [32mAnd I am on the profile page for "[32m[1mKayvan[0m[0m[32m"[90m                 # features/step_definitions/shared_steps.rb:36[0m[0m
+    [32mAnd I click "[32m[1mAccept Kevin join request[0m[0m[32m" link[90m              # features/step_definitions/web_steps.rb:26[0m[0m
+    [32mThen I should be on [32m[1mthe group dashboard page for "Kayvan"[0m[0m[32m[90m # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mKevin[0m[0m[32m"[90m                                  # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Accept an invitation someone's group[90m                  # features/group_creation/accept.feature:31[0m
+    [32mGiven I am logged in with cid "[32m[1m33333[0m[0m[32m"[90m                         # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mGiven there is an invitation to join from "[32m[1mKayvan[0m[0m[32m" to "[32m[1mKevin[0m[0m[32m"[90m # features/step_definitions/group_creation_steps.rb:5[0m[0m
+    [32mAnd I am on the profile page for "[32m[1mKevin[0m[0m[32m"[90m                      # features/step_definitions/shared_steps.rb:36[0m[0m
+    [32mAnd I click "[32m[1mAccept Kayvan invite request[0m[0m[32m" link[90m               # features/step_definitions/web_steps.rb:26[0m[0m
+    [32mThen I should be on [32m[1mthe group dashboard page for "Kayvan"[0m[0m[32m[90m     # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mKevin[0m[0m[32m"[90m                                      # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Accept a merge request to another group[90m             # features/group_creation/accept.feature:39[0m
+    [32mGiven I am logged in with cid "[32m[1m77777[0m[0m[32m"[90m                       # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mGiven there is a request to merge from "[32m[1mKayvan[0m[0m[32m" to "[32m[1mArturo[0m[0m[32m"[90m # features/step_definitions/group_creation_steps.rb:9[0m[0m
+    [32mAnd I am on the profile page for "[32m[1mAlfonso[0m[0m[32m"[90m                  # features/step_definitions/shared_steps.rb:36[0m[0m
+    [32mAnd I click "[32m[1mAccept Kayvan merge request[0m[0m[32m" link[90m              # features/step_definitions/web_steps.rb:26[0m[0m
+    [32mThen I should be on [32m[1mthe group dashboard page for "Kayvan"[0m[0m[32m[90m   # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mKayvan[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: Request to join an existing group
+  As a student
+  I want to request to join an existing group
+  So that I can form a project group
+
+  Background: I am on the Search for Students page[90m # features/group_creation/request.feature:6[0m
+    [32mGiven settings set[90m                             # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mAnd the following users exist:[90m                 # features/step_definitions/setup_steps.rb:15[0m[0m
+      | [32mname   [0m[0m |[0m [32mabout[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid  [0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mMegumi [0m[0m |[0m [32mabout[0m[0m |[0m [32m        [0m[0m |[0m [32m11111[0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKevin  [0m[0m |[0m [32mabout[0m[0m |[0m [32m77      [0m[0m |[0m [32m22222[0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mAlfonso[0m[0m |[0m [32mabout[0m[0m |[0m [32m33      [0m[0m |[0m [32m33333[0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKayvan [0m[0m |[0m [32mabout[0m[0m |[0m [32m77      [0m[0m |[0m [32m44444[0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+    [32mAnd the following groups exist:[90m                # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_name     [0m[0m |[0m
+      | [32m33[0m[0m |[0m [32mAlfonso's group[0m[0m |[0m
+      | [32m77[0m[0m |[0m [32mKevin's group  [0m[0m |[0m
+
+  Scenario: Send an invitation to someone who is not in a group[90m # features/group_creation/request.feature:20[0m
+    [32mGiven I am logged in with cid "[32m[1m33333[0m[0m[32m"[90m                       # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mAnd I am on the Search for Students Page[90m                    # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mWhen [32m[1mI click "11111" link[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m                 # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mThen I should be on [32m[1mthe View Profile Page for "Megumi"[0m[0m[32m[90m      # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mWhen I press "[32m[1mInvite to group[0m[0m[32m" button[90m                       # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should see "[32m[1mRequest pending[0m[0m[32m"[90m                         # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Send a join request to someone who is in an existing group[90m # features/group_creation/request.feature:28[0m
+    [32mGiven I am logged in with cid "[32m[1m11111[0m[0m[32m"[90m                              # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mAnd I am on the Search for Students Page[90m                           # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mWhen [32m[1mI click "22222" link[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m                        # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd I press "[32m[1mRequest to join[0m[0m[32m" button[90m                               # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should see "[32m[1mRequest pending[0m[0m[32m"[90m                                # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Send a merge request to someone who is in an existing group[90m # features/group_creation/request.feature:35[0m
+    [32mGiven I am logged in with cid "[32m[1m33333[0m[0m[32m"[90m                               # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mAnd I am on the Search for Students Page[90m                            # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mWhen [32m[1mI click "22222" link[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m                         # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd I press "[32m[1mRequest to merge[0m[0m[32m" button[90m                               # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should see "[32m[1mRequest pending[0m[0m[32m"[90m                                 # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Try to send a request to groupmate[90m  # features/group_creation/request.feature:42[0m
+    [32mGiven I am logged in with cid "[32m[1m44444[0m[0m[32m"[90m       # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mAnd I am on the Search for Students Page[90m    # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mWhen [32m[1mI click "22222" link[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mThen I should see "[32m[1mAlready a groupmate[0m[0m[32m"[90m     # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Group is full[90m                       # features/group_creation/request.feature:48[0m
+    [32mGiven the following users exist:[90m            # features/step_definitions/setup_steps.rb:15[0m[0m
+      | [32mname  [0m[0m |[0m [32mabout[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid  [0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mArturo[0m[0m |[0m [32mabout[0m[0m |[0m [32m77      [0m[0m |[0m [32m99999[0m[0m |[0m [32mabout[0m[0m |[0m [32minterest[0m[0m |[0m
+    [32mGiven I am logged in with cid "[32m[1m11111[0m[0m[32m"[90m       # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mAnd I am on the Search for Students Page[90m    # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mWhen [32m[1mI click "22222" link[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mThen I should see "[32m[1mGroup is full[0m[0m[32m"[90m           # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: Submit assignments online
+  As a student member of a group
+  I want to be able to submit files as a response to assignments
+  So that my teachers can grade them
+
+  Background: I am a logged in student in my group dashboard[90m # features/group_dashboard/file_submit.feature:6[0m
+    [32mGiven settings set[90m                                       # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following task exists:[90m                         # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [32mtitle       [0m[0m |[0m [32mdescription[0m[0m |[0m [32mdue_date[0m[0m |[0m
+      | [32miteration1-1[0m[0m |[0m [32mfeatures   [0m[0m |[0m [32m5/1/2014[0m[0m |[0m
+      | [32miteration1-2[0m[0m |[0m [32mfeatures   [0m[0m |[0m [32m5/8/2014[0m[0m |[0m
+    [33mAnd I am logged into the student group dashboard[90m         # features/step_definitions/undefined_steps.rb:29[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:30:in `/^I am logged into the student group dashboard$/'[0m
+[33m      features/group_dashboard/file_submit.feature:12:in `And I am logged into the student group dashboard'[0m
+
+  Scenario: Upload a file[90m                                         # features/group_dashboard/file_submit.feature:14[0m
+    [36mGiven I click on "[36m[1miteration1-1[0m[0m[36m" under tasks[90m                   # features/step_definitions/undefined_steps.rb:33[0m[0m
+    [36mAnd I fill in "[36m[1mdescription[0m[0m[36m" with "[36m[1mThis is our iteration 1-1.[0m[0m[36m"[90m # features/step_definitions/web_steps.rb:30[0m[0m
+    [36mAnd I fill in "[36m[1mfile to upload[0m[0m[36m" with "[36m[1miteration1-1.zip[0m[0m[36m"[90m        # features/step_definitions/web_steps.rb:30[0m[0m
+    [33mAnd I press "Submit"[90m                                          # features/group_dashboard/file_submit.feature:18[0m[0m
+[33m      Undefined step: "I press "Submit"" (Cucumber::Undefined)[0m
+[33m      features/group_dashboard/file_submit.feature:18:in `And I press "Submit"'[0m
+    [36mThen I should see "[36m[1mAssignment Submitted Successfully![0m[0m[36m"[90m        # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Upload a link[90m                                                  # features/group_dashboard/file_submit.feature:21[0m
+    [36mGiven I click on "[36m[1miteration1-2[0m[0m[36m" under tasks[90m                            # features/step_definitions/undefined_steps.rb:33[0m[0m
+    [36mAnd I fill in "[36m[1mdescription[0m[0m[36m" with "[36m[1mThis is our deployed iteration 1-2.[0m[0m[36m"[90m # features/step_definitions/web_steps.rb:30[0m[0m
+    [36mAnd I select "[36m[1mHeroku Link[0m[0m[36m" from the "[36m[1mLink Type[0m[0m[36m" drop down menu[90m         # features/step_definitions/undefined_steps.rb:37[0m[0m
+    [36mAnd I fill in "[36m[1mlink[0m[0m[36m" with "[36m[1mhttps://cool-webapp.heroku.com[0m[0m[36m"[90m             # features/step_definitions/web_steps.rb:30[0m[0m
+    [33mAnd I press "Submit"[90m                                                   # features/group_dashboard/file_submit.feature:26[0m[0m
+[33m      Undefined step: "I press "Submit"" (Cucumber::Undefined)[0m
+[33m      features/group_dashboard/file_submit.feature:26:in `And I press "Submit"'[0m
+    [36mThen I should see "[36m[1mAssignment Submitted Successfully![0m[0m[36m"[90m                 # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Upload nothing and attempt to submit my assignment[90m          # features/group_dashboard/file_submit.feature:29[0m
+    [36mGiven I click on "[36m[1miteration1-1[0m[0m[36m" under tasks[90m                         # features/step_definitions/undefined_steps.rb:33[0m[0m
+    [36mAnd I fill in "[36m[1mdescription[0m[0m[36m" with "[36m[1mThis is our iteration 1-1.[0m[0m[36m"[90m       # features/step_definitions/web_steps.rb:30[0m[0m
+    [33mAnd I press "Submit"[90m                                                # features/group_dashboard/file_submit.feature:32[0m[0m
+[33m      Undefined step: "I press "Submit"" (Cucumber::Undefined)[0m
+[33m      features/group_dashboard/file_submit.feature:32:in `And I press "Submit"'[0m
+    [36mThen I should see "[36m[1mError: You must select a file or provide a link[0m[0m[36m"[90m # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: View and Grade assignments
+  As an instructor in charge of a group
+  I want to be able to post grades to their submissions
+  So students can see how well they did on them
+
+  Background: I am a logged in instructor with a group assigned which has some prefilled data[90m                          # features/group_dashboard/instructor_feedback.feature:6[0m
+    [32mGiven settings set[90m                                                                                                 # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                                                                             # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mname   [0m[0m |[0m
+      | [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                                                                                    # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mgroup_name      [0m[0m |[0m
+      | [32mBackstreet Buoys[0m[0m |[0m
+    [32mAnd the following student exists:[90m                                                                                  # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mname        [0m[0m |[0m
+      | [32mLittle Timmy[0m[0m |[0m
+      | [32mJohn Cobra  [0m[0m |[0m
+    [33mAnd group "[33m[1mBackstreet Buoys[0m[0m[33m" has "[33m[1mLittle Timmy[0m[0m[33m", "[33m[1mJohn Cobra[0m[0m[33m" as members[90m                                           # features/step_definitions/undefined_steps.rb:41[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:42:in `/^group "(.*?)" has "(.*?)", "(.*?)" as members$/'[0m
+[33m      features/group_dashboard/instructor_feedback.feature:21:in `And group "Backstreet Buoys" has "Little Timmy", "John Cobra" as members'[0m
+    [36mAnd group "[36m[1mBackstreet Buoys[0m[0m[36m" is assigned to "[36m[1mRobocop[0m[0m[36m"[90m                                                              # features/step_definitions/undefined_steps.rb:45[0m[0m
+    [36mAnd the following task exists:[90m                                                                                     # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [36mtitle[0m[0m |[0m [36mdescription [0m[0m |[0m [36mdue_date          [0m[0m |[0m
+      | [36mIt1-1[0m[0m |[0m [36mWork for us![0m[0m |[0m [36m2011-10-1 00:00:00[0m[0m |[0m
+    [36mAnd the following submission exists:[90m                                                                               # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [36mlabel[0m[0m |[0m [36mcontent  [0m[0m |[0m
+      | [36mUrl  [0m[0m |[0m [36mwww.a.com[0m[0m |[0m
+    [36mAnd an assignment exists for task "[36m[1mIt1-1[0m[0m[36m" and group "[36m[1mBackstreet Buoys[0m[0m[36m" with submission "[36m[1mUrl[0m[0m[36m" and max score of "[36m[1m10[0m[0m[36m"[90m # features/step_definitions/undefined_steps.rb:49[0m[0m
+
+  Scenario: See the submissions for an assignments[90m                                                                     # features/group_dashboard/instructor_feedback.feature:34[0m
+    [36mGiven I am logged in as instructor "[36m[1mRobocop[0m[0m[36m"[90m                                                                       # features/step_definitions/undefined_steps.rb:53[0m[0m
+    [36mAnd I am on the "[36m[1mGroup Dashboard for Backstreet Buoys[0m[0m[36m" page[90m                                                        # features/step_definitions/undefined_steps.rb:57[0m[0m
+    [36mThen [36m[1mI should see "Url"[0m[0m[36m within [36m[1m"Submissions"[0m[0m[36m[90m                                                                       # features/step_definitions/web_steps.rb:48[0m[0m
+    [36mAnd I should see "[36m[1mwww.a.com[0m[0m[36m"[90m                                                                                       # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Grade an assignment[90m                                                                                        # features/group_dashboard/instructor_feedback.feature:40[0m
+    [36mGiven I am logged in as instructor "[36m[1mRobocop[0m[0m[36m"[90m                                                                       # features/step_definitions/undefined_steps.rb:53[0m[0m
+    [36mAnd I am on the "[36m[1mGroup Dashboard for Backstreet Buoys[0m[0m[36m" page[90m                                                        # features/step_definitions/undefined_steps.rb:57[0m[0m
+    [36mAnd [36m[1mI fill "score_amount" with "5"[0m[0m[36m within [36m[1m"assignment-It1-1"[0m[0m[36m[90m                                                       # features/step_definitions/web_steps.rb:48[0m[0m
+    [36mAnd [36m[1mI click on "save"[0m[0m[36m within [36m[1m"assignment-It1-1"[0m[0m[36m[90m                                                                    # features/step_definitions/web_steps.rb:48[0m[0m
+    [36mThen I should see "[36m[1m5 out of 10[0m[0m[36m"[90m                                                                                    # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: Communicate with group
+  As an instructor in charge of a group
+  I want to be able to communicate with the group members
+  So I can answer their questions, provide feedback...
+
+  Background: I am a logged in student in my group dashboard[90m                                                           # features/group_dashboard/instructor_group_communication.feature:6[0m
+    [32mGiven settings set[90m                                                                                                 # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                                                                             # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mname   [0m[0m |[0m
+      | [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                                                                                    # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mgroup_name      [0m[0m |[0m
+      | [32mBackstreet Buoys[0m[0m |[0m
+    [32mAnd the following student exists:[90m                                                                                  # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mname        [0m[0m |[0m
+      | [32mLittle Timmy[0m[0m |[0m
+      | [32mJohn Cobra  [0m[0m |[0m
+    [33mAnd group "[33m[1mBackstreet Buoys[0m[0m[33m" has "[33m[1mLittle Timmy[0m[0m[33m", "[33m[1mJohn Cobra[0m[0m[33m" as members[90m                                           # features/step_definitions/undefined_steps.rb:41[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:42:in `/^group "(.*?)" has "(.*?)", "(.*?)" as members$/'[0m
+[33m      features/group_dashboard/instructor_group_communication.feature:21:in `And group "Backstreet Buoys" has "Little Timmy", "John Cobra" as members'[0m
+    [36mAnd group "[36m[1mBackstreet Buoys[0m[0m[36m" is assigned to "[36m[1mRobocop[0m[0m[36m"[90m                                                              # features/step_definitions/undefined_steps.rb:45[0m[0m
+    [36mAnd the following task exists:[90m                                                                                     # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [36mtitle[0m[0m |[0m [36mdescription [0m[0m |[0m [36mdue_date          [0m[0m |[0m
+      | [36mIt1-1[0m[0m |[0m [36mWork for us![0m[0m |[0m [36m2011-10-1 00:00:00[0m[0m |[0m
+    [36mAnd the following submission exists:[90m                                                                               # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [36mlabel[0m[0m |[0m [36mcontent  [0m[0m |[0m
+      | [36mUrl  [0m[0m |[0m [36mwww.a.com[0m[0m |[0m
+    [36mAnd an assignment exists for task "[36m[1mIt1-1[0m[0m[36m" and group "[36m[1mBackstreet Buoys[0m[0m[36m" with submission "[36m[1mUrl[0m[0m[36m" and max score of "[36m[1m10[0m[0m[36m"[90m # features/step_definitions/undefined_steps.rb:49[0m[0m
+
+  Scenario: I should be able to send messages[90m                                                                          # features/group_dashboard/instructor_group_communication.feature:34[0m
+    [36mGiven I am logged in as instructor "[36m[1mRobocop[0m[0m[36m"[90m                                                                       # features/step_definitions/undefined_steps.rb:53[0m[0m
+    [36mAnd I am on the "[36m[1mGroup Dashboard for Backstreet Buoys[0m[0m[36m" page[90m                                                        # features/step_definitions/undefined_steps.rb:57[0m[0m
+    [36mAnd [36m[1mI fill "message" with "random garbage"[0m[0m[36m within [36m[1m"assignment-It1-1"[0m[0m[36m[90m                                               # features/step_definitions/web_steps.rb:48[0m[0m
+    [36mAnd [36m[1mI click on "save"[0m[0m[36m within [36m[1m"assignment-It1-1"[0m[0m[36m[90m                                                                    # features/step_definitions/web_steps.rb:48[0m[0m
+    [36mThen I should see "[36m[1m5 out of 10[0m[0m[36m"[90m                                                                                    # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should be on [36m[1mthe "Group Dashboard for Backstreet Buoys" page[0m[0m[36m[90m                                                 # features/step_definitions/shared_steps.rb:40[0m[0m
+    [36mAnd [36m[1mI should see "random garbage"[0m[0m[36m within [36m[1m"assignment-It1-1 .content"[0m[0m[36m[90m                                               # features/step_definitions/web_steps.rb:48[0m[0m
+
+Feature: View instructors assigned groups
+  As an instructor
+  I want to be able to see what groups I am in charge of
+  So I can quickly navigate through them and monitor how are they going
+
+  Background: I am a logged in instructor with some groups assigned[90m # features/group_dashboard/instructor_list_of_groups.feature:6[0m
+    [32mGiven settings set[90m                                              # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructors exist:[90m                          # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mname   [0m[0m |[0m
+      | [32mRobocop[0m[0m |[0m
+      | [32mKITT   [0m[0m |[0m
+    [32mAnd the following groups exist:[90m                                 # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mgroup_name      [0m[0m |[0m
+      | [32mBackstreet Buoys[0m[0m |[0m
+      | [32mSpace Girls     [0m[0m |[0m
+      | [32mN Sunk          [0m[0m |[0m
+    [33mAnd group "[33m[1mBackstreet Buoys[0m[0m[33m" is assigned to "[33m[1mRobocop[0m[0m[33m"[90m           # features/step_definitions/undefined_steps.rb:45[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/undefined_steps.rb:46:in `/^group "(.*?)" is assigned to "(.*?)"$/'[0m
+[33m      features/group_dashboard/instructor_list_of_groups.feature:19:in `And group "Backstreet Buoys" is assigned to "Robocop"'[0m
+    [36mAnd group "[36m[1mSpace Girls[0m[0m[36m" is assigned to "[36m[1mRobocop[0m[0m[36m"[90m                # features/step_definitions/undefined_steps.rb:45[0m[0m
+    [36mAnd group "[36m[1mN Sunk[0m[0m[36m" is assigned to "[36m[1mKITT[0m[0m[36m"[90m                        # features/step_definitions/undefined_steps.rb:45[0m[0m
+
+  Scenario: See my assigned groups[90m                        # features/group_dashboard/instructor_list_of_groups.feature:23[0m
+    [36mGiven I am logged in as instructor "[36m[1mRobocop[0m[0m[36m"[90m          # features/step_definitions/undefined_steps.rb:53[0m[0m
+    [36mAnd I am on the "[36m[1mView my groups[0m[0m[36m" page[90m                 # features/step_definitions/undefined_steps.rb:57[0m[0m
+    [36mThen I should see "[36m[1mBackstreet Buoys[0m[0m[36m"[90m                  # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should see "[36m[1mSpace Girls[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:57[0m[0m
+    [36mAnd I should not see "[36m[1mN Sunk[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:75[0m[0m
+
+  Scenario: Clicking on a group[90m                           # features/group_dashboard/instructor_list_of_groups.feature:30[0m
+    [36mGiven I am logged in as instructor "[36m[1mRobocop[0m[0m[36m"[90m          # features/step_definitions/undefined_steps.rb:53[0m[0m
+    [36mAnd I am on the "[36m[1mView my groups[0m[0m[36m" page[90m                 # features/step_definitions/undefined_steps.rb:57[0m[0m
+    [33mAnd I click on "Backstreet Buoys"[90m                     # features/group_dashboard/instructor_list_of_groups.feature:33[0m[0m
+[33m      Undefined step: "I click on "Backstreet Buoys"" (Cucumber::Undefined)[0m
+[33m      features/group_dashboard/instructor_list_of_groups.feature:33:in `And I click on "Backstreet Buoys"'[0m
+    [36mThen I should be on [36m[1mthe "Group Dashboard" page[0m[0m[36m[90m        # features/step_definitions/shared_steps.rb:40[0m[0m
+    [36mAnd I should see "[36m[1mBackstreet Buoys[0m[0m[36m"[90m                   # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: See feedback and grade
+  As a student member of a group
+  I want to be able to see the grade we received from instructor
+  So that I can make improvement on the project
+
+  Background: I am a logged in student in my group dashboard[90m  # features/group_dashboard/student_feedback.feature:6[0m
+    [32mGiven settings set[90m                                        # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                    # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m43[0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                           # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32minstructor_id[0m[0m |[0m
+      | [32m78[0m[0m |[0m [32m43           [0m[0m |[0m
+    [32mAnd the following students exist:[90m                         # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mid[0m[0m |[0m [32mname[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid[0m[0m |[0m
+      | [32m99[0m[0m |[0m [32mPepe[0m[0m |[0m [32m78      [0m[0m |[0m [32m123[0m[0m |[0m
+      | [32m88[0m[0m |[0m [32mJohn[0m[0m |[0m [32m78      [0m[0m |[0m [32m456[0m[0m |[0m
+    [32mAnd the following tasks exist:[90m                            # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [32mid[0m[0m |[0m [32mtitle[0m[0m |[0m [32mdue_date          [0m[0m |[0m [32mdescription[0m[0m |[0m
+      | [32m91[0m[0m |[0m [32mIt1-1[0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32mBlah       [0m[0m |[0m
+      | [32m92[0m[0m |[0m [32mIt1-2[0m[0m |[0m [32m2013-10-1 00:00:00[0m[0m |[0m [32mDerp derp  [0m[0m |[0m
+    [32mAnd the following assignments exist:[90m                      # features/step_definitions/group_dashboard_step.rb:7[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mtask_id[0m[0m |[0m
+      | [32m89[0m[0m |[0m [32m78      [0m[0m |[0m [32m91     [0m[0m |[0m
+      | [32m53[0m[0m |[0m [32m78      [0m[0m |[0m [32m92     [0m[0m |[0m
+    [32mAnd the following score exists:[90m                           # features/step_definitions/group_dashboard_step.rb:25[0m[0m
+      | [32mid[0m[0m |[0m [32mmax_score[0m[0m |[0m [32mscore[0m[0m |[0m [32massignment_id[0m[0m |[0m
+      | [32m21[0m[0m |[0m [32m20       [0m[0m |[0m [32m10   [0m[0m |[0m [32m89           [0m[0m |[0m
+      | [32m22[0m[0m |[0m [32m30       [0m[0m |[0m [32m-1   [0m[0m |[0m [32m53           [0m[0m |[0m
+    [32mAnd the following submissions exist:[90m                      # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [32mlabel [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent[0m[0m |[0m [32msubmitted_date    [0m[0m |[0m
+      | [32mEssay [0m[0m |[0m [32m89           [0m[0m |[0m [32mBleh   [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m
+      | [32mHeroku[0m[0m |[0m [32m53           [0m[0m |[0m [32mnil    [0m[0m |[0m [32mnil               [0m[0m |[0m
+    [32mAnd the following posts exist:[90m                            # features/step_definitions/group_dashboard_step.rb:19[0m[0m
+      | [32mauthor_id[0m[0m |[0m [32mpublished_at      [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent     [0m[0m |[0m
+      | [32m99       [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32m89           [0m[0m |[0m [32msuch content[0m[0m |[0m
+      | [32m43       [0m[0m |[0m [32m2011-10-2 00:00:00[0m[0m |[0m [32m53           [0m[0m |[0m [32mwow         [0m[0m |[0m
+    [32mGiven it is currently [32m[1m2014-9-2 00:00:00[0m[0m[32m[90m                   # features/support/temporal_cucumber_helpers.rb:32[0m[0m
+    [32mAnd I am logged into the student group dashboard as "[32m[1m123[0m[0m[32m"[90m # features/step_definitions/group_dashboard_step.rb:51[0m[0m
+
+  Scenario: Grade was submitted by instructor[90m                 # features/group_dashboard/student_feedback.feature:49[0m
+    [32mThen [32m[1mI should see "10.0/20.0"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m     # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: Instructor did not submit a grade[90m                  # features/group_dashboard/student_feedback.feature:52[0m
+    [32mThen [32m[1mI should see "Not yet graded"[0m[0m[32m within [32m[1m"#assignment-53"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+
+Feature: View assignments due
+  As a student member of a group
+  I want a common place where to see all my group's pending assignments and when they are due
+  So that I can quickly know what we have to do
+
+  Background: I am a logged in student in my group dashboard[90m  # features/group_dashboard/student_group_communication.feature:6[0m
+    [32mGiven settings set[90m                                        # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                    # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m43[0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                           # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32minstructor_id[0m[0m |[0m
+      | [32m78[0m[0m |[0m [32m43           [0m[0m |[0m
+    [32mAnd the following students exist:[90m                         # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mid[0m[0m |[0m [32mname[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid[0m[0m |[0m
+      | [32m99[0m[0m |[0m [32mPepe[0m[0m |[0m [32m78      [0m[0m |[0m [32m123[0m[0m |[0m
+      | [32m88[0m[0m |[0m [32mJohn[0m[0m |[0m [32m78      [0m[0m |[0m [32m456[0m[0m |[0m
+    [32mAnd the following tasks exist:[90m                            # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [32mid[0m[0m |[0m [32mtitle[0m[0m |[0m [32mdue_date          [0m[0m |[0m [32mdescription[0m[0m |[0m
+      | [32m91[0m[0m |[0m [32mIt1-1[0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32mBlah       [0m[0m |[0m
+      | [32m92[0m[0m |[0m [32mIt1-2[0m[0m |[0m [32m2013-10-1 00:00:00[0m[0m |[0m [32mDerp derp  [0m[0m |[0m
+    [32mAnd the following assignments exist:[90m                      # features/step_definitions/group_dashboard_step.rb:7[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mtask_id[0m[0m |[0m
+      | [32m89[0m[0m |[0m [32m78      [0m[0m |[0m [32m91     [0m[0m |[0m
+      | [32m53[0m[0m |[0m [32m78      [0m[0m |[0m [32m92     [0m[0m |[0m
+    [32mAnd the following score exists:[90m                           # features/step_definitions/group_dashboard_step.rb:25[0m[0m
+      | [32mid[0m[0m |[0m [32mmax_score[0m[0m |[0m [32mscore[0m[0m |[0m [32massignment_id[0m[0m |[0m
+      | [32m21[0m[0m |[0m [32m20       [0m[0m |[0m [32m10   [0m[0m |[0m [32m89           [0m[0m |[0m
+      | [32m22[0m[0m |[0m [32m30       [0m[0m |[0m [32mnil  [0m[0m |[0m [32m53           [0m[0m |[0m
+    [32mAnd the following submissions exist:[90m                      # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [32mlabel [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent[0m[0m |[0m [32msubmitted_date    [0m[0m |[0m
+      | [32mEssay [0m[0m |[0m [32m89           [0m[0m |[0m [32mBleh   [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m
+      | [32mHeroku[0m[0m |[0m [32m53           [0m[0m |[0m [32mnil    [0m[0m |[0m [32mnil               [0m[0m |[0m
+    [32mAnd the following posts exist:[90m                            # features/step_definitions/group_dashboard_step.rb:19[0m[0m
+      | [32mauthor_id[0m[0m |[0m [32mpublished_at      [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent     [0m[0m |[0m
+      | [32m99       [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32m89           [0m[0m |[0m [32mwow         [0m[0m |[0m
+      | [32m43       [0m[0m |[0m [32m2011-10-2 00:00:00[0m[0m |[0m [32m53           [0m[0m |[0m [32msuch content[0m[0m |[0m
+    [32mAnd I am logged into the student group dashboard as "[32m[1m123[0m[0m[32m"[90m # features/step_definitions/group_dashboard_step.rb:51[0m[0m
+
+  Scenario: I should be able to input questions[90m                                        # features/group_dashboard/student_group_communication.feature:48[0m
+    [32mGiven [32m[1mI fill in "content" with "when are you free to meet"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI press "Post" button[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m                                  # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mThen I should be on [32m[1mthe group dashboard page for cid "123"[0m[0m[32m[90m                         # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd [32m[1mI should see "when are you free to meet"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m               # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: I should see the instructor's response in group dashboard[90m          # features/group_dashboard/student_group_communication.feature:54[0m
+    [32mThen [32m[1mI should see "Robocop"[0m[0m[32m within [32m[1m"#assignment-53 .messages"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI should see "such content"[0m[0m[32m within [32m[1m"#assignment-53 .messages .content"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+
+Feature: Submit Assignments
+  As a student member of a group
+  I want to see what deliverables of the project the group needs to submit and how I can submit
+  So that I can submit the project
+
+  Background: I am a logged in student in my group dashboard[90m    # features/group_dashboard/student_submit_assignments.feature:6[0m
+    [32mGiven settings set[90m                                          # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                      # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m43[0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                             # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32minstructor_id[0m[0m |[0m
+      | [32m78[0m[0m |[0m [32m43           [0m[0m |[0m
+    [32mAnd the following students exist:[90m                           # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mid[0m[0m |[0m [32mname[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid[0m[0m |[0m
+      | [32m99[0m[0m |[0m [32mPepe[0m[0m |[0m [32m78      [0m[0m |[0m [32m123[0m[0m |[0m
+      | [32m88[0m[0m |[0m [32mJohn[0m[0m |[0m [32m78      [0m[0m |[0m [32m456[0m[0m |[0m
+    [32mAnd the following tasks exist:[90m                              # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [32mid[0m[0m |[0m [32mtitle[0m[0m |[0m [32mdue_date          [0m[0m |[0m [32mdescription[0m[0m |[0m
+      | [32m91[0m[0m |[0m [32mIt1-1[0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32mBlah       [0m[0m |[0m
+      | [32m92[0m[0m |[0m [32mIt1-2[0m[0m |[0m [32m2013-10-1 00:00:00[0m[0m |[0m [32mDerp derp  [0m[0m |[0m
+    [32mAnd the following assignments exist:[90m                        # features/step_definitions/group_dashboard_step.rb:7[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mtask_id[0m[0m |[0m
+      | [32m89[0m[0m |[0m [32m78      [0m[0m |[0m [32m91     [0m[0m |[0m
+      | [32m53[0m[0m |[0m [32m78      [0m[0m |[0m [32m92     [0m[0m |[0m
+    [32mAnd the following score exists:[90m                             # features/step_definitions/group_dashboard_step.rb:25[0m[0m
+      | [32mid[0m[0m |[0m [32mmax_score[0m[0m |[0m [32mscore[0m[0m |[0m [32massignment_id[0m[0m |[0m
+      | [32m21[0m[0m |[0m [32m20       [0m[0m |[0m [32m10   [0m[0m |[0m [32m89           [0m[0m |[0m
+      | [32m22[0m[0m |[0m [32m30       [0m[0m |[0m [32mnil  [0m[0m |[0m [32m53           [0m[0m |[0m
+    [32mAnd the following submissions exist:[90m                        # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [32mlabel [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent[0m[0m |[0m [32msubmitted_date    [0m[0m |[0m
+      | [32mEssay [0m[0m |[0m [32m89           [0m[0m |[0m [32mBleh   [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m
+      | [32mHeroku[0m[0m |[0m [32m53           [0m[0m |[0m [32m       [0m[0m |[0m [32m                  [0m[0m |[0m
+    [32mAnd the following posts exist:[90m                              # features/step_definitions/group_dashboard_step.rb:19[0m[0m
+      | [32mauthor_id[0m[0m |[0m [32mpublished_at      [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent     [0m[0m |[0m
+      | [32m99       [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32m89           [0m[0m |[0m [32msuch content[0m[0m |[0m
+      | [32m43       [0m[0m |[0m [32m2011-10-2 00:00:00[0m[0m |[0m [32m53           [0m[0m |[0m [32mwow         [0m[0m |[0m
+    [32mGiven I am logged into the student group dashboard as "[32m[1m123[0m[0m[32m"[90m # features/step_definitions/group_dashboard_step.rb:51[0m[0m
+
+  Scenario: First time submit[90m                                          # features/group_dashboard/student_submit_assignments.feature:49[0m
+    [32mWhen I fill in "[32m[1mHeroku[0m[0m[32m" with "[32m[1mbananas[0m[0m[32m"[90m                             # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I press "[32m[1mSave[0m[0m[32m" button[90m                                          # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should see "[32m[1mbananas[0m[0m[32m"[90m                                        # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd [32m[1mI should not see "#submission_content"[0m[0m[32m within [32m[1m"#assignment-53"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: Not first time submit[90m                                       # features/group_dashboard/student_submit_assignments.feature:55[0m
+    [32mThen [32m[1mI should not see "#submission_content"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m # features/step_definitions/web_steps.rb:48[0m[0m
+
+Feature: View assignments due
+  As a student member of a group
+  I want a common place where to see all my group's pending assignments and when they are due
+  So that I can quickly know what we have to do
+
+  Background: I am a logged in student in my group dashboard[90m    # features/group_dashboard/student_view_assignments.feature:6[0m
+    [32mGiven settings set[90m                                          # features/step_definitions/setup_steps.rb:1[0m[0m
+    [32mGiven the following instructor exists:[90m                      # features/step_definitions/setup_steps.rb:21[0m[0m
+      | [32mid[0m[0m |[0m [32mname   [0m[0m |[0m
+      | [32m43[0m[0m |[0m [32mRobocop[0m[0m |[0m
+    [32mAnd the following group exists:[90m                             # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32minstructor_id[0m[0m |[0m [32mgroup_name[0m[0m |[0m
+      | [32m78[0m[0m |[0m [32m43           [0m[0m |[0m [32mMonkees   [0m[0m |[0m
+    [32mAnd the following students exist:[90m                           # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mid[0m[0m |[0m [32mname[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid[0m[0m |[0m
+      | [32m99[0m[0m |[0m [32mPepe[0m[0m |[0m [32m78      [0m[0m |[0m [32m123[0m[0m |[0m
+      | [32m88[0m[0m |[0m [32mJohn[0m[0m |[0m [32m78      [0m[0m |[0m [32m456[0m[0m |[0m
+    [32mAnd the following tasks exist:[90m                              # features/step_definitions/group_dashboard_step.rb:1[0m[0m
+      | [32mid[0m[0m |[0m [32mtitle[0m[0m |[0m [32mdue_date          [0m[0m |[0m [32mdescription[0m[0m |[0m
+      | [32m91[0m[0m |[0m [32mIt1-1[0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32mBlah       [0m[0m |[0m
+      | [32m92[0m[0m |[0m [32mIt1-2[0m[0m |[0m [32m2013-10-1 00:00:00[0m[0m |[0m [32mDerp derp  [0m[0m |[0m
+    [32mAnd the following assignments exist:[90m                        # features/step_definitions/group_dashboard_step.rb:7[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mtask_id[0m[0m |[0m
+      | [32m89[0m[0m |[0m [32m78      [0m[0m |[0m [32m91     [0m[0m |[0m
+      | [32m53[0m[0m |[0m [32m78      [0m[0m |[0m [32m92     [0m[0m |[0m
+    [32mAnd the following score exists:[90m                             # features/step_definitions/group_dashboard_step.rb:25[0m[0m
+      | [32mid[0m[0m |[0m [32mmax_score[0m[0m |[0m [32mscore[0m[0m |[0m [32massignment_id[0m[0m |[0m
+      | [32m21[0m[0m |[0m [32m20       [0m[0m |[0m [32m10   [0m[0m |[0m [32m89           [0m[0m |[0m
+      | [32m22[0m[0m |[0m [32m30       [0m[0m |[0m [32mnil  [0m[0m |[0m [32m53           [0m[0m |[0m
+    [32mAnd the following submissions exist:[90m                        # features/step_definitions/group_dashboard_step.rb:13[0m[0m
+      | [32mlabel [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent[0m[0m |[0m [32msubmitted_date    [0m[0m |[0m
+      | [32mEssay [0m[0m |[0m [32m89           [0m[0m |[0m [32mBleh   [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m
+      | [32mHeroku[0m[0m |[0m [32m53           [0m[0m |[0m [32mnil    [0m[0m |[0m [32mnil               [0m[0m |[0m
+    [32mAnd the following posts exist:[90m                              # features/step_definitions/group_dashboard_step.rb:19[0m[0m
+      | [32mauthor_id[0m[0m |[0m [32mpublished_at      [0m[0m |[0m [32massignment_id[0m[0m |[0m [32mcontent     [0m[0m |[0m
+      | [32m99       [0m[0m |[0m [32m2011-10-1 00:00:00[0m[0m |[0m [32m89           [0m[0m |[0m [32msuch content[0m[0m |[0m
+      | [32m43       [0m[0m |[0m [32m2011-10-2 00:00:00[0m[0m |[0m [32m53           [0m[0m |[0m [32mwow         [0m[0m |[0m
+    [32mGiven it is currently [32m[1m2013-9-2 00:00:00[0m[0m[32m[90m                     # features/support/temporal_cucumber_helpers.rb:32[0m[0m
+    [32mGiven I am logged into the student group dashboard as "[32m[1m123[0m[0m[32m"[90m # features/step_definitions/group_dashboard_step.rb:51[0m[0m
+
+  Scenario: I should see assignments in chronological order[90m     # features/group_dashboard/student_view_assignments.feature:49[0m
+    [32mThen I should see "[32m[1mIt1-1[0m[0m[32m" before "[32m[1mIt1-2[0m[0m[32m"[90m                    # features/step_definitions/web_steps.rb:65[0m[0m
+    [32mAnd [32m[1mI should see "Blah"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m             # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: I should see the date in the header of future assignments[90m # features/group_dashboard/student_view_assignments.feature:53[0m
+    [32mThen [32m[1mI should see "1/Oct/2013"[0m[0m[32m within [32m[1m"#assignment-53"[0m[0m[32m[90m            # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI should not see "1/Oct/2011"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m         # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: I should see the score in the header of past assignments[90m # features/group_dashboard/student_view_assignments.feature:57[0m
+    [32mThen [32m[1mI should see "10.0/20.0"[0m[0m[32m within [32m[1m"#assignment-89"[0m[0m[32m[90m            # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI should not see "Score"[0m[0m[32m within [32m[1m"#assignment-53"[0m[0m[32m[90m             # features/step_definitions/web_steps.rb:48[0m[0m
+
+Feature: create a profile with my information
+  As a student
+  I want to make my info (skills, personal, interests, section #) visible to other students
+  So that I can market myself to other students who may join my group
+
+  Background: I am on the Create New Profile page[90m # features/student_profiles/create_view_edit.feature:6[0m
+    [32mGiven settings set[90m                            # features/step_definitions/setup_steps.rb:1[0m[0m
+
+  Scenario: Create new user and View user information[90m         # features/student_profiles/create_view_edit.feature:9[0m
+    [32mGiven I am logged in with cid "[32m[1m12345[0m[0m[32m"[90m                     # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mGiven I am on the Create New Student Profile page[90m         # features/step_definitions/student_profiles_steps.rb:9[0m[0m
+    [32mAnd I fill in "[32m[1mName[0m[0m[32m" with "[32m[1mJalal[0m[0m[32m"[90m                         # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I select "[32m[1m101[0m[0m[32m" from "[32m[1mstudent_section_id[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:5[0m[0m
+    [32mAnd I fill in "[32m[1mInterest[0m[0m[32m" with "[32m[1mRunning[0m[0m[32m"[90m                   # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I fill in "[32m[1mDescription:[0m[0m[32m" with "[32m[1mI am a test student[0m[0m[32m"[90m   # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I press "[32m[1mSave[0m[0m[32m" button[90m                                 # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should be on [32m[1mthe New User Profile page for "Jalal"[0m[0m[32m[90m # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mJalal[0m[0m[32m"[90m                                  # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd I should see "[32m[1mRunning[0m[0m[32m"[90m                                # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd I should see "[32m[1mI am a test student[0m[0m[32m"[90m                    # features/step_definitions/web_steps.rb:57[0m[0m
+
+  Scenario: Edit user information[90m                           # features/student_profiles/create_view_edit.feature:22[0m
+    [32mGiven I am logged in with cid "[32m[1m111111[0m[0m[32m"[90m                  # features/step_definitions/shared_steps.rb:1[0m[0m
+    [32mGiven I am on the Create New Student Profile page[90m       # features/step_definitions/student_profiles_steps.rb:9[0m[0m
+    [32mAnd I fill in "[32m[1mName[0m[0m[32m" with "[32m[1mKayvan[0m[0m[32m"[90m                      # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I select "[32m[1m101[0m[0m[32m" from "[32m[1mstudent_section_id[0m[0m[32m"[90m            # features/step_definitions/web_steps.rb:5[0m[0m
+    [32mAnd I fill in "[32m[1mInterest[0m[0m[32m" with "[32m[1mNothing[0m[0m[32m"[90m                 # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I fill in "[32m[1mDescription:[0m[0m[32m" with "[32m[1mI am a test student[0m[0m[32m"[90m # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I press "[32m[1mSave[0m[0m[32m" button[90m                               # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mGiven I am on the Edit Student Profile page of "[32m[1mKayvan[0m[0m[32m"[90m # features/step_definitions/student_profiles_steps.rb:13[0m[0m
+    [32mAnd I fill in "[32m[1mInterest[0m[0m[32m" with "[32m[1mSome Thing[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:30[0m[0m
+    [32mAnd I press "[32m[1mSave[0m[0m[32m" button[90m                               # features/step_definitions/web_steps.rb:22[0m[0m
+    [32mThen I should be on [32m[1mthe User Profile page of "Kayvan"[0m[0m[32m[90m   # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mSome Thing[0m[0m[32m"[90m                           # features/step_definitions/web_steps.rb:57[0m[0m
+
+Feature: search for potential group members
+  As a student
+  I want to be able to search for profiles of other students based on their skills, section number, past courses, etc.
+  So that I can better decide who to join in a team
+
+  Background: Students have already created Spillio User Profiles[90m # features/student_profiles/search.feature:6[0m
+    [32mGiven the following students exist:[90m                           # features/step_definitions/setup_steps.rb:34[0m[0m
+      | [32mname   [0m[0m |[0m [32mabout  [0m[0m |[0m [32mgroup_id[0m[0m |[0m [32mcid  [0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKevin  [0m[0m |[0m [32mbananas[0m[0m |[0m [32m        [0m[0m |[0m [32m33333[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mKayvan [0m[0m |[0m [32mabout  [0m[0m |[0m [32m77      [0m[0m |[0m [32m44444[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mAlfonso[0m[0m |[0m [32mI rule [0m[0m |[0m [32m33      [0m[0m |[0m [32m55555[0m[0m |[0m [32minterest[0m[0m |[0m
+      | [32mJalal  [0m[0m |[0m [32mabout  [0m[0m |[0m [32m33      [0m[0m |[0m [32m66666[0m[0m |[0m [32minterest[0m[0m |[0m
+    [32mAnd the following groups exist:[90m                               # features/step_definitions/setup_steps.rb:27[0m[0m
+      | [32mid[0m[0m |[0m [32mgroup_name     [0m[0m |[0m
+      | [32m33[0m[0m |[0m [32mAlfonso's group[0m[0m |[0m
+      | [32m77[0m[0m |[0m [32mKayvan's group [0m[0m |[0m
+    [32mAnd I am logged in with cid "[32m[1m44444[0m[0m[32m" as a [32m[1mStudent[0m[0m[32m[90m              # features/step_definitions/shared_steps.rb:7[0m[0m
+
+  Scenario: I should see a list of all the students and some extra info of them[90m # features/student_profiles/search.feature:22[0m
+    [32mGiven I am on the Search for Students Page[90m                                  # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mThen [32m[1mI should see "Kayvan"[0m[0m[32m within [32m[1m"#44444"[0m[0m[32m[90m                                  # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd I should see "[32m[1mJalal[0m[0m[32m"[90m                                                    # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd I should not see "[32m[1m33333[0m[0m[32m"[90m                                                # features/step_definitions/web_steps.rb:75[0m[0m
+    [32mAnd [32m[1mI should see "I rule"[0m[0m[32m within [32m[1m"#55555"[0m[0m[32m[90m                                   # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI should not see "Group"[0m[0m[32m within [32m[1m"#33333"[0m[0m[32m[90m                                # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd [32m[1mI should see "Group"[0m[0m[32m within [32m[1m"#55555"[0m[0m[32m[90m                                    # features/step_definitions/web_steps.rb:48[0m[0m
+
+  Scenario: search should return students whose name contains the search query, case unsensitive[90m # features/student_profiles/search.feature:31[0m
+    [32mGiven I am on the Search for Students Page[90m                                                   # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mAnd I search for "[32m[1mal[0m[0m[32m"[90m                                                                        # features/step_definitions/student_profiles_steps.rb:17[0m[0m
+    [32mThen I should be on [32m[1mthe Search for Students Page[0m[0m[32m[90m                                             # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mJalal[0m[0m[32m"[90m                                                                     # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd I should see "[32m[1mAlfonso[0m[0m[32m"[90m                                                                   # features/step_definitions/web_steps.rb:57[0m[0m
+    [32mAnd [32m[1mI should not see "Kayvan"[0m[0m[32m within [32m[1m"#results"[0m[0m[32m[90m                                              # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd I should not see "[32m[1mKevin[0m[0m[32m"[90m                                                                 # features/step_definitions/web_steps.rb:75[0m[0m
+
+  Scenario: search for non existing terms should tell the user nothing was found[90m # features/student_profiles/search.feature:40[0m
+    [32mGiven I am on the Search for Students Page[90m                                   # features/step_definitions/shared_steps.rb:32[0m[0m
+    [32mAnd I search for "[32m[1mTorrent for DBZ s02e22[0m[0m[32m"[90m                                    # features/step_definitions/student_profiles_steps.rb:17[0m[0m
+    [32mThen I should be on [32m[1mthe Search for Students Page[0m[0m[32m[90m                             # features/step_definitions/shared_steps.rb:40[0m[0m
+    [32mAnd I should see "[32m[1mNo results found[0m[0m[32m"[90m                                          # features/step_definitions/web_steps.rb:57[0m[0m
+
+33 scenarios ([36m4 skipped[0m, [33m7 pending[0m, [32m22 passed[0m)
+354 steps ([36m86 skipped[0m, [33m7 undefined[0m, [33m7 pending[0m, [32m254 passed[0m)
+0m7.323s
+[33m[0m
+[33mYou can implement step definitions for undefined steps with these snippets:[0m
+[33m[0m
+[33mGiven(/^I press "(.*?)"$/) do |arg1|[0m
+[33m  pending # express the regexp above with the code you wish you had[0m
+[33mend[0m
+[33m[0m
+[33mGiven(/^I click "(.*?)"$/) do |arg1|[0m
+[33m  pending # express the regexp above with the code you wish you had[0m
+[33mend[0m
+[33m[0m
+[33mGiven(/^I click on "(.*?)"$/) do |arg1|[0m
+[33m  pending # express the regexp above with the code you wish you had[0m
+[33mend[0m
+

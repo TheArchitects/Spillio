@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125025521) do
+ActiveRecord::Schema.define(:version => 20131127073408) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "cid"
+    t.string   "time_stamp"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
@@ -48,22 +55,15 @@ ActiveRecord::Schema.define(:version => 20131125025521) do
 
   create_table "groups", :force => true do |t|
     t.string   "group_name"
-    t.integer  "instructor_id"
     t.integer  "section_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "status"
-    t.integer  "max_size"
-  end
-
-  add_index "groups", ["instructor_id"], :name => "index_groups_on_instructor_id"
-  add_index "groups", ["section_id"], :name => "index_groups_on_section_id"
-
-  create_table "instructors", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "status"
+    t.integer  "max_size"
+    t.integer  "reader_id"
   end
+
+  add_index "groups", ["section_id"], :name => "index_groups_on_section_id"
 
   create_table "posts", :force => true do |t|
     t.datetime "published_at"
@@ -76,6 +76,14 @@ ActiveRecord::Schema.define(:version => 20131125025521) do
 
   add_index "posts", ["assignment_id"], :name => "index_posts_on_assignment_id"
   add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
+
+  create_table "reader_requests", :force => true do |t|
+    t.integer  "requester"
+    t.boolean  "responded"
+    t.string   "time_stamp"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "scores", :force => true do |t|
     t.decimal  "score",         :default => -1.0
@@ -133,13 +141,13 @@ ActiveRecord::Schema.define(:version => 20131125025521) do
     t.text     "about"
     t.integer  "section_id"
     t.string   "interest"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "cid"
     t.string   "type"
     t.integer  "group_id"
     t.string   "email"
-    t.boolean  "is_administrator", :default => false
+    t.boolean  "is_reader",  :default => false
   end
 
   add_index "users", ["group_id"], :name => "index_users_on_group_id"

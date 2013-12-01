@@ -1,0 +1,9 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => (reader_requests.size > 0) ? "dropdown" : "", href: "#"}
+    Reader Requests
+    %span.badge #{reader_requests.size > 0 ? reader_requests.size : ""}
+    %b.caret{:class => (reader_requests.size == 0) ? "hide" : "" }
+  %ul.dropdown-menu
+    - reader_requests.each do |request|
+      %li
+        =link_to "Accept #{request.get_requester.name}"

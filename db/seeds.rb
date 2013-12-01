@@ -9,6 +9,9 @@ setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
+admin = Admin.create(cid: 1007417)
+admin.save
+
 puts "settings : Group size => #{Setting.first.max_group_size}"
 
 courses = Course.create!([{ name: 'CS161' }, { name: 'CS168' }])
@@ -38,26 +41,16 @@ alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 alfonso.courses << courses[1]
 alfonso.save
 
-stephanie = Instructor.create!(name: 'Stephanie')
-alan = Instructor.create!(name: 'Alan')
-william = Instructor.create!(name: 'William')
-stephanie.save
-alan.save
-william.save
-
 # TODO: Groups should only be created with a special function each time a user is
 # created. When a student is merged onto a new group, if its old group becomes
 # empty, it must be deleted
 the_beatles = Group.create_group_with_mock_assignments('The Beatles')
 the_beatles.students << kayvan
 the_beatles.students << megumi
-the_beatles.instructor = stephanie
 the_beatles.save
-
 
 rolling = Group.create_group_with_mock_assignments('The Rolling Stones')
 rolling.students << kevin
-rolling.instructor = alan
 rolling.save
 
 req = GroupJoinRequest.create!
@@ -65,6 +58,33 @@ req.requester = kevin
 req.requestee = kayvan
 req.request_type = 'merge'
 req.save
+
+# Makeing couple readers
+
+Stephanie = Student.create!(name: 'Stephanie', about:'Nothing to say', interest: 'Everything', cid:'000001')
+Stephanie.section = sections[1]
+Stephanie.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
+Stephanie.courses << courses[1]
+Stephanie.make_reader
+Stephanie.save
+
+alan = Student.create!(name: 'alan', about:'Nothing to say', interest: 'Everything', cid:'000002')
+alan.section = sections[1]
+alan.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
+alan.courses << courses[1]
+alan.make_reader
+alan.save
+
+william = Student.create!(name: 'william', about:'Nothing to say', interest: 'Everything', cid:'000002')
+william.section = sections[1]
+william.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
+william.courses << courses[1]
+william.make_reader
+william.save
+
+ReaderRequest.create(responded: false, requester: kayvan.id)
+ReaderRequest.create(responded: false, requester: kevin.id)
+
 
 
 puts "Seed planted :)"
