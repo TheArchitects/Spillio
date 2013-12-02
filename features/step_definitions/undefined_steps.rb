@@ -26,10 +26,6 @@ Given(/^I click on "(.*?)" in the Sidebar$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^I am logged into the student group dashboard$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given(/^I click on "(.*?)" under tasks$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end

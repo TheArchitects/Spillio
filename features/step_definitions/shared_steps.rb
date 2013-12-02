@@ -17,7 +17,7 @@ Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
         skill_ids: [Skill.find_or_initialize_by_name('Ruby').id],
         course_ids: [Course.find_or_initialize_by_name('CS161').id]
       }
-      Student.create_for_current_user!(s, cas_user)
+      Student.create_or_update(s, cas_user)
     end
     # TODO Implement more cases: instructor, admin
   end
