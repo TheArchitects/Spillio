@@ -82,8 +82,8 @@ william.courses << courses[1]
 william.make_reader
 william.save
 
-ReaderRequest.create(responded: false, requester: kayvan.id)
-ReaderRequest.create(responded: false, requester: kevin.id)
+ReaderRequest.create(responded: false, requester: kayvan)
+ReaderRequest.create(responded: false, requester: kevin)
 
 
 
