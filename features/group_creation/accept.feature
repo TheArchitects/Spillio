@@ -19,7 +19,6 @@ Feature: Respond to someone's request to join a group
     | 77 | Kayvan's group |
     | 44 | Arturo's group |
 
-
   Scenario: Accept a request to join someone's group
     Given I am logged in with cid "44444"
     Given there is a request to join from "Kevin" to "Kayvan"
