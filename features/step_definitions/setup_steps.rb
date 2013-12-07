@@ -18,7 +18,7 @@ Given(/the following user[s]? exist[s]?:$/)do |users_table|
   end
 end
 
-Given(/the following instructor[s]? exist[s]?:$/) do |table|
+Given(/the following admin[s]? exist[s]?:$/) do |table|
   table.hashes.each do |int|
     Instructor.create!(int)
   end

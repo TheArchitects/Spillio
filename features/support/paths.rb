@@ -13,11 +13,15 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the group dashboard page for "(.*)"$/
-      group_db_show_path(User.find_by_name($1).group_id)
+
+    when /^the group dashboard page for group id "(.*)"$/
+      group_db_show_path($1)
 
     when /^the group dashboard page for cid "(.*)"$/
       group_db_show_path(User.find_by_cid($1).group_id)
+
+    when /^the group dashboard page for "(.*)"$/
+      group_db_show_path(User.find_by_name($1).group_id)
 
     when /^the (?:View |New User |User )?Profile Page (?:for|of) "(.+)"$/i
       student_path(Student.find_by_name($1))

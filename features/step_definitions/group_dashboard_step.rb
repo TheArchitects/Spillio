@@ -22,13 +22,6 @@ Given(/^the following post[s]? exist[s]?:$/) do |table|
   end
 end
 
-Given(/^the following score[s]? exist[s]?:$/) do |table|
-  table.hashes.each do |stu|
-    Score.create!(stu)
-  end
-end
-
-
 
 Then(/^I should see '(\d+)\/(\d+)' as a score$/) do |arg1, arg2|
   CASClient::Frameworks::Rails::Filter.fake("homer")
