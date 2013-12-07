@@ -9,8 +9,10 @@ setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
+
 admin = Admin.create(cid: 1007417)
 admin.save
+
 
 puts "settings : Group size => #{Setting.first.max_group_size}"
 
@@ -81,10 +83,5 @@ william.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 william.courses << courses[1]
 william.make_reader
 william.save
-
-ReaderRequest.create(responded: false, requester: kayvan)
-ReaderRequest.create(responded: false, requester: kevin)
-
-
 
 puts "Seed planted :)"

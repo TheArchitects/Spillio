@@ -2,7 +2,9 @@
   = stylesheet_link_tag 'shared_navbar'
 
 / Navbar. In the future we can include instructor navbars here too
-- if not @authenticated_user.nil? and @authenticated_user.class == User
-  = render "students/loggedin_student_navbar"
-- elsif @authenticated_user.class == Admin
+- if @authenticated_user.class == Admin
   = render "admins/navbar"
+- elsif not @authenticated_user.nil?
+  = render "students/loggedin_student_navbar"
+- else
+  = render "shared/general_navbar"
