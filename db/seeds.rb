@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
+# Examples:2
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
@@ -23,24 +23,28 @@ kayvan = Student.create!(name: 'Fake Kayvan', about:'Nothing to say', interest: 
 kayvan.section = sections[1]
 kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 kayvan.courses << courses[1]
+kayvan.email = "kayvan.najafzadeh@gmail.com"
 kayvan.save
 
 megumi = Student.create!(name: 'Megumi', about:'Doggie person', interest: 'Guys', cid:'1122233')
 megumi.section = sections[0]
 megumi.skills << Skill.create!([{ name: 'Japanese' }, { name: 'Judo' }])
 megumi.courses << courses[0]
+megumi.email = "megupertino@gmail.com"
 megumi.save
 
 kevin = Student.create!(name: 'Kevin', about:'I am cool.', interest: 'Girls', cid:'123987')
 kevin.section = sections[0]
 kevin.skills << Skill.create!([{ name: 'Android' }, { name: 'Origami' }])
 kevin.courses << courses[0]
+kevin.email = "kevinshen34@gmail.com>"
 kevin.save
 
 alfonso = Student.create!(name: 'Alfonso', about:'Nothing to say', interest: 'Everything', cid:'010101')
 alfonso.section = sections[1]
 alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 alfonso.courses << courses[1]
+alfonso.email = "alfongj@gmail.com"
 alfonso.save
 
 # TODO: Groups should only be created with a special function each time a user is
@@ -63,12 +67,12 @@ req.save
 
 # Makeing couple readers
 
-Stephanie = Student.create!(name: 'Stephanie', about:'Nothing to say', interest: 'Everything', cid:'000001')
-Stephanie.section = sections[1]
-Stephanie.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
-Stephanie.courses << courses[1]
-Stephanie.make_reader
-Stephanie.save
+stephanie = Student.create!(name: 'Stephanie', about:'Nothing to say', interest: 'Everything', cid:'000001')
+stephanie.section = sections[1]
+stephanie.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
+stephanie.courses << courses[1]
+stephanie.make_reader
+stephanie.save
 
 alan = Student.create!(name: 'alan', about:'Nothing to say', interest: 'Everything', cid:'000002')
 alan.section = sections[1]

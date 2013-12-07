@@ -49,9 +49,9 @@
           - @students.each do |s|
             %a.list-group-item{href: "/students/#{s.id}", id: "#{s.cid}"}
               .row
-                .col-lg-1.col-md-1.col-sm-2.col-xs-2
-                  %img.img-circle.img-responsive{alt: "User profile", src: "https://www.clt-lana.org/images/default-user.png"}/
-                .col-lg-11.col-md-11.col-sm-10.col-xs-10
+                .st-avatar.col-lg-1.col-md-1.col-sm-2.col-xs-12
+                  %img.img-circle.img-responsive{alt: "User profile", src: s.gravatar_url}/
+                .st-details.col-lg-11.col-md-11.col-sm-10.col-xs-12
                   %h4.list-group-item-heading= s.name
                   %p.list-group-item-text
                     %strong Section:

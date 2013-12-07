@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(:version => 20131207044049) do
 
   create_table "admins", :force => true do |t|
     t.integer  "cid"
-    t.string   "time_stamp"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -23,11 +22,11 @@ ActiveRecord::Schema.define(:version => 20131207044049) do
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
     t.integer  "task_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "title"
-    t.integer  "grade",      :default => -1
-    t.integer  "max_grade",  :default => -1, :null => false
+    t.decimal  "grade",      :default => -1.0
+    t.decimal  "max_grade",  :default => -1.0, :null => false
   end
 
   add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
@@ -78,14 +77,6 @@ ActiveRecord::Schema.define(:version => 20131207044049) do
 
   add_index "posts", ["assignment_id"], :name => "index_posts_on_assignment_id"
   add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
-
-  create_table "reader_requests", :force => true do |t|
-    t.integer  "requester"
-    t.boolean  "responded"
-    t.string   "time_stamp"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "sections", :force => true do |t|
     t.integer  "number"
