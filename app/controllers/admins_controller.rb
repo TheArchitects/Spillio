@@ -52,8 +52,7 @@ class AdminsController < AuthenticatedController
   end
 
   def assign_grade(assignment, score, max_score)
-    new_score = Score.create(:max_score=>max_score,:score=>score)
-    assignment.scores << new_score
+    assignment.score = new_score
   end
 
   def new_assignment

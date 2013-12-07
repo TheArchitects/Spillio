@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131127073408) do
+ActiveRecord::Schema.define(:version => 20131207044049) do
 
   create_table "admins", :force => true do |t|
     t.integer  "cid"
@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(:version => 20131127073408) do
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
     t.integer  "task_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "title"
+    t.integer  "grade",      :default => -1
+    t.integer  "max_grade",  :default => -1, :null => false
   end
 
   add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
@@ -84,16 +86,6 @@ ActiveRecord::Schema.define(:version => 20131127073408) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "scores", :force => true do |t|
-    t.decimal  "score",         :default => -1.0
-    t.decimal  "max_score"
-    t.integer  "assignment_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-  end
-
-  add_index "scores", ["assignment_id"], :name => "index_scores_on_assignment_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "number"
