@@ -2,7 +2,6 @@ class Assignment < ActiveRecord::Base
   belongs_to :group
 	belongs_to :task
 
-	has_many :scores
 	has_many :submissions
 	has_many :posts
 
