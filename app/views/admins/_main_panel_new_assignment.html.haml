@@ -1,49 +1,64 @@
+- content_for :scripts do
+  = javascript_include_tag 'new_assignment'
+
+/ Admin panel for assignment management
 .col-lg-9.col-md-9.col-sm-12.col-xs-12
   #accordion.panel-group
-    .panel.panel-default.assignment
+    .panel.panel-default.card-panel
       .panel-heading
-        #assignment-5.panel-collapse
-          .card
-            %h4 Assignment Name
-            .input-group{style: "width:50%"}
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#new-assignment"}
+            Create new assignment
+      #new-assignment.panel-collapse.collapse.in
+        .card#assignment-details
+          .row
+            .col-lg-3.col-md-4.col-sm-4.col-xs-12
+              %h4 Assignment Name
+            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
               %input.form-control{type: "text", name: "assignment_name"}/
-            %hr/
-            %h4 Due Date
-            .input-group{style: "width:50%"}
+          %hr/
+          .row
+            .col-lg-3.col-md-4.col-sm-4.col-xs-12
+              %h4 Due Date
+            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
               %input.form-control{type: "text", name: "due_date"}/
-              %span.input-group-addon /2013
               .input-group-btn
                 / Button and dropdown menu
                 %button.btn.btn-default{type: "button"} Calendar
-            %hr/
-            %h4 Possible points
-            .input-group{style: "width:50%"}
-              %input.form-control{type: "text", name: "possible_points"}/
-              .input-group-btn
-                / Button and dropdown menu
-                %button.btn.btn-default{type: "button"} Save
-            %hr/
-            %h4 Description
-            .input-group{style: "width:100%"}
-              %textarea.form-control{rows: "8", name: "description"}
-            %hr/
-            %h4 Required Submissions
-            %table.table.table-striped#submissions
-              %tr
-                %th Type
-                %th Name
-                %th Description
-              %tr
-                %td
-                  = select_tag "file type", options_for_select(['File', 'Link'])
-                %td
-                  .input-group{style: "width:50%"}
-                    %input.form-control{type: "text", name: "assignment_name_1", placeholder: "name"}/
-                %td
-                  .input-group{style: "width:50%"}
-                    %input.form-control{type: "text", name: "description1", placeholder: "description"}/
-              / TODO: Move that onclick to js handlers.
-              %button.btn.btn-success{onclick: "addRow()", style: "float:right", type: "button"} Add Another File
-              %br/
-            %button.btn.btn-success{style: "float:right; margin-bottom:40px", type: "button"} Save Changes
-            %br/
+          %hr/
+          .row
+            .col-lg-3.col-md-4.col-sm-4.col-xs-12
+              %h4 Maximum grade
+            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+              %input.form-control{type: "number", name: "possible_points"}/
+              %span.input-group-addon points
+          %hr/
+          .row
+            .col-lg-3.col-md-4.col-sm-4.col-xs-12
+              %h4 Description
+            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+              %textarea.form-control{rows: "6", name: "description"}
+        .card#assignment-submissions
+          %h4 Required Submissions
+          %table.table.table-striped#submissions
+            %tr
+              %th Type
+              %th Name
+              %th Description
+              %th
+            %tr
+              %td
+                = select_tag "submission_types[]", options_for_select(['File', 'Link'])
+              %td
+                .input-group
+                  %input.form-control{type: "text", name: "submission_names[]", placeholder: "Name"}/
+              %td
+                .input-group
+                  %input.form-control{type: "text", name: "submission_descriptions[]", placeholder: "Description"}/
+              %td
+                %button.btn.btn-warning.btn-sm.remove-submission
+                  %span.glyphicon.glyphicon-remove
+                %button.btn.btn-primary.btn-sm.add-submission
+                  %span.glyphicon.glyphicon-plus
+        .card#assignment-save
+          %button.btn.btn-success{type: "submit"} Save Changes
