@@ -17,6 +17,8 @@
         %button.btn.btn-default{id:"search", type: "submit"}
           %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
+        %li
+          =link_to "Admin Panel","#{admin_path}"
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             = "Admin"
