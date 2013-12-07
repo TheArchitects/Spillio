@@ -1,14 +1,14 @@
 module GroupDashBoardHelper
   def assignment_badge(assignment)
     if DateTime.now > assignment.due_date
-      score, max_score = assignment.total_score
-      if score.nil?
+      grade, max_grade = assignment.grade, assignment.max_grade
+      if grade.nil? || grade == -1
         haml_tag :span, :class => 'pull-right badge' do
           haml_concat("Not yet graded")
         end
       else
         haml_tag :span, :class => 'pull-right badge' do
-          haml_concat("Score: #{score}/#{max_score}")
+          haml_concat("Score: #{grade}/#{max_grade}")
         end
       end
     else

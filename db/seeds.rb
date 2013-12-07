@@ -82,9 +82,4 @@ william.courses << courses[1]
 william.make_reader
 william.save
 
-ReaderRequest.create(responded: false, requester: kayvan)
-ReaderRequest.create(responded: false, requester: kevin)
-
-
-
 puts "Seed planted :)"

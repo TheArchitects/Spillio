@@ -1,7 +1,6 @@
 class AdminsController < AuthenticatedController
 
   def index
-
   end
 
   def show
@@ -15,7 +14,6 @@ class AdminsController < AuthenticatedController
     when "ag"
       @partial = "main_panel_assign_grades"
     end
-
   end
 
   # returning all the groups associated to this reader
@@ -47,20 +45,17 @@ class AdminsController < AuthenticatedController
     group.save
   end
 
-  def post_new_task(title, description, due_date)
-    new_task = Task.create(:title=>title, :description=>description, :due_date=>due_date)
-  end
-
-  def assign_grades(assignment, score, max_score)
+  def assign_grade(assignment, score, max_score)
     assignment.score = new_score
   end
 
   def new_assignment
-
   end
 
   def post_new_assignment
-    # To Do Validate
+    # TODO: Update for new scoring system, for adding submission fields
+
+    # TODO Validate
     title = params[:task_name]
     description = params[:description]
     due_date = Date.parse(params[:due_date])

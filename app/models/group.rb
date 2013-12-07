@@ -20,11 +20,13 @@ class Group < ActiveRecord::Base
     Setting.first.max_group_size = max
   end
 
+  # TODO: Better name
   def self.get_groups_for(reader_id)
     self.where(reader_id: reader_id)
   end
 
   # TODO: Remove once we have isntructor functionality
+  # TODO: OR at least fix grade/score bug
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
 
