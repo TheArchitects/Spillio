@@ -51,7 +51,7 @@ class AdminsController < AuthenticatedController
     new_task = Task.create(:title=>title, :description=>description, :due_date=>due_date)
   end
 
-  def assign_grade(assignment, score, max_score)
+  def assign_grades(assignment, score, max_score)
     assignment.score = new_score
   end
 

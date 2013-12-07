@@ -22,6 +22,7 @@ class Assignment < ActiveRecord::Base
   end
 
   def total_score
+=begin
     total_max_score, total_score = 0, 0
     scores.each do |s|
       # At least one score hasn't been graded yet
@@ -38,5 +39,6 @@ class Assignment < ActiveRecord::Base
     else
       return total_score, total_max_score
     end
+=end
   end
 end
