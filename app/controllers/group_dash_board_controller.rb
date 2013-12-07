@@ -5,7 +5,12 @@ class GroupDashBoardController < AuthenticatedController
 	#display all the info of the group that belongs to
 	#authenticated user
 	def show
-		group_id = @authenticated_user.group.id
+		if @authenticated_user.class == Admin
+			group_id = params[:id]	
+		else
+			group_id = @authenticated_user.group.id		
+		end
+		
 		if group_id.to_s == params[:id]
 			@group = Group.find(group_id)
 		else
