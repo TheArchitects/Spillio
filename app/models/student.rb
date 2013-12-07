@@ -73,7 +73,9 @@ class Student < User
 	    )
 	end
 
-  def is_administrator
-    return false
+  def gravatar_url
+    email = self.email || "" #Possibly get the email with @student.email
+    gravatar_id = Digest::MD5::hexdigest(email.downcase)
+    "https://secure.gravatar.com/avatar/#{gravatar_id}?s=300"
   end
 end

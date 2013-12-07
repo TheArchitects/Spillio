@@ -6,3 +6,17 @@ body {
 #search-form {
   max-width: 400px;
 }
+
+.st-avatar {
+  padding-right: 0 !important;
+  padding-top: 5px !important;
+  padding-bottom: 15px !important;
+}
+
+.st-avatar > img {
+  margin: 0 auto;
+}
+
+.st-details {
+  padding-top: 5px !important;
+}

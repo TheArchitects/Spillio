@@ -20,9 +20,7 @@ class StudentsController < AuthenticatedController
   end
 
   def render_profile
-    email = @student.email || "" #Possibly get the email with @student.email
-    gravatar_id = Digest::MD5::hexdigest(email.downcase)
-    @gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
+    @gravatar_url = @student.gravatar_url
     render :profile
   end
 
