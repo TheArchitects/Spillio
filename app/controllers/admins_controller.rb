@@ -77,11 +77,14 @@ class AdminsController < AuthenticatedController
   end
 
   def promote_user_to_reader
-    student_to_promote = Student.find_by_id(params[:id])
-    student_to_promote.is_reader = true;
-    student_to_promote.save
-
-    flash[:notice] = "#{student_to_promote.name} became a reader."
+    if params[:id]=="-1"
+      flash[:error] = "You should be on the user's profile page before promoting!"      
+    else
+      student_to_promote = Student.find_by_id(params[:id])
+      student_to_promote.is_reader = true;
+      student_to_promote.save
+      flash[:notice] = "#{student_to_promote.name} became a reader."
+    end
     redirect_to :back
   end
 
@@ -91,7 +94,8 @@ class AdminsController < AuthenticatedController
 
   def check_for_admin
     unless @authenticated_user.class == Admin
-      render text: "Wow, are you an Admin?"
+      # The hacker will not even notice that this is a valid path ;)
+      render :file => 'public/404.html', :status => :not_found, :layout => false
     end
   end
 end

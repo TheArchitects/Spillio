@@ -9,6 +9,6 @@ class Setting < ActiveRecord::Base
 	end
 
 	def self.get_max_group_size
-		@@max_group_size ||= self.first.max_group_size
+		@@max_group_size = self.first.max_group_size
 	end
 end
