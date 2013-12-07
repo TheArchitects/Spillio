@@ -10,8 +10,8 @@ class AuthenticatedController  < ApplicationController
     # This may be nil if the user is not authenticated yet
     @authenticated_user = User.find_by_cid(session[:cas_user]) || Admin.find_by_cid(session[:cas_user])
     if @authenticated_user.nil?
-      render text: "Sorry, you are not authorized OR you dont have a user yet."
-      #head :forbidden and return false
+      render text: "Sorry, you are not authorized OR you haven't created a user yet."
+      return false
     end
   end
 end
