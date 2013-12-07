@@ -1,5 +1,7 @@
 class AdminsController < AuthenticatedController
 
+  before_filter :check_for_admin
+
   def index
   end
 
@@ -72,5 +74,24 @@ class AdminsController < AuthenticatedController
     end
 
     render :text => "Assignment posted :D"
+  end
+
+  def promote_user_to_reader
+    student_to_promote = Student.find_by_id(params[:id])
+    student_to_promote.is_reader = true;
+    student_to_promote.save
+
+    flash[:notice] = "#{student_to_promote.name} became a reader."
+    redirect_to :back
+  end
+
+
+  private
+
+
+  def check_for_admin
+    unless @authenticated_user.class == Admin
+      render text: "Wow, are you an Admin?"
+    end
   end
 end
