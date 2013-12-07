@@ -6,6 +6,7 @@ Spillio::Application.routes.draw do
   match 'group_join/accept/:id' => 'group_join#accept'
 
   # For CAS Login
+  match '/fake_login' => 'login#fake_login'
   match '/login' => 'login#login', :as => :login, via: [:get]
   match '/logout' => 'login#logout', :as => :logout, via: [:get]
   match '/account' => 'login#index', :as => :user_account, via: [:get]
@@ -21,7 +22,6 @@ Spillio::Application.routes.draw do
 
 
   # Admin Controller
-
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
   match '/admin/group_management' => 'admins#show', :as => :group_management, via: [:get]
   match '/admin/new_assignment' => 'admins#new_assignment', :as => :new_assignment
