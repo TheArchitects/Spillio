@@ -1,6 +1,5 @@
 Given /^I am logged in with cid "(.*)"$/i do |cas_user|
-  #CASClient::Frameworks::Rails::Filter.fake(cas_user)
-  visit("/fake_login?hacker_key=seacucumber&cid=#{cas_user}")
+  CASClient::Frameworks::Rails::Filter.fake(cas_user)
 end
 
 # Prefabricates a user model with the given cas ide so we dont need to go
