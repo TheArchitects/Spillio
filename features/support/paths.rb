@@ -26,6 +26,12 @@ module NavigationHelpers
     when /^the (?:View |New User |User )?Profile Page (?:for|of) "(.+)"$/i
       student_path(Student.find_by_name($1))
 
+    when /^the Group Managment page$/i
+      "/admin/?page=gm"
+
+    when /^the New Assignment page$/i
+      "/admin/?page=na"
+
     when /^the Search for Students Page$/
       student_search_path
 
