@@ -18,6 +18,6 @@ class Assignment < ActiveRecord::Base
 
   def posts_in_chronological_order
     posts = Post.where(:assignment_id => self.id)
-                .order(:date => :asc)
+                .order("published_at ASC")
   end
 end
