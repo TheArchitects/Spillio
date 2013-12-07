@@ -5,12 +5,17 @@ class AdminsController < AuthenticatedController
   end
 
   def show
-    #instructor? = @authenticated_user.is_administrator
-    #unless instructor?
-      #flash[:notice] = 'You do not have permission to view this page'
-      #redirect_to student_path @authenticated_user
-      #return
-    #end
+    @partial = "main_panel_group_management"
+
+    case params["page"]
+    when "gm"
+      @partial =  "main_panel_group_management"
+    when "na"
+      @partial = "main_panel_new_assignment"
+    when "ag"
+      @partial = "main_panel_assign_grades"
+    end
+
   end
 
   # returning all the groups associated to this reader
