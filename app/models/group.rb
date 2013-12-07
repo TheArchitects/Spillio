@@ -38,8 +38,6 @@ class Group < ActiveRecord::Base
       submitted_date: Date.parse('5-6-2006')
       })
     assignment_1.submissions << submission_1
-    score_1 = Score.create({:max_score => 20, :score => 10})
-    assignment_1.scores << score_1
     assignment_1.save
 
     task_2 = Task.mock_task_2

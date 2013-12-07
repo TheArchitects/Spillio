@@ -14,7 +14,7 @@
         %button.btn.btn-default{id:"search", type: "submit"}
           %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
-        = render 'shared/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
+        = render 'group_dash_board/incoming_group_requests', :group_requests => @authenticated_user.incoming_group_requests
         - unless @authenticated_user.group_id.nil?
           %li
             =link_to "My group","#{group_db_show_url @authenticated_user.group_id}"

@@ -31,7 +31,7 @@
                 %ul.dropdown-menu
                   - Group.all.each do |gr|
                     %li
-                      %a{href: "group/#{gr.id}"} #{gr.group_name}
+                      %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}
               %hr/
               .btn-group
                 %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
@@ -40,4 +40,4 @@
                 %ul.dropdown-menu
                   - Group.get_groups_for(@authenticated_user).each do |gr|
                     %li
-                      %a{href: "group/#{gr.id}"} #{gr.group_name}
+                      %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}
