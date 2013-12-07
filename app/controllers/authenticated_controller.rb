@@ -1,12 +1,8 @@
 class AuthenticatedController  < ApplicationController
 	# This requires the user to be authenticated for viewing allother pages.
-	before_filter :check_authenticated_credentials
+	before_filter CASClient::Frameworks::Rails::Filter, :except => [:login_controller => :fake_login]
   before_filter :get_authenticated_user
 
-
-  def check_authenticated_credentials
-    CASClient::Frameworks::Rails::Filter
-  end
 
   # Gets from the db the authenticated user model, returns forbidden if there
   # is not anyone.

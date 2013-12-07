@@ -31,7 +31,6 @@ end
 
 
 Then(/^I should see '(\d+)\/(\d+)' as a score$/) do |arg1, arg2|
-  CASClient::Frameworks::Rails::Filter.fake("homer")
   visit '/group/' + "#{Group.all[0].id}"
   assert page.has_content?('')
 end
