@@ -2,7 +2,6 @@ require 'digest/sha2'
 
 class LoginController < AuthenticatedController
 	skip_before_filter :get_authenticated_user, :only => [:login, :fake_login, :index]
-	skip_before_filter :check_authenticated_credentials, :only => [:fake_login]
 
 	@@god_key = "58fbd53cbd2048bed8d0721f7359fe19ad30406a92fddc9a1e60d816e28fb10f"
 

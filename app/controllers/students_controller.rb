@@ -84,7 +84,7 @@ class StudentsController < AuthenticatedController
     else
       missing = StudentsController.list_of_missing_params(s)
       flash[:notice] = "Please fill in the following fields: " + missing
-      redirect :back
+      redirect_to :back
     end
   end
 
