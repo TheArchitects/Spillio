@@ -1,11 +1,11 @@
 class Group < ActiveRecord::Base
-  belongs_to :instructor
+  belongs_to :reader, :class_name => "Student"
   belongs_to :section
   has_many :students
 	has_many :assignments
   has_many :group_join_requests
 	attr_accessible :group_name
-  attr_accessible :id, :instructor_id
+  attr_accessible :id
 
   # TODO Clean up max_students mess: we have them like three times
   def num_students
@@ -20,7 +20,13 @@ class Group < ActiveRecord::Base
     Setting.first.max_group_size = max
   end
 
+  # TODO: Better name
+  def self.get_groups_for(reader_id)
+    self.where(reader_id: reader_id)
+  end
+
   # TODO: Remove once we have isntructor functionality
+  # TODO: OR at least fix grade/score bug
   def self.create_group_with_mock_assignments(group_name)
     group = Group.create({group_name: group_name})
 
@@ -32,8 +38,6 @@ class Group < ActiveRecord::Base
       submitted_date: Date.parse('5-6-2006')
       })
     assignment_1.submissions << submission_1
-    score_1 = Score.create({:max_score => 20, :score => 10})
-    assignment_1.scores << score_1
     assignment_1.save
 
     task_2 = Task.mock_task_2

@@ -1,0 +1,35 @@
+.col-lg-9.col-md-9.col-sm-12.col-xs-12
+  #accordion.panel-group
+    - Task.all.each do |t|
+      %form.panel.panel-default.assignment{role: "update assignment grade", action: "update_grades_path"}
+        .panel-heading
+          %h4#iteration.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#task#{t.id}"}
+              #{t.title}
+            %span.pull-right.badge
+              Not yet assigned
+        .panel-collapse.collapse{id: "task#{t.id}"}
+          .card
+            %h4 Description
+            .panel-body
+              #{t.description}
+            %h4 Submissions
+            .panel-body
+              %div
+                %span Submitted file:
+                %a{href: "#"} Group1.zip
+                %span#time 11:59 PM   11/17/2013
+                %br/
+                %span Website link:
+                %a{href: "http://spillio.herokuapp.com"} spillio.herokuapp.com
+                %span#time 11:59 PM   11/17/2013
+                %hr/
+              .row
+                .col-lg-6{style: "float:right"}
+                  .input-group
+                    %input.form-control{type: "text"}/
+                    %span.input-group-addon /20
+                    %span.input-group-btn
+                      %button.btn.btn-default{type: "button"} Submit grade
+    %br/
+/ / Assignment dahsboard panel

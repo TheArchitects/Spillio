@@ -1,0 +1,43 @@
+.col-lg-3.col-md-3.col-sm-12.col-xs-12
+  .panel.panel-default
+    .panel-body
+      .panel.panel-default.assignment
+        .panel-heading
+          %h4.panel-title
+            %a{href: "/admin/?page=gm"}
+              Group Management
+      .panel.panel-default.assignment
+        .panel-heading
+          %h4.panel-title
+            %a{href: "/admin/?page=na"}
+              New Assignment
+      .panel.panel-default.assignment
+        .panel-heading
+          %h4.panel-title
+            %a{href: "/admin/?page=ag"}
+              Assign Grades
+      .panel.panel-default.assignment
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-manage"}
+              Groups
+        #group-manage.panel-collapse.collapse
+          .card
+            .btn-group
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                  All Groups
+                  %span.caret
+                %ul.dropdown-menu
+                  - Group.all.each do |gr|
+                    %li
+                      %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}
+              %hr/
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                  My Groups
+                  %span.caret
+                %ul.dropdown-menu
+                  - Group.get_groups_for(@authenticated_user).each do |gr|
+                    %li
+                      %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}

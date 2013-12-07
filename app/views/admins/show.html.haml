@@ -1,0 +1,28 @@
+= javascript_include_tag "new_assignment"
+- content_for :title do
+  = "Dashboard"
+
+- content_for :styles do
+  = stylesheet_link_tag 'group_dash_board'
+
+/ Navbar
+= render "navbar"
+
+/ Page body
+.container
+  .container
+    .row
+      %h3= "Admin Console"
+      %hr/
+    .row
+      - if flash[:notice]
+        .alert.alert-warning= flash[:notice]
+      - if flash[:error]
+        .alert.alert-error= flash[:error]
+    / Left panel
+    =render "left_panel"
+    / / main Panel
+    
+    =render @partial
+    
+

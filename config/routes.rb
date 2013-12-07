@@ -6,6 +6,7 @@ Spillio::Application.routes.draw do
   match 'group_join/accept/:id' => 'group_join#accept'
 
   # For CAS Login
+  match '/fake_login' => 'login#fake_login'
   match '/login' => 'login#login', :as => :login, via: [:get]
   match '/logout' => 'login#logout', :as => :logout, via: [:get]
   match '/account' => 'login#index', :as => :user_account, via: [:get]
@@ -18,12 +19,12 @@ Spillio::Application.routes.draw do
   put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
   post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
 
-  # For Group Management Controller
-  match 'group_management' => 'instructors#show', :as => :group_management_show, via: [:get]
-  match 'new_assignment' => 'instructors#new_assignment'
-  match 'post_assignment' => 'instructors#post_new_assignment'
-  match 'assign_grades' => 'instructors#assign_grades'
-  match 'group_management/update' => 'instructors#update'
+
+
+  # Admin Controller
+  match '/admin/promote_user_to_reader/:id' => 'admins#promote_user_to_reader', :as => :promote_to_reader
+  match '/admin/update' => 'admins#update', :as => :update_settings
+  match '/admin' => 'admins#show', :as => :admin, via: [:get]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

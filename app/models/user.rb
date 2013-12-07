@@ -29,6 +29,14 @@ class User < ActiveRecord::Base
     GroupJoinRequest.where(:requestee_id => self)
   end
 
+  def self.get_readers
+    User.where(:is_reader=>true)
+  end
+
+  def make_reader
+    self.is_reader = true
+    self.save
+  end
 
 
   private

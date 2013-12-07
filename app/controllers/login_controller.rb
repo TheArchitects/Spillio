@@ -1,11 +1,19 @@
+require 'digest/sha2'
+
 class LoginController < AuthenticatedController
-	skip_before_filter :get_authenticated_user, :only => [:login, :index]
+	skip_before_filter :get_authenticated_user, :only => [:login, :fake_login, :index]
+
+	@@god_key = "58fbd53cbd2048bed8d0721f7359fe19ad30406a92fddc9a1e60d816e28fb10f"
 
 	def index
 		if User.exists_with_cid? session[:cas_user]
 			#existing user
 			authenticated_user = User.find_by_cid(session[:cas_user])
 			redirect_to group_db_show_url authenticated_user.group.id
+		elsif Admin.exists_with_cid? session[:cas_user]
+			#existing admin
+			authenticated_user = Admin.find_by_cid(session[:cas_user])
+			redirect_to admin_url
 		else
 			#new user
 			redirect_to new_student_path
@@ -17,7 +25,24 @@ class LoginController < AuthenticatedController
 		@cid = session[:cas_user]
 		@login_url = CASClient::Frameworks::Rails::Filter.login_url(self)
 		#when the login was successful
+
+		# TODO: take into account that an admin may log in
 		redirect_to user_account_path
+	end
+
+
+	# Manual login
+	def fake_login
+		if params.has_key?("hacker_key") &&
+			params.has_key?("cid") &&
+			is_god?(params[:hacker_key])
+
+			CASClient::Frameworks::Rails::Filter.fake(params[:cid])
+			session[:cas_user] = params[:cid]
+			redirect_to root_url
+		else
+			render :text => "Were u tryin' to hack us?"
+		end
 	end
 
 
@@ -31,5 +56,13 @@ class LoginController < AuthenticatedController
 
 	def self.logged_in?
 		@cid!=nil
+	end
+
+
+	private
+
+	def is_god?(key)
+		digest = Digest::SHA2.new << key
+		return digest == @@god_key
 	end
 end

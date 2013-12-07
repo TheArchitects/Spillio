@@ -15,7 +15,7 @@ Feature: Submit assignments online
     Given I click on "iteration1-1" under tasks
     And I fill in "description" with "This is our iteration 1-1."
     And I fill in "file to upload" with "iteration1-1.zip"
-    And I press "Submit"
+    And I press "Submit" button
     Then I should see "Assignment Submitted Successfully!"
 
   Scenario: Upload a link
@@ -23,11 +23,11 @@ Feature: Submit assignments online
     And I fill in "description" with "This is our deployed iteration 1-2."
     And I select "Heroku Link" from the "Link Type" drop down menu
     And I fill in "link" with "https://cool-webapp.heroku.com"
-    And I press "Submit"
+    And I press "Submit" button
     Then I should see "Assignment Submitted Successfully!"
 
   Scenario: Upload nothing and attempt to submit my assignment
     Given I click on "iteration1-1" under tasks
     And I fill in "description" with "This is our iteration 1-1."
-    And I press "Submit"
+    And I press "Submit" button
     Then I should see "Error: You must select a file or provide a link"

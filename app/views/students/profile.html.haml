@@ -16,19 +16,22 @@
   / Form
   .container
     / Top section
+    .row#top-section
+      .pull-left
+        - if @view_only
+          %h3 #{@student.name}'s profile
+        - else
+          %h3 Edit your profile
+      .pull-right
+        = render 'join_student_group'
     .row
-      - if @view_only
-        %h3 #{@student.name}'s profile
-      - else
-        %h3 Edit your profile
-      = render 'join_student_group'
       %hr/
       - if flash[:notice]
         .alert.alert-warning= flash[:notice]
     = form_for @student, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
       .row
         / Top left section
-        #student-info-section.col-xs-12.col-sm-12.col-md-8.col-lg-8
+        #student-info-section.col-xs-12.col-sm-12.col-md-9.col-lg-9
           .panel.panel-default
             .panel-heading Personal info:
             .panel-body
@@ -65,9 +68,8 @@
                     = f.text_area :about, :class => 'form-control', :rows => '4', :required => true
         / / Top left section
         / Image section
-        #image-section.col-xs-12.col-sm-12.col-md-4.col-lg-4
-          .thumbnail
-            %img#avatar-image.img-square.img-responsive{alt: "User profile", src: "#{@gravatar_url}"}
+        #image-section.col-xs-12.col-sm-12.col-md-3.col-lg-3
+          %img#avatar-image.img-circle.img-responsive{alt: "User profile", src: "#{@gravatar_url}"}
         / Image section
       / / Top section
       .row.hide
