@@ -8,6 +8,7 @@ Spillio::Application.routes.draw do
   # For CAS Login
   match '/fake_login' => 'login#fake_login'
   match '/login' => 'login#login', :as => :login, via: [:get]
+  match '/fake_logout' => 'login#fake_logout'
   match '/logout' => 'login#logout', :as => :logout, via: [:get]
   match '/account' => 'login#index', :as => :user_account, via: [:get]
 

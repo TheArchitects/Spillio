@@ -5,9 +5,5 @@ class HomeController < ApplicationController
 			authenticated_user = User.find_by_cid(session[:cas_user])
 			redirect_to group_db_show_url authenticated_user.group.id
 		end
-
-		@login_link = login_path
-
 	end
-
 end
