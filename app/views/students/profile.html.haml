@@ -26,8 +26,6 @@
         = render 'join_student_group'
     .row
       %hr/
-      - if flash[:notice]
-        .alert.alert-warning= flash[:notice]
     = form_for @student, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
       .row
         / Top left section

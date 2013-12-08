@@ -83,7 +83,7 @@ class StudentsController < AuthenticatedController
       create_and_render_student(s, student_cid)
     else
       missing = StudentsController.list_of_missing_params(s)
-      flash[:notice] = "Please fill in the following fields: " + missing
+      flash[:error] = "Please fill in the following fields: " + missing
       redirect_to :back
     end
   end
