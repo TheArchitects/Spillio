@@ -27,7 +27,8 @@ body {
   overflow-x: hidden;
 }
 
-.card-panel > .panel-collapse > .card:first-child {
+.card-panel > .panel-collapse > .card:first-child,
+#assignment-details {
   margin-top: 10px;
 }
 

@@ -8,6 +8,7 @@ Spillio::Application.routes.draw do
   # For CAS Login
   match '/fake_login' => 'login#fake_login'
   match '/login' => 'login#login', :as => :login, via: [:get]
+  match '/fake_logout' => 'login#fake_logout'
   match '/logout' => 'login#logout', :as => :logout, via: [:get]
   match '/account' => 'login#index', :as => :user_account, via: [:get]
 
@@ -24,6 +25,7 @@ Spillio::Application.routes.draw do
   # Admin Controller
   match '/admin/promote_user_to_reader/:id' => 'admins#promote_user_to_reader', :as => :promote_to_reader
   match '/admin/update' => 'admins#update', :as => :update_settings
+  match '/admin/create_task' => 'admins#post_new_assignment', via: [:post]
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
 
   # The priority is based upon order of creation:
