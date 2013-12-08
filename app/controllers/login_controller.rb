@@ -1,7 +1,7 @@
 require 'digest/sha2'
 
 class LoginController < AuthenticatedController
-	skip_before_filter :get_authenticated_user, :only => [:login, :fake_login, :index]
+	skip_before_filter :get_authenticated_user, :only => [:login, :logout, :fake_login, :index]
 
 	@@god_key = "58fbd53cbd2048bed8d0721f7359fe19ad30406a92fddc9a1e60d816e28fb10f"
 
@@ -31,17 +31,19 @@ class LoginController < AuthenticatedController
 	end
 
 
+	# TODO: remove or limit this & fake_logout to dev only
 	# Manual login
 	def fake_login
 		if params.has_key?("hacker_key") &&
-			params.has_key?("cid") &&
-			is_god?(params[:hacker_key])
+				params.has_key?("cid") &&
+				is_god?(params[:hacker_key])
 
 			CASClient::Frameworks::Rails::Filter.fake(params[:cid])
-			session[:cas_user] = params[:cid]
+			flash[:success] = "You have successfully backdoored into the system"
 			redirect_to root_url
 		else
-			render :text => "Were u tryin' to hack us?"
+			flash[:warning] = "Were you trying to hack us?"
+			redirect_to :back
 		end
 	end
 
@@ -49,6 +51,13 @@ class LoginController < AuthenticatedController
 	def logout
 		CASClient::Frameworks::Rails::Filter.logout(self)
 	end
+
+	# Manual logout
+	def fake_logout
+		CASClient::Frameworks::Rails::Filter.unfake
+		redirect_to :logout
+	end
+
 
 	def self.get_cid
 		@cid = session[:cas_user]
