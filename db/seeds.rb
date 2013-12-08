@@ -91,10 +91,6 @@ submission_2 = Submission.create({
   })
 assignment_2.submissions << submission_2
 assignment_2.save
-rolling.students << kayvan
-rolling.students << megumi
-rolling.save
-
 
 rolling.students << kevin
 rolling.save
