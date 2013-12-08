@@ -1,6 +1,6 @@
 %h4 Grade and Feedback
 .panel-body
-%form{action: "#{save_grade_path}"}
+= form_tag({:action => 'save_grade', :controller=>'group_dash_board', :id=>params[:id], :method=>'put'}) do
   .form-group
     .row
       %label.col-md-4.control-label{for: "grade"} Grade:
