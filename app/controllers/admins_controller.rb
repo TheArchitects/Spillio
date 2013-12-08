@@ -7,6 +7,7 @@ class AdminsController < AuthenticatedController
 
   def show
     @partial = "main_panel_group_management"
+    @cur_page = params["page"]
 
     case params["page"]
     when "gm"

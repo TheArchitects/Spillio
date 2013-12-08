@@ -29,7 +29,7 @@ Feature: Project Upload
     When I click "Project Management" link
     And I fill in "Title" with "Cool Project" within "#new-project"
     And I fill in "Project Portal url" with "http://url.com" within "#new-project"
-    And I press "Submit Assignment" button
+    And I press "Import project" button
     Then I should see "Cool Project added!"
     And I should see "Cool Project" within "#project-list"
     And I should see "No group assigned yet" within "#project-list"
