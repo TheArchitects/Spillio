@@ -18,12 +18,11 @@ class AdminsController < AuthenticatedController
 
   # TODO: Refactor with better name, Validate
   def update
-    if params.has_key? "group_size" && (not params[:group_size].empty?)
+    if ((params.has_key?(:group_size)) && (not params[:group_size].empty?))
       update_max_group_size(params[:group_size])
     end
-
-    if params.has_key? "group_reader" && (not params[:group_reader].empty?)
-      udate_group_readers(params[:group_reader])
+    if ((params.has_key?(:group_reader)) && (not params[:group_reader].empty?))
+      update_group_readers(params[:group_reader])
     end
     redirect_to admin_path
   end
@@ -74,14 +73,14 @@ class AdminsController < AuthenticatedController
 
   def update_max_group_size(new_group_size)
     if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
-      Setting.set_max_group_size(params[:group_size])
       flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
+      Setting.set_max_group_size(params[:group_size])
     end
   end
 
   def update_group_readers(group_readers)
+    updated_any_reader = false
     group_readers.each do |group_id, reader_id|
-      updated_any_reader = false
       if (not reader_id.empty?) && reader_id != "Please select"
         if (assign_reader_to_a_group(group_id, reader_id))
           updated_any_reader = true

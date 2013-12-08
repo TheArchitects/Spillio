@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20131207044049) do
 
   create_table "submissions", :force => true do |t|
     t.string   "label"
-    t.string   "type"
+    t.string   "subm_type"
     t.text     "content"
     t.datetime "submitted_date"
     t.integer  "assignment_id"

@@ -9,11 +9,12 @@ class Task < ActiveRecord::Base
       assignment.max_grade = max_grade
       assignment.save
 
-      0.upto(submission_types-1) do |i|
+      0.upto(submission_types.length-1) do |i|
         label = submission_labels[i]
         type = submission_types[i]
-        submission = Submission.create!(:label => label, :type => type,
-          :assignment => assignment)
+        submission = Submission.create!(:label => label, :subm_type => type)
+        submission.assignment = assignment
+        submission.save
       end
     end
   end
