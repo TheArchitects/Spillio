@@ -57,8 +57,10 @@ class GroupDashBoardController < AuthenticatedController
 	def create_post
 		assignment_id = params[:assignment_id]
 
-		if Assignment.exists?(assignment_id)
-			assignment = Assignment.find(assignment_id)
+		assignment = Assignment.find(assignment_id)
+		group_id = assignment.group_id
+
+		if @authenticated_user.class != Admin
 			post = Post.create({
 				content: params[:content],
 				published_at: DateTime.now
@@ -70,14 +72,14 @@ class GroupDashBoardController < AuthenticatedController
 			post.author = @authenticated_user
 			post.save
 
-			group_id = assignment.group_id
+			redirect_to group_db_show_url(group_id)
+			return
+		else
+			flash[:info] = "Admin can not post here."
 			redirect_to group_db_show_url(group_id)
 			return
 		end
 
-		render text: "Sad panda. You tried to do something weird"
-
-		# TODO Do proper Sad path
 	end
 
 private
