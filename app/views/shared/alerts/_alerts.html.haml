@@ -1,0 +1,14 @@
+- if flash[:success]
+  = render :partial => 'shared/alerts/alert_success', :locals => {:message => flash[:success]}
+
+- if flash[:info]
+  = render :partial => 'shared/alerts/alert_info', :locals => {:message => flash[:info]}
+
+- if flash[:warning]
+  = render :partial => 'shared/alerts/alert_warning', :locals => {:message => flash[:warning]}
+
+- if flash[:danger]
+  = render :partial => 'shared/alerts/alert_danger', :locals => {:message => flash[:danger]}
+
+- if flash[:error]
+  = render :partial => 'shared/alerts/alert_danger', :locals => {:message => flash[:error]}

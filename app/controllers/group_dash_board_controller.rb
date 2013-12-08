@@ -6,15 +6,15 @@ class GroupDashBoardController < AuthenticatedController
 	#authenticated user
 	def show
 		if @authenticated_user.class == Admin
-			group_id = params[:id]	
+			group_id = params[:id]
 		else
-			group_id = @authenticated_user.group.id		
+			group_id = @authenticated_user.group.id
 		end
-		
+
 		if group_id.to_s == params[:id]
 			@group = Group.find(group_id)
 		else
-			flash[:notice] = 'You are not allowed to check this group :)'
+			flash[:warning] = 'You are not allowed to check this group :)'
 			redirect_to student_path @authenticated_user
 			return
 		end

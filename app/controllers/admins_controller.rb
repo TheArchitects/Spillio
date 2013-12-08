@@ -24,7 +24,7 @@ class AdminsController < AuthenticatedController
   def update
     new_group_size = params[:group_size]
     if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
-      flash[:notice] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
+      flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
       Setting.set_max_group_size(params[:group_size])
     end
     if params[:group_reader]
@@ -33,7 +33,7 @@ class AdminsController < AuthenticatedController
           assign_reader_to_a_group(group_id, reader_id)
         end
       end
-      flash[:notice] = "Changes to group readers have been saved."
+      flash[:success] = "Changes to group readers have been saved."
     end
     redirect_to admin_path
   end
@@ -78,7 +78,7 @@ class AdminsController < AuthenticatedController
     student_to_promote = Student.find_by_id(params[:id])
     student_to_promote.is_reader = true;
     student_to_promote.save
-    flash[:notice] = "#{student_to_promote.name} became a reader."
+    flash[:success] = "#{student_to_promote.name} became a reader."
     redirect_to :back
   end
 

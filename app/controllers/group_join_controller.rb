@@ -13,13 +13,13 @@ class GroupJoinController < AuthenticatedController
     when 'merge'
       # from a group to a group
       forge_request('merge', from, to)
-      flash[:notice] = "Merge request sent to #{to.name}"
+      flash[:success] = "Merge request sent to #{to.name}"
     when 'join'
       # from a student to a group
       forge_request('join', from, to)
-      flash[:notice] = "Invitation sent to #{to.name}"
+      flash[:success] = "Invitation sent to #{to.name}"
     else
-      flash[:notice] = "Sorry, I did not understand your request!"
+      flash[:error] = "Sorry, I did not understand your request!"
     end
 
     redirect_to :back
@@ -43,7 +43,7 @@ class GroupJoinController < AuthenticatedController
         # from a student to a group
         accept_join(req, false)
       else
-        flash[:notice] = "Sorry, we did not understand your request!"
+        flash[:error] = "Sorry, we did not understand your request!"
         redirect_to :back
       end
     else
@@ -94,10 +94,10 @@ private
     merged_group_id = Group.merge_groups(group1_id,group2_id)
 
     if merged_group_id
-      flash[:notice] = "Groups merged"
+      flash[:success] = "Groups merged"
       redirect_to group_db_show_path merged_group_id
     else
-      flash[:notice] = "Maximum size exceded"
+      flash[:error] = "Maximum size exceded"
       redirect_to :back
     end
 
