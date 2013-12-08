@@ -1,0 +1,37 @@
+/* line 1, ../../app/assets/stylesheets/student_search.css.scss */
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+/* line 6, ../../app/assets/stylesheets/student_search.css.scss */
+#search-form {
+  max-width: 400px;
+}
+
+/* line 10, ../../app/assets/stylesheets/student_search.css.scss */
+.st-avatar {
+  padding-right: 0 !important;
+  padding-top: 5px !important;
+  padding-bottom: 15px !important;
+}
+
+/* line 16, ../../app/assets/stylesheets/student_search.css.scss */
+.st-avatar > img {
+  margin: 0 auto;
+}
+
+/* line 20, ../../app/assets/stylesheets/student_search.css.scss */
+.st-details {
+  padding-top: 5px !important;
+}
+
+/* line 24, ../../app/assets/stylesheets/student_search.css.scss */
+.st-name {
+  display: inline-block;
+}
+
+/* line 28, ../../app/assets/stylesheets/student_search.css.scss */
+.st-title {
+  display: inline-block;
+}

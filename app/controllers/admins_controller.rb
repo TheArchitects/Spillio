@@ -13,8 +13,6 @@ class AdminsController < AuthenticatedController
       @partial =  "main_panel_group_management"
     when "na"
       @partial = "main_panel_new_assignment"
-    when "ag"
-      @partial = "main_panel_assign_grades"
     end
   end
 
