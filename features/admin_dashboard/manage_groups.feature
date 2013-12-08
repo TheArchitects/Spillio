@@ -5,9 +5,6 @@ Feature: Assign groups to instructors
 
   Background: I am a logged in admin in the dashboard
     Given settings set
-	  Given the following instructor exists:
-	  |id |name    |
-	  |88 |Robocop |
 
 	  And the following group exists:
 	  |group_name | id |instructor_id |

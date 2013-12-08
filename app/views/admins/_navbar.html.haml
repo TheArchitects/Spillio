@@ -24,8 +24,9 @@
             = "Admin"
             %b.caret
           %ul.dropdown-menu
-            %li
-              =link_to "Promote to Reader","#{promote_to_reader_path(params[:id]||-1)}"
+            -if @show_promote_link
+              %li
+                =link_to "Promote to Reader","#{promote_to_reader_path(params[:id]||-1)}"
             %li
               =link_to "Logout","#{logout_path}"
     / /.nav-collapse

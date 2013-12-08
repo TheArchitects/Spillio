@@ -16,6 +16,7 @@ class StudentsController < AuthenticatedController
   def show
     @student = Student.find(params[:id])
     @view_only = true
+    @show_promote_link = true
     render_profile
   end
 
@@ -69,8 +70,6 @@ class StudentsController < AuthenticatedController
     @any_results = @students.any?
     @num_pages = num_pages
   end
-
-
 
   private
 
