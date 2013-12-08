@@ -67,9 +67,10 @@ class Student < User
 
   # Checks if this student can potentially be joined in a group by another
 	def joinable_by?(other_student)
-	  # False if self doesn't have a group or self equals the other student
 	  return (
-	      (not other_student == self)
+	      (not other_student == self) and #can not invite/merge/join  yourself
+        (other_student.class!=Admin) and # admin can not invite/merge/join to anyone
+        (not is_reader) # can not invite/merge/join with a reader
 	    )
 	end
 

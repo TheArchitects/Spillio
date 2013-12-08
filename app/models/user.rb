@@ -21,10 +21,6 @@ class User < ActiveRecord::Base
     return type == 'Student'
   end
 
-  def is_instructor?
-    return type == 'Instructor'
-  end
-
   def incoming_group_requests
     GroupJoinRequest.where(:requestee_id => self)
   end
