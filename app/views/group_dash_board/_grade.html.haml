@@ -1,14 +1,14 @@
 %h4 Grade and Feedback
 .panel-body
-%form{role: "form"}
+%form{action: "#{save_grade_path}"}
   .form-group
     .row
       %label.col-md-4.control-label{for: "grade"} Grade:
       .col-md-4
         .input-group
-          %input#grade.form-control{placeholder: "0", type: "text"}/
-          %span.input-group-addon /20
+          %input#grade.form-control{name: "grade", placeholder: "#{assignment.grade}", type: "text"}/
+          %span.input-group-addon /#{assignment.max_grade}
   %label.control-label.text-left{for: "comments"} Comments:
   .form-group
-    = text_area_tag :content, nil, :rows => 3, :class => 'form-control', :required => true
-  %submit.btn.btn-primary{type: "submit"} Save
+    = text_area_tag :content, "#{assignment.ta_feedback}", :rows => 3, :class => 'form-control', :required => true
+  %button.btn.btn-primary{type: "submit"} Save

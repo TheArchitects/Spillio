@@ -10,7 +10,7 @@ setting.max_group_size = 6
 setting.save
 
 
-admin = Admin.create(cid: 760906)
+admin = Admin.create(cid: 1007417)
 admin.save
 
 

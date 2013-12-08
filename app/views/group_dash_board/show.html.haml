@@ -46,8 +46,9 @@
                   .panel-body
                     = assignment.description
                   = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
-                .card.grade
-                  = render :partial => 'grade', :locals => {:assignment => assignment}
+                - if @authenticated_user.class == Admin
+                  .card.grade
+                    = render :partial => 'grade', :locals => {:assignment => assignment}
                 .card.messages
                   = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
       / / Assignment dashboard panel

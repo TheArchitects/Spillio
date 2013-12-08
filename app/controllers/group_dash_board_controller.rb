@@ -39,6 +39,17 @@ class GroupDashBoardController < AuthenticatedController
 		# TODO Do proper Sad path
 	end
 
+  def save_grade
+		if @authenticated_user.class == Admin
+      assignment = Assignment.find(params[:id])
+      assignment.grade = params[:grade]
+      assignment.ta_feedback = params[:content]
+      assignment.save
+      group_id = assignment.group_id
+      redirect_to group_db_show_url(group_id)
+    end
+  end
+
 	#Creates a new post for the specified assignment
 	def create_post
 		assignment_id = params[:assignment_id]
