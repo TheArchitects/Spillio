@@ -53,8 +53,9 @@ task_1 = Task.mock_task_1
 assignment_1 = Assignment.create_from_group_and_task(the_beatles, task_1)
 submission_1 = Submission.create({
   label: "Your credit card details plz",
-  content: "Sure: 1234-1234-1324-1234",
-  submitted_date: Date.parse('5-6-2006')
+  content: "http://www.google.com",
+  submitted_date: Date.parse('5-6-2006'),
+  subm_type: "Link"
   })
 assignment_1.submissions << submission_1
 assignment_1.save
@@ -63,6 +64,7 @@ task_2 = Task.mock_task_2
 assignment_2 = Assignment.create_from_group_and_task(the_beatles, task_2)
 submission_2 = Submission.create({
   label: "Plz gimme the codez",
+  subm_type: "File"
   })
 assignment_2.submissions << submission_2
 assignment_2.save
@@ -78,8 +80,9 @@ task_1 = Task.mock_task_1
 assignment_1 = Assignment.create_from_group_and_task(rolling, task_1)
 submission_1 = Submission.create({
   label: "Your credit card details plz",
-  content: "Sure: 1234-1234-1324-1234",
-  submitted_date: Date.parse('5-6-2006')
+  content: "http://www.google.com",
+  submitted_date: Date.parse('5-6-2006'),
+  subm_type: "Link"
   })
 assignment_1.submissions << submission_1
 assignment_1.save
@@ -88,6 +91,7 @@ task_2 = Task.mock_task_2
 assignment_2 = Assignment.create_from_group_and_task(rolling, task_2)
 submission_2 = Submission.create({
   label: "Plz gimme the codez",
+  subm_type: "File"
   })
 assignment_2.submissions << submission_2
 assignment_2.save
