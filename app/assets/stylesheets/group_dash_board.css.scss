@@ -1,29 +1,33 @@
+/*
+ * This css is used both for group dashboard and admin panel
+ */
+
 body {
   padding-top: 70px;
 }
 
 .card {
-    padding:1.5rem;
-    box-shadow:0 1px 2px #aaa;
-    background:white;
-    margin:0 1rem 1rem;
-    border-radius:3px;
-    user-select:none;
-    animation:fly-in-from-left .5s 1s ease both;
-    transform-origin:top left;
+  padding:1.5rem;
+  box-shadow:0 1px 2px #aaa;
+  background:white;
+  margin:0 1rem 1rem;
+  border-radius:3px;
+  user-select:none;
+  animation:fly-in-from-left .5s 1s ease both;
+  transform-origin:top left;
 }
 
-.assignment {
+.card-panel {
   background-color: #d5d5d5;
 }
 
-.assignment > .panel-collapse {
+.card-panel > .panel-collapse {
   max-height: 400px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
-.assignment > .panel-collapse > .card:first-child {
+.card-panel > .panel-collapse > .card:first-child {
   margin-top: 10px;
 }
 
@@ -51,3 +55,20 @@ span.author {
   text-align: right;
 }
 
+#max-group-size {
+  max-width: 200px;
+}
+
+#assignment-save {
+  padding: 0px;
+  background: transparent;
+}
+
+#assignment-save > button {
+  width: 100%;
+}
+
+.remove-submission, .add-submission {
+  width: 43px;
+  height: 43px;
+}

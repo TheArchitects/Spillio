@@ -1,20 +1,23 @@
-/ Assignment dahsboard panel
+/ Admin panel for group management
 %form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update group settings", action: "#{update_settings_path}"}
   #accordion.panel-group
-    .panel.panel-default.assignment
+    .panel.panel-default.card-panel
       .panel-heading
-        %h4#iteration.panel-title
-          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-5"}
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-settings"}
             General Group Settings
-      #assignment-5.panel-collapse
+      #group-settings.panel-collapse.collapse.in
         .card
           %h4 Maximum Group Size
-          .input-group{style: "width:30%"}
-            %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "text", name: "group_size"}/
-          %hr/
-          %h4 Submissions
-          %hr/
-          %h4 Assign Instructors to Groups
+          #max-group-size.input-group
+            %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "number", name: "group_size"}/
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-list"}
+            Group list
+      #group-list.panel-collapse.collapse
+        .card
           %table.table.table-striped
             %tr
               %th Group
@@ -31,11 +34,10 @@
                       %option{selected: "selected", value: "Please select"} Please select:
                     - else
                       %option{selected: "selected", value: gr.reader.id} #{gr.reader.name}
-
                     - User.get_readers.each do |reader|
                       %option{value: reader.id} #{reader.name}
     %br/
-    %button.btn.btn-success{style: "float:right", type: "submit"} Make Changes
+    %button.btn.btn-success{style: "float:right", type: "submit"} Apply Changes
   %br/
   %br/
   %br/
