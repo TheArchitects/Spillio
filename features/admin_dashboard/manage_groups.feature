@@ -21,8 +21,15 @@ Feature: Assign groups to a reader
     And I am on the admin panel page
 
 
-  Scenario: Assign Robocop to group_a
+  Scenario: Assign a group to a reader
     When I click "Group Management" link
     When I select "Kevin" from group reader for "33"
     And I press "Apply Changes" button
     Then I should see "Changes to group readers have been saved."
+
+  Scenario: change group size
+    Given the group size is 3
+    When I fill in "group_size" with "5"
+    And I press "Apply Changes" button
+    Then I should see "Current size is 5"
+
