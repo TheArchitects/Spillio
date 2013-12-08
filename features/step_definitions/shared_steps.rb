@@ -19,7 +19,7 @@ Given /^I am logged in with cid "(.*)" as a (.*)$/i do |cas_user, user_type|
       }
       Student.create_or_update(s, cas_user)
     end
-    # TODO Implement more cases: instructor, admin
+    # TODO Implement more cases: reader, admin
   end
 end
 
