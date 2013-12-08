@@ -36,3 +36,9 @@ Given(/the following student[s]? exist[s]?:$/) do |table|
     Student.create!(stu)
   end
 end
+
+Given(/^the student with cid "(.*?)" is a reader$/) do |arg1|
+  s = Student.find_by_cid(arg1)
+  s.make_reader
+  s.save
+end

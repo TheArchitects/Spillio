@@ -1,24 +1,28 @@
-Feature: Assign groups to instructors
+Feature: Assign groups to a reader
   As a class administrator
-  I want to be able to assign groups to TAs
+  I want to be able to assign groups to TAs or Readers
   So TAs can work with groups and give them feedback
 
-  Background: I am a logged in admin in the dashboard
+  Background:
     Given settings set
+    And I am logged in as admin
+    And the following groups exist:
+    | id | group_name     |
+    | 33 | Alfonso's group|
+    | 77 | Kayvan's group |
+    | 44 | Arturo's group |
+    
+    Given the following users exist:
+    | name   | about | cid   | interest|
+    | Kevin  | about | 33333 | interest|
+    | Kayvan | about | 44444 | interest|
+    Given the student with cid "33333" is a reader
+    Given the student with cid "44444" is a reader
+    And I am on the admin panel page
 
-	  And the following group exists:
-	  |group_name | id |instructor_id |
-  	|group_a    | 27 |88            |
-
-	  And the following students exist:
-	  |id |name |group_id |
-	  |45 |Pepe |27       |
-	  |64 |John |27       |
 
   Scenario: Assign Robocop to group_a
-    Given I am on the dashboard
-    And I click on "Group Management" in the sidebar
-    And I select "Robocop" under "Assigned to" for "group_a"
-    And I press "Save"
-    Then I should see "Changes Made Successfully"
-    And I should see "group_a assigned to "Robocop"
+    When I click "Group Management" link
+    When I select "Kevin" from group reader for "33"
+    And I press "Apply Changes" button
+    Then I should see "Changes to group readers have been saved."

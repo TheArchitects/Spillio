@@ -83,3 +83,8 @@ end
 Then /^the "([^\"]+)" field should be disabled$/ do |field|
   find_field(field)[:disabled].should == 'disabled'
 end
+
+
+When /^I select "(.*)" from group reader for "(.*)"$/ do |value, group_id|
+  step "I select \"#{value}\" from \"group_reader[#{group_id}]\""
+end

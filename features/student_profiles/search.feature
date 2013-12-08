@@ -17,7 +17,7 @@ Feature: search for potential group members
     | 33 | Alfonso's group|
     | 77 | Kayvan's group |
 
-    And I am logged in with cid "44444" as a Student
+    And I am logged in with cid "44444"
 
   Scenario: I should see a list of all the students and some extra info of them
     Given I am on the Search for Students Page
