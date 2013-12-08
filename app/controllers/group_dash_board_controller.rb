@@ -5,15 +5,17 @@ class GroupDashBoardController < AuthenticatedController
 	#display all the info of the group that belongs to
 	#authenticated user
 	def show
-		if @authenticated_user.class == Admin
+		@group = Group.find_by_id(params[:id])
+		if @authenticated_user.class == Admin or
+			(@authenticated_user == @group.reader)
 			group_id = params[:id]
+			@edit_mode = true
 		else
 			group_id = @authenticated_user.group.id
+			@edit_mode = false
 		end
 
-		if group_id.to_s == params[:id]
-			@group = Group.find(group_id)
-		else
+		if group_id.to_s != params[:id]
 			flash[:warning] = 'You are not allowed to check this group :)'
 			redirect_to student_path @authenticated_user
 			return
@@ -39,16 +41,17 @@ class GroupDashBoardController < AuthenticatedController
 		# TODO Do proper Sad path
 	end
 
-  def save_grade
-		if @authenticated_user.class == Admin
-      assignment = Assignment.find(params[:id])
-      assignment.grade = params[:grade]
-      assignment.ta_feedback = params[:content]
-      assignment.save
-      group_id = assignment.group_id
-      redirect_to group_db_show_url(group_id)
-    end
-  end
+	def save_grade
+		if eligible_to_grade?
+        	assignment = Assignment.find(params[:id])
+			assignment.grade = params[:grade]
+			assignment.ta_feedback = params[:content]
+			assignment.save
+			group_id = assignment.group_id
+			flash[:successful] = "Grade has been saved."
+			redirect_to group_db_show_url(group_id)
+	    end
+  	end
 
 	#Creates a new post for the specified assignment
 	def create_post
@@ -77,7 +80,9 @@ class GroupDashBoardController < AuthenticatedController
 		# TODO Do proper Sad path
 	end
 
-
-
-
+private
+	def eligible_to_grade?
+		(@authenticated_user.class == Admin) or
+		(@authenticated_user == @group.reader)
+	end
 end
