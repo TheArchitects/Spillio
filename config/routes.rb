@@ -22,7 +22,7 @@ Spillio::Application.routes.draw do
   match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get]
   put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
   post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
-
+  match 'save_grade/:id' => 'group_dash_board#save_grade', :as => :save_grade, via: [:post, :put]
 
 
   # Admin Controller

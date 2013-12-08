@@ -46,6 +46,13 @@
                   .panel-body
                     = assignment.description
                   = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
-                .card.messages
-                  = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
+                - if @edit_mode
+                  .card.grade
+                    = render :partial => 'grade', :locals => {:assignment => assignment}
+                - elsif assignment.grade!=-1
+                  .card.grade
+                    = render :partial => 'reader_feedback', :locals => {:assignment => assignment}
+                - if 
+                  .card.messages
+                    = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
       / / Assignment dashboard panel
