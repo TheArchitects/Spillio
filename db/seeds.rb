@@ -46,58 +46,28 @@ alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 alfonso.courses << courses[1]
 alfonso.email = "alfongj@gmail.com"
 alfonso.save
+
 ## Creating groups with mock assignments
 the_beatles = Group.create({group_name: 'The Beatles'})
-
-task_1 = Task.mock_task_1
-assignment_1 = Assignment.create_from_group_and_task(the_beatles, task_1)
-submission_1 = Submission.create({
-  label: "Your credit card details plz",
-  content: "http://www.google.com",
-  submitted_date: Date.parse('5-6-2006'),
-  subm_type: "Link"
-  })
-assignment_1.submissions << submission_1
-assignment_1.save
-
-task_2 = Task.mock_task_2
-assignment_2 = Assignment.create_from_group_and_task(the_beatles, task_2)
-submission_2 = Submission.create({
-  label: "Plz gimme the codez",
-  subm_type: "File"
-  })
-assignment_2.submissions << submission_2
-assignment_2.save
 the_beatles.students << kayvan
 the_beatles.students << megumi
 the_beatles.save
 
-## creating second mock group
-
 rolling = Group.create({group_name: 'The Rolling Stones'})
-
-task_1 = Task.mock_task_1
-assignment_1 = Assignment.create_from_group_and_task(rolling, task_1)
-submission_1 = Submission.create({
-  label: "Your credit card details plz",
-  content: "http://www.google.com",
-  submitted_date: Date.parse('5-6-2006'),
-  subm_type: "Link"
-  })
-assignment_1.submissions << submission_1
-assignment_1.save
-
-task_2 = Task.mock_task_2
-assignment_2 = Assignment.create_from_group_and_task(rolling, task_2)
-submission_2 = Submission.create({
-  label: "Plz gimme the codez",
-  subm_type: "File"
-  })
-assignment_2.submissions << submission_2
-assignment_2.save
-
 rolling.students << kevin
 rolling.save
+
+## Creating groups with mock assignments
+title = "Iteration 1.0"
+description = "Lets do some TDD :)"
+due_date = Time.now
+max_grade = 20
+submission_types = ['Link','File']
+submission_labels = ['Heroku','Source File']
+
+task = Task.create!(:title => title, :description => description, :due_date => due_date)
+task.assign_to_all_groups(max_grade, submission_types, submission_labels)
+
 
 # Creating a Group Join
 
