@@ -13,27 +13,42 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-
     when /^the group dashboard page for group id "(.*)"$/
       group_db_show_path($1)
 
     when /^the group dashboard page for cid "(.*)"$/
-      group_db_show_path(User.find_by_cid($1).group_id)
+      group_db_show_path(Student.find_by_cid($1).group_id)
 
     when /^the group dashboard page for "(.*)"$/
-      group_db_show_path(User.find_by_name($1).group_id)
+      group_db_show_path(Student.find_by_name($1).group_id)
 
-    when /^the (?:View |New User |User )?Profile Page (?:for|of) "(.+)"$/i
+    when /^the profile page (?:for|of) "(.*)"$/i
       student_path(Student.find_by_name($1))
 
-    when /^the Group Managment page$/i
+    when /^the group managment page$/i
       "/admin/?page=gm"
 
-    when /^the New Assignment page$/i
+    when /^the new assignment page$/i
       "/admin/?page=na"
 
-    when /^the Search for Students Page$/
+    when /^the search for students page$/
       student_search_path
+
+    when /^the home page$/
+      root_path
+
+    when /^the admin panel page$/
+      admin_path
+    when /^the new user profile page for "(.*)"$/
+      student_path(Student.find_by_name($1))
+
+    when /^the create new student profile page$/
+      new_student_path
+    when /^the edit student profile page of "(.*)"$/
+      edit_student_path(Student.find_by_name($1))  
+    when /^the user profile page (?:for|of) "(.*)"$/
+      student_path(Student.find_by_name($1))
+
 
     else
       begin

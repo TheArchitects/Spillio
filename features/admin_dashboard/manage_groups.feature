@@ -31,5 +31,5 @@ Feature: Assign groups to a reader
     Given the group size is 3
     When I fill in "group_size" with "5"
     And I press "Apply Changes" button
-    Then I should see "Current size is 5"
+    Then I should see "Awesome"
 

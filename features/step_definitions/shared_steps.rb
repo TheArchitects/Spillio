@@ -12,17 +12,6 @@ end
 # => Location Steps
 #
 
-Given /^I am on the Search for Students Page$/ do
-  visit(student_search_path)
-end
-
-Given /^I am on the profile page for "(.*)"$/ do |user|
-  visit(student_path(User.find_by_name(user)))
-end
-
-Given /^I am on the admin panel page$/ do
-  visit(admin_path)
-end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
@@ -31,4 +20,8 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
   else
     assert_equal path_to(page_name), current_path
   end
+end
+
+Given /^(?:|I )am on (.+)$/ do |page_name|
+  visit(path_to(page_name))
 end

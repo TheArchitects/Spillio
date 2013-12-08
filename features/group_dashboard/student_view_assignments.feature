@@ -5,10 +5,7 @@ Feature: View assignments due
 
   Background: I am a logged in student in my group dashboard
     Given settings set
-    Given the following instructor exists:
-    | id | name    |
-    | 43 | Robocop |
-
+    
     And the following group exists:
     | id | instructor_id | group_name |
     | 78 | 43            | Monkees    |
@@ -27,11 +24,6 @@ Feature: View assignments due
     | id | group_id | task_id |
     | 89 | 78       | 91      |
     | 53 | 78       | 92      |
-
-    And the following score exists:
-    | id | max_score | score | assignment_id |
-    | 21 | 20        | 10    | 89            |
-    | 22 | 30        | nil   | 53            |
 
     And the following submissions exist:
     | label  | assignment_id | content | submitted_date       |

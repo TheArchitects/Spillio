@@ -11,10 +11,6 @@ Then /^show me the page$/ do
 end
 
 
-
-
-
-
 #
 # => User input actions on a page
 #
