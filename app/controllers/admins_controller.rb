@@ -13,8 +13,6 @@ class AdminsController < AuthenticatedController
       @partial =  "main_panel_group_management"
     when "na"
       @partial = "main_panel_new_assignment"
-    when "ag"
-      @partial = "main_panel_assign_grades"
     end
   end
 
@@ -77,14 +75,10 @@ class AdminsController < AuthenticatedController
   end
 
   def promote_user_to_reader
-    if params[:id]=="-1"
-      flash[:error] = "You should be on the user's profile page before promoting!"
-    else
-      student_to_promote = Student.find_by_id(params[:id])
-      student_to_promote.is_reader = true;
-      student_to_promote.save
-      flash[:success] = "#{student_to_promote.name} became a reader."
-    end
+    student_to_promote = Student.find_by_id(params[:id])
+    student_to_promote.is_reader = true;
+    student_to_promote.save
+    flash[:success] = "#{student_to_promote.name} became a reader."
     redirect_to :back
   end
 

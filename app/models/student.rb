@@ -78,4 +78,11 @@ class Student < User
     gravatar_id = Digest::MD5::hexdigest(email.downcase)
     "https://secure.gravatar.com/avatar/#{gravatar_id}?s=300"
   end
+
+  def get_student_title
+    if self.is_reader?
+      "reader"
+    end
+  end
+
 end

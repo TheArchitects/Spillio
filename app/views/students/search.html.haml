@@ -52,7 +52,8 @@
                 .st-avatar.col-lg-1.col-md-1.col-sm-2.col-xs-12
                   %img.img-circle.img-responsive{alt: "User profile", src: s.gravatar_url}/
                 .st-details.col-lg-11.col-md-11.col-sm-10.col-xs-12
-                  %h4.list-group-item-heading= s.name
+                  %h4.list-group-item-heading.st-name= s.name
+                  %span.label.label-success.st-title= s.get_student_title
                   %p.list-group-item-text
                     %strong Section:
                     - if not s.section.nil?
