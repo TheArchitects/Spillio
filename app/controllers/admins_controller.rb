@@ -72,7 +72,7 @@ class AdminsController < AuthenticatedController
   end
 
   def update_max_group_size(new_group_size)
-    if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
+    if new_group_size != Setting.get_max_group_size
       flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
       Setting.set_max_group_size(params[:group_size])
     end

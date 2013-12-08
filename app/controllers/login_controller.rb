@@ -42,7 +42,7 @@ class LoginController < AuthenticatedController
 			flash[:success] = "You have successfully backdoored into the system"
 			redirect_to root_url
 		else
-			flash[:success] = "Were you trying to hack us?"
+			flash[:warning] = "Were you trying to hack us?"
 			redirect_to :back
 		end
 	end
