@@ -14,6 +14,7 @@ class AdminsController < AuthenticatedController
     when "am"
       @partial = "main_panel_assignment_management"
     when "pm"
+      @new_project = Project.new
       @partial = "main_panel_project_management"
     end
   end
