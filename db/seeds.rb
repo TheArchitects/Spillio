@@ -46,18 +46,60 @@ alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 alfonso.courses << courses[1]
 alfonso.email = "alfongj@gmail.com"
 alfonso.save
+## Creating groups with mock assignments
+the_beatles = Group.create({group_name: 'The Beatles'})
 
-# TODO: Groups should only be created with a special function each time a user is
-# created. When a student is merged onto a new group, if its old group becomes
-# empty, it must be deleted
-the_beatles = Group.create_group_with_mock_assignments('The Beatles')
+task_1 = Task.mock_task_1
+assignment_1 = Assignment.create_from_group_and_task(the_beatles, task_1)
+submission_1 = Submission.create({
+  label: "Your credit card details plz",
+  content: "http://www.google.com",
+  submitted_date: Date.parse('5-6-2006'),
+  subm_type: "Link"
+  })
+assignment_1.submissions << submission_1
+assignment_1.save
+
+task_2 = Task.mock_task_2
+assignment_2 = Assignment.create_from_group_and_task(the_beatles, task_2)
+submission_2 = Submission.create({
+  label: "Plz gimme the codez",
+  subm_type: "File"
+  })
+assignment_2.submissions << submission_2
+assignment_2.save
 the_beatles.students << kayvan
 the_beatles.students << megumi
 the_beatles.save
 
-rolling = Group.create_group_with_mock_assignments('The Rolling Stones')
+## creating second mock group
+
+rolling = Group.create({group_name: 'The Rolling Stones'})
+
+task_1 = Task.mock_task_1
+assignment_1 = Assignment.create_from_group_and_task(rolling, task_1)
+submission_1 = Submission.create({
+  label: "Your credit card details plz",
+  content: "http://www.google.com",
+  submitted_date: Date.parse('5-6-2006'),
+  subm_type: "Link"
+  })
+assignment_1.submissions << submission_1
+assignment_1.save
+
+task_2 = Task.mock_task_2
+assignment_2 = Assignment.create_from_group_and_task(rolling, task_2)
+submission_2 = Submission.create({
+  label: "Plz gimme the codez",
+  subm_type: "File"
+  })
+assignment_2.submissions << submission_2
+assignment_2.save
+
 rolling.students << kevin
 rolling.save
+
+# Creating a Group Join
 
 req = GroupJoinRequest.create!
 req.requester = kevin
@@ -89,3 +131,8 @@ william.make_reader
 william.save
 
 puts "Seed planted :)"
+
+
+
+
+

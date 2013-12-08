@@ -5,9 +5,6 @@ Feature: See feedback and grade
 
   Background: I am a logged in student in my group dashboard
     Given settings set
-    Given the following instructor exists:
-    | id | name    |
-    | 43 | Robocop |
 
     And the following group exists:
     | id | instructor_id |
@@ -27,11 +24,6 @@ Feature: See feedback and grade
     | id | group_id | task_id |
     | 89 | 78       | 91      |
     | 53 | 78       | 92      |
-
-    And the following score exists:
-    | id | max_score | score | assignment_id |
-    | 21 | 20        | 10    | 89            |
-    | 22 | 30        | -1    | 53            |
 
     And the following submissions exist:
     | label  | assignment_id | content | submitted_date       |

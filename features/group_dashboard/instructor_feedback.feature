@@ -5,9 +5,6 @@ Feature: View and Grade assignments
 
   Background: I am a logged in instructor with a group assigned which has some prefilled data
     Given settings set
-    Given the following instructor exists:
-    | name    |
-    | Robocop |
 
     And the following group exists:
     | group_name       |

@@ -5,9 +5,6 @@ Feature: Communicate with group
 
   Background: I am a logged in student in my group dashboard
     Given settings set
-    Given the following instructor exists:
-    | name    |
-    | Robocop |
 
     And the following group exists:
     | group_name       |

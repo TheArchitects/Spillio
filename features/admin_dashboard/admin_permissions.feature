@@ -18,7 +18,6 @@ Feature: Admin's permissions
     Scenario: I should not have access to admin panel
       Given I am logged in as admin
       Given I am on the admin panel page
-      Then show me the page
       Then I should see "Group Management"
       And I click "Group Management" link
       Then I should see "General Group Settings"
