@@ -25,7 +25,8 @@
               %th Group's GSI
             - Group.all.each do |gr|
               %tr
-                %td #{gr.group_name}
+                %td
+                  %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}
                 %td
                   %span.badge #{gr.num_students}
                 %td

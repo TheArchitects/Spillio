@@ -23,8 +23,8 @@ Feature: Admin's permissions
       And I click "Group Management" link
       Then I should see "General Group Settings"
       
-      Then I should see "New Assignment"
-      And I click "New Assignment" link
+      Then I should see "Assignment Management"
+      And I click "Assignment Management" link
       Then I should see "Create new assignment"
       
       
