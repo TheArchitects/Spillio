@@ -4,7 +4,7 @@ Feature: search for potential group members
   So that I can better decide who to join in a team
 
   Background: Students have already created Spillio User Profiles
-
+    Given settings set
     Given the following students exist:
     | name   | about       | group_id | cid   | interest |
     | Kevin  | bananas     |          | 33333 | interest |

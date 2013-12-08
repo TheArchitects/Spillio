@@ -62,7 +62,6 @@ class Group < ActiveRecord::Base
     self.assignments.sort! {|a,b| a.due_date <=> b.due_date}
   end
 
-
   def set_defaults
     self.max_size ||= Setting.first.max_group_size
   end
