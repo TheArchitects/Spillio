@@ -16,36 +16,19 @@ class AdminsController < AuthenticatedController
     end
   end
 
-  # returning all the groups associated to this reader
-  def mygroups
-    Group.get_groups_for(@authenticated_user.id)
-  end
-
+  # TODO: Refactor with better name, Validate
   def update
-    new_group_size = params[:group_size]
-    if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
-      flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
-      Setting.set_max_group_size(params[:group_size])
+    if ((params.has_key?(:group_size)) && (not params[:group_size].empty?))
+      update_max_group_size(params[:group_size])
     end
-    if params[:group_reader]
-      params[:group_reader].each do |group_id, reader_id|
-        if reader_id != "Please select"
-          assign_reader_to_a_group(group_id, reader_id)
-        end
-      end
-      flash[:success] = "Changes to group readers have been saved."
+    if ((params.has_key?(:group_reader)) && (not params[:group_reader].empty?))
+      update_group_readers(params[:group_reader])
     end
     redirect_to admin_path
   end
 
-  def assign_reader_to_a_group(group_id, reader_id)
-    group = Group.find_by_id(group_id)
-    reader = Student.find_by_id(reader_id)
-    group.reader = reader
-    group.save
-  end
 
-  def assign_grade(assignment, score, max_score)
+  def assign_grade(assignment, score)
     assignment.score = new_score
   end
 
@@ -53,25 +36,20 @@ class AdminsController < AuthenticatedController
   end
 
   def post_new_assignment
-    # TODO: Update for new scoring system, for adding submission fields
-
     # TODO Validate
-    title = params[:task_name]
+    title = params[:title]
     description = params[:description]
     due_date = Date.parse(params[:due_date])
-    max_score = params[:max_score]
-    label = params[:submission_label]
+    max_grade = params[:assignment_max_grade]
+    submission_types = params[:submission_types]
+    submission_labels = params[:submission_labels]
 
     task = Task.create!(:title => title, :description => description, :due_date => due_date)
+    task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 
-    Group.all.each do |group|
-      assignment = Assignment.create_from_group_and_task(group, task)
-      assignment.scores << Score.create!(:max_score => max_score)
-      assignment.submissions << Submission.create!(:label => label)
-      assignment.save
-    end
+    flash[:success] = "Assignment sent to all groups"
 
-    render :text => "Assignment posted :D"
+    redirect_to :back
   end
 
   def promote_user_to_reader
@@ -90,6 +68,41 @@ class AdminsController < AuthenticatedController
     unless @authenticated_user.class == Admin
       # The hacker will not even notice that this is a valid path ;)
       render :file => 'public/404.html', :status => :not_found, :layout => false
+    end
+  end
+
+  def update_max_group_size(new_group_size)
+    if new_group_size != Setting.get_max_group_size
+      flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
+      Setting.set_max_group_size(params[:group_size])
+    end
+  end
+
+  def update_group_readers(group_readers)
+    updated_any_reader = false
+    group_readers.each do |group_id, reader_id|
+      if (not reader_id.empty?) && reader_id != "Please select"
+        if (assign_reader_to_a_group(group_id, reader_id))
+          updated_any_reader = true
+        end
+      end
+    end
+    if (updated_any_reader)
+      flash[:success] = "Changes to group readers have been saved."
+    end
+  end
+
+  # Returns false if it couldn't assign the reader (e.g., bc it was already
+  # assigned)
+  def assign_reader_to_a_group(group_id, reader_id)
+    group = Group.find_by_id(group_id)
+    reader = Student.find_by_id(reader_id)
+    if group.reader != reader
+      group.reader = reader
+      group.save
+      return true
+    else
+      return false
     end
   end
 end

@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :section
   has_and_belongs_to_many :courses
   has_many :skills
-  attr_accessible :about, :interest, :name, :cid, :type
+  attr_accessible :about, :interest, :name, :cid
 
   def self.search_by_name(query, page)
     # TODO: Avoid SQL injection!!
@@ -17,9 +17,6 @@ class User < ActiveRecord::Base
 
 
   # Instance methods
-  def is_student?
-    return type == 'Student'
-  end
 
   def incoming_group_requests
     GroupJoinRequest.where(:requestee_id => self)
