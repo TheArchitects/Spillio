@@ -16,34 +16,18 @@ class AdminsController < AuthenticatedController
     end
   end
 
-  # returning all the groups associated to this reader
-  def mygroups
-    Group.get_groups_for(@authenticated_user.id)
-  end
-
+  # TODO: Refactor with better name, Validate
   def update
-    new_group_size = params[:group_size]
-    if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
-      flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
-      Setting.set_max_group_size(params[:group_size])
+    if params.has_key? "group_size" && (not params[:group_size].empty?)
+      update_max_group_size(params[:group_size])
     end
-    if params[:group_reader]
-      params[:group_reader].each do |group_id, reader_id|
-        if reader_id != "Please select"
-          assign_reader_to_a_group(group_id, reader_id)
-        end
-      end
-      flash[:success] = "Changes to group readers have been saved."
+
+    if params.has_key? "group_reader" && (not params[:group_reader].empty?)
+      udate_group_readers(params[:group_reader])
     end
     redirect_to admin_path
   end
 
-  def assign_reader_to_a_group(group_id, reader_id)
-    group = Group.find_by_id(group_id)
-    reader = Student.find_by_id(reader_id)
-    group.reader = reader
-    group.save
-  end
 
   def assign_grade(assignment, score, max_score)
     assignment.score = new_score
@@ -53,8 +37,6 @@ class AdminsController < AuthenticatedController
   end
 
   def post_new_assignment
-    # TODO: Update for new scoring system, for adding submission fields
-
     # TODO Validate
     title = params[:task_name]
     description = params[:description]
@@ -91,5 +73,28 @@ class AdminsController < AuthenticatedController
       # The hacker will not even notice that this is a valid path ;)
       render :file => 'public/404.html', :status => :not_found, :layout => false
     end
+  end
+
+  def update_max_group_size(new_group_size)
+    if new_group_size and new_group_size != Setting.get_max_group_size and new_group_size != ""
+      Setting.set_max_group_size(params[:group_size])
+      flash[:success] = "Updated Group Max Size from #{Setting.get_max_group_size} to #{new_group_size}"
+    end
+  end
+
+  def update_group_readers(group_readers)
+    group_readers.each do |group_id, reader_id|
+      if reader_id != "Please select"
+        assign_reader_to_a_group(group_id, reader_id)
+      end
+    end
+    flash[:success] = "Changes to group readers have been saved."
+  end
+
+  def assign_reader_to_a_group(group_id, reader_id)
+    group = Group.find_by_id(group_id)
+    reader = Student.find_by_id(reader_id)
+    group.reader = reader
+    group.save
   end
 end
