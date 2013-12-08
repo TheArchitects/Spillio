@@ -1,22 +1,40 @@
 Feature: Project Upload
-  As an instructor for the CS 169 Course
-  I want to be able to post a project
-  So that students can decide which client they want to work with
+  As an instructor of the CS 169 Course
+  I want to be able to post a list of project options
+  So that students can decide which projects they prefer to work in
 
 
   Background: I am a logged in admin on the dashboard
     Given settings set
-	  Given the following instructor exists:
-	  | id | name    |
-	  | 3  | Robocop |
+    And I am logged in as admin
+    And the following groups exist:
+    | id | group_name     |
+    | 33 | Alfonso's group|
+    | 77 | Kayvan's group |
+    | 44 | Arturo's group |
 
-    And I am logged in as "Robocop"
+    Given the following users exist:
+    | name   | about | cid   | interest|
+    | Kevin  | about | 33333 | interest|
+    | Kayvan | about | 44444 | interest|
+    Given the student with cid "33333" is a reader
+    Given the student with cid "44444" is a reader
+    And I am on the admin panel page
 
-    Scenario: Post "Cool Project" for all groups to see
-    Given I am on the dashboard
-    And I click on "Add Project" in the sidebar
-    And I fill in "Name" with "Cool Project"
-    And I fill in "Description" with "Information about the Project"
-    And I fill in "Contact Info" with "(777)777-7777"
-    And I click "Submit"
-    Then I should see "New Project Added!"
+  Scenario: Empty list of projects
+    When I click "Project Management" link
+    Then I should be on the admin project management page
+    And I should see "No projects yet. Please import some" within "#project-list"
+
+  Scenario: Post "Cool Project" for all groups to see
+    When I click "Project Management" link
+    Then I should be on the admin project management page
+    When I fill in "Name" with "Cool Project" within "#new-project"
+    And I fill in "Description" with "This project is nuts" within "#new-project"
+    And I fill in "Contact Info" with "schwagger@hotmail.com" within "#new-project"
+    And I press "Submit Assignment" button
+    Then I should be on the admin project management page
+    And I should see "Cool Project added!"
+    And I should see "Cool Project" within "#project-list"
+    And I should see "This project is nuts" within "#project-list"
+    And I should see "schwagger@hotmail.com" within "#project-list"

@@ -10,9 +10,11 @@ class AdminsController < AuthenticatedController
 
     case params["page"]
     when "gm"
-      @partial =  "main_panel_group_management"
-    when "na"
-      @partial = "main_panel_new_assignment"
+      @partial = "main_panel_group_management"
+    when "am"
+      @partial = "main_panel_assignment_management"
+    when "pm"
+      @partial = "main_panel_project_management"
     end
   end
 

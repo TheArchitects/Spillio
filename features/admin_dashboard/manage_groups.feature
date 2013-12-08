@@ -11,7 +11,7 @@ Feature: Assign groups to a reader
     | 33 | Alfonso's group|
     | 77 | Kayvan's group |
     | 44 | Arturo's group |
-    
+
     Given the following users exist:
     | name   | about | cid   | interest|
     | Kevin  | about | 33333 | interest|
@@ -23,6 +23,7 @@ Feature: Assign groups to a reader
 
   Scenario: Assign a group to a reader
     When I click "Group Management" link
+    Then I should be on the Group Management page
     When I select "Kevin" from group reader for "33"
     And I press "Apply Changes" button
     Then I should see "Changes to group readers have been saved."
