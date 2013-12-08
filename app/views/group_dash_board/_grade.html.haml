@@ -6,7 +6,7 @@
       %label.col-md-4.control-label{for: "grade"} Grade:
       .col-md-4
         .input-group
-          %input#grade.form-control{name: "grade", placeholder: "#{assignment.grade}", type: "text"}/
+          %input#grade.form-control{name: "grade", placeholder: "#{assignment.grade if assignment.grade!=-1;}", type: "text"}/
           %span.input-group-addon /#{assignment.max_grade}
   %label.control-label.text-left{for: "comments"} Comments:
   .form-group
