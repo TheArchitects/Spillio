@@ -5,60 +5,59 @@
 .col-lg-9.col-md-9.col-sm-12.col-xs-12
   #accordion.panel-group
     .panel.panel-default.card-panel
-      .panel-heading
-        %h4.panel-title
-          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#new-assignment"}
-            Create new assignment
-      #new-assignment.panel-collapse.collapse.in
-        .card#assignment-details
-          .row
-            .col-lg-3.col-md-4.col-sm-4.col-xs-12
-              %h4 Assignment Name
-            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
-              %input.form-control{type: "text", name: "assignment_name"}/
-          %hr/
-          .row
-            .col-lg-3.col-md-4.col-sm-4.col-xs-12
-              %h4 Due Date
-            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
-              %input.form-control{type: "text", name: "due_date"}/
-              .input-group-btn
-                / Button and dropdown menu
-                %button.btn.btn-default{type: "button"} Calendar
-          %hr/
-          .row
-            .col-lg-3.col-md-4.col-sm-4.col-xs-12
-              %h4 Maximum grade
-            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
-              %input.form-control{type: "number", name: "possible_points"}/
-              %span.input-group-addon points
-          %hr/
-          .row
-            .col-lg-3.col-md-4.col-sm-4.col-xs-12
-              %h4 Description
-            .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
-              %textarea.form-control{rows: "6", name: "description"}
-        .card#assignment-submissions
-          %h4 Required Submissions
-          %table.table.table-striped#submissions
-            %tr
-              %th Type
-              %th Name
-              %th Description
-              %th
-            %tr
-              %td
-                = select_tag "submission_types[]", options_for_select(['File', 'Link'])
-              %td
-                .input-group
-                  %input.form-control{type: "text", name: "submission_names[]", placeholder: "Name"}/
-              %td
-                .input-group
-                  %input.form-control{type: "text", name: "submission_descriptions[]", placeholder: "Description"}/
-              %td
-                %button.btn.btn-warning.btn-sm.remove-submission
-                  %span.glyphicon.glyphicon-remove
-                %button.btn.btn-primary.btn-sm.add-submission
-                  %span.glyphicon.glyphicon-plus
-        .card#assignment-save
-          %button.btn.btn-success{type: "submit"} Save Changes
+      = form_tag :controller => :admins, :action => :post_new_assignment
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#new-assignment"}
+              Create new assignment
+        #new-assignment.panel-collapse.collapse.in
+          .card#assignment-details
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                %h4 Assignment Title
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                %input.form-control{type: "text", name: "title"}/
+            %hr/
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                %h4 Due Date
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                %input.form-control{type: "date", name: "due_date"}/
+                .input-group-btn
+                  / Button and dropdown menu
+                  %button.btn.btn-default{type: "button"} Calendar
+            %hr/
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                %h4 Maximum grade
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                %input.form-control{type: "number", name: "assignment_max_grade"}/
+                %span.input-group-addon points
+            %hr/
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                %h4 Description
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                %textarea.form-control{rows: "6", name: "description"}
+          .card#assignment-submissions
+            %h4 Required Submissions
+            %table.table.table-striped#submissions
+              %tr
+                %th Type
+                %th Name
+                %th Description
+                %th
+              %tr
+                %td
+                  = select_tag "submission_types[]", options_for_select(['File', 'Link'])
+                %td
+                  .input-group
+                    %input.form-control{type: "text", name: "submission_labels[]", placeholder: "e.g., Heroku URL"}/
+                %td
+                  %button.btn.btn-warning.btn-sm.remove-submission
+                    %span.glyphicon.glyphicon-remove
+                  %button.btn.btn-primary.btn-sm.add-submission
+                    %span.glyphicon.glyphicon-plus
+          .card#assignment-save
+            %button.btn.btn-success{type: "submit"} Save Changes
+            - # TODO: In the future have a list of assignments here

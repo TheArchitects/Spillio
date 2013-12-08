@@ -1,7 +1,22 @@
 class Task < ActiveRecord::Base
-  belongs_to :author, :class_name => "Instructor"
   has_many :assignments
-  attr_accessible :id, :title, :description, :due_date, :content # TODO: wtf is content
+  attr_accessible :id, :title, :description, :due_date
+
+
+  def assign_to_all_groups(max_grade, submission_types, submission_labels)
+    Group.all.each do |group|
+      assignment = Assignment.create_from_group_and_task(group, self)
+      assignment.max_grade = max_grade
+      assignment.save
+
+      0.upto(submission_types-1) do |i|
+        label = submission_labels[i]
+        type = submission_types[i]
+        submission = Submission.create!(:label => label, :type => type,
+          :assignment => assignment)
+      end
+    end
+  end
 
   # TODO: Remove once we have instructor functionality
   def self.mock_task_1

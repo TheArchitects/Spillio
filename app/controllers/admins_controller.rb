@@ -29,7 +29,7 @@ class AdminsController < AuthenticatedController
   end
 
 
-  def assign_grade(assignment, score, max_score)
+  def assign_grade(assignment, score)
     assignment.score = new_score
   end
 
@@ -38,22 +38,19 @@ class AdminsController < AuthenticatedController
 
   def post_new_assignment
     # TODO Validate
-    title = params[:task_name]
+    title = params[:title]
     description = params[:description]
     due_date = Date.parse(params[:due_date])
-    max_score = params[:max_score]
-    label = params[:submission_label]
+    max_grade = params[:assignment_max_grade]
+    submission_types = params[:submission_types]
+    submission_labels = params[:submission_labels]
 
     task = Task.create!(:title => title, :description => description, :due_date => due_date)
+    task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 
-    Group.all.each do |group|
-      assignment = Assignment.create_from_group_and_task(group, task)
-      assignment.scores << Score.create!(:max_score => max_score)
-      assignment.submissions << Submission.create!(:label => label)
-      assignment.save
-    end
+    flash[:success] = "Assignment sent to all groups"
 
-    render :text => "Assignment posted :D"
+    redirect_to :back
   end
 
   def promote_user_to_reader
@@ -84,17 +81,29 @@ class AdminsController < AuthenticatedController
 
   def update_group_readers(group_readers)
     group_readers.each do |group_id, reader_id|
-      if reader_id != "Please select"
-        assign_reader_to_a_group(group_id, reader_id)
+      updated_any_reader = false
+      if (not reader_id.empty?) && reader_id != "Please select"
+        if (assign_reader_to_a_group(group_id, reader_id))
+          updated_any_reader = true
+        end
       end
     end
-    flash[:success] = "Changes to group readers have been saved."
+    if (updated_any_reader)
+      flash[:success] = "Changes to group readers have been saved."
+    end
   end
 
+  # Returns false if it couldn't assign the reader (e.g., bc it was already
+  # assigned)
   def assign_reader_to_a_group(group_id, reader_id)
     group = Group.find_by_id(group_id)
     reader = Student.find_by_id(reader_id)
-    group.reader = reader
-    group.save
+    if group.reader != reader
+      group.reader = reader
+      group.save
+      return true
+    else
+      return false
+    end
   end
 end
