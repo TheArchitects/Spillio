@@ -1,0 +1,14 @@
+%h4 Grade and Feedback
+.panel-body
+%form{role: "form"}
+  .form-group
+    .row
+      %label.col-md-4.control-label{for: "grade"} Grade:
+      .col-md-4
+        .input-group
+          %input#grade.form-control{placeholder: "0", type: "text"}/
+          %span.input-group-addon /20
+  %label.control-label.text-left{for: "comments"} Comments:
+  .form-group
+    = text_area_tag :content, nil, :rows => 3, :class => 'form-control', :required => true
+  %submit.btn.btn-primary{type: "submit"} Save
