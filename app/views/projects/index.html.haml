@@ -50,10 +50,10 @@
           / Results
           - @projects.each do |p|
             .list-group-item
-              .row
+              .row{id: "project-#{p.id}"}
                 .st-avatar.col-lg-1.col-md-1.col-sm-2
                   %img.img-circle.img-responsive{alt: "User profile", src: "#"}/
-                .st-details.col-lg-7.col-md-7.col-sm-6
+                .st-details.col-lg-8.col-md-8.col-sm-6
                   %a{href: "/projects/#{p.id}", id: "#{p.id}"}
                     %h4.list-group-item-heading.st-name= p.title
                     - if not p.description.nil?
@@ -65,14 +65,29 @@
                         %strong URL:
                         = p.url
                 %form{role: "request project"}
-                  %label.col-lg-1.col-md-1.col-sm-1.control-label{for: "priority"} Priority
-                  .st-details.col-lg-1.col-md-1.col-sm-1
-                    = select_tag("priority", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe, :id=>"priority")
-                  .st-details.col-lg-2.col-md-2.col-sm-2
-                    = button_tag("Request")
+                  .st-details.col-lg3.col-md-3.col-sm-4
+                  .btn-group{"data-toggle" => "buttons"}
+                    %label.btn.btn-primary
+                      %input#1{name: "priorities", type: "radio"}/
+                      1
+                    %label.btn.btn-primary
+                      %input#2{name: "priorities", type: "radio"}/
+                      2
+                    %label.btn.btn-primary
+                      %input#3{name: "priorities", type: "radio"}/
+                      3
+                    %label.btn.btn-primary
+                      %input#3{name: "priorities", type: "radio"}/
+                      4
+                    %label.btn.btn-primary
+                      %input#5{name: "priorities", type: "radio"}/
+                      5
+
     - else
       .row
         .alert.alert-danger
           No results found
+
+  %input{:type=>"hidden", :value=>@group_id, :id=>"group-id"}
   / / Results list
 / / Page body

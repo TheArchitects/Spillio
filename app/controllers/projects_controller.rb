@@ -1,11 +1,10 @@
-class ProjectsController < ApplicationController
+class ProjectsController < AuthenticatedController
   # GET /projects
   # GET /projects.json
   def index
-    render :text => "Unimplemented"
-    return
-
+    @group_id = @authenticated_user.group.id
     @projects = Project.all
+    @any_results = @projects.any?
 
     respond_to do |format|
       format.html # index.html.erb
