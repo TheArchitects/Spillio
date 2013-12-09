@@ -1,4 +1,5 @@
 class ProjectsController < AuthenticatedController
+  
   # GET /projects
   # GET /projects.json
   def index
@@ -118,6 +119,7 @@ class ProjectsController < AuthenticatedController
       elsif earliest_time > req.time
         earliest_time = req.created_at
         earliest_group = req.group
+      end
     end
     earliest_group
   end
@@ -143,4 +145,5 @@ class ProjectsController < AuthenticatedController
     end
     @matches
   end
+
 end
