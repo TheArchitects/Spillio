@@ -1,6 +1,6 @@
 %h4 Grade and Feedback
 .panel-body
-= form_tag({:action => 'save_grade', :controller=>'group_dash_board', :id=>params[:id], :method=>'put'}) do
+= form_tag({:action => 'save_grade', :controller=>'group_dash_board', :assignment_id=>assignment.id, :method=>'put'}) do
   .form-group
     .row
       %label.col-md-4.control-label{for: "grade"} Grade:
@@ -10,5 +10,5 @@
           %span.input-group-addon /#{assignment.max_grade}
   %label.control-label.text-left{for: "comments"} Comments:
   .form-group
-    = text_area_tag :content, "#{assignment.ta_feedback}", :rows => 3, :class => 'form-control', :required => true
+    = text_area_tag :feedback, "#{assignment.ta_feedback}", :rows => 3, :class => 'form-control', :required => true
   %button.btn.btn-primary{type: "submit"} Save

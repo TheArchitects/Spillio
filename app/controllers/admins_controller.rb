@@ -27,14 +27,6 @@ class AdminsController < AuthenticatedController
     redirect_to admin_path
   end
 
-
-  def assign_grade(assignment, score)
-    assignment.score = new_score
-  end
-
-  def new_assignment
-  end
-
   def post_new_assignment
     # TODO Validate
     title = params[:title]

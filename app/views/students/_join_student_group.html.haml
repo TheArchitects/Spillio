@@ -1,5 +1,5 @@
 - if (not @student.nil?) && (not @authenticated_user.nil?) && @student.joinable_by?(@authenticated_user)
-  %form{role: "form", action: "/group_join/create"}
+  %form{role: "form", action: "#{create_group_join_path}"}
     - active = GroupJoinRequest.valid_request?(@authenticated_user.id, @student.id)
     - label = GroupJoinRequest.request_label(@authenticated_user.id, @student.id)
     %input{type: "hidden", name: "requestee", value: @student.id}
