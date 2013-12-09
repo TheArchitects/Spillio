@@ -106,7 +106,7 @@ class ProjectsController < AuthenticatedController
     # else create it from scratch
     # TODO: something like:
     # pr = ProjectJoinRequest.find_or_initialize_by_requester_and_requestee(group, project)
-    pr = ProjectJoinRequest.create(:requester => group, :requestee => project)
+    pr = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
     pr.priority = priority
     pr.save!
 
