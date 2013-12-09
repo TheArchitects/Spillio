@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208211234) do
+ActiveRecord::Schema.define(:version => 20131208222057) do
 
   create_table "admins", :force => true do |t|
     t.integer  "cid"
@@ -22,11 +22,12 @@ ActiveRecord::Schema.define(:version => 20131208211234) do
   create_table "assignments", :force => true do |t|
     t.integer  "group_id"
     t.integer  "task_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "title"
-    t.decimal  "grade",      :default => -1.0
-    t.decimal  "max_grade",  :default => -1.0, :null => false
+    t.decimal  "grade",       :default => -1.0
+    t.decimal  "max_grade",   :default => -1.0, :null => false
+    t.string   "ta_feedback"
   end
 
   add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
@@ -82,8 +83,9 @@ ActiveRecord::Schema.define(:version => 20131208211234) do
     t.string   "title"
     t.string   "url"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "sections", :force => true do |t|

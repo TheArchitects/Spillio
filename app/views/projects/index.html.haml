@@ -1,0 +1,78 @@
+- content_for :title do
+  = "Search"
+- content_for :styles do
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2.css", :rel=>"stylesheet"}
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2-bootstrap.css", :rel=>"stylesheet"}
+  = stylesheet_link_tag 'student_search'
+- content_for :scripts do
+  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
+  = javascript_include_tag 'student_search'
+
+/ Navbar
+= render "shared/navbar"
+
+/ Page body
+.container
+  %h3 Projects
+  -#
+    / Advanced search
+    .container
+      .row
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a.accordion-toggle{"data-toggle" => "collapse", href: "#advanced-settings"}
+                Advanced search
+                %b.caret
+          #advanced-settings.panel-collapse.collapse
+            .panel-body
+              %form
+                .checkbox
+                  %label
+                    %input{type: "checkbox", name: "only_students_without_groups", checked: @only_students_without_groups}/
+                    Only students without groups
+                .checkbox
+                  %label
+                    %input{type: "checkbox", name: "only_students_in_my_section", checked: @only_students_in_my_section}/
+                    Only students in my section
+                - if not @all_skills.nil?
+                  %select.select2#filter-by-skills{name: "filter_by_skills", multiple: "multiple"}
+                    - @all_skills.each do |sk|
+                      %option{value: sk.name}= sk.name
+                %button.btn.btn-primary.btn-sm{type: "submit"}
+                  Re do search
+  / / Advanced search
+  / Results list
+  .container#results
+    - if @any_results
+      .row
+        .list-group
+          / Results
+          - @projects.each do |p|
+            .list-group-item
+              .row
+                .st-avatar.col-lg-1.col-md-1.col-sm-2
+                  %img.img-circle.img-responsive{alt: "User profile", src: "#"}/
+                .st-details.col-lg-7.col-md-7.col-sm-6
+                  %a{href: "/projects/#{p.id}", id: "#{p.id}"}
+                    %h4.list-group-item-heading.st-name= p.title
+                    - if not p.description.nil?
+                      %p.list-group-item-text
+                        %strong Description:
+                        = p.description
+                    - if not p.url.nil?
+                      %p.list-group-item-text
+                        %strong URL:
+                        = p.url
+                %form{role: "request project"}
+                  %label.col-lg-1.col-md-1.col-sm-1.control-label{for: "priority"} Priority
+                  .st-details.col-lg-1.col-md-1.col-sm-1
+                    = select_tag("priority", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe, :id=>"priority")
+                  .st-details.col-lg-2.col-md-2.col-sm-2
+                    = button_tag("Request")
+    - else
+      .row
+        .alert.alert-danger
+          No results found
+  / / Results list
+/ / Page body
