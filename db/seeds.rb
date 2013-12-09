@@ -10,8 +10,8 @@ setting.max_group_size = 6
 setting.save
 
 
-#admin = Admin.create(cid: 760906)
-#admin.save
+admin = Admin.create(cid: 760906)
+admin.save
 
 
 puts "settings : Group size => #{Setting.first.max_group_size}"

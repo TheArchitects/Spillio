@@ -68,19 +68,19 @@
                   .st-details.col-lg3.col-md-3.col-sm-4
                   .btn-group{"data-toggle" => "buttons"}
                     %label.btn.btn-primary
-                      %input#1{name: "priorities", type: "radio"}/
+                      %input.btn-priority{name: "priorities", type: "radio", data: {priority: 1}}/
                       1
                     %label.btn.btn-primary
-                      %input#2{name: "priorities", type: "radio"}/
+                      %input.btn-priority{name: "priorities", type: "radio", data: {priority: 2}}/
                       2
                     %label.btn.btn-primary
-                      %input#3{name: "priorities", type: "radio"}/
+                      %input.btn-priority#3{name: "priorities", type: "radio", data: {priority: 3}}/
                       3
                     %label.btn.btn-primary
-                      %input#3{name: "priorities", type: "radio"}/
+                      %input.btn-priority#4{name: "priorities", type: "radio", data: {priority: 4}}/
                       4
                     %label.btn.btn-primary
-                      %input#5{name: "priorities", type: "radio"}/
+                      %input.btn-priority#5{name: "priorities", type: "radio", data: {priority: 5}}/
                       5
 
     - else
