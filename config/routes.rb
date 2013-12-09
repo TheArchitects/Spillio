@@ -31,6 +31,9 @@ Spillio::Application.routes.draw do
   match '/admin/create_task' => 'admins#post_new_assignment', via: [:post]
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
 
+  # Project Controller
+  match '/projects/match' => 'projects#get_matches', :as => :match
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

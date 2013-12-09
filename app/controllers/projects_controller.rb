@@ -93,4 +93,54 @@ class ProjectsController < AuthenticatedController
       format.json { head :no_content }
     end
   end
+
+  def get_highest_priority_requests(proj)
+    highest_priority = 0
+    requests = []
+    proj.requests.each do |req|
+      if highest_priority > req.priority
+        high_priority = req.priority
+        requests = [req.group]
+      elsif highest_priority == req.priority
+        requests.append(req)
+      end
+    end
+    groups
+  end
+
+  def get_highest_priority_group(requests)
+    earliest_time = nil?
+    earliest_group = nil?
+    requests.all.each do |req|
+      if earliest_time.nil?
+        earliest_time = req.time
+        earliest_group = req.group
+      elsif earliest_time > req.time
+        earliest_time = req.time
+        earliest_group = req.group
+    end
+    earliest_group
+  end
+
+  def get_matches
+    @matches = {}
+    not_matched = []
+    remaining_groups = Group.all.to_a
+    Project.all.each do |proj|
+      requests = get_highest_priority_requests(proj)
+      if requests.length > 1
+        matches[proj] = get_highest_priority_group(requests)
+        remaining_groups.delete(matches[proj])
+      elsif requests.length == 1
+        matches[proj] = requests[0].group
+        remaining_groups.delete(matches[proj])
+      else
+        not_matched.append(proj)
+      end
+    end
+    not_matched.all.each do |proj|
+      matches[proj] = not_matched.pop
+    end
+    @matches
+  end
 end
