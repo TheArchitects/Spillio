@@ -5,8 +5,8 @@ Spillio::Application.routes.draw do
   get 'search/students' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
   match 'student/cid/:id' => 'students#show_by_cid', :as => :student_show_by_cid, via: [:get]
-  match 'group_join/create' => 'group_join#create'
-  match 'group_join/accept/:id' => 'group_join#accept'
+  match 'group_join/create' => 'group_join#create', :as => :create_group_join
+  match 'group_join/accept/:id' => 'group_join#accept', :as => :accept_group_join
 
   # For CAS Login
   match '/fake_login' => 'login#fake_login'
@@ -22,7 +22,7 @@ Spillio::Application.routes.draw do
   match 'group/:id' => 'group_dash_board#show', :as => :group_db_show, via: [:get]
   put 'submission/:id' => 'group_dash_board#submit_assignment' , :as => :submission
   post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
-  match 'save_grade/:id' => 'group_dash_board#save_grade', :as => :save_grade, via: [:post, :put]
+  match 'assignment/:assignment_id/save_grade' => 'group_dash_board#save_grade', :as => :save_grade, via: [:post, :put]
 
 
   # Admin Controller

@@ -42,3 +42,12 @@ Feature: Respond to someone's request to join a group
     And I click "Accept Kayvan merge request" link
     Then I should be on the group dashboard page for "Kayvan"
     And I should see "Kayvan"
+
+  Scenario: Accept a merge request but group size excedes
+    Given I am logged in with cid "66666"
+    Given there is a request to merge from "Arturo" to "Jalal"
+    And I am on the profile page for "Jalal"
+    And I click "Accept Arturo merge request" link
+    Then I should be on the profile page for "Jalal"
+    And I should see "Maximum size exceded"
+
