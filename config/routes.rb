@@ -33,6 +33,7 @@ Spillio::Application.routes.draw do
 
   # Project Controller
   match '/projects/match' => 'projects#get_matches', :as => :match
+  post '/project/:project_id/request_from_group/:group_id' => 'projects#request_from_group', :as => :project_request_from_group
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
