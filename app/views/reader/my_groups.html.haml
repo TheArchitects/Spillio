@@ -1,0 +1,32 @@
+- content_for :title do
+  = "My Groups"
+- content_for :styles do
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2.css", :rel=>"stylesheet"}
+  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2-bootstrap.css", :rel=>"stylesheet"}
+  = stylesheet_link_tag 'student_search'
+- content_for :scripts do
+  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
+  = javascript_include_tag 'student_search'
+
+/ Navbar
+= render "shared/navbar"
+
+/ Page body
+.container
+  / Results list
+  .container#results
+    - if @any_results
+      .row
+        .list-group
+          / Results
+          - @groups.each do |g|
+            %a.list-group-item{href: group_db_show_path(g.id), id: g.id}
+              .row
+                .st-details.col-lg-11.col-md-11.col-sm-10.col-xs-12
+                  %h4.list-group-item-heading.st-name= g.group_name
+    - else
+      .row
+        .alert.alert-danger
+          There is no group assigned to you yet.
+  / / Results list
+/ / Page body
