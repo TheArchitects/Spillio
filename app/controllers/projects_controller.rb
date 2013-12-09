@@ -158,13 +158,14 @@ class ProjectsController < AuthenticatedController
     earliest_group = nil?
     requests.all.each do |req|
       if earliest_time.nil?
-        earliest_time = req.time
+        earliest_time = req.created_at
         earliest_group = req.group
       elsif earliest_time > req.time
-        earliest_time = req.time
+        earliest_time = req.created_at
         earliest_group = req.group
       end
     end
     earliest_group
   end
+
 end

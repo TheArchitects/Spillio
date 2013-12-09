@@ -1,5 +1,5 @@
 class AdminsController < AuthenticatedController
-
+  helper_method :get_num_groups
   before_filter :check_for_admin
 
   def index
@@ -100,5 +100,9 @@ class AdminsController < AuthenticatedController
     else
       return false
     end
+  end
+
+  def get_num_groups(p_id, priority)
+    ProjectJoinRequest.where(:priority=>priority, :project_id=>p_id).to_a.length
   end
 end
