@@ -52,32 +52,33 @@
                 .st-details.col-lg-8.col-md-8.col-sm-6
                   %a{href: "/projects/#{p.id}", id: "#{p.id}"}
                     %h4.list-group-item-heading.st-name= p.title
-                  - if not p.description.nil?
-                    %p.list-group-item-text
-                      %strong Description:
-                      = p.description
-                  - if not p.url.nil?
-                    %p.list-group-item-text
-                      %strong URL:
-                      = p.url
-                %form{role: "request project"}
-                  .st-details.col-lg3.col-md-3.col-sm-4
-                  .btn-group{"data-toggle" => "buttons"}
-                    %label.btn.btn-primary
-                      %input.btn-priority{name: "priorities", type: "radio", data: {priority: 1}}/
-                      1
-                    %label.btn.btn-primary
-                      %input.btn-priority{name: "priorities", type: "radio", data: {priority: 2}}/
-                      2
-                    %label.btn.btn-primary
-                      %input.btn-priority#3{name: "priorities", type: "radio", data: {priority: 3}}/
-                      3
-                    %label.btn.btn-primary
-                      %input.btn-priority#4{name: "priorities", type: "radio", data: {priority: 4}}/
-                      4
-                    %label.btn.btn-primary
-                      %input.btn-priority#5{name: "priorities", type: "radio", data: {priority: 5}}/
-                      5
+                    - if not p.description.nil?
+                      %p.list-group-item-text
+                        %strong Description:
+                        = p.description
+                    - if not p.url.nil?
+                      %p.list-group-item-text
+                        %strong URL:
+                        = p.url
+                -if not @group_id.nil?
+                  %form{role: "request project"}
+                    .st-details.col-lg3.col-md-3.col-sm-4
+                    .btn-group{"data-toggle" => "buttons"}
+                      %label.btn.btn-primary
+                        %input.btn-priority{name: "priorities", type: "radio", data: {priority: 1}}/
+                        1
+                      %label.btn.btn-primary
+                        %input.btn-priority{name: "priorities", type: "radio", data: {priority: 2}}/
+                        2
+                      %label.btn.btn-primary
+                        %input.btn-priority#3{name: "priorities", type: "radio", data: {priority: 3}}/
+                        3
+                      %label.btn.btn-primary
+                        %input.btn-priority#4{name: "priorities", type: "radio", data: {priority: 4}}/
+                        4
+                      %label.btn.btn-primary
+                        %input.btn-priority#5{name: "priorities", type: "radio", data: {priority: 5}}/
+                        5
 
     - else
       .row
