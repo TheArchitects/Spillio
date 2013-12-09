@@ -47,7 +47,7 @@ alfonso.courses << courses[1]
 alfonso.email = "alfongj@gmail.com"
 alfonso.save
 
-## Creating groups with mock assignments
+## Creating groups with mock Groups
 the_beatles = Group.create({group_name: 'The Beatles'})
 the_beatles.students << kayvan
 the_beatles.students << megumi

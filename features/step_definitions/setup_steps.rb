@@ -37,6 +37,14 @@ Given(/the following student[s]? exist[s]?:$/) do |table|
   end
 end
 
+Given(/the following project[s]? exist[s]?:$/) do |table|
+  table.hashes.each do |proj|
+    Project.create!(proj)
+  end
+end
+
+
+
 Given(/^the student with cid "(.*?)" is a reader for "(.*)"$/) do |arg1, arg2|
   s = Student.find_by_cid(arg1)
   s.make_reader

@@ -13,12 +13,6 @@ Feature: Project Upload
     | 77 | Kayvan's group |
     | 44 | Arturo's group |
 
-    Given the following users exist:
-    | name   | about | cid   | interest|
-    | Kevin  | about | 33333 | interest|
-    | Kayvan | about | 44444 | interest|
-    Given the student with cid "33333" is a reader
-    Given the student with cid "44444" is a reader
     And I am on the admin panel page
 
   Scenario: Empty list of projects
