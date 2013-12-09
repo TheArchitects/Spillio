@@ -1,4 +1,7 @@
 class ProjectsController < AuthenticatedController
+  # TODO Remove this and similar thing from authenticated_controller
+  skip_before_filter :get_authenticated_user, :only => [:request_from_group]
+
   # GET /projects
   # GET /projects.json
   def index
@@ -60,6 +63,48 @@ class ProjectsController < AuthenticatedController
     end
   end
 
+  def request_from_group
+    group = Group.find params[:group_id]
+    project = Project.find params[:project_id]
+    priority = params[:priority]
+
+    # If there was a prev request for same gr and proj, then update it
+    # else create it from scratch
+    # TODO: something like:
+    # pr = ProjectJoinRequest.find_or_initialize_by_requester_and_requestee(group, project)
+    pr = ProjectJoinRequest.create(:requester => group, :requestee => project)
+    pr.priority = priority
+    pr.save!
+
+    # TODO: Now if there was a request for same gr and priority but diff proj,
+    # remove it
+    render :nothing => true, :status => 200
+  end
+
+  def get_matches
+    @matches = {}
+    not_matched = []
+    remaining_groups = Group.all.to_a
+    Project.all.each do |proj|
+      requests = get_highest_priority_requests(proj)
+      if requests.length > 1
+        matches[proj] = get_highest_priority_group(requests)
+        remaining_groups.delete(matches[proj])
+      elsif requests.length == 1
+        matches[proj] = requests[0].group
+        remaining_groups.delete(matches[proj])
+      else
+        not_matched.append(proj)
+      end
+    end
+    not_matched.all.each do |proj|
+      matches[proj] = not_matched.pop
+    end
+    @matches
+  end
+
+
+  private
   def get_highest_priority_requests(proj)
     highest_priority = 0
     requests = []
@@ -89,25 +134,4 @@ class ProjectsController < AuthenticatedController
     earliest_group
   end
 
-  def get_matches
-    @matches = {}
-    not_matched = []
-    remaining_groups = Group.all.to_a
-    Project.all.each do |proj|
-      requests = get_highest_priority_requests(proj)
-      if requests.length > 1
-        matches[proj] = get_highest_priority_group(requests)
-        remaining_groups.delete(matches[proj])
-      elsif requests.length == 1
-        matches[proj] = requests[0].group
-        remaining_groups.delete(matches[proj])
-      else
-        not_matched.append(proj)
-      end
-    end
-    not_matched.all.each do |proj|
-      matches[proj] = not_matched.pop
-    end
-    @matches
-  end
 end

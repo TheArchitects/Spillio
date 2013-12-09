@@ -1,12 +1,10 @@
 - content_for :title do
-  = "Search"
+  = "All Projects"
 - content_for :styles do
-  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2.css", :rel=>"stylesheet"}
-  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2-bootstrap.css", :rel=>"stylesheet"}
   = stylesheet_link_tag 'student_search'
 - content_for :scripts do
   %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
-  = javascript_include_tag 'student_search'
+  = javascript_include_tag 'projects_index'
 
 / Navbar
 = render "shared/navbar"
@@ -14,7 +12,7 @@
 / Page body
 .container
   %h3 Projects
-  -#
+  -# TODO: Implement:
     / Advanced search
     .container
       .row
@@ -49,10 +47,8 @@
         .list-group
           / Results
           - @projects.each do |p|
-            .list-group-item
-              .row{id: "project-#{p.id}"}
-                .st-avatar.col-lg-1.col-md-1.col-sm-2
-                  %img.img-circle.img-responsive{alt: "User profile", src: "#"}/
+            .list-group-item{id: "project-#{p.id}"}
+              .row
                 .st-details.col-lg-8.col-md-8.col-sm-6
                   %a{href: "/projects/#{p.id}", id: "#{p.id}"}
                     %h4.list-group-item-heading.st-name= p.title

@@ -35,14 +35,25 @@
             %table.table.table-striped
               %tr
                 %th Title
-                %th Url
+                %th
+                  Demand
+                  %br
+                  %span.badge 1
+                  %span.badge 2
+                  %span.badge 3
+                  %span.badge 4
+                  %span.badge 5
                 %th Assigned group
               - Project.all.each do |pr|
                 %tr
                   %td
                     %a{href: "#{pr.url}"}= pr.title
                   %td
-                    %a{href: "#{pr.url}"}= pr.url
+                    %span.badge #{get_num_groups(pr.id, 1)}
+                    %span.badge #{get_num_groups(pr.id, 2)}
+                    %span.badge #{get_num_groups(pr.id, 3)}
+                    %span.badge #{get_num_groups(pr.id, 4)}
+                    %span.badge #{get_num_groups(pr.id, 5)}
                   %td
                     - if pr.group.nil?
                       %p No group assigned yet
