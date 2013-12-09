@@ -57,8 +57,11 @@ rolling = Group.create({group_name: 'The Rolling Stones'})
 rolling.students << kevin
 rolling.save
 
-## Creating groups with mock assignments
-title = "Iteration 1.0"
+
+################################ Populating Assignments #####################################
+puts "Populating Assignments"
+## mock assignments iter 1.1
+title = "Iteration 1.1"
 description = "Lets do some TDD :)"
 due_date = Time.now
 max_grade = 20
@@ -69,6 +72,39 @@ task = Task.create!(:title => title, :description => description, :due_date => d
 task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 
 
+## mock assignments iter 1.2
+title = "Iteration 1.2"
+description = "Did you do TDD???"
+due_date = Time.now+(60*60*24*7)
+max_grade = 20
+submission_types = ['Link','File']
+submission_labels = ['Heroku','Source File']
+
+task = Task.create!(:title => title, :description => description, :due_date => due_date)
+task.assign_to_all_groups(max_grade, submission_types, submission_labels)
+
+## mock assignments iter 2.1
+title = "Iteration 2.1"
+description = "Time to find some bugs"
+due_date = Time.now+(60*60*24*14)
+max_grade = 20
+submission_types = ['Link','File']
+submission_labels = ['Heroku','Source File']
+
+task = Task.create!(:title => title, :description => description, :due_date => due_date)
+task.assign_to_all_groups(max_grade, submission_types, submission_labels)
+
+## mock assignments iter 2.2
+title = "Iteration 2.2"
+description = "Kill those bugs"
+due_date = Time.now+(60*60*24*21)
+max_grade = 20
+submission_types = ['Link','File']
+submission_labels = ['Heroku','Source File']
+
+task = Task.create!(:title => title, :description => description, :due_date => due_date)
+task.assign_to_all_groups(max_grade, submission_types, submission_labels)
+
 # Creating a Group Join
 
 req = GroupJoinRequest.create!
@@ -76,6 +112,7 @@ req.requester = kevin
 req.requestee = kayvan
 req.request_type = 'merge'
 req.save
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ Populating Assignments ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # Makeing couple readers
 

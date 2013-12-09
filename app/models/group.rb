@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
   belongs_to :reader, :class_name => "Student"
   belongs_to :section
+  has_one :project
   has_many :students
   has_many :assignments
   has_many :group_join_requests

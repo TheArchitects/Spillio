@@ -7,6 +7,7 @@ class AdminsController < AuthenticatedController
 
   def show
     @partial = "main_panel_group_management"
+    @cur_page = params["page"]
 
     case params["page"]
     when "gm"
@@ -28,14 +29,6 @@ class AdminsController < AuthenticatedController
       update_group_readers(params[:group_reader])
     end
     redirect_to admin_path
-  end
-
-
-  def assign_grade(assignment, score)
-    assignment.score = new_score
-  end
-
-  def new_assignment
   end
 
   def post_new_assignment

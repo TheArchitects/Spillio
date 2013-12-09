@@ -9,7 +9,7 @@ class GroupJoinController < AuthenticatedController
     when 'invite'
       # from a student to a student
       forge_request('invite', from, to)
-      "Request sent to #{to.name}"
+      flash[:success] = "Request sent to #{to.name}"
     when 'merge'
       # from a group to a group
       forge_request('merge', from, to)
@@ -19,7 +19,7 @@ class GroupJoinController < AuthenticatedController
       forge_request('join', from, to)
       flash[:success] = "Invitation sent to #{to.name}"
     else
-      flash[:error] = "Sorry, I did not understand your request!"
+      flash[:error] = "I did not understand your request!"
     end
 
     redirect_to :back
@@ -30,7 +30,7 @@ class GroupJoinController < AuthenticatedController
 
     type = req.request_type
 
-    if req && @authenticated_user.id == req.requestee.id
+    if @authenticated_user.id == req.requestee.id
 
       case type
       when 'invite'
@@ -42,15 +42,6 @@ class GroupJoinController < AuthenticatedController
       when 'join'
         # from a student to a group
         accept_join(req, false)
-      else
-        flash[:error] = "Sorry, we did not understand your request!"
-        redirect_to :back
-      end
-    else
-      # In case of merge, we are redirecting the user already in
-      # the accept_merge function
-      unless type=='merge'
-        redirect_to :back
       end
     end
   end

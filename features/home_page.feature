@@ -9,4 +9,3 @@ Feature: Home redirection
     | Kevin  | about |          | 33333 | interest|
     And I am logged in with cid "33333"
     And I am on the home page
-    Then show me the page

@@ -17,6 +17,11 @@ body {
   transform-origin:top left;
 }
 
+#left-navigation .btn {
+  width: 100%;
+  margin: 5px 0;
+}
+
 .card-panel {
   background-color: #d5d5d5;
 }
@@ -28,7 +33,8 @@ body {
 }
 
 .card-panel > .panel-collapse > .card:first-child,
-#assignment-details {
+#assignment-details,
+#project-details {
   margin-top: 10px;
 }
 
@@ -65,7 +71,8 @@ span.author {
   background: transparent;
 }
 
-.save-button-card > button {
+.save-button-card > button,
+.save-button-card > input {
   width: 100%;
 }
 

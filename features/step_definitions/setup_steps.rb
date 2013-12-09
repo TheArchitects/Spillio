@@ -14,7 +14,7 @@ end
 
 Given(/the following user[s]? exist[s]?:$/)do |users_table|
   users_table.hashes.each do |user|
-    Student.create!(user)
+    s = Student.create!(user)
   end
 end
 
@@ -35,6 +35,16 @@ Given(/the following student[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Student.create!(stu)
   end
+end
+
+Given(/^the student with cid "(.*?)" is a reader for "(.*)"$/) do |arg1, arg2|
+  s = Student.find_by_cid(arg1)
+  s.make_reader
+  s.save
+
+  g = Group.find_by_id(arg2)
+  g.reader = s
+  g.save
 end
 
 Given(/^the student with cid "(.*?)" is a reader$/) do |arg1|
