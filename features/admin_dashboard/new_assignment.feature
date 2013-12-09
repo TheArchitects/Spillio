@@ -12,7 +12,7 @@ Feature: Post new task
     Given the following student exist:
     | name   | about | cid   | interest| group_id|
     | Kevin  | about | 33333 | interest|  33     |
-    
+
     Given I am logged in as admin
     Given I am on the admin panel page
 
@@ -23,7 +23,7 @@ Feature: Post new task
     And I fill in "assignment_max_grade" with "20"
     And I fill in "due_date" with "5/1/2014"
     And I fill in "submission_labels[]" with "Pivotal Tracker Link,Field with User Stories and Cucumber Tests"
-    And I press "Save Changes" button
+    And I press "Submit Assignment" button
     Then I should see "Assignment sent to all groups"
     Given I am logged in with cid "33333"
     And I am on the group dashboard page for group id "33"

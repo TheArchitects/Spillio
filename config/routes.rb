@@ -1,4 +1,7 @@
 Spillio::Application.routes.draw do
+  resources :projects
+
+
   get 'search/students' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
   match 'student/cid/:id' => 'students#show_by_cid', :as => :student_show_by_cid, via: [:get]

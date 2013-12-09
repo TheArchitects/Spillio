@@ -1,0 +1,50 @@
+/ Admin panel for project management
+.col-lg-9.col-md-9.col-sm-12.col-xs-12
+  #accordion.panel-group
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#new-project"}
+            Import new project
+      #new-project.panel-collapse.in
+        = form_for @new_project, :html => {:role => 'form'} do |f|
+          .card#project-details
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                = f.label :title, 'Project Title', :class => 'control-label'
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                = f.text_field :title, :class => 'form-control', :required => true
+            %hr/
+            .row
+              .col-lg-3.col-md-4.col-sm-4.col-xs-12
+                = f.label :url, 'Project Portal url', :class => 'control-label'
+              .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
+                = f.url_field :url, :class => 'form-control', :required => true
+          .card.save-button-card#project-save
+            = f.submit 'Import project', :class => 'btn btn-success'
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#project-list"}
+            Project list
+      #project-list.panel-collapse.collapse
+        .card
+          - if Project.count == 0
+            %h4 No projects yet. Please import some
+          - else
+            %table.table.table-striped
+              %tr
+                %th Title
+                %th Url
+                %th Assigned group
+              - Project.all.each do |pr|
+                %tr
+                  %td
+                    %a{href: "#{pr.url}"}= pr.title
+                  %td
+                    %a{href: "#{pr.url}"}= pr.url
+                  %td
+                    - if pr.group.nil?
+                      %p No group assigned yet
+                    - else
+                      %a{href: "#{group_db_show_path(pr.group.id)}"} #{pr.group.group_name}

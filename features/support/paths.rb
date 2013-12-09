@@ -25,11 +25,14 @@ module NavigationHelpers
     when /^the profile page (?:for|of) "(.*)"$/i
       student_path(Student.find_by_name($1))
 
-    when /^the group managment page$/i
+    when /^the admin group management page$/i
       "/admin/?page=gm"
 
-    when /^the new assignment page$/i
-      "/admin/?page=na"
+    when /^the admin assignment management page$/i
+      "/admin/?page=am"
+
+    when /^the admin project management page$/i
+      "/admin/?page=pm"
 
     when /^the search for students page$/
       student_search_path
@@ -45,7 +48,7 @@ module NavigationHelpers
     when /^the create new student profile page$/
       new_student_path
     when /^the edit student profile page of "(.*)"$/
-      edit_student_path(Student.find_by_name($1))  
+      edit_student_path(Student.find_by_name($1))
     when /^the user profile page (?:for|of) "(.*)"$/
       student_path(Student.find_by_name($1))
 

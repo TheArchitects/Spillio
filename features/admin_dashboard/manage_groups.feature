@@ -11,7 +11,7 @@ Feature: Assign groups to a reader
     | 33 | Alfonso's group|
     | 77 | Kayvan's group |
     | 44 | Arturo's group |
-    
+
     Given the following users exist:
     | name   | about | cid   | interest|
     | Kevin  | about | 33333 | interest|

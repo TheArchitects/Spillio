@@ -1,18 +1,15 @@
 .col-lg-3.col-md-3.col-sm-12.col-xs-12
-  .panel.panel-default
+  #left-navigation.panel.panel-default
     .panel-body
-      .panel.panel-default.assignment
-        .panel-heading
-          %h4.panel-title
-            %a{href: "/admin/?page=gm"}
-              Group Management
-      .panel.panel-default.assignment
-        .panel-heading
-          %h4.panel-title
-            %a{href: "/admin/?page=na"}
-              Assignment Management
-      .panel.panel-defaut.assignment
-        .panel-heading
-          %h4.panel-title
-            %a{href: "/admin/?page=ag"}
-              Assign Grades
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "/admin/?page=gm", :class => (@cur_page == 'gm' ? "btn-info" : "btn-primary")}
+            Group Management
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "/admin/?page=am", :class => (@cur_page == 'am' ? "btn-info" : "btn-primary")}
+            Assignment Management
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "/admin/?page=pm", :class => (@cur_page == 'pm' ? "btn-info" : "btn-primary")}
+            Project Management
