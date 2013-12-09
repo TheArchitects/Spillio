@@ -118,6 +118,7 @@ class ProjectsController < AuthenticatedController
       elsif earliest_time > req.time
         earliest_time = req.time
         earliest_group = req.group
+      end
     end
     earliest_group
   end
