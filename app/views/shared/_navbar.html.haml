@@ -4,6 +4,8 @@
 / Navbar. In the future we can include instructor navbars here too
 - if @authenticated_user.class == Admin
   = render "admins/navbar"
+- elsif @authenticated_user.is_reader
+  = render "reader/reader_navbar"
 - elsif not @authenticated_user.nil?
   = render "students/loggedin_student_navbar"
 - else
