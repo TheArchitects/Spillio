@@ -26,6 +26,7 @@ Feature: Assign groups to a reader
     When I select "Kevin" from group reader for "33"
     And I press "Apply Changes" button
     Then I should see "Changes to group readers have been saved."
+    And I press "Apply Changes" button
 
   Scenario: change group size
     Given the group size is 3

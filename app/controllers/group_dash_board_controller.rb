@@ -15,7 +15,7 @@ class GroupDashBoardController < AuthenticatedController
 			@edit_mode = false
 		end
 
-		if group_id.to_s != params[:id]
+		if group_id.nil? or group_id.to_s != params[:id]
 			flash[:warning] = 'You are not allowed to check this group :)'
 			redirect_to student_path @authenticated_user
 			return
@@ -36,19 +36,16 @@ class GroupDashBoardController < AuthenticatedController
 			return
 		end
 
-		render text: "Sad panda. You tried to do something weird"
-
-		# TODO Do proper Sad path
 	end
 
 	def save_grade
-		if eligible_to_grade?
-        	assignment = Assignment.find(params[:id])
+        assignment = Assignment.find(params[:assignment_id])
+		if eligible_to_grade? assignment
 			assignment.grade = params[:grade]
 			assignment.ta_feedback = params[:content]
 			assignment.save
 			group_id = assignment.group_id
-			flash[:successful] = "Grade has been saved."
+			flash[:success] = "Grade has been saved."
 			redirect_to group_db_show_url(group_id)
 	    end
   	end
@@ -83,8 +80,9 @@ class GroupDashBoardController < AuthenticatedController
 	end
 
 private
-	def eligible_to_grade?
+	def eligible_to_grade? assignment
+		group_id = assignment.group_id
 		(@authenticated_user.class == Admin) or
-		(@authenticated_user == @group.reader)
+		(@authenticated_user == Group.find_by_id(group_id).reader)
 	end
 end

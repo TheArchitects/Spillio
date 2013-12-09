@@ -54,4 +54,3 @@ Feature: Request to join an existing group
     And I am on the search for students page
     When I click "22222" link within "#results"
     Then I should see "Group is full"
-
