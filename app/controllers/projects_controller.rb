@@ -121,6 +121,7 @@ class ProjectsController < AuthenticatedController
     not_matched.each do |proj|
       @matches[proj] = remaining_groups.pop
     end
+
     @matches.each do |proj, group|
       proj.group = group
       proj.save
