@@ -10,7 +10,7 @@ setting.max_group_size = 6
 setting.save
 
 
-admin = Admin.create(cid: 1000)
+admin = Admin.create(cid: 1007417)
 admin.save
 
 
@@ -49,6 +49,7 @@ alfonso.courses << courses[1]
 alfonso.email = "alfongj@gmail.com"
 alfonso.save
 
+## Creating groups with mock Groups
 jalal = Student.create!(name: 'Jalal Buckley', about:'Nothing to say', interest: 'Everything', cid:'1005')
 jalal.section = sections[1]
 jalal.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
@@ -150,7 +151,7 @@ req.request_type = 'merge'
 req.save
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^ Populating Assignments ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-# Makeing couple readers
+# Making a couple readers
 
 stephanie = Student.create!(name: 'Stephanie', about:'Nothing to say', interest: 'Everything', cid:'000001')
 stephanie.section = sections[1]
@@ -172,6 +173,11 @@ william.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
 william.courses << courses[1]
 william.make_reader
 william.save
+
+project_a = Project.create(:title=>"An awesome project", :description=> "Join our project!", :url=>"http://www.awesome.com")
+project_a.save
+project_b = Project.create(:title=>"An even more awesome project", :description=> "No join our project!", :url=>"http://www.coolpeople.com")
+project_b.save
 
 puts "Seed planted :)"
 

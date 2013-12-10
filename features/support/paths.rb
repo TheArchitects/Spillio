@@ -40,6 +40,9 @@ module NavigationHelpers
     when /^the home page$/
       root_path
 
+    when /^the projects page$/
+      projects_path
+
     when /^the admin panel page$/
       admin_path
     when /^the new user profile page for "(.*)"$/

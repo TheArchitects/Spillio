@@ -1,0 +1,90 @@
+- content_for :title do
+  = "All Projects"
+- content_for :styles do
+  = stylesheet_link_tag 'student_search'
+- content_for :scripts do
+  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
+  = javascript_include_tag 'projects_index'
+
+/ Navbar
+= render "shared/navbar"
+
+/ Page body
+.container
+  %h3 Projects
+  -# TODO: Implement:
+    / Advanced search
+    .container
+      .row
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a.accordion-toggle{"data-toggle" => "collapse", href: "#advanced-settings"}
+                Advanced search
+                %b.caret
+          #advanced-settings.panel-collapse.collapse
+            .panel-body
+              %form
+                .checkbox
+                  %label
+                    %input{type: "checkbox", name: "only_students_without_groups", checked: @only_students_without_groups}/
+                    Only students without groups
+                .checkbox
+                  %label
+                    %input{type: "checkbox", name: "only_students_in_my_section", checked: @only_students_in_my_section}/
+                    Only students in my section
+                - if not @all_skills.nil?
+                  %select.select2#filter-by-skills{name: "filter_by_skills", multiple: "multiple"}
+                    - @all_skills.each do |sk|
+                      %option{value: sk.name}= sk.name
+                %button.btn.btn-primary.btn-sm{type: "submit"}
+                  Re do search
+  / / Advanced search
+  / Results list
+  .container#results
+    - if @any_results
+      .row
+        .list-group
+          / Results
+          - @projects.each do |p|
+            .list-group-item{id: "project-#{p.id}"}
+              .row
+                .st-details.col-lg-8.col-md-8.col-sm-6
+                  %a{href: "/projects/#{p.id}", id: "#{p.id}"}
+                    %h4.list-group-item-heading.st-name= p.title
+                    - if not p.description.nil?
+                      %p.list-group-item-text
+                        %strong Description:
+                        = p.description
+                    - if not p.url.nil?
+                      %p.list-group-item-text
+                        %strong URL:
+                        = p.url
+                -if not @group_id.nil?
+                  %form{role: "request project"}
+                    .st-details.col-lg3.col-md-3.col-sm-4
+                    .btn-group{"data-toggle" => "buttons"}
+                      %label.btn.btn-primary
+                        %input.btn-priority{name: "priorities", type: "radio", data: {priority: 1}}/
+                        1
+                      %label.btn.btn-primary
+                        %input.btn-priority{name: "priorities", type: "radio", data: {priority: 2}}/
+                        2
+                      %label.btn.btn-primary
+                        %input.btn-priority#3{name: "priorities", type: "radio", data: {priority: 3}}/
+                        3
+                      %label.btn.btn-primary
+                        %input.btn-priority#4{name: "priorities", type: "radio", data: {priority: 4}}/
+                        4
+                      %label.btn.btn-primary
+                        %input.btn-priority#5{name: "priorities", type: "radio", data: {priority: 5}}/
+                        5
+
+    - else
+      .row
+        .alert.alert-danger
+          No results found
+
+  %input{:type=>"hidden", :value=>@group_id, :id=>"group-id"}
+  / / Results list
+/ / Page body
