@@ -19,6 +19,8 @@ puts "settings : Group size => #{Setting.first.max_group_size}"
 courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
 sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
 
+puts "Populating Users"
+
 kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
 kayvan.section = sections[1]
 kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }, { name: 'Python' }, { name: 'C' }, { name: 'JS' }])
@@ -42,13 +44,6 @@ kevin.courses << courses[0]
 kevin.email = "kevinshen34@gmail.com>"
 kevin.save
 
-jalal = Student.create!(name: 'Jalal Buckley', about:'Nothing to say', interest: 'Everything', cid:'760906')
-jalal.section = sections[1]
-jalal.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
-jalal.courses << courses[1]
-jalal.email = "jalal.buckley@gmail.com"
-jalal.save
-
 arturo = Student.create!(name: 'Arturo Pacifico Griffini', about:'Nothing to say', interest: 'Everything', cid:'877183')
 arturo.section = sections[1]
 arturo.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
@@ -57,12 +52,12 @@ arturo.email = "pacifico.arturo@gmail.com"
 arturo.save
 
 ## Creating groups with mock assignments
+puts "Populating Groups"
 the_beatles = Group.create({group_name: 'Group 1'})
-the_beatles.students << kayvan
+the_beatles.students << kevin
 the_beatles.save
 
 rolling = Group.create({group_name: 'Group 2'})
-rolling.students << kevin
 rolling.students << arturo
 rolling.save
 
@@ -133,14 +128,11 @@ submission_labels = ['Heroku','Source File']
 task = Task.create!(:title => title, :description => description, :due_date => due_date)
 task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 
-# Creating a Group Join
-
-req = GroupJoinRequest.create!
-req.requester = kevin
-req.requestee = kayvan
-req.request_type = 'merge'
-req.save
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^ Populating Assignments ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+puts "Populating Projects"
+
+Project.create!(:title => "Cal Central", :url => "http://bptech.berkeley.edu/projects")
+Project.create!(:title => "CalBears", :url => "http://bptech.berkeley.edu/projects")
 
 
 puts "Seed planted :)"
