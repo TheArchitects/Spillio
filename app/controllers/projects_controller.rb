@@ -112,8 +112,8 @@ class ProjectsController < AuthenticatedController
         @matches[proj] = get_highest_priority_group(requests)
         remaining_groups.delete(matches[proj])
       elsif requests.length == 1
-        @matches[proj] = requests[0].group
-        remaining_groups.delete(matches[proj])
+        @matches[proj] = Group.find(requests[0].group_id)
+        remaining_groups.delete(@matches[proj])
       else
         not_matched.append(proj)
       end
@@ -135,9 +135,9 @@ class ProjectsController < AuthenticatedController
     highest_priority = 100
     requests = []
     proj.project_join_requests.each do |req|
-      if highest_priority < req.priority
+      if highest_priority > req.priority
         high_priority = req.priority
-        requests = [req.group]
+        requests = [req]
       elsif highest_priority == req.priority
         requests.append(req)
       end
@@ -151,10 +151,10 @@ class ProjectsController < AuthenticatedController
     requests.all.each do |req|
       if earliest_time.nil?
         earliest_time = req.created_at
-        earliest_group = req.group
+        earliest_group = Group.find(req.group_id)
       elsif earliest_time > req.time
         earliest_time = req.created_at
-        earliest_group = req.group
+        earliest_group = Group.find(req.group_id)
       end
     end
     earliest_group
