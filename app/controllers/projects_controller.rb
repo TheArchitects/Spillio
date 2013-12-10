@@ -64,6 +64,22 @@ class ProjectsController < AuthenticatedController
 #    end
 #  end
 
+  def get_project_join_request(group, project, priority)
+    req = nil
+    ProjectJoinRequest.all.each do |pjr|
+      if pjr.group_id == group.id and pjr.project_id == project.id
+        req = pjr
+        break
+      elsif pjr.group_id == group.id and pjr.priority.to_i.to_s == priority and pjr.project_id != project.id
+        pjr.destroy
+      end
+    end
+    if req.nil?
+      req = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
+    end
+    req
+  end
+
   def request_from_group
     group = Group.find params[:group_id]
     project = Project.find params[:project_id]
@@ -73,7 +89,9 @@ class ProjectsController < AuthenticatedController
     # else create it from scratch
     # TODO: something like:
     # pr = ProjectJoinRequest.find_or_initialize_by_requester_and_requestee(group, project)
-    pr = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
+    pr = get_project_join_request(group, project, priority)
+    pr.group = group
+    pr.project = project
     pr.priority = priority
     pr.save!
 
@@ -83,41 +101,47 @@ class ProjectsController < AuthenticatedController
   end
 
   def get_matches
+    #TO-DO: you can only call this if you are an instructor
+
     @matches = {}
     not_matched = []
     remaining_groups = Group.all.to_a
     Project.all.each do |proj|
       requests = get_highest_priority_requests(proj)
       if requests.length > 1
-        matches[proj] = get_highest_priority_group(requests)
+        @matches[proj] = get_highest_priority_group(requests)
         remaining_groups.delete(matches[proj])
       elsif requests.length == 1
-        matches[proj] = requests[0].group
-        remaining_groups.delete(matches[proj])
+        @matches[proj] = Group.find(requests[0].group_id)
+        remaining_groups.delete(@matches[proj])
       else
         not_matched.append(proj)
       end
     end
-    not_matched.all.each do |proj|
-      matches[proj] = not_matched.pop
+    not_matched.each do |proj|
+      @matches[proj] = remaining_groups.pop
     end
-    @matches
+    @matches.each do |proj, group|
+      proj.group = group
+      proj.save
+    end
+    redirect_to '/admin'
   end
 
 
   private
   def get_highest_priority_requests(proj)
-    highest_priority = 0
+    highest_priority = 100
     requests = []
-    proj.requests.each do |req|
+    proj.project_join_requests.each do |req|
       if highest_priority > req.priority
         high_priority = req.priority
-        requests = [req.group]
+        requests = [req]
       elsif highest_priority == req.priority
         requests.append(req)
       end
     end
-    groups
+    requests
   end
 
   def get_highest_priority_group(requests)
@@ -126,10 +150,10 @@ class ProjectsController < AuthenticatedController
     requests.all.each do |req|
       if earliest_time.nil?
         earliest_time = req.created_at
-        earliest_group = req.group
+        earliest_group = Group.find(req.group_id)
       elsif earliest_time > req.time
         earliest_time = req.created_at
-        earliest_group = req.group
+        earliest_group = Group.find(req.group_id)
       end
     end
     earliest_group

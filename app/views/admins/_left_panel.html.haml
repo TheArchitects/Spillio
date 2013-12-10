@@ -13,3 +13,7 @@
         .col-lg-12.col-md-12.col-sm-12.col-xs-12
           %a.btn{href: "/admin/?page=pm", :class => (@cur_page == 'pm' ? "btn-info" : "btn-primary")}
             Project Management
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "#{match_path}", :class => (@cur_page == '#' ? "btn-info" : "btn-primary"), :id=>"Match Groups"}
+            Match Groups
