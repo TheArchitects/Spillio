@@ -1,5 +1,5 @@
 class AdminsController < AuthenticatedController
-  helper_method :get_num_groups
+  helper_method :get_num_groups, :get_name_requester_groups
   before_filter :check_for_admin
 
   def index
@@ -105,4 +105,13 @@ class AdminsController < AuthenticatedController
   def get_num_groups(p_id, priority)
     ProjectJoinRequest.where(:priority=>priority, :project_id=>p_id).to_a.length
   end
+
+  def get_name_requester_groups(p_id, priority)
+    names = ""
+    ProjectJoinRequest.where(:priority=>priority, :project_id=>p_id).each do |pjr| 
+      names = "#{Group.find_by_id(pjr.group_id).group_name.to_s}\n#{names}"
+    end
+    names
+  end
+
 end
