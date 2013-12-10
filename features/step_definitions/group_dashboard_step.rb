@@ -10,6 +10,12 @@ Given(/^the following assignment[s]? exist[s]?:$/) do |table|
   end
 end
 
+Given(/^the following project_join_request[s]? exist[s]?:$/) do |table|
+  table.hashes.each do |stu|
+    ProjectJoinRequest.create!(stu)
+  end
+end
+
 Given(/^the following submission[s]? exist[s]?:$/) do |table|
   table.hashes.each do |stu|
     Submission.create!(stu)
