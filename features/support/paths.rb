@@ -54,6 +54,8 @@ module NavigationHelpers
       edit_student_path(Student.find_by_name($1))
     when /^the user profile page (?:for|of) "(.*)"$/
       student_path(Student.find_by_name($1))
+    when /the view my groups page$/
+      my_groups_path
 
 
     else
