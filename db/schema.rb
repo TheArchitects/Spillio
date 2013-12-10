@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208211234) do
+ActiveRecord::Schema.define(:version => 20131209050052) do
 
   create_table "admins", :force => true do |t|
     t.integer  "cid"
@@ -79,12 +79,22 @@ ActiveRecord::Schema.define(:version => 20131208211234) do
   add_index "posts", ["assignment_id"], :name => "index_posts_on_assignment_id"
   add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
 
+  create_table "project_join_requests", :force => true do |t|
+    t.decimal  "priority"
+    t.string   "datetime"
+    t.integer  "group_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.string   "url"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "sections", :force => true do |t|

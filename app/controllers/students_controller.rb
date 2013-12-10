@@ -40,18 +40,6 @@ class StudentsController < AuthenticatedController
     create_or_update_handler
   end
 
-  # Finds the student with Calnet Id number
-  def show_by_cid
-    @student = Student.find_by_cid(params[:id])
-
-    if @student
-      @view_only = false
-      render_profile
-    else
-      redirect_to new_student_path
-    end
-  end
-
   def search
     name_query = params[:query] || ""
     page = params[:page] || 1

@@ -9,7 +9,6 @@ setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
-
 admin = Admin.create(cid: '760906')
 admin.save
 
@@ -131,9 +130,10 @@ task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^ Populating Assignments ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 puts "Populating Projects"
 
-Project.create!(:title => "Cal Central", :url => "http://bptech.berkeley.edu/projects")
-Project.create!(:title => "CalBears", :url => "http://bptech.berkeley.edu/projects")
-
+project_a = Project.create(:title=>"An awesome project", :description=> "Join our project!", :url=>"http://www.awesome.com")
+project_a.save
+project_b = Project.create(:title=>"An even more awesome project", :description=> "No join our project!", :url=>"http://www.coolpeople.com")
+project_b.save
 
 puts "Seed planted :)"
 

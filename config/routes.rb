@@ -4,7 +4,6 @@ Spillio::Application.routes.draw do
 
   get 'search/students' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
-  match 'student/cid/:id' => 'students#show_by_cid', :as => :student_show_by_cid, via: [:get]
   match 'group_join/create' => 'group_join#create', :as => :create_group_join
   match 'group_join/accept/:id' => 'group_join#accept', :as => :accept_group_join
 
@@ -32,6 +31,10 @@ Spillio::Application.routes.draw do
   match '/admin/update' => 'admins#update', :as => :update_settings
   match '/admin/create_task' => 'admins#post_new_assignment', via: [:post]
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
+
+  # Project Controller
+  match '/projects/match' => 'projects#get_matches', :as => :match
+  post '/project/:project_id/request_from_group/:group_id' => 'projects#request_from_group', :as => :project_request_from_group
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
