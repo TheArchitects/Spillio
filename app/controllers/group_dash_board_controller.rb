@@ -11,7 +11,7 @@ class GroupDashBoardController < AuthenticatedController
 			group_id = params[:id]
 			@edit_mode = true
 		else
-			group_id = @authenticated_user.group.id
+			group_id = (@authenticated_user.group.id if (not @authenticated_user.group.nil?)) || nil;
 			@edit_mode = false
 		end
 
