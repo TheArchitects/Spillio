@@ -1,11 +1,8 @@
 - content_for :title do
   = "My Groups"
 - content_for :styles do
-  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2.css", :rel=>"stylesheet"}
-  %link{:href=>"//cdn.jsdelivr.net/select2/3.4.4/select2-bootstrap.css", :rel=>"stylesheet"}
   = stylesheet_link_tag 'student_search'
 - content_for :scripts do
-  %script{:src=>"//cdn.jsdelivr.net/select2/3.4.4/select2.min.js"}
   = javascript_include_tag 'student_search'
 
 / Navbar

@@ -35,13 +35,13 @@ class GroupJoinRequest < ActiveRecord::Base
 
 	def self.generate_reason_for_invalid_request(requester_id, requestee_id)
 		if self.request_exists?(requester_id, requestee_id)
-      label = 'Request pending'
-    elsif self.request_to_teammates?(requester_id, requestee_id)
-      label = 'Already a groupmate'
-    elsif self.request_to_full_teams?(requester_id, requestee_id)
-      label = 'Group is full'
-    end
-    return label||""
+	      label = 'Request pending'
+	    elsif self.request_to_teammates?(requester_id, requestee_id)
+	      label = 'Already a groupmate'
+	    elsif self.request_to_full_teams?(requester_id, requestee_id)
+	      label = 'Group is full'
+	    end
+	    return label||""
 	end
 
 	def self.request_exists?(requester, requestee)

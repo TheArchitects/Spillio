@@ -9,7 +9,7 @@ class LoginController < AuthenticatedController
 		if User.exists_with_cid? session[:cas_user]
 			#existing user
 			authenticated_user = User.find_by_cid(session[:cas_user])
-			redirect_to group_db_show_url authenticated_user.group.id
+			redirect_to student_path authenticated_user
 		elsif Admin.exists_with_cid? session[:cas_user]
 			#existing admin
 			authenticated_user = Admin.find_by_cid(session[:cas_user])

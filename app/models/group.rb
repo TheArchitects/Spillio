@@ -35,21 +35,16 @@ class Group < ActiveRecord::Base
     group1 = Group.find(group1_id)
     group2 = Group.find(group2_id)
 
-    if group1.size + group2.size < Setting.first.max_group_size
-      merged_group = Group.create(group_name: group2.group_name)
+    if group1.size + group2.size < group2.max_size
 
       group1.students.each do |s|
-        s.group_id = merged_group.id
+        s.group_id = group2.id
         s.save
       end
 
-      group2.students.each do |s|
-        s.group_id = merged_group.id
-        s.save
-      end
-
+      group1.destroy
       # successful merge
-      return merged_group.id
+      return group2.id
     else
       # group size exceeded
       return false

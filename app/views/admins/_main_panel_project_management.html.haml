@@ -38,10 +38,10 @@
                 %th
                   Demand
                   %br
-                  %span.badge 1
-                  %span.badge 2
-                  %span.badge 3
-                  %span.badge 4
+                  %span.badge.badge-green 1
+                  %span.badge.badge-yellow 2
+                  %span.badge.badge-blue 3
+                  %span.badge.badge-red 4
                   %span.badge 5
                 %th Assigned group
               - Project.all.each do |pr|
@@ -49,10 +49,10 @@
                   %td
                     %a{href: "#{pr.url}"}= pr.title
                   %td
-                    %span.badge #{get_num_groups(pr.id, 1)}
-                    %span.badge #{get_num_groups(pr.id, 2)}
-                    %span.badge #{get_num_groups(pr.id, 3)}
-                    %span.badge #{get_num_groups(pr.id, 4)}
+                    %span.badge.badge-green #{get_num_groups(pr.id, 1)}
+                    %span.badge.badge-yellow #{get_num_groups(pr.id, 2)}
+                    %span.badge.badge-blue #{get_num_groups(pr.id, 3)}
+                    %span.badge.badge-red #{get_num_groups(pr.id, 4)}
                     %span.badge #{get_num_groups(pr.id, 5)}
                   %td
                     - if pr.group.nil?
