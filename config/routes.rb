@@ -8,6 +8,8 @@ Spillio::Application.routes.draw do
   match 'group_join/create' => 'group_join#create', :as => :create_group_join
   match 'group_join/accept/:id' => 'group_join#accept', :as => :accept_group_join
 
+  match 'reader/groups' => 'reader#my_groups', :as => :my_groups
+
   # For CAS Login
   match '/fake_login' => 'login#fake_login'
   match '/login' => 'login#login', :as => :login, via: [:get]
