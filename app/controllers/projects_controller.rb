@@ -108,7 +108,6 @@ class ProjectsController < AuthenticatedController
     remaining_groups = Group.all.to_a
     Project.all.each do |proj|
       requests = get_highest_priority_requests(proj)
-      debugger
       if requests.length > 1
         @matches[proj] = get_highest_priority_group(requests)
         remaining_groups.delete(matches[proj])
