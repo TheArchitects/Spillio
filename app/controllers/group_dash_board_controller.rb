@@ -42,7 +42,7 @@ class GroupDashBoardController < AuthenticatedController
         assignment = Assignment.find(params[:assignment_id])
 		if eligible_to_grade? assignment
 			assignment.grade = params[:grade]
-			assignment.ta_feedback = params[:content]
+			assignment.ta_feedback = params[:feedback]
 			assignment.save
 			group_id = assignment.group_id
 			flash[:success] = "Grade has been saved."
