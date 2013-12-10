@@ -49,11 +49,11 @@
                   %td
                     %a{href: "#{pr.url}"}= pr.title
                   %td
-                    %span.badge.badge-green #{get_num_groups(pr.id, 1)}
-                    %span.badge.badge-yellow #{get_num_groups(pr.id, 2)}
-                    %span.badge.badge-blue #{get_num_groups(pr.id, 3)}
-                    %span.badge.badge-red #{get_num_groups(pr.id, 4)}
-                    %span.badge #{get_num_groups(pr.id, 5)}
+                    %span.badge.badge-green{title:get_name_requester_groups(pr.id, 1)} #{get_num_groups(pr.id, 1)}
+                    %span.badge.badge-yellow{title:get_name_requester_groups(pr.id, 2)}  #{get_num_groups(pr.id, 2)}
+                    %span.badge.badge-blue{title:get_name_requester_groups(pr.id, 3)}  #{get_num_groups(pr.id, 3)}
+                    %span.badge.badge-red{title:get_name_requester_groups(pr.id, 4)}  #{get_num_groups(pr.id, 4)}
+                    %span.badge{title:get_name_requester_groups(pr.id, 5)}  #{get_num_groups(pr.id, 5)}
                   %td
                     - if pr.group.nil?
                       %p No group assigned yet
