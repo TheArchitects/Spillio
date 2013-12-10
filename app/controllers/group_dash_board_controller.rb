@@ -11,7 +11,7 @@ class GroupDashBoardController < AuthenticatedController
 			group_id = params[:id]
 			@edit_mode = true
 		else
-			group_id = @authenticated_user.group.id
+			group_id = (@authenticated_user.group.id if (not @authenticated_user.group.nil?)) || nil;
 			@edit_mode = false
 		end
 
@@ -42,7 +42,7 @@ class GroupDashBoardController < AuthenticatedController
         assignment = Assignment.find(params[:assignment_id])
 		if eligible_to_grade? assignment
 			assignment.grade = params[:grade]
-			assignment.ta_feedback = params[:content]
+			assignment.ta_feedback = params[:feedback]
 			assignment.save
 			group_id = assignment.group_id
 			flash[:success] = "Grade has been saved."
