@@ -49,9 +49,7 @@ alfonso.courses << courses[1]
 alfonso.email = "alfongj@gmail.com"
 alfonso.save
 
-<<<<<<< HEAD
 ## Creating groups with mock Groups
-=======
 jalal = Student.create!(name: 'Jalal Buckley', about:'Nothing to say', interest: 'Everything', cid:'1005')
 jalal.section = sections[1]
 jalal.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
@@ -67,7 +65,6 @@ arturo.email = "pacifico.arturo@gmail.com"
 arturo.save
 
 ## Creating groups with mock assignments
->>>>>>> 2435949309c9a93ee8b03faea35e435a5f51a3aa
 the_beatles = Group.create({group_name: 'The Beatles'})
 the_beatles.students << kayvan
 the_beatles.students << alfonso
