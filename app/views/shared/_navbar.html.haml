@@ -8,6 +8,6 @@
   -if @authenticated_user.is_reader
     = render "reader/reader_navbar"
   -else
-  = render "students/loggedin_student_navbar"
+    = render "students/loggedin_student_navbar"
 - else
   = render "shared/general_navbar"
