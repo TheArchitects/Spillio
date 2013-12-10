@@ -63,6 +63,22 @@ class ProjectsController < AuthenticatedController
     end
   end
 
+  def get_project_join_request(group, project, priority)
+    req = nil
+    ProjectJoinRequest.all.each do |pjr|
+      if pjr.group_id == group.id and pjr.project_id == project.id
+        req = pjr
+        break
+      elsif pjr.group_id == group.id and pjr.priority.to_i.to_s == priority and pjr.project_id != project.id
+        pjr.destroy
+      end
+    end
+    if req.nil?
+      req = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
+    end
+    req
+  end
+
   def request_from_group
     group = Group.find params[:group_id]
     project = Project.find params[:project_id]
@@ -72,7 +88,9 @@ class ProjectsController < AuthenticatedController
     # else create it from scratch
     # TODO: something like:
     # pr = ProjectJoinRequest.find_or_initialize_by_requester_and_requestee(group, project)
-    pr = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
+    pr = get_project_join_request(group, project, priority)
+    pr.group = group
+    pr.project = project
     pr.priority = priority
     pr.save!
 
@@ -89,10 +107,12 @@ class ProjectsController < AuthenticatedController
     remaining_groups = Group.all.to_a
     Project.all.each do |proj|
       requests = get_highest_priority_requests(proj)
+      debugger
       if requests.length > 1
         @matches[proj] = get_highest_priority_group(requests)
         remaining_groups.delete(matches[proj])
       elsif requests.length == 1
+        debugger
         @matches[proj] = requests[0].group
         remaining_groups.delete(matches[proj])
       else
@@ -114,10 +134,10 @@ class ProjectsController < AuthenticatedController
 
   private
   def get_highest_priority_requests(proj)
-    highest_priority = 0
+    highest_priority = 100
     requests = []
     proj.project_join_requests.each do |req|
-      if highest_priority > req.priority
+      if highest_priority < req.priority
         high_priority = req.priority
         requests = [req.group]
       elsif highest_priority == req.priority

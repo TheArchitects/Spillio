@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   has_one :project
   has_many :students
   has_many :assignments
-  has_many :group_join_requests
+  has_many :project_join_requests
   attr_accessible :group_name, :id, :max_size
   after_initialize :set_defaults
 
