@@ -10,16 +10,16 @@ setting.max_group_size = 6
 setting.save
 
 
-admin = Admin.create(cid: 1000)
+admin = Admin.create(cid: '760906')
 admin.save
 
 
 puts "settings : Group size => #{Setting.first.max_group_size}"
 
 courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
-sections = Section.create!([{ number: 100 }, { number: 101 }])
+sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
 
-kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1001')
+kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
 kayvan.section = sections[1]
 kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }, { name: 'Python' }, { name: 'C' }, { name: 'JS' }])
 kayvan.courses << courses[2]
@@ -27,7 +27,7 @@ kayvan.courses << courses[1]
 kayvan.email = "kayvan.najafzadeh@gmail.com"
 kayvan.save
 
-megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'1002')
+megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'883514')
 megumi.section = sections[0]
 megumi.skills << Skill.create!([{ name: 'Japanese' }, { name: 'Judo' }])
 megumi.courses << courses[0]
@@ -35,28 +35,21 @@ megumi.courses << courses[2]
 megumi.email = "megupertino@gmail.com"
 megumi.save
 
-kevin = Student.create!(name: 'Kevin Shen', about:'I am cool.', interest: 'Girls', cid:'1003')
+kevin = Student.create!(name: 'Kevin Shen', about:'I am cool.', interest: 'Girls', cid:'946211')
 kevin.section = sections[0]
 kevin.skills << Skill.create!([{ name: 'Android' }, { name: 'Origami' }])
 kevin.courses << courses[0]
 kevin.email = "kevinshen34@gmail.com>"
 kevin.save
 
-alfonso = Student.create!(name: 'Alfonso GOMEZ-JORDANA MANAS', about:'Nothing to say', interest: 'Everything', cid:'1004')
-alfonso.section = sections[1]
-alfonso.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
-alfonso.courses << courses[1]
-alfonso.email = "alfongj@gmail.com"
-alfonso.save
-
-jalal = Student.create!(name: 'Jalal Buckley', about:'Nothing to say', interest: 'Everything', cid:'1005')
+jalal = Student.create!(name: 'Jalal Buckley', about:'Nothing to say', interest: 'Everything', cid:'760906')
 jalal.section = sections[1]
 jalal.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 jalal.courses << courses[1]
 jalal.email = "jalal.buckley@gmail.com"
 jalal.save
 
-arturo = Student.create!(name: 'Arturo Pacifico Griffini', about:'Nothing to say', interest: 'Everything', cid:'1006')
+arturo = Student.create!(name: 'Arturo Pacifico Griffini', about:'Nothing to say', interest: 'Everything', cid:'877183')
 arturo.section = sections[1]
 arturo.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }])
 arturo.courses << courses[1]
@@ -64,17 +57,16 @@ arturo.email = "pacifico.arturo@gmail.com"
 arturo.save
 
 ## Creating groups with mock assignments
-the_beatles = Group.create({group_name: 'The Beatles'})
+the_beatles = Group.create({group_name: 'Group 1'})
 the_beatles.students << kayvan
-the_beatles.students << alfonso
 the_beatles.save
 
-rolling = Group.create({group_name: 'The Rolling Stones'})
+rolling = Group.create({group_name: 'Group 2'})
 rolling.students << kevin
 rolling.students << arturo
 rolling.save
 
-group3 = Group.create({group_name: 'The Test Group'})
+group3 = Group.create({group_name: 'Group 3'})
 group3.students << megumi
 group3.save
 
@@ -150,28 +142,6 @@ req.request_type = 'merge'
 req.save
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^ Populating Assignments ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-# Makeing couple readers
-
-stephanie = Student.create!(name: 'Stephanie', about:'Nothing to say', interest: 'Everything', cid:'000001')
-stephanie.section = sections[1]
-stephanie.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
-stephanie.courses << courses[1]
-stephanie.make_reader
-stephanie.save
-
-alan = Student.create!(name: 'alan', about:'Nothing to say', interest: 'Everything', cid:'000002')
-alan.section = sections[1]
-alan.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
-alan.courses << courses[1]
-alan.make_reader
-alan.save
-
-william = Student.create!(name: 'william', about:'Nothing to say', interest: 'Everything', cid:'000002')
-william.section = sections[1]
-william.skills << Skill.create!([{ name: 'Juggling' }, { name: 'Knitting' }])
-william.courses << courses[1]
-william.make_reader
-william.save
 
 puts "Seed planted :)"
 
