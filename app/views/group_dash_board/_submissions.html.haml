@@ -10,7 +10,7 @@
           %br
           .form-group
             - if submission.subm_type == Submission.possible_submission_types[:text_area]
-              = f.text_area :content, :class => 'form-control', :required => true
+              = f.text_area :content, :class => 'form-control', :required => true, :rows => "5", :cols => "60"
             - else
               = f.text_field :content, :class => 'form-control', :required => true
 
