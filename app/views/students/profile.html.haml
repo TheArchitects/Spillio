@@ -48,17 +48,25 @@
                   - else
                     = f.text_field :email, :placeholder => 'Email Address', :class => 'form-control', :disabled => @view_only, :required => true
               .form-group
-                = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
-                .col-lg-2
+                = f.label :class_account, 'Class Account: ', :class => 'col-lg-2 control-label'
+                .col-lg-10
                   - if @view_only
-                    - if not @student.section.nil?
-                      %p= @student.section.number
-                    - else
-                      %p Not yet specified
+                    %p= @student.class_account
                   - else
-                    = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
+                    = f.text_field :class_account, :placeholder => 'ex: cs169-xy', :class => 'form-control', :disabled => @view_only, :required => true
               .form-group
-                = f.label :about, 'Description: ', :class => 'col-lg-2 control-label'
+                - if Section.all.any?
+                  = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'
+                  .col-lg-2
+                    - if @view_only
+                      - if not @student.section.nil?
+                        %p= @student.section.number
+                      - else
+                        %p Not yet specified
+                    - else
+                      = collection_select :student, :section_id, Section.all, :id, :number, :class => 'form-control'
+              .form-group
+                = f.label :about, 'About me: ', :class => 'col-lg-2 control-label'
                 .col-lg-10
                   - if @view_only
                     %p= @student.about

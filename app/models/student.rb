@@ -10,15 +10,21 @@ class Student < User
   	student.about = student_edit_form_data[:about]
   	student.email = student_edit_form_data[:email]
     student.interest = student_edit_form_data[:interest]
+    student.class_account = student_edit_form_data[:class_account]
     student.cid = cas_id
 
-    student.section = Section.find(student_edit_form_data[:section_id])
+    unless student_edit_form_data[:section_id].nil?
+      student.section = Section.find(student_edit_form_data[:section_id])
+    end
+
     unless student_edit_form_data[:course_ids].nil?
       student.add_courses(student_edit_form_data[:course_ids])
     end
+
     unless student_edit_form_data[:skill_names].nil?
       student.add_skills(student_edit_form_data[:skill_names].split(','))
     end
+    
     student.save
 
     if not student.group_id
