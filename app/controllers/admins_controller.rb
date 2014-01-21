@@ -13,6 +13,7 @@ class AdminsController < AuthenticatedController
     when "gm"
       @partial = "main_panel_group_management"
     when "am"
+      @submission_types = Submission.possible_submission_types.values
       @partial = "main_panel_assignment_management"
     when "pm"
       @new_project = Project.new
@@ -55,6 +56,13 @@ class AdminsController < AuthenticatedController
     flash[:success] = "#{student_to_promote.name} became a reader."
     redirect_to :back
   end
+
+
+  def export_submissions
+    render json: Assignment.find_by_id(params[:assignment_id]).submissions.to_json
+  end
+
+
 
 
   private

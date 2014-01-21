@@ -49,7 +49,7 @@
                 %th
               %tr
                 %td
-                  = select_tag "submission_types[]", options_for_select(['File', 'Link'])
+                  = select_tag "submission_types[]", options_for_select(@submission_types)
                 %td
                   .input-group
                     %input.form-control{type: "text", name: "submission_labels[]", placeholder: "e.g., Heroku URL", required: true}/

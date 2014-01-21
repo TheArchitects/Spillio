@@ -5,4 +5,8 @@ class Submission < ActiveRecord::Base
   def max_grade
     self.assignment.max_grade
   end
+
+  def self.possible_submission_types
+    {text_field: "Text Field",text_area: "Text Area",file: "File"}
+  end
 end

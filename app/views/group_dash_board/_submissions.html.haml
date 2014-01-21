@@ -4,12 +4,16 @@
   %h4 Submissions
   .panel-body
     - submissions.each do |submission|
-      - if ( submission.content.nil? || submission.content.empty?)
+      - if ( submission.content.nil? || submission.content.empty? || submission.assignment.due_date > Time.now)
         = form_for submission, :html => {:class => 'form-inline', :role => 'form'} do |f|
           = f.label :content, submission.label, :class => 'control-label'
           %br
           .form-group
-            = f.text_field :content, :class => 'form-control', :required => true
+            - if submission.subm_type == Submission.possible_submission_types[:text_area]
+              = f.text_area :content, :class => 'form-control', :required => true
+            - else
+              = f.text_field :content, :class => 'form-control', :required => true
+
           = f.submit 'Save', :class => 'btn btn-primary'
       - else
         %h4= submission.label

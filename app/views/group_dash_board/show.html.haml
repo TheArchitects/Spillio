@@ -33,7 +33,7 @@
       / Assignment dashboard panel
       .col-lg-9.col-md-9.col-sm-12.col-xs-12
         #accordion.panel-group
-          - @group.assignments_in_order.each do |assignment|
+          - @group.assignments_in_order.any? do |assignment|
             .panel.panel-default.card-panel{:id => "assignment-#{assignment.id}"}
               .panel-heading
                 %h4.panel-title
@@ -55,4 +55,9 @@
                 - if 
                   .card.messages
                     = render :partial => 'posts', :locals => {:posts => assignment.posts_in_chronological_order, :assignment_id => assignment.id}
+          - if @group.assignments_in_order.empty?
+            .panel.panel-default.card-panel
+              .panel-heading
+                %h4.panel-title
+                  = "No Assignments yet ;)"
       / / Assignment dashboard panel
