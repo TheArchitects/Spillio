@@ -1,26 +1,23 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:2
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Required seeds
+
 setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
-admin = Admin.create(cid: '760906')
+admin_cid = "760906"
+admin = Admin.create(cid: admin_cid)
 admin.save
 
+puts "Required seeds planted; Group size => #{Setting.first.max_group_size} Admin's Cid => #{admin_cid}"
 
-puts "settings : Group size => #{Setting.first.max_group_size}"
+#courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
+#sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
 
-courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
-sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
 
+=begin
 puts "Populating Users"
 
-kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
+kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1000000')
 kayvan.section = sections[1]
 kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }, { name: 'Python' }, { name: 'C' }, { name: 'JS' }])
 kayvan.courses << courses[2]
@@ -136,6 +133,8 @@ project_b = Project.create(:title=>"An even more awesome project", :description=
 project_b.save
 
 puts "Seed planted :)"
+=end
+
 
 
 
