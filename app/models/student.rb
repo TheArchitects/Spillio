@@ -42,10 +42,11 @@ class Student < User
   end
 
   def add_courses(course_ids)
-    course_ids.each do |course_id|
-      course = Course.find(course_id)
-      unless self.courses.include? course
-        self.courses << course
+    course_ids.split(',').each do |course_id|
+      #course = Course.find(course_id)
+      #unless self.courses.include? course
+      unless self.courses.any? { |course| course.name == course_id}
+        self.courses << Course.create(:name=>course_id)
         self.save
       end
     end

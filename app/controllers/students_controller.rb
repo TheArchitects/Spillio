@@ -64,7 +64,7 @@ class StudentsController < AuthenticatedController
   def create_or_update_handler
     s = params[:student]
     student_cid = session[:cas_user]
-    StudentsController.cleanup_fields!(s)
+    #StudentsController.cleanup_fields!(s)
 
     if Student.enough_fields?(s, student_cid)
       create_and_render_student(s, student_cid)
