@@ -1,1 +1,0 @@
-$(function(){$(".flyover").addClass("in"),setTimeout(function(){$(".flyover").removeClass("in")},5e3),$(".flyover").on("click",function(){$(this).removeClass("in")})});

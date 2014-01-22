@@ -1,1 +1,0 @@
-$(document).ready(function(){$("select").select2(),$("#student_skill_names").select2({tags:["ruby","rails","java","iOs","android"],tokenSeparators:[","]}),$("select, #student_skill_names").each(function(t,s){"true"==$(s).attr("data_readonly")&&$(s).select2("readonly",!0)})});
