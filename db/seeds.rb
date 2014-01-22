@@ -2,6 +2,7 @@
 
 setting = Setting.create!
 setting.max_group_size = 6
+setting.show_group_join_feature = false
 setting.save
 
 puts "Required seeds planted; Group size => #{Setting.first.max_group_size}"
@@ -12,14 +13,13 @@ admins = Group.create({group_name: 'Admins'})
 
 puts "Populating Users"
 
-kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1000000')
-kayvan.section = sections[1]
-kayvan.skills << Skill.create!([{ name: 'Java' }, { name: 'Ruby' }, { name: 'Python' }, { name: 'C' }, { name: 'JS' }])
-kayvan.courses << courses[2]
-kayvan.courses << courses[1]
+george = Student.create!(name: "George Necula", about: "Class instructor", cid: 111075, email: "necula@cs.berkeley.edu")
+george.save
+
+=begin
+kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
 kayvan.email = "kayvan.najafzadeh@gmail.com"
 kayvan.save
-=begin
 
 megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'883514')
 megumi.section = sections[0]

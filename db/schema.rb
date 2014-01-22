@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20140121215634) do
+ActiveRecord::Schema.define(:version => 20140122083135) do
 
   create_table "admins", :force => true do |t|
     t.integer  "cid"
@@ -108,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20140121215634) do
 
   create_table "settings", :force => true do |t|
     t.integer "max_group_size"
+    t.boolean "show_group_join_feature"
   end
 
   create_table "skills", :force => true do |t|

@@ -7,7 +7,8 @@ class GroupJoinRequest < ActiveRecord::Base
 		return (
 				(not self.request_exists?(requester, requestee)) and
 				(not self.request_to_teammates?(requester, requestee)) and
-				(not self.request_to_full_teams?(requester, requestee))
+				(not self.request_to_full_teams?(requester, requestee)) and
+				Setting.find(1).show_group_join_feature
 			)
 	end
 
@@ -15,8 +16,8 @@ class GroupJoinRequest < ActiveRecord::Base
 		if self.valid_request?(requester_id, requestee_id)
 			return self.generate_valid_request_type(requester_id, requestee_id)
 		else
-	    return self.generate_reason_for_invalid_request(requester_id, requestee_id)
-	  end
+	    	return self.generate_reason_for_invalid_request(requester_id, requestee_id)
+		end
 	end
 
 	private
