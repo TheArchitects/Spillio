@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   has_many :project_join_requests
   attr_accessible :group_name, :id, :max_size
   after_initialize :set_defaults
+  after_create :add_assignments
 
   # TODO Clean up max_students mess: we have them like three times
   def num_students
@@ -61,5 +62,21 @@ class Group < ActiveRecord::Base
 
   def set_defaults
     self.max_size ||= Setting.first.max_group_size
+  end
+
+  def add_assignments
+    Task.all.each do |task|
+      sample_assignment = Assignment.find_by_task_id(task.id)
+
+      assignment = Assignment.create_from_group_and_task(self, task)
+      assignment.max_grade = sample_assignment.max_grade
+      assignment.save
+
+      sample_assignment.submissions.each do |submission|
+        new_submission = Submission.create!(:label => submission.label, :subm_type => submission.subm_type)
+        new_submission.assignment = assignment
+        new_submission.save
+      end
+    end
   end
 end

@@ -10,7 +10,6 @@ courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' 
 sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
 admins = Group.create({group_name: 'Admins'})
 
-=begin
 puts "Populating Users"
 
 kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1000000')
@@ -20,6 +19,7 @@ kayvan.courses << courses[2]
 kayvan.courses << courses[1]
 kayvan.email = "kayvan.najafzadeh@gmail.com"
 kayvan.save
+=begin
 
 megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'883514')
 megumi.section = sections[0]
