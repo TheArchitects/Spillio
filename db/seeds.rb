@@ -4,15 +4,11 @@ setting = Setting.create!
 setting.max_group_size = 6
 setting.save
 
-admin_cid = "760906"
-admin = Admin.create(cid: admin_cid)
-admin.save
+puts "Required seeds planted; Group size => #{Setting.first.max_group_size}"
 
-puts "Required seeds planted; Group size => #{Setting.first.max_group_size} Admin's Cid => #{admin_cid}"
-
-#courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
-#sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
-
+courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
+sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
+admins = Group.create({group_name: 'Admins'})
 
 =begin
 puts "Populating Users"

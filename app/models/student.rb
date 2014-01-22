@@ -75,8 +75,8 @@ class Student < User
 	def joinable_by?(other_student)
 	  return (
 	      (not other_student == self) and #can not invite/merge/join  yourself
-        (other_student.class!=Admin) and # admin can not invite/merge/join to anyone
-        (not is_reader) # can not invite/merge/join with a reader
+        (other_student.is_admin?) and # admin can not invite/merge/join to anyone
+        (not is_reader?) # can not invite/merge/join with a reader
 	    )
 	end
 

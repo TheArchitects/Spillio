@@ -3,8 +3,10 @@ Given /^I am logged in with cid "(.*)"$/i do |cas_user|
 end
 
 Given(/^I am logged in as admin$/) do
-  admin = Admin.create(cid: 100000)
+  admin = Student.create(cid: 100000)
+  admin.make_admin
   admin.save
+
   step "I am logged in with cid \"100000\""
 end
 

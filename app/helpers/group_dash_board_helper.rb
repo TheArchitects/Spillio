@@ -12,7 +12,7 @@ module GroupDashBoardHelper
         end
       end
     else
-      formatted_date = assignment.due_date.strftime('%a, %d/%b/%Y')
+      formatted_date = assignment.due_date.strftime('%a, %d/%b/%Y %H:%M')
       haml_tag :span, :class => 'pull-right badge' do
         haml_concat("Due on #{formatted_date}")
       end

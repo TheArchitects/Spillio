@@ -17,4 +17,4 @@ Feature: Promoting a student to a reader
   Scenario: promoting a user to become reader
     Given I am on the profile page for "Kevin"
     When I click "Promote to Reader" link
-    Then I should see "Kevin became a reader."
+    Then I should see "Kevin became a Reader."

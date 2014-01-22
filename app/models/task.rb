@@ -11,9 +11,11 @@ class Task < ActiveRecord::Base
       0.upto(submission_types.length-1) do |i|
         label = submission_labels[i]
         type = submission_types[i]
-        submission = Submission.create!(:label => label, :subm_type => type)
-        submission.assignment = assignment
-        submission.save
+        if not label.empty?
+          submission = Submission.create!(:label => label, :subm_type => type)
+          submission.assignment = assignment
+          submission.save
+        end
       end
     end
   end

@@ -33,10 +33,11 @@ Spillio::Application.routes.draw do
 
   # Admin Controller
   match '/admin/promote_user_to_reader/:id' => 'admins#promote_user_to_reader', :as => :promote_to_reader
+  match '/admin/promote_user_to_admin/:id' => 'admins#promote_user_to_admin', :as => :promote_to_admin
   match '/admin/update' => 'admins#update', :as => :update_settings
   match '/admin/create_task' => 'admins#post_new_assignment', via: [:post]
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
-
+  match '/admin/submissions/:assignment_id' => 'admins#export_submissions', :as => :assignment_submitions, via: [:get]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

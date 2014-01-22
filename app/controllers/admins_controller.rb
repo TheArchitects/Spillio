@@ -36,7 +36,7 @@ class AdminsController < AuthenticatedController
     # TODO Validate
     title = params[:title]
     description = params[:description]
-    due_date = Date.parse(params[:due_date])
+    due_date = params[:due_date]
     max_grade = params[:assignment_max_grade]
     submission_types = params[:submission_types]
     submission_labels = params[:submission_labels]
@@ -53,7 +53,15 @@ class AdminsController < AuthenticatedController
     student_to_promote = Student.find_by_id(params[:id])
     student_to_promote.is_reader = true;
     student_to_promote.save
-    flash[:success] = "#{student_to_promote.name} became a reader."
+    flash[:success] = "#{student_to_promote.name} became a Reader."
+    redirect_to :back
+  end
+
+  def promote_user_to_admin
+    student_to_promote = Student.find_by_id(params[:id])
+    student_to_promote.is_admin = true;
+    student_to_promote.save
+    flash[:success] = "#{student_to_promote.name} became an Admin."
     redirect_to :back
   end
 
@@ -69,7 +77,7 @@ class AdminsController < AuthenticatedController
 
 
   def check_for_admin
-    unless @authenticated_user.class == Admin
+    unless @authenticated_user.is_admin?
       # The hacker will not even notice that this is a valid path ;)
       render :file => 'public/404.html', :status => :not_found, :layout => false
     end

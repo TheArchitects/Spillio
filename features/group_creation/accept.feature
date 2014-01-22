@@ -7,6 +7,7 @@ Feature: Respond to someone's request to join a group
     Given settings set
     Given the following users exist:
     | name   | about | group_id | cid   | interest|
+    | admin  | some  |          | 00000 |         |
     | Kevin  | about |          | 33333 | interest|
     | Kayvan | about | 77       | 44444 | interest|
     | Alfonso| about | 33       | 55555 | interest|

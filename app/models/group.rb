@@ -55,6 +55,7 @@ class Group < ActiveRecord::Base
   # Instance methods
 
   def assignments_in_order
+    #self.assignments.sort_by :due_date
     self.assignments.sort! {|a,b| a.due_date <=> b.due_date}
   end
 

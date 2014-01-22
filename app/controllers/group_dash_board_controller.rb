@@ -6,7 +6,7 @@ class GroupDashBoardController < AuthenticatedController
 	#authenticated user
 	def show
 		@group = Group.find_by_id(params[:id])
-		if @authenticated_user.class == Admin or
+		if @authenticated_user.is_admin? or
 			(@authenticated_user == @group.reader)
 			group_id = params[:id]
 			@edit_mode = true
@@ -57,32 +57,26 @@ class GroupDashBoardController < AuthenticatedController
 		assignment = Assignment.find(assignment_id)
 		group_id = assignment.group_id
 
-		if @authenticated_user.class != Admin
-			post = Post.create({
-				content: params[:content],
-				published_at: DateTime.now
-				})
+		
+		post = Post.create({
+			content: params[:content],
+			published_at: DateTime.now
+			})
 
-			assignment.posts << post
-			assignment.save
+		assignment.posts << post
+		assignment.save
 
-			post.author = @authenticated_user
-			post.save
+		post.author = @authenticated_user
+		post.save
 
-			redirect_to group_db_show_url(group_id)
-			return
-		else
-			flash[:info] = "Admin can not post here."
-			redirect_to group_db_show_url(group_id)
-			return
-		end
-
+		redirect_to group_db_show_url(group_id)
+		return
 	end
 
 private
 	def eligible_to_grade? assignment
 		group_id = assignment.group_id
-		(@authenticated_user.class == Admin) or
+		(@authenticated_user.is_admin?) or
 		(@authenticated_user == Group.find_by_id(group_id).reader)
 	end
 end
