@@ -14,6 +14,7 @@ Feature: Assign groups to a reader
 
     Given the following users exist:
     | name   | about | cid   | interest|
+    | admin  | some  | 00000 |         |
     | Kevin  | about | 33333 | interest|
     | Kayvan | about | 44444 | interest|
     Given the student with cid "33333" is a reader

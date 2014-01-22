@@ -15,6 +15,7 @@ Feature: View Projects
 
     Given the following users exist:
     | name   | about | group_id | cid   |
+    | admin  | some  |          | 00000 |
     | Kevin  | about |     33   | 33333 |
 
     Given the following projects exist:

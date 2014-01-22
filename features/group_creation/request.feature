@@ -47,8 +47,9 @@ Feature: Request to join an existing group
 
   Scenario: Group is full
     Given the following users exist:
-    |name  | about| group_id|cid  | about| interest|
-    |Arturo|  about| 77      |99999| about| interest|
+    |name  | about | group_id|cid   | interest|
+    | admin| some  |         | 00000|      |
+    |Arturo|  about| 77      |99999 | interest|
 
     Given I am logged in with cid "11111"
     And I am on the search for students page

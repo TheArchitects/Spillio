@@ -6,6 +6,7 @@ Feature: Home redirection
   Scenario: redirecting loggedin users
 	Given the following users exist:
     | name   | about | group_id | cid   | interest|
+    | admin  | some  |          | 00000 |         |
     | Kevin  | about |          | 33333 | interest|
     And I am logged in with cid "33333"
     And I am on the home page

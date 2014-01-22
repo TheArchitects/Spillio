@@ -8,6 +8,7 @@ Feature: Admin's permissions
     Given settings set
     Given the following users exist:
     | name   | about | group_id | cid   | interest|
+    | admin  | some  |          | 00000 |         |
     | Kevin  | about |          | 33333 | interest|
 
     Scenario: I should not have access to admin panel
@@ -16,7 +17,7 @@ Feature: Admin's permissions
       Then I should see "The page you were looking for doesn't exist"
 
     Scenario: I should not have access to admin panel
-      Given I am logged in as admin
+      Given I am logged in with cid "00000"
       Given I am on the admin panel page
       Then I should see "Group Management"
       And I click "Group Management" link

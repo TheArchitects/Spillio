@@ -1,5 +1,6 @@
 Given /settings set/ do
 	Setting.create(max_group_size: 3)
+  Group.create({group_name: 'Admins'})
 end
 
 Given /the group size is (\d*)/ do |size|
@@ -15,12 +16,6 @@ end
 Given(/the following user[s]? exist[s]?:$/)do |users_table|
   users_table.hashes.each do |user|
     s = Student.create!(user)
-  end
-end
-
-Given(/the following admin[s]? exist[s]?:$/) do |table|
-  table.hashes.each do |int|
-    Instructor.create!(int)
   end
 end
 
