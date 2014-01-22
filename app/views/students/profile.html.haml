@@ -53,7 +53,7 @@
                   - if @view_only
                     %p= @student.class_account
                   - else
-                    = f.text_field :class_account, :placeholder => 'ex: cs169-xy', :class => 'form-control', :disabled => @view_only, :required => true
+                    = f.text_field :class_account, :placeholder => 'ex: cs169-xy', :class => 'form-control', :disabled => @view_only, :required => false
               .form-group
                 - if Section.all.any?
                   = f.label :section, 'Section: ', :class => 'col-lg-2 control-label'

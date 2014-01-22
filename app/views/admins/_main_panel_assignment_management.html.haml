@@ -22,7 +22,7 @@
               .col-lg-3.col-md-4.col-sm-4.col-xs-12
                 %h4 Due Date
               .input-group.col-lg-6.col-md-8.col-sm-8.col-xs-12
-                %input.form-control{type: "date", name: "due_date", required: true, required: true}/
+                %input.form-control{type: "datetime", name: "due_date", required: true, placeholder: "Y/M/D h:m:s"}/
                 .input-group-btn
                   / Button and dropdown menu
                   %button.btn.btn-default{type: "button"} Calendar
@@ -52,7 +52,7 @@
                   = select_tag "submission_types[]", options_for_select(@submission_types)
                 %td
                   .input-group
-                    %input.form-control{type: "text", name: "submission_labels[]", placeholder: "e.g., Heroku URL", required: true}/
+                    %input.form-control{type: "text", name: "submission_labels[]", placeholder: "e.g., Heroku URL", required: false}/
                 %td
                   %button.btn.btn-warning.btn-sm.remove-submission{type: "button"}
                     %span.glyphicon.glyphicon-remove

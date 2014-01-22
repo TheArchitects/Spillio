@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :courses
   has_many :skills
   attr_accessible :about, :interest, :name, :cid
+  after_create :make_admin, if: :first_user?
 
   def self.search_by_name(query, page)
     # TODO: Avoid SQL injection!!
@@ -31,10 +32,22 @@ class User < ActiveRecord::Base
     self.save
   end
 
-
+  def make_admin
+    if not self.is_admin?
+      self.is_admin = true
+      Group.find_by_group_name("Admins").students << self 
+      self.save
+    end
+  end
+  
   private
+
   def self.num_pages_from_query(query)
     total_res = query.count
     1 + (total_res-1) / 20
+  end
+
+  def first_user?
+    self.id==1
   end
 end
