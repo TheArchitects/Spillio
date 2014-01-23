@@ -9,7 +9,7 @@
         %h4.panel-title
           %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#new-assignment"}
             Create new assignment
-      #new-assignment.panel-collapse.collapse.in
+      #new-assignment.panel-collapse.collapse
         = form_tag :controller => :admins, :action => :post_new_assignment do
           .card#assignment-details
             .row
@@ -61,3 +61,26 @@
           .card.save-button-card#assignment-save
             %button.btn.btn-success{type: "submit"} Submit Assignment
             - # TODO: In the future have a list of assignments here
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#assignment-list"}
+            Assignments list
+      #assignment-list.panel-collapse.collapse.in
+        .card
+          %table.table.table-striped
+            %tr
+              %th Title
+              %th Due Date
+              %th Points
+              %th
+            - Task.all.each do |task|
+              %tr{id: "task-#{task.id}"}
+                %td
+                  =task.title
+                %td
+                  =task.due_date
+                %td
+                  =Assignment.find_by_task_id(task.id).max_grade
+                %td
+                  %a{href: assignment_submitions_path(task.id)}Export
