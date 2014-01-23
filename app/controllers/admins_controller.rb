@@ -59,8 +59,7 @@ class AdminsController < AuthenticatedController
 
   def promote_user_to_admin
     student_to_promote = Student.find_by_id(params[:id])
-    student_to_promote.is_admin = true;
-    student_to_promote.save
+    student_to_promote.make_admin
     flash[:success] = "#{student_to_promote.name} became an Admin."
     redirect_to :back
   end

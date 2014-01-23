@@ -13,13 +13,14 @@ admins = Group.create({group_name: 'Admins'})
 
 puts "Populating Users"
 
-george = Student.create!(name: "George Necula", about: "Class instructor", cid: 111075, email: "necula@cs.berkeley.edu")
+george = Student.create!(name: "George Necula", about: "Class instructor", cid: 111075)
+george.email = "necula@cs.berkeley.edu"
 george.save
 
-=begin
 kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
 kayvan.email = "kayvan.najafzadeh@gmail.com"
 kayvan.save
+=begin
 
 megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'883514')
 megumi.section = sections[0]
