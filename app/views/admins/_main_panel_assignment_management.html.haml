@@ -83,4 +83,6 @@
                 %td
                   =Assignment.find_by_task_id(task.id).max_grade
                 %td
-                  %a{href: assignment_submitions_path(task.id)}Export
+                  %a{href: task_submitions_path(task.id), target: "_blank"}HTML
+                  =" - "
+                  %a{href: task_submitions_path(task.id)+".csv"}CSV
