@@ -66,14 +66,20 @@ class AdminsController < AuthenticatedController
 
 
   def export_submissions
-    render json: Assignment.find_by_id(params[:assignment_id]).submissions.to_json
+    respond_to do |format|
+      format.html {
+        @assignments_tabel = Task.find_by_id(params[:task_id]).build_full_assignments_list
+        @partial = "main_panel_assignment_submissions"
+        render "export_submissions"
+      }
+      format.csv { render text: Task.find_by_id(params[:task_id]).to_csv(request.host_with_port) }
+    end
   end
 
 
 
 
   private
-
 
   def check_for_admin
     unless @authenticated_user.is_admin?
