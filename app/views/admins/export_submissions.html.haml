@@ -1,23 +1,38 @@
 - content_for :title do
-  = "Dashboard"
+  = "Assignment Submissions"
 
 - content_for :styles do
-  = stylesheet_link_tag 'group_dash_board'
   = stylesheet_link_tag 'export_submissions'
-
-/ Navbar
-= render "navbar"
 
 / Page body
 .container
-  .container
+  / Admin panel for assignment submissions
+  - if @assignments_tabel.any?
     .row
-      %h3= "Admin Console"
-      %hr/
-    / Left panel
-    =render "left_panel"
-    / / main Panel
-
-    =render @partial
+      .list-group
+        / Results
+        - @assignments_tabel.each do |a|
+          .list-group-item{id: "group-assignment-#{a[:id]}"}
+            .row
+              .st-details.col-lg-12.col-md-8.col-sm-6
+                %h4.list-group-item-heading.st-name= a[:group_name]
+            .row
+              .st-details.col-lg-12.col-md-8.col-sm-6
+                %p.list-group-item-text
+                  %strong Members:
+                  - a[:members].each do |member|
+                    =member
+            %br
+            .row
+              .st-details.col-lg-12.col-md-8.col-sm-6
+                - a[:submissions].each do |sub|
+                  %p.list-group-item-text
+                    %strong=sub[:label]+":"
+                  %p.list-group-item-text
+                    %pre=sub[:content]
+  - else
+    .row
+      .alert.alert-danger
+        No results found
 
 

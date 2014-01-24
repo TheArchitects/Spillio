@@ -20,12 +20,15 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def to_csv
+  def to_csv hostname
     assignments_tabel = self.build_full_assignments_list
+
     CSV.generate do |csv|
       csv << ["Class Account","Student Name","Link to Submission"]+assignments_tabel.first[:submissions].map { |sub| sub[:label] }
       assignments_tabel.each do |assignment|
-        csv << [assignment[:members].map { |s| "#{s}" }.join(', '),assignment[:group_name],"link"]+assignment[:submissions].map { |sub| sub[:content] }
+        csv << [assignment[:members].map { |s| "#{s}" }.join(', '),assignment[:group_name],
+                Rails.application.routes.url_helpers.task_submitions_url(self.id, host: hostname)+"#group-assignment-"+assignment[:id].to_s
+                ]+assignment[:submissions].map { |sub| sub[:content] }
       end
     end
   end

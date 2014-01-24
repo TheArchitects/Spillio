@@ -70,9 +70,9 @@ class AdminsController < AuthenticatedController
       format.html {
         @assignments_tabel = Task.find_by_id(params[:task_id]).build_full_assignments_list
         @partial = "main_panel_assignment_submissions"
-        render
+        render "export_submissions"
       }
-      format.csv { render text: Task.find_by_id(params[:task_id]).to_csv }
+      format.csv { render text: Task.find_by_id(params[:task_id]).to_csv(request.host_with_port) }
     end
   end
 
