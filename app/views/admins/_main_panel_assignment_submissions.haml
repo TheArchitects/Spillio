@@ -1,0 +1,29 @@
+/ Admin panel for assignment submissions
+.col-lg-9.col-md-9.col-sm-12.col-xs-12
+  - if @assignments_tabel.any?
+    .row
+      .list-group
+        / Results
+        - @assignments_tabel.each do |a|
+          .list-group-item{id: "assignment-#{a[:id]}"}
+            .row
+              .st-details.col-lg-8.col-md-8.col-sm-6
+                %h4.list-group-item-heading.st-name= a[:group_name]
+            .row
+              .st-details.col-lg-8.col-md-8.col-sm-6
+                %p.list-group-item-text
+                  %strong Members:
+                  - a[:members].each do |member|
+                    =member
+            %br
+            .row
+              .st-details.col-lg-8.col-md-8.col-sm-6
+                - a[:submissions].each do |sub|
+                  %p.list-group-item-text
+                    %strong=sub[:label]+":"
+                  %p.list-group-item-text
+                    %pre=sub[:content]
+  - else
+    .row
+      .alert.alert-danger
+        No results found

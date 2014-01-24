@@ -19,4 +19,28 @@ class Task < ActiveRecord::Base
       end
     end
   end
+
+  def to_csv
+    assignments_tabel = self.build_full_assignments_list
+    CSV.generate do |csv|
+      csv << ["Class Account","Student Name","Link to Submission"]+assignments_tabel.first[:submissions].map { |sub| sub[:label] }
+      assignments_tabel.each do |assignment|
+        csv << [assignment[:members].map { |s| "#{s}" }.join(', '),assignment[:group_name],"link"]+assignment[:submissions].map { |sub| sub[:content] }
+      end
+    end
+  end
+
+  def build_full_assignments_list
+    assignments_tabel = []
+    assignments.each do |assignment|
+      assignment_map = {id: assignment.id, 
+                        group_name: assignment.group.group_name, 
+                        members: assignment.group.students.map {|stu| stu.class_account},
+                        submissions: assignment.submissions.map { |sub| {label: sub.label,content: sub.content}}
+                      }
+      assignments_tabel << assignment_map
+    end
+
+    return assignments_tabel
+  end
 end
