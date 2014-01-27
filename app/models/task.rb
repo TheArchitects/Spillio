@@ -36,12 +36,13 @@ class Task < ActiveRecord::Base
 
   def build_full_assignments_list
     assignments_tabel = []
-    sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at <=> b.submissions.order("updated_at DESC").first.updated_at}
+    sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at.nsec <=> b.submissions.order("updated_at DESC").first.updated_at.nsec}
     sorted_assignments.each do |assignment|
+      ordered_subs = assignment.submissions.sort{|a, b| a.created_at.nsec <=> b.created_at.nsec}
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},
-                        submissions: assignment.submissions.map { |sub| {label: sub.label, content: sub.content, created_at: sub.created_at.nsec}}
+                        submissions: ordered_subs.map { |sub| {label: sub.label, content: sub.content, created_at: sub.created_at.nsec, updated_at: sub.updated_at.nsec}}
                       }
       assignments_tabel << assignment_map
     end
