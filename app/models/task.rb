@@ -29,7 +29,7 @@ class Task < ActiveRecord::Base
         csv << [assignment[:members].map { |s| "#{s}" }.join(', '),
                 assignment[:group_name],
                 Rails.application.routes.url_helpers.task_submitions_url(self.id, host: hostname)+"#group-assignment-"+assignment[:id].to_s
-                ]+assignment[:submissions].map { |sub| sub[:content] }
+                ]+assignment[:submissions].sort{|a, b| a[:created_at] <=> b[:created_at]}.map { |sub| sub[:content] }
       end
     end
   end
@@ -41,7 +41,7 @@ class Task < ActiveRecord::Base
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},
-                        submissions: assignment.submissions.map { |sub| {label: sub.label,content: sub.content}}
+                        submissions: assignment.submissions.map { |sub| {label: sub.label, content: sub.content, created_at: sub.created_at}}
                       }
       assignments_tabel << assignment_map
     end

@@ -34,6 +34,7 @@ class AdminsController < AuthenticatedController
 
   def post_new_assignment
     # TODO Validate
+
     title = params[:title]
     description = params[:description]
     due_date = params[:due_date]
@@ -69,10 +70,10 @@ class AdminsController < AuthenticatedController
     respond_to do |format|
       format.html {
         @assignments_tabel = Task.find_by_id(params[:task_id]).build_full_assignments_list
-        @partial = "main_panel_assignment_submissions"
         render "export_submissions"
       }
       format.csv { render text: Task.find_by_id(params[:task_id]).to_csv(request.host_with_port) }
+      format.json { render json: Task.find_by_id(params[:task_id]).build_full_assignments_list.to_json}
     end
   end
 
