@@ -41,7 +41,7 @@ class Task < ActiveRecord::Base
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},
-                        submissions: assignment.submissions.map { |sub| {label: sub.label, content: sub.content, created_at: sub.created_at}}
+                        submissions: assignment.submissions.map { |sub| {label: sub.label, content: sub.content, created_at: sub.created_at.nsec}}
                       }
       assignments_tabel << assignment_map
     end
