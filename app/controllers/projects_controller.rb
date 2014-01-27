@@ -35,35 +35,6 @@ class ProjectsController < AuthenticatedController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
-  
-  #def update
-  #  @project = Project.find(params[:id])
-  #  respond_to do |format|
-  #    if @project.update_attributes(params[:project])
-  #      format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-  #      format.json { head :no_content }
-  #    else
-  #      format.html { render action: "edit" }
-  #      format.json { render json: @project.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-#  def destroy
-#    @project = Project.find(params[:id])
-#    @project.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to projects_url }
-#      format.json { head :no_content }
-#    end
-#  end
-
   def get_project_join_request(group, project, priority)
     req = nil
     ProjectJoinRequest.all.each do |pjr|
@@ -98,6 +69,23 @@ class ProjectsController < AuthenticatedController
     # TODO: Now if there was a request for same gr and priority but diff proj,
     # remove it
     render :nothing => true, :status => 200
+  end
+
+  def update_priorities
+    group = Group.find params[:group_id]
+    project_priorities = params[:projects]
+    
+    project_priorities.each do |project_id,priority|
+      req = ProjectJoinRequest.where(project_id: project_id, group_id: group.id)
+      if req.empty? 
+       req = ProjectJoinRequest.create(project_id: project_id, group_id: group.id)
+      end
+      req.priority = priority
+      req.save!
+    end
+
+    flash[:success] = "You have successfully submitted your choices"
+    redirect_to group_db_show_path(group)
   end
 
   def get_matches
