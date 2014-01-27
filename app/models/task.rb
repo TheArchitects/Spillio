@@ -26,7 +26,8 @@ class Task < ActiveRecord::Base
     CSV.generate do |csv|
       csv << ["Class Account","Student Name","Link to Submission"]+assignments_tabel.first[:submissions].map { |sub| sub[:label] }
       assignments_tabel.each do |assignment|
-        csv << [assignment[:members].map { |s| "#{s}" }.join(', '),assignment[:group_name],
+        csv << [assignment[:members].map { |s| "#{s}" }.join(', '),
+                assignment[:group_name],
                 Rails.application.routes.url_helpers.task_submitions_url(self.id, host: hostname)+"#group-assignment-"+assignment[:id].to_s
                 ]+assignment[:submissions].map { |sub| sub[:content] }
       end
@@ -35,7 +36,8 @@ class Task < ActiveRecord::Base
 
   def build_full_assignments_list
     assignments_tabel = []
-    assignments.each do |assignment|
+    sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at <=> b.submissions.order("updated_at DESC").first.updated_at}
+    sorted_assignments.each do |assignment|
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},

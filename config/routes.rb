@@ -2,7 +2,7 @@ Spillio::Application.routes.draw do
 
   # Project Controller
   match '/projects/match' => 'projects#get_matches', :as => :match
-  post '/project/:project_id/request_from_group/:group_id' => 'projects#request_from_group', :as => :project_request_from_group
+  post '/project/update_priorities/:group_id' => 'projects#update_priorities', :as => :update_priorities_for_group
 
   resources :projects
 
