@@ -39,7 +39,7 @@ class LoginController < AuthenticatedController
 			redirect_to root_url
 		else
 			flash[:warning] = "Were you trying to hack us?"
-			redirect_to :back
+			redirect_to root_url
 		end
 	end
 
