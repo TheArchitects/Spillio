@@ -46,7 +46,7 @@
                     %h4 Description
                     .panel-body
                       = assignment.description
-                    = render :partial => 'submissions', :locals => {:submissions => assignment.submissions}
+                    = render :partial => 'submissions', :locals => {:submissions => assignment.submissions.sort{|a, b| a[:created_at] <=> b[:created_at]}}
                   - if @edit_mode
                     .card.grade
                       = render :partial => 'grade', :locals => {:assignment => assignment}
