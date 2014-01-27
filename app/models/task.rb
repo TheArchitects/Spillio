@@ -36,7 +36,8 @@ class Task < ActiveRecord::Base
 
   def build_full_assignments_list
     assignments_tabel = []
-    assignments.sort{|a,b| a.submissions.first.updated_at <=> b.submissions.first.updated_at}.each do |assignment|
+    sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at <=> b.submissions.order("updated_at DESC").first.updated_at}
+    sorted_assignments.each do |assignment|
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},
