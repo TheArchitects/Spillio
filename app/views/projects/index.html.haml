@@ -19,13 +19,24 @@
         .row
           .list-group
             / Results
+            - if @has_voted
+              .list-group-item
+                .row
+                  .st-details.col-lg-9.col-md-9.col-sm-9
+                    %dl
+                      %dt Selected Projects:
+                      %dd 1st: #{@voted_projects[0]}
+                      %dd 2nd: #{@voted_projects[1]}
+                      %dd 3rd: #{@voted_projects[2]}
+                      %dd 4th: #{@voted_projects[3]}
+                      %dd 5th: #{@voted_projects[4]}
             - @projects.each do |p|
               .list-group-item{id: "project-#{p.id}"}
                 .row
                   .st-details.col-lg-9.col-md-9.col-sm-9
                     %a{href: p.url, id: "#{p.id}"}
                       %h4.list-group-item-heading.st-name= p.title
-                    - if not p.url.nil?
+                    - if not p.url.nil? and not p.url.empty?
                       %p.list-group-item-text
                         %strong URL:
                         = p.url

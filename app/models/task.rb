@@ -12,11 +12,15 @@ class Task < ActiveRecord::Base
         label = submission_labels[i]
         type = submission_types[i]
         if not label.empty?
-          submission = Submission.create!(:label => label, :subm_type => type)
-          submission.assignment = assignment
-          submission.save
+          assignment.submissions << Submission.create!(:label => label, :subm_type => type)
+
+          #submission = Submission.create!(:label => label, :subm_type => type)
+          #submission.assignment = assignment
+          #submission.save
         end
       end
+
+      assignment.save
     end
   end
 
@@ -39,6 +43,7 @@ class Task < ActiveRecord::Base
     assignments_tabel = []
     sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at.nsec <=> b.submissions.order("updated_at DESC").first.updated_at.nsec}
     sorted_assignments.each do |assignment|
+
       ordered_subs = assignment.submissions.sort{|a, b| a.content.to_s.length <=> b.content.to_s.length}
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
