@@ -49,19 +49,32 @@ class ProjectsController < AuthenticatedController
 
   def update_priorities
     group = Group.find params[:group_id]
+    if group.id != @authenticated_user.group_id
+      flash[:error] = "Please don't try to hack the system."
+      redirect_to :back
+      return
+    end
+
     project_priorities = params[:projects]
     
+    if project_priorities.nil?
+      reqs = ProjectJoinRequest.where(group_id: group.id)
+      reqs.each{|r| r.destroy}
+      flash[:warning] = "Selections has been removed."
+      redirect_to :back
+      return
+    end
     project_priorities.each do |project_id,priority|
-      req = ProjectJoinRequest.where(project_id: project_id, group_id: group.id).first
+      req = ProjectJoinRequest.where(priority: priority, group_id: group.id).first
       if req.nil?
-       req = ProjectJoinRequest.create(project_id: project_id, group_id: group.id)
+       req = ProjectJoinRequest.create(priority: priority, group_id: group.id)
       end
-      req.priority = priority
+      req.project_id = project_id
       req.save!
     end
 
     flash[:success] = "You have successfully submitted your choices"
-    redirect_to group_db_show_path(group)
+    redirect_to :back
   end
 
   def get_matches
