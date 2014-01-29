@@ -11,7 +11,7 @@
 
 / Page body
 .container
-  %form{role: "request project", action: update_priorities_for_group_path(@group_id), method:"post"}
+  =form_tag(update_priorities_for_group_path(@group_id), :method => :post) do
     %h3 Projects
     / Results list
     .container#results
