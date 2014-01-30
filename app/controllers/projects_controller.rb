@@ -12,7 +12,7 @@ class ProjectsController < AuthenticatedController
     @any_results = @projects.any?
     @has_voted = false
     @voted_projects = [] 
-    votes = ProjectJoinRequest.where(priority: [1,2,3,4,5]).order("priority ASC")
+    votes = ProjectJoinRequest.where(priority: [1,2,3,4,5], group_id: @group_id).order("priority ASC")
     0.upto(4).each{|i| 
       proj_req = votes.find_by_priority(i+1)
       if not proj_req.nil?
