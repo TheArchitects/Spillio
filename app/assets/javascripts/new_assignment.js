@@ -1,7 +1,7 @@
 $(function() {
   var addSubmission = function() {
     var $row = $(this).closest("tr");
-    $row.clone(false).insertAfter($row);
+    $row.clone().insertAfter($row).find("input").val("")
   }
 
   var removeSubmission = function() {
