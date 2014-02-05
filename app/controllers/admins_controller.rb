@@ -51,7 +51,9 @@ class AdminsController < AuthenticatedController
     redirect_to :back
   end
 
-
+  def export_project_prefrences
+    render "project_prefrences"
+  end
 
 
   def promote_user_to_reader
