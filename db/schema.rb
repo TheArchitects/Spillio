@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(:version => 20140130212324) do
     t.string   "title"
     t.string   "url"
     t.integer  "group_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.text     "description", :limit => 255
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "sections", :force => true do |t|
