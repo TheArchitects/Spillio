@@ -54,6 +54,16 @@ Go to project folder (ie., the one that contains app/, config/...)
 
 6.- Rejoice
 
+== Installing pg on local machine
+
+-for making local host trusted: modifiy /etc/postgresql/9.1/main/pg_hba.conf and change the following line
+# "local" is for Unix domain socket connections only
+local   all             all                                     trust
+
+-for restarting postgres: sudo /etc/init.d/postgresql restart
+
+-for running psql as a postgres user: psql -U postgres
+
 
 == Instruction to import the gostgres db from heroku to localhost
 
