@@ -1,0 +1,45 @@
+- content_for :title do
+  = "Assignment Submissions"
+
+- content_for :styles do
+  = stylesheet_link_tag 'export_submissions'
+
+/ Page body
+%table{class:"table table-striped", id:"t1"}
+  %thead
+    %tr
+      %th class Account
+      %th Student Name
+      %th Assigned project
+      %th Satisfaction Score
+      %th 1st proj pref
+      %th 2nd proj pref    
+      %th 3rd proj pref    
+      %th 4th proj pref    
+      %th 5th proj pref
+      %th Size of biggest proj
+      %th 1st partner pref
+      %th 2nd partner pref
+      %th 3rd partner pref
+      %th 4th partner pref
+  %tbody
+    - Group.all.each_with_index do |g,i|
+      %tr
+        %td=g.students.first.class_account
+        %td=g.students.first.name
+        %td
+        %td
+        - p = ProjectJoinRequest.where(group_id:g.id)
+        - p.sort{|r1, r2| r1.priority <=> r2.priority}
+        %td=p[0].project.title unless p[0].nil?
+        %td=p[1].project.title unless p[1].nil?
+        %td=p[2].project.title unless p[2].nil?
+        %td=p[3].project.title unless p[3].nil?
+        %td=p[4].project.title unless p[4].nil?
+        - assignment2= Assignment.where(group_id:g.id,task_id:2)[0]
+        - submissions = assignment2.get_submissions_in_order
+        %td=submissions[0].content
+        %td=submissions[1].content
+        %td=submissions[2].content
+        %td=submissions[3].content
+        %td=submissions[4].content
