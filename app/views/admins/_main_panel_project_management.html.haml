@@ -64,4 +64,4 @@
                     - if pr.group.nil?
                       %p No group assigned yet
                     - else
-                      %a{href: "#{group_db_show_path(pr.group.id)}"} #{pr.group.group_name}
+                      %a{href: "#{group_path(pr.group.id)}"} #{pr.group.group_name}
