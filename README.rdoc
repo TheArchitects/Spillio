@@ -56,6 +56,8 @@ Go to project folder (ie., the one that contains app/, config/...)
 
 == Installing pg on local machine
 
+-https://devcenter.heroku.com/articles/heroku-postgresql#set-up-postgres-on-linux
+
 -for making local host trusted: modifiy /etc/postgresql/9.1/main/pg_hba.conf and change the following line
 # "local" is for Unix domain socket connections only
 local   all             all                                     trust
