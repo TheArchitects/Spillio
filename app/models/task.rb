@@ -44,7 +44,7 @@ class Task < ActiveRecord::Base
     sorted_assignments = assignments.sort{|a,b| a.submissions.order("updated_at DESC").first.updated_at.nsec <=> b.submissions.order("updated_at DESC").first.updated_at.nsec}
     sorted_assignments.each do |assignment|
 
-      ordered_subs = assignment.submissions.sort{|a, b| a.content.to_s.length <=> b.content.to_s.length}
+      ordered_subs = assignment.get_submissions_in_order
       assignment_map = {id: assignment.id, 
                         group_name: assignment.group.group_name, 
                         members: assignment.group.students.map {|stu| stu.class_account},

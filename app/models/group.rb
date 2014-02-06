@@ -9,9 +9,11 @@ class Group < ActiveRecord::Base
   after_initialize :set_defaults
   after_create :add_assignments
 
-  # TODO Clean up max_students mess: we have them like three times
-  def num_students
-    self.students.count
+  def self.status_options
+    { open: "open" ,  #Has atleast 1 and Can have more students
+      close: "close", #Doesn't and will not have any students
+      full: "full"   #Has the maximum size of students
+    }
   end
 
   # TODO: Better name
@@ -22,28 +24,25 @@ class Group < ActiveRecord::Base
   def self.delete_if_empty(group_id)
     if Group.exists? group_id
       group = Group.find group_id
-      if group.students.count == 0
-        group.destroy
+      if group.num_students == 0
+        group.status = Group.status_options[:close]
+        group.save
       end
     end
-  end
-
-  def size
-    self.students.count
   end
 
   def self.merge_groups(group1_id, group2_id)
     group1 = Group.find(group1_id)
     group2 = Group.find(group2_id)
 
-    if group1.size + group2.size < group2.max_size
+    if group1.num_students + group2.num_students < group2.max_size
 
       group1.students.each do |s|
         s.group_id = group2.id
         s.save
       end
 
-      group1.destroy
+      group1.status = Group.status_options[:close]
       # successful merge
       return group2.id
     else
@@ -52,8 +51,10 @@ class Group < ActiveRecord::Base
     end
   end
 
-
   # Instance methods
+  def num_students
+    self.students.count
+  end
 
   def assignments_in_order
     #self.assignments.sort_by :due_date

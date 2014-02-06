@@ -6,7 +6,6 @@ Spillio::Application.routes.draw do
 
   resources :projects
 
-
   get 'search/students' => 'students#search', :as => :student_search
   resources :students # TODO: Chop off some of the routes
   match 'group_join/create' => 'group_join#create', :as => :create_group_join
@@ -30,12 +29,12 @@ Spillio::Application.routes.draw do
   post 'assignment/:assignment_id/posts/create' => 'group_dash_board#create_post'
   match 'assignment/:assignment_id/save_grade' => 'group_dash_board#save_grade', :as => :save_grade, via: [:post, :put]
 
-
   # Admin Controller
   match '/admin/promote_user_to_reader/:id' => 'admins#promote_user_to_reader', :as => :promote_to_reader
   match '/admin/promote_user_to_admin/:id' => 'admins#promote_user_to_admin', :as => :promote_to_admin
   match '/admin/update' => 'admins#update', :as => :update_settings
   match '/admin/create_task' => 'admins#post_new_assignment', via: [:post]
+  match '/admin/project_prefrences' => 'admins#export_project_prefrences', via: [:get]
   match '/admin' => 'admins#show', :as => :admin, via: [:get]
   match '/admin/submissions/:task_id' => 'admins#export_submissions', :as => :task_submitions, via: [:get]
 
