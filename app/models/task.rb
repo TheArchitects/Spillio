@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
   attr_accessible :id, :title, :description, :due_date
+
 
   def assign_to_all_groups(max_grade, submission_types, submission_labels)
     Group.all.each do |group|

@@ -2,8 +2,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :group
 	belongs_to :task
 
-	has_many :submissions
-	has_many :posts
+	has_many :submissions, dependent: :destroy
+	has_many :posts, dependent: :destroy
 
 	delegate :title, :description, :due_date, :to => :task
 

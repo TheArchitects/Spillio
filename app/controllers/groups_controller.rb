@@ -1,4 +1,4 @@
-class GroupDashBoardController < AuthenticatedController
+class GroupsController < AuthenticatedController
 
 	#assumption: When directing to the group dash board
 	#you set :id to authenticated_user.group
@@ -32,7 +32,7 @@ class GroupDashBoardController < AuthenticatedController
 			submission.submitted_date = DateTime.now
 			submission.save
 			group_id = submission.assignment.group_id
-			redirect_to group_db_show_url(group_id)
+			redirect_to group_url(group_id)
 			return
 		end
 
@@ -46,7 +46,7 @@ class GroupDashBoardController < AuthenticatedController
 			assignment.save
 			group_id = assignment.group_id
 			flash[:success] = "Grade has been saved."
-			redirect_to group_db_show_url(group_id)
+			redirect_to group_url(group_id)
 	    end
   	end
 
@@ -69,7 +69,7 @@ class GroupDashBoardController < AuthenticatedController
 		post.author = @authenticated_user
 		post.save
 
-		redirect_to group_db_show_url(group_id)
+		redirect_to group_url(group_id)
 		return
 	end
 
