@@ -12,11 +12,25 @@
           %table.table.table-striped
             %tr
               %th Name
+              %th Class Account
+              %th Group
               %th Action
             - Student.where(is_admin: :false).order(:name).each do |stu|
               %tr
                 %td
                   %a{href: "#{student_path(stu.id)}"} #{stu.name}
+                %td
+                  #{stu.class_account}
+                %td
+                  - gr = stu.group
+                  / %select{ :name=> "group[#{gr.id}]", :id=> "group[#{gr.id}]" }
+                  /   - if gr.nil?
+                  /     %option{selected: "selected", value: "Please select"} Please select:
+                  /   - else
+                  /     %option{selected: "selected", value: gr.id} #{gr.group_name}
+                  /   - Group.order(:group_name).each do |group|
+                  /     %option{value: group.id} #{group.group_name}
+                  %a{href: group_path(gr.id)}#{gr.group_name}
                 %td
                   = link_to(stu, method: :delete, data: { confirm: "Are you sure you want to delete #{stu.name}?"}) do
                     %span.glyphicon.glyphicon-remove 
