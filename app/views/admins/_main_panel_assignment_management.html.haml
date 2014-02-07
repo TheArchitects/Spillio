@@ -73,7 +73,7 @@
               %th Title
               %th Due Date
               %th Points
-              %th
+              %th Action
             - Task.all.each do |task|
               %tr{id: "task-#{task.id}"}
                 %td
@@ -86,3 +86,6 @@
                   %a{href: task_submitions_path(task.id), target: "_blank"}HTML
                   =" - "
                   %a{href: task_submitions_path(task.id)+".csv"}CSV
+                  =" - "
+                  = link_to(task, method: :delete, data: { confirm: "Are you sure you want to delete #{task.title}?"}) do
+                    %span.glyphicon.glyphicon-remove 

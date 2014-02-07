@@ -40,6 +40,15 @@ class StudentsController < AuthenticatedController
     create_or_update_handler
   end
 
+  def destroy
+    if @authenticated_user.is_admin?
+      user_id = params[:id]
+      User.find(user_id).destroy
+      flash[:success]= "User successfully deleted."
+    end
+    redirect_to :back
+  end
+
   def search
     name_query = params[:query] || ""
     page = params[:page] || 1

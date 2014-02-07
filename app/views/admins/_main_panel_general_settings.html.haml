@@ -1,0 +1,49 @@
+/ Admin panel for general settings
+%form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update settings", action: "#{update_settings_path}"}
+  #accordion.general-settings
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#general-settings"}
+            General Settings
+      #group-settings.panel-collapse.collapse.in
+        .card
+          .row
+            .col-lg-4.col-md-4
+              %h4 Maximum Group Size
+            .input-group.col-lg-8.col-md-8.col-sm-8.col-xs-12
+              %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "number", name: "group_size", id: "group_size"}/
+          %hr
+          .row
+            .col-lg-4.col-md-4
+              %h4 Allow Registration?
+            .input-group.col-lg-8.col-md-8.col-sm-8.col-xs-12
+              .radio
+                %label
+                  %input#optionsRadios1{checked: "checked", name: "allow_registration", type: "radio", value: "yes"}/
+                  yes
+              .radio
+                %label
+                  %input#optionsRadios2{name: "allow_registration", type: "radio", value: "no"}/
+                  no
+          %hr      
+          .row
+            .col-lg-4.col-md-4
+              %h4 Students make groups?
+            .input-group.col-lg-8.col-md-8.col-sm-8.col-xs-12
+              .radio
+                %label
+                  %input#optionsRadios1{checked: "checked", name: "group_join_feature", type: "radio", value: "show"}/
+                  Let students invite/join/merge other students/groups
+              .radio
+                %label
+                  %input#optionsRadios2{name: "group_join_feature", type: "radio", value: "hide"}/
+                  Hide the feature from students (manual group assignment)
+          // TODO: add input for course sections
+
+    %br/
+    %button.btn.btn-success{style: "float:right", type: "submit"} Save Changes
+  %br/
+  %br/
+  %br/
+/ / Assignment dashboard panel
