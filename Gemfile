@@ -7,7 +7,7 @@ gem 'rails', '3.2.14'
 
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
-  gem 'sqlite3'
+  gem 'pg'
   gem 'debugger'
   gem 'database_cleaner'
   gem 'capybara'
@@ -45,3 +45,5 @@ gem 'will_paginate', '~> 3.0.5'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+gem 'exceptiontrap'
+gem 'mixpanel-ruby'

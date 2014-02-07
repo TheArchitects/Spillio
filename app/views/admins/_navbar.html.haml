@@ -18,9 +18,9 @@
           %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
         %li
-          =link_to "Contol Panel","#{admin_path}"
+          =link_to "Control Panel","#{admin_path}"
         %li
-          =link_to "Admin group","#{group_db_show_url @authenticated_user.group_id}"
+          =link_to "Admin group","#{group_url @authenticated_user.group_id}"
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             = @authenticated_user.name

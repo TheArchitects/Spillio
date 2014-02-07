@@ -10,11 +10,32 @@ class ProjectsController < AuthenticatedController
     end
     @projects = Project.all
     @any_results = @projects.any?
+    @has_voted = false
+    @voted_projects = [] 
+    votes = ProjectJoinRequest.where(priority: [1,2,3,4,5], group_id: @group_id).order("priority ASC")
+    0.upto(4).each{|i| 
+      proj_req = votes.find_by_priority(i+1)
+      if not proj_req.nil?
+        @voted_projects[i] = proj_req.project.title
+        @has_voted = true
+      else
+        @voted_projects[i] = " --- "
+      end
+      }
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
     end
+  end
+
+  def destroy
+    if @authenticated_user.is_admin?
+      project_id = params[:id]
+      Project.find(project_id).destroy
+      flash[:success]= "Project successfully deleted."
+    end
+    redirect_to :back
   end
 
   # POST /projects
@@ -35,69 +56,34 @@ class ProjectsController < AuthenticatedController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
-  
-  #def update
-  #  @project = Project.find(params[:id])
-  #  respond_to do |format|
-  #    if @project.update_attributes(params[:project])
-  #      format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-  #      format.json { head :no_content }
-  #    else
-  #      format.html { render action: "edit" }
-  #      format.json { render json: @project.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-#  def destroy
-#    @project = Project.find(params[:id])
-#    @project.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to projects_url }
-#      format.json { head :no_content }
-#    end
-#  end
-
-  def get_project_join_request(group, project, priority)
-    req = nil
-    ProjectJoinRequest.all.each do |pjr|
-      if pjr.group_id == group.id and pjr.project_id == project.id
-        req = pjr
-        break
-      elsif pjr.group_id == group.id and pjr.priority.to_i.to_s == priority and pjr.project_id != project.id
-        pjr.destroy
-      end
-    end
-    if req.nil?
-      req = ProjectJoinRequest.create(:group_id => params[:group_id], :project_id => params[:project_id])
-    end
-    req
-  end
-
-  def request_from_group
+  def update_priorities
     group = Group.find params[:group_id]
-    project = Project.find params[:project_id]
-    priority = params[:priority]
+    if group.id != @authenticated_user.group_id
+      flash[:error] = "Please don't try to hack the system."
+      redirect_to :back
+      return
+    end
 
-    # If there was a prev request for same gr and proj, then update it
-    # else create it from scratch
-    # TODO: something like:
-    # pr = ProjectJoinRequest.find_or_initialize_by_requester_and_requestee(group, project)
-    pr = get_project_join_request(group, project, priority)
-    pr.group = group
-    pr.project = project
-    pr.priority = priority
-    pr.save!
+    project_priorities = params[:projects]
+    
+    if project_priorities.nil?
+      reqs = ProjectJoinRequest.where(group_id: group.id)
+      reqs.each{|r| r.destroy}
+      flash[:warning] = "Selections has been removed."
+      redirect_to :back
+      return
+    end
+    project_priorities.each do |project_id,priority|
+      req = ProjectJoinRequest.where(priority: priority, group_id: group.id).first
+      if req.nil?
+       req = ProjectJoinRequest.create(priority: priority, group_id: group.id)
+      end
+      req.project_id = project_id
+      req.save!
+    end
 
-    # TODO: Now if there was a request for same gr and priority but diff proj,
-    # remove it
-    render :nothing => true, :status => 200
+    flash[:success] = "You have successfully submitted your choices"
+    redirect_to :back
   end
 
   def get_matches

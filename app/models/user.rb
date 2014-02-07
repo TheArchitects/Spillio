@@ -34,8 +34,11 @@ class User < ActiveRecord::Base
 
   def make_admin
     if not self.is_admin?
+      old_group = self.group 
       self.is_admin = true
-      Group.find_by_group_name("Admins").students << self 
+      admins_group = Group.find_by_group_name("Admins")
+      admins_group.students << self
+      Group.delete_if_empty(old_group.id) if old_group
       self.save
     end
   end

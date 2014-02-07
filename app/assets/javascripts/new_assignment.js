@@ -1,7 +1,7 @@
 $(function() {
   var addSubmission = function() {
     var $row = $(this).closest("tr");
-    $row.clone().insertAfter($row);
+    $row.clone().insertAfter($row).find("input").val("")
   }
 
   var removeSubmission = function() {
@@ -14,3 +14,16 @@ $(function() {
   $("#submissions").on("click", ".remove-submission", removeSubmission);
   $("#submissions").on("click", ".add-submission", addSubmission);
 });
+
+
+//make a form for submiting updated task informations
+make_editable = function(task_id){
+  task_children = $("#task-"+task_id).children();
+  task_children.each(
+      function(index){
+        $(this).replaceWith("<td><input type='text' value='"+$(this).text().trim()+"'></td>")
+      }
+    )
+}
+
+

@@ -8,7 +8,7 @@ class GroupJoinRequest < ActiveRecord::Base
 				(not self.request_exists?(requester, requestee)) and
 				(not self.request_to_teammates?(requester, requestee)) and
 				(not self.request_to_full_teams?(requester, requestee)) and
-				Setting.find(1).show_group_join_feature
+				Setting.first.show_group_join_feature
 			)
 	end
 
@@ -62,10 +62,10 @@ class GroupJoinRequest < ActiveRecord::Base
 
 		if requestee_group_id.nil?
 			requester_group = Group.find(requester_group_id)
-			return requester_group.size == requester_group.max_size
+			return requester_group.num_students == requester_group.max_size
 		else
 			requestee_group = Group.find(requestee_group_id)
-			return requestee_group.size == requestee_group.max_size
+			return requestee_group.num_students == requestee_group.max_size
 		end
 	end
 end

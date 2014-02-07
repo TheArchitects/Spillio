@@ -6,16 +6,20 @@ class AdminsController < AuthenticatedController
   end
 
   def show
-    @partial = "main_panel_group_management"
+    @partial = "main_panel_general_settings"
     @cur_page = params["page"]
 
     case params["page"]
-    when "gm"
+    when "general"
+      @partial = "main_panel_general_settings"
+    when "users"
+      @partial = "main_panel_user_managment"
+    when "groups"
       @partial = "main_panel_group_management"
-    when "am"
+    when "assignments"
       @submission_types = Submission.possible_submission_types.values
       @partial = "main_panel_assignment_management"
-    when "pm"
+    when "projects"
       @new_project = Project.new
       @partial = "main_panel_project_management"
     end
@@ -34,12 +38,14 @@ class AdminsController < AuthenticatedController
 
   def post_new_assignment
     # TODO Validate
+
     title = params[:title]
     description = params[:description]
     due_date = params[:due_date]
     max_grade = params[:assignment_max_grade]
     submission_types = params[:submission_types]
     submission_labels = params[:submission_labels]
+    submission_labels = add_prefix(submission_labels) # Necessary for sorting purposes
 
     task = Task.create!(:title => title, :description => description, :due_date => due_date)
     task.assign_to_all_groups(max_grade, submission_types, submission_labels)
@@ -48,6 +54,11 @@ class AdminsController < AuthenticatedController
 
     redirect_to :back
   end
+
+  def export_project_prefrences
+    render "project_prefrences"
+  end
+
 
   def promote_user_to_reader
     student_to_promote = Student.find_by_id(params[:id])
@@ -59,22 +70,28 @@ class AdminsController < AuthenticatedController
 
   def promote_user_to_admin
     student_to_promote = Student.find_by_id(params[:id])
-    student_to_promote.is_admin = true;
-    student_to_promote.save
+    student_to_promote.make_admin
     flash[:success] = "#{student_to_promote.name} became an Admin."
     redirect_to :back
   end
 
 
   def export_submissions
-    render json: Assignment.find_by_id(params[:assignment_id]).submissions.to_json
+    respond_to do |format|
+      format.html {
+        @assignments_tabel = Task.find_by_id(params[:task_id]).build_full_assignments_list
+        render "export_submissions"
+      }
+      format.csv { render text: Task.find_by_id(params[:task_id]).to_csv(request.host_with_port) }
+      format.json { render json: Task.find_by_id(params[:task_id]).build_full_assignments_list.to_json}
+    end
   end
-
-
-
 
   private
 
+  def add_prefix(submission_labels)
+    submission_labels.each_with_index.map{ |sub_lab, index| "#{(index+1).to_s}) #{sub_lab}" }
+  end
 
   def check_for_admin
     unless @authenticated_user.is_admin?
