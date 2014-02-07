@@ -8,7 +8,7 @@ class GroupJoinRequest < ActiveRecord::Base
 				(not self.request_exists?(requester, requestee)) and
 				(not self.request_to_teammates?(requester, requestee)) and
 				(not self.request_to_full_teams?(requester, requestee)) and
-				Setting.find(1).show_group_join_feature
+				Setting.first.show_group_join_feature
 			)
 	end
 

@@ -26,7 +26,7 @@
             - Group.all.each do |gr|
               %tr
                 %td
-                  %a{href: "#{group_db_show_path(gr.id)}"} #{gr.group_name}
+                  %a{href: "#{group_path(gr.id)}"} #{gr.group_name}
                 %td
                   %span.badge #{gr.num_students}
                 %td

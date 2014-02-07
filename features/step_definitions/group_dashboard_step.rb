@@ -30,7 +30,7 @@ end
 
 
 Then(/^I should see '(\d+)\/(\d+)' as a score$/) do |arg1, arg2|
-  visit '/group/' + "#{Group.all[0].id}"
+  visit group_db_show_path(Group.all[0].id)
   assert page.has_content?('')
 end
 

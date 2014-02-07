@@ -17,7 +17,7 @@
         .list-group
           / Results
           - @groups.each do |g|
-            %a.list-group-item{href: group_db_show_path(g.id), id: g.id}
+            %a.list-group-item{href: group_path(g.id), id: g.id}
               .row
                 .st-details.col-lg-11.col-md-11.col-sm-10.col-xs-12
                   %h4.list-group-item-heading.st-name= g.group_name
