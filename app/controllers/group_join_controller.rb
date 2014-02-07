@@ -75,7 +75,7 @@ private
     req.destroy
 
     @authenticated_user.reload
-    redirect_to group_db_show_path(@authenticated_user.group_id)
+    redirect_to group_path(@authenticated_user.group_id)
   end
 
   def accept_merge(req)
@@ -86,7 +86,7 @@ private
 
     if merged_group_id
       flash[:success] = "Groups merged"
-      redirect_to group_db_show_path merged_group_id
+      redirect_to group_path merged_group_id
     else
       flash[:error] = "Maximum size exceded"
       redirect_to :back

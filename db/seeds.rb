@@ -7,20 +7,28 @@ setting.save
 
 puts "Required seeds planted; Group size => #{Setting.first.max_group_size}"
 
-courses = Course.create!([{ name: 'CS161' }, { name: 'CS186' }, { name: 'CS169' }])
-sections = Section.create!([{ number: 100 }, { number: 101 }, { number: 102 }, { number: 103 }])
+courses = Course.create!([
+					{ name: 'CS152' }, 
+					{ name: 'CS160' }, 
+					{ name: 'CS161' }, 
+					{ name: 'CS162' }, 
+					{ name: 'CS164' }, 
+					{ name: 'CS169' },
+					{ name: 'CS170' },
+					{ name: 'CS174' },
+					{ name: 'CS184' },
+					{ name: 'CS186' },
+					{ name: 'CS188' },
+					{ name: 'CS189' },
+					{ name: 'CS194' },
+					{ name: 'CS195' },
+					{ name: 'CS196' },
+					{ name: 'CS198' },])
+
 admins = Group.create({group_name: 'Admins'})
 
-puts "Populating Users"
-
-george = Student.create!(name: "George Necula", about: "Class instructor", cid: 111075)
-george.email = "necula@cs.berkeley.edu"
-george.save
-
-kayvan = Student.create!(name: 'Kayvan Najafzadeh', about:'I transfered to Berkeley from San Jose', interest: 'Hve been in three continents', cid:'1007417')
-kayvan.email = "kayvan.najafzadeh@gmail.com"
-kayvan.save
 =begin
+puts "Populating Users"
 
 megumi = Student.create!(name: ' Megumi Ishioka', about:'Doggie person', interest: 'Guys', cid:'883514')
 megumi.section = sections[0]

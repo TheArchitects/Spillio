@@ -1,0 +1,1 @@
+$(function(){var t=function(t,i){$.each($("label[id|='priority-"+i+"']"),function(){$(this).attr("data-project")!==t&&$(this).attr("class","btn btn-primary")})};$(".btn-group").on("click",".btn-primary",function(){var i=($("#group-id").val(),$(this).closest(".list-group-item").attr("id").split("-")[1]),n=$(this).find(".btn-priority").data("priority");t(i,n)})});

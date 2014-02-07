@@ -6,16 +6,20 @@ class AdminsController < AuthenticatedController
   end
 
   def show
-    @partial = "main_panel_group_management"
+    @partial = "main_panel_general_settings"
     @cur_page = params["page"]
 
     case params["page"]
-    when "gm"
+    when "general"
+      @partial = "main_panel_general_settings"
+    when "users"
+      @partial = "main_panel_user_managment"
+    when "groups"
       @partial = "main_panel_group_management"
-    when "am"
+    when "assignments"
       @submission_types = Submission.possible_submission_types.values
       @partial = "main_panel_assignment_management"
-    when "pm"
+    when "projects"
       @new_project = Project.new
       @partial = "main_panel_project_management"
     end
@@ -41,6 +45,7 @@ class AdminsController < AuthenticatedController
     max_grade = params[:assignment_max_grade]
     submission_types = params[:submission_types]
     submission_labels = params[:submission_labels]
+    submission_labels = add_prefix(submission_labels) # Necessary for sorting purposes
 
     task = Task.create!(:title => title, :description => description, :due_date => due_date)
     task.assign_to_all_groups(max_grade, submission_types, submission_labels)
@@ -49,6 +54,11 @@ class AdminsController < AuthenticatedController
 
     redirect_to :back
   end
+
+  def export_project_prefrences
+    render "project_prefrences"
+  end
+
 
   def promote_user_to_reader
     student_to_promote = Student.find_by_id(params[:id])
@@ -77,10 +87,11 @@ class AdminsController < AuthenticatedController
     end
   end
 
-
-
-
   private
+
+  def add_prefix(submission_labels)
+    submission_labels.each_with_index.map{ |sub_lab, index| "#{(index+1).to_s}) #{sub_lab}" }
+  end
 
   def check_for_admin
     unless @authenticated_user.is_admin?
