@@ -29,6 +29,15 @@ class ProjectsController < AuthenticatedController
     end
   end
 
+  def destroy
+    if @authenticated_user.is_admin?
+      project_id = params[:id]
+      Project.find(project_id).destroy
+      flash[:success]= "Project successfully deleted."
+    end
+    redirect_to :back
+  end
+
   # POST /projects
   # POST /projects.json
   def create

@@ -6,16 +6,20 @@ class AdminsController < AuthenticatedController
   end
 
   def show
-    @partial = "main_panel_group_management"
+    @partial = "main_panel_general_settings"
     @cur_page = params["page"]
 
     case params["page"]
-    when "gm"
+    when "general"
+      @partial = "main_panel_general_settings"
+    when "users"
+      @partial = "main_panel_user_managment"
+    when "groups"
       @partial = "main_panel_group_management"
-    when "am"
+    when "assignments"
       @submission_types = Submission.possible_submission_types.values
       @partial = "main_panel_assignment_management"
-    when "pm"
+    when "projects"
       @new_project = Project.new
       @partial = "main_panel_project_management"
     end

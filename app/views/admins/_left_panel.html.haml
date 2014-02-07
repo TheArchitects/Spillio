@@ -3,16 +3,24 @@
     .panel-body
       .row
         .col-lg-12.col-md-12.col-sm-12.col-xs-12
-          %a.btn{href: "/admin/?page=gm", :class => (@cur_page == 'gm' ? "btn-info" : "btn-primary")}
-            Group Management
+          %a.btn{href: "/admin/?page=general", :class => (@cur_page == 'gs' ? "btn-info" : "btn-primary")}
+            General
       .row
         .col-lg-12.col-md-12.col-sm-12.col-xs-12
-          %a.btn{href: "/admin/?page=am", :class => (@cur_page == 'am' ? "btn-info" : "btn-primary")}
-            Assignment Management
+          %a.btn{href: "/admin/?page=users", :class => (@cur_page == 'gm' ? "btn-info" : "btn-primary")}
+            Users
       .row
         .col-lg-12.col-md-12.col-sm-12.col-xs-12
-          %a.btn{href: "/admin/?page=pm", :class => (@cur_page == 'pm' ? "btn-info" : "btn-primary")}
-            Project Management
+          %a.btn{href: "/admin/?page=groups", :class => (@cur_page == 'gm' ? "btn-info" : "btn-primary")}
+            Groups
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "/admin/?page=assignments", :class => (@cur_page == 'am' ? "btn-info" : "btn-primary")}
+            Assignments
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          %a.btn{href: "/admin/?page=projects", :class => (@cur_page == 'pm' ? "btn-info" : "btn-primary")}
+            Projects
       .row
         .col-lg-12.col-md-12.col-sm-12.col-xs-12
           %a.btn{href: "#{match_path}", :class => (@cur_page == '#' ? "btn-info" : "btn-primary"), :id=>"Match Groups"}

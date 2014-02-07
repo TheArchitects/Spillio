@@ -1,0 +1,42 @@
+/ Admin panel for student management
+//%form.col-lg-9.col-md-9.col-sm-12.col-xs-12{role: "update user settings", action: "#{update_user_settings_path}"}
+.col-lg-9.col-md-9.col-sm-12.col-xs-12
+  #accordion.panel-student
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#student-list"}
+            Student list
+      #student-list.panel-collapse.collapse.in
+        .card
+          %table.table.table-striped
+            %tr
+              %th Name
+              %th Action
+            - Student.where(is_admin: :false).order(:name).each do |stu|
+              %tr
+                %td
+                  %a{href: "#{student_path(stu.id)}"} #{stu.name}
+                %td
+                  = link_to(stu, method: :delete, data: { confirm: "Are you sure you want to delete #{stu.name}?"}) do
+                    %span.glyphicon.glyphicon-remove 
+
+    .panel.panel-default.card-panel
+      .panel-heading
+        %h4.panel-title
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#admin-list"}
+            Admin list
+      #admin-list.panel-collapse.collapse
+        .card
+          %table.table.table-striped
+            %tr
+              %th Name
+              %th Action
+            - Student.where(is_admin: :true).each do |stu|
+              %tr
+                %td
+                  %a{href: "#{student_path(stu.id)}"} #{stu.name}
+                %td
+                  = link_to(stu, method: :delete, data: { confirm: "Are you sure you want to delete #{stu.name}?"}) do
+                    %span.glyphicon.glyphicon-remove 
+/ / Assignment dashboard panel
