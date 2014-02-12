@@ -56,16 +56,24 @@ Go to project folder (ie., the one that contains app/, config/...)
 
 == Installing pg on local machine
 
+1.- sudo apt-get install postgresql
+2.- sudo apt-get install libpq-dev
+
+
 -https://devcenter.heroku.com/articles/heroku-postgresql#set-up-postgres-on-linux
 
--for making local host trusted: modifiy /etc/postgresql/9.1/main/pg_hba.conf and change the following line
-# "local" is for Unix domain socket connections only
-local   all             all                                     trust
+3.- Open /etc/postgresql/9.1/main/pg_hba.conf 
+4.- Change the following line
+	# "local" is for Unix domain socket connections only
+	local   all             all                                     trust
 
--for restarting postgres: sudo /etc/init.d/postgresql restart
+5.- sudo /etc/init.d/postgresql restart
 
--for running psql as a postgres user: psql -U postgres
+6.- Running psql as a postgres user: psql -U postgres
 
+7.- CREATE ROLE myapp with createdb login password 'password1'
+  
+ref: https://www.digitalocean.com/community/articles/how-to-setup-ruby-on-rails-with-postgres
 
 == Instruction to import the gostgres db from heroku to localhost
 
@@ -76,3 +84,4 @@ local   all             all                                     trust
 3.download the dump file
 
 4.pg_restore --verbose --clean --no-acl --no-owner -h localhost -U myapp -d myapp_development ~/Downloads/<backup name>.dump
+
