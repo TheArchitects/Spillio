@@ -6,22 +6,22 @@ class AdminsController < AuthenticatedController
   end
 
   def show
-    @partial = "main_panel_general_settings"
-    @cur_page = params["page"]
+    @partial = 'main_panel_general_settings'
+    @cur_page = params['page']
 
-    case params["page"]
-    when "general"
-      @partial = "main_panel_general_settings"
-    when "users"
-      @partial = "main_panel_user_managment"
-    when "groups"
-      @partial = "main_panel_group_management"
-    when "assignments"
+    case params['page']
+    when 'general'
+      @partial = 'main_panel_general_settings'
+    when 'users'
+      @partial = 'main_panel_user_management'
+    when 'groups'
+      @partial = 'main_panel_group_management'
+    when 'assignments'
       @submission_types = Submission.possible_submission_types.values
-      @partial = "main_panel_assignment_management"
-    when "projects"
+      @partial = 'main_panel_assignment_management'
+    when 'projects'
       @new_project = Project.new
-      @partial = "main_panel_project_management"
+      @partial = 'main_panel_project_management'
     end
   end
 
@@ -50,13 +50,13 @@ class AdminsController < AuthenticatedController
     task = Task.create!(:title => title, :description => description, :due_date => due_date)
     task.assign_to_all_groups(max_grade, submission_types, submission_labels)
 
-    flash[:success] = "Assignment sent to all groups"
+    flash[:success] = 'Assignment sent to all groups'
 
     redirect_to :back
   end
 
-  def export_project_prefrences
-    render "project_prefrences"
+  def export_project_preferences
+    render 'project_preferences'
   end
 
 
@@ -79,8 +79,8 @@ class AdminsController < AuthenticatedController
   def export_submissions
     respond_to do |format|
       format.html {
-        @assignments_tabel = Task.find_by_id(params[:task_id]).build_full_assignments_list
-        render "export_submissions"
+        @assignments_table = Task.find_by_id(params[:task_id]).build_full_assignments_list
+        render 'export_submissions'
       }
       format.csv { render text: Task.find_by_id(params[:task_id]).to_csv(request.host_with_port) }
       format.json { render json: Task.find_by_id(params[:task_id]).build_full_assignments_list.to_json}
@@ -110,14 +110,14 @@ class AdminsController < AuthenticatedController
   def update_group_readers(group_readers)
     updated_any_reader = false
     group_readers.each do |group_id, reader_id|
-      if (not reader_id.empty?) && reader_id != "Please select"
+      if (not reader_id.empty?) && reader_id != 'Please select'
         if (assign_reader_to_a_group(group_id, reader_id))
           updated_any_reader = true
         end
       end
     end
     if (updated_any_reader)
-      flash[:success] = "Changes to group readers have been saved."
+      flash[:success] = 'Changes to group readers have been saved.'
     end
   end
 
@@ -140,7 +140,7 @@ class AdminsController < AuthenticatedController
   end
 
   def get_name_requester_groups(p_id, priority)
-    names = ""
+    names = ''
     ProjectJoinRequest.where(:priority=>priority, :project_id=>p_id).each do |pjr| 
       names = "#{Group.find_by_id(pjr.group_id).group_name.to_s}\n#{names}"
     end

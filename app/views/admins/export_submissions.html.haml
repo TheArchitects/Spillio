@@ -7,11 +7,11 @@
 / Page body
 .container
   / Admin panel for assignment submissions
-  - if @assignments_tabel.any?
+  - if @assignments_table.any?
     .row
       .list-group
         / Results
-        - @assignments_tabel.each do |a|
+        - @assignments_table.each do |a|
           .list-group-item{id: "group-assignment-#{a[:id]}"}
             .row
               .st-details.col-lg-12.col-md-8.col-sm-6

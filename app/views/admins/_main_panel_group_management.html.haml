@@ -4,13 +4,12 @@
     .panel.panel-default.card-panel
       .panel-heading
         %h4.panel-title
-          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#group-settings"}
-            General Group Settings
+          %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#create-group"}
+            Create new group
       #group-settings.panel-collapse.collapse.in
         .card
-          %h4 Maximum Group Size
-          #max-group-size.input-group
-            %input.form-control{placeholder: "Current size is #{Setting.get_max_group_size}", type: "number", name: "group_size"}/
+          %h4 New Group
+          
     .panel.panel-default.card-panel
       .panel-heading
         %h4.panel-title
