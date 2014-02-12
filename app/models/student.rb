@@ -1,6 +1,8 @@
 class Student < User
   belongs_to :group
   has_many :group_join_requests
+  has_and_belongs_to_many :courses
+  has_many :skills
   attr_accessible :id, :name, :group_id
 
   def self.create_or_update(student_edit_form_data, cas_id)
